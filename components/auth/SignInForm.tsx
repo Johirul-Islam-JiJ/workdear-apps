@@ -4,9 +4,10 @@ import Fontisto from "@expo/vector-icons/Fontisto";
 import { Link } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import Input from "../Input";
-import { ThemedText } from "../ThemedText";
-import { ThemedView } from "../ThemedView";
+import Button from "../libs/Button";
+import Input from "../libs/Input";
+import { ThemedText } from "../libs/ThemedText";
+import { ThemedView } from "../libs/ThemedView";
 
 const SignInForm = () => {
   const [showPasswoard, setShowPassword] = React.useState(false);
@@ -47,6 +48,7 @@ const SignInForm = () => {
             }
           />
         </View>
+        <Button title="Sign in" variant="Contained" />
       </View>
 
       <View

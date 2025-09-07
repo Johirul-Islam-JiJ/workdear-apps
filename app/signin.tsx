@@ -1,6 +1,6 @@
 import SignInForm from "@/components/auth/SignInForm";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemedText } from "@/components/libs/ThemedText";
+import { ThemedView } from "@/components/libs/ThemedView";
 import { Image } from "expo-image";
 import React from "react";
 import { View } from "react-native";
