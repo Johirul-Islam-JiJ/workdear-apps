@@ -101,11 +101,13 @@ const SignInForm = () => {
             )}
           />
         </View>
+        <ThemedText style={{ textAlign: "right" }} type="link">
+          Forgot password?
+        </ThemedText>
         <Button
           onPress={handleSubmit(onSubmit)}
           title="Sign in"
           variant="Contained"
-          style={{ marginTop: 10 }}
         />
       </View>
 
