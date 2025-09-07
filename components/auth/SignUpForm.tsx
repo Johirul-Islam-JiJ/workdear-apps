@@ -58,7 +58,7 @@ const SignUpForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Payload>({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       name: "",
@@ -70,15 +70,20 @@ const SignUpForm = () => {
       acceptedTerms: false,
     },
   });
+  const checkbox = watch("acceptedTerms");
   const checkboxColor = useThemeColor(
-    watch("acceptedTerms") ? "primaryDarker" : "placeHolder"
+    checkbox ? "primaryDarker" : "placeHolder"
   );
+  const checkboxBorderColor = useThemeColor(
+    errors.acceptedTerms ? "error" : checkbox ? "primaryDarker" : "borderColor"
+  );
+
   const emailIconColor = useThemeColor(errors.email ? "error" : "placeHolder");
   const passwordIconColor = useThemeColor(
     errors.password ? "error" : "placeHolder"
   );
 
-  async function onSubmit(data: Payload) {
+  async function onSubmit(data: any) {
     console.log(data);
   }
 
@@ -190,12 +195,14 @@ const SignUpForm = () => {
             control={control}
             render={({ field: { onChange, value } }) => (
               <DropdownMenu
+                value={value}
                 items={[
                   { label: "Bangladesh", value: "1" },
                   { label: "India", value: "2" },
                 ]}
                 placeholder="Select your country"
                 onSelect={onChange}
+                error={errors.country_id?.message}
               />
             )}
           />
@@ -231,7 +238,7 @@ const SignUpForm = () => {
                 }}
               >
                 <Checkbox
-                  style={{ borderColor: checkboxColor, marginTop: 5 }}
+                  style={{ borderColor: checkboxBorderColor, marginTop: 5 }}
                   value={value}
                   onValueChange={onChange}
                   color={value ? checkboxColor : undefined}

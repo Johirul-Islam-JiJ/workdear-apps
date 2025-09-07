@@ -1,6 +1,6 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -21,6 +21,7 @@ type DropdownProps = {
   placeholder: string;
   onSelect: (item: DropdownItem) => void;
   error?: string;
+  value?: string;
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -28,17 +29,25 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   placeholder,
   onSelect,
   error,
+  value,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const [visible, setVisible] = useState(false);
-  const borderColor = useThemeColor("borderColor");
+  const borderColor = useThemeColor(error ? "error" : "borderColor");
   const iconColor = useThemeColor(error ? "error" : "placeHolder");
   const dropdownBgColor = useThemeColor("white");
+
+  useEffect(() => {
+    const item = items.find((item) => item.value === value);
+    if (item) {
+      setSelected(item);
+    }
+  }, []);
 
   const handleSelect = (item: DropdownItem) => {
     setSelected(item);
     setVisible(false);
-    onSelect && onSelect(item);
+    onSelect && onSelect(item.value);
   };
 
   return (
