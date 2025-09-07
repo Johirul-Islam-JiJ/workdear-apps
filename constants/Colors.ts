@@ -1,6 +1,7 @@
 export const Colors = {
   light: {
     white: "#FFFFFF",
+    text: "#000000",
     light: "#F0EFEF",
     lightGray: "#EEEEEE",
     primaryLighter: "#5BBA6F",
@@ -15,6 +16,7 @@ export const Colors = {
   },
   dark: {
     white: "#FFFFFF",
+    text: "#FFFFFF",
     light: "#F0EFEF",
     lightGray: "#EEEEEE",
     primaryLighter: "#5BBA6F",

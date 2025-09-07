@@ -15,17 +15,21 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+  const [fontLoaded] = useFonts({
+    RobotoCondensedExtraLight: require("../assets/fonts/RobotoCondensed-ExtraLight.ttf"),
+    RobotoCondensedLight: require("../assets/fonts/RobotoCondensed-Light.ttf"),
+    RobotoCondensedMedium: require("../assets/fonts/RobotoCondensed-Medium.ttf"),
+    RobotoCondensedRegular: require("../assets/fonts/RobotoCondensed-Regular.ttf"),
+    RobotoCondensedSemiBold: require("../assets/fonts/RobotoCondensed-SemiBold.ttf"),
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (fontLoaded) {
       SplashScreen.hide();
     }
-  }, [loaded]);
+  }, [fontLoaded]);
 
-  if (!loaded) {
+  if (!fontLoaded) {
     return null;
   }
 
