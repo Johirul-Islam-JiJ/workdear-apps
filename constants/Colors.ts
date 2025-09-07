@@ -13,6 +13,8 @@ export const Colors = {
     info: "#5BBA6F",
     success: "#137547",
     warning: "#F5FA00",
+    borderColor: "#808080",
+    placeHolder: "#9F9F9F",
   },
   dark: {
     white: "#FFFFFF",
@@ -28,6 +30,8 @@ export const Colors = {
     info: "#5BBA6F",
     success: "#137547",
     warning: "#F5FA00",
+    borderColor: "#808080",
+    placeHolder: "#9F9F9F",
   },
 };
 
