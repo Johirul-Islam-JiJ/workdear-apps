@@ -3,7 +3,7 @@ import { StyleSheet, Text, type TextProps } from "react-native";
 import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-export type ThemedTextProps = TextProps & {
+type ThemedTextProps = TextProps & {
   color?: ColorScheme;
   type?:
     | "default"
