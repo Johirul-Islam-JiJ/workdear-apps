@@ -16,11 +16,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [fontLoaded] = useFonts({
-    RobotoCondensedExtraLight: require("../assets/fonts/RobotoCondensed-ExtraLight.ttf"),
-    RobotoCondensedLight: require("../assets/fonts/RobotoCondensed-Light.ttf"),
-    RobotoCondensedMedium: require("../assets/fonts/RobotoCondensed-Medium.ttf"),
-    RobotoCondensedRegular: require("../assets/fonts/RobotoCondensed-Regular.ttf"),
-    RobotoCondensedSemiBold: require("../assets/fonts/RobotoCondensed-SemiBold.ttf"),
+    RobotoSerifExtraLight: require("../assets/fonts/RobotoSerif_28pt-ExtraLight.ttf"),
+    RobotoSerifLight: require("../assets/fonts/RobotoSerif_28pt-Light.ttf"),
+    RobotoSerifSemiBold: require("../assets/fonts/RobotoSerif_28pt-Medium.ttf"),
+    RobotoSerifRegular: require("../assets/fonts/RobotoSerif_28pt-Regular.ttf"),
+    RobotoSerifBold: require("../assets/fonts/RobotoSerif_28pt-Bold.ttf"),
   });
 
   useEffect(() => {
@@ -36,10 +36,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
+        <Stack.Screen name="signin" options={{ headerShown: false }} />
+        <Stack.Screen name="signup" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ThemeProvider>
   );
 }

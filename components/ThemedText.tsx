@@ -1,9 +1,10 @@
 import { StyleSheet, Text, type TextProps } from "react-native";
 
+import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
 export type ThemedTextProps = TextProps & {
-  color?: string;
+  color?: ColorScheme;
   type?: "default" | "title" | "defaultSemiBold" | "subtitle" | "link";
 };
 
@@ -13,7 +14,7 @@ export function ThemedText({
   type = "default",
   ...rest
 }: ThemedTextProps) {
-  const textColor = useThemeColor("text");
+  const textColor = useThemeColor(color);
 
   return (
     <Text
@@ -35,26 +36,26 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
-    fontFamily: "RobotoCondensedRegular",
+    fontFamily: "RobotoSerifRegular",
   },
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
-    fontFamily: "RobotoCondensedSemiBold",
+    fontFamily: "RobotoSerifBold",
   },
   title: {
     fontSize: 32,
     lineHeight: 32,
-    fontFamily: "RobotoCondensedMedium",
+    fontFamily: "RobotoSerifSemiBold",
   },
   subtitle: {
     fontSize: 20,
-    fontFamily: "RobotoCondensedLight",
+    fontFamily: "RobotoSerifBold",
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
     color: "#0a7ea4",
-    fontFamily: "RobotoCondensedRegular",
+    fontFamily: "RobotoSerifRegular",
   },
 });
