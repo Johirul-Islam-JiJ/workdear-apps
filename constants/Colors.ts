@@ -30,3 +30,5 @@ export const Colors = {
     warning: "#F5FA00",
   },
 };
+
+export type ColorScheme = keyof typeof Colors.light & keyof typeof Colors.dark;
