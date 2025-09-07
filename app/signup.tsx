@@ -1,15 +1,21 @@
 import Header from "@/components/auth/Header";
 import SignUpForm from "@/components/auth/SignUpForm";
+import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 const SignUp = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <ThemedView color="lightGray" style={{ flex: 1 }}>
       <Header title="Sign up to start your journey" />
-
-      <SignUpForm />
-    </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+        enabled
+      >
+        <SignUpForm />
+      </KeyboardAvoidingView>
+    </ThemedView>
   );
 };
 

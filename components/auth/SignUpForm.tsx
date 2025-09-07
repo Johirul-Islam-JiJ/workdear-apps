@@ -6,13 +6,12 @@ import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Pressable, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
 
 const schema = yup.object().shape({
   name: yup
@@ -38,16 +37,6 @@ const schema = yup.object().shape({
     .oneOf([true], "You must accept the Terms and Privacy Policy")
     .required(),
 });
-
-type Payload = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-  country_id: string;
-  manager_id?: string;
-  acceptedTerms: boolean;
-};
 
 const SignUpForm = () => {
   const [showPasswoard, setShowPassword] = React.useState(false);
@@ -88,10 +77,10 @@ const SignUpForm = () => {
   }
 
   return (
-    <ThemedView
-      color="lightGray"
-      style={{
-        flex: 1,
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+        flexGrow: 1,
         justifyContent: "space-between",
         paddingHorizontal: 15,
         paddingVertical: 20,
@@ -285,7 +274,7 @@ const SignUpForm = () => {
           <ThemedText type="link">Login</ThemedText>
         </Link>
       </View>
-    </ThemedView>
+    </ScrollView>
   );
 };
 
