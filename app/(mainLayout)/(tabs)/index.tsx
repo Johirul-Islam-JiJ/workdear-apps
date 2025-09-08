@@ -1,14 +1,25 @@
 import Banner from "@/components/home/Banner";
-import { ThemedText } from "@/components/libs/ThemedText";
+import JobLists from "@/components/job/JobLists";
+import Packages from "@/components/package/Packages";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 const HomeSreen = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <Banner />
-      <ThemedText>Home</ThemedText>
-    </View>
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 10,
+          paddingVertical: 15,
+          rowGap: 15,
+        }}
+      >
+        <JobLists />
+        <Packages />
+      </View>
+    </ScrollView>
   );
 };
 
