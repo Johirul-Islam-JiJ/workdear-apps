@@ -1,6 +1,8 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { DrawerActions } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
+import { useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   Animated,
@@ -41,6 +43,11 @@ const heroData = [
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [fadeAnim] = useState(new Animated.Value(0));
+  const navigation = useNavigation();
+
+  function openDrawer() {
+    navigation.dispatch(DrawerActions.openDrawer());
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,7 +89,7 @@ const Banner = () => {
       <BlurView intensity={50} style={styles.blur}>
         <View style={styles.overlay} />
         <View style={styles.navBar}>
-          <Pressable>
+          <Pressable onPress={openDrawer}>
             <FontAwesome6 name="bars" size={24} color="white" />
           </Pressable>
 
