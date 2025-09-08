@@ -1,3 +1,4 @@
+import NavBar from "@/components/home/NavBar";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -21,7 +22,12 @@ export default function TabLayout() {
           },
           default: {},
         }),
-        header: () => <ThemedView color="primaryDark" style={{ height: 35 }} />,
+        header: () => (
+          <>
+            <ThemedView color="primaryDark" style={{ height: 35 }} />
+            <NavBar />
+          </>
+        ),
       }}
     >
       <Tabs.Screen

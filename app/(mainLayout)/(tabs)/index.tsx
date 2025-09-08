@@ -4,9 +4,9 @@ import Packages from "@/components/package/Packages";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
-const HomeSreen = () => {
+const HomeScreen = () => {
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, position: "relative" }}>
       <Banner />
       <View
         style={{
@@ -23,4 +23,4 @@ const HomeSreen = () => {
   );
 };
 
-export default HomeSreen;
+export default HomeScreen;
