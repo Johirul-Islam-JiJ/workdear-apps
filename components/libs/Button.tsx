@@ -5,10 +5,9 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
-  Text,
-  TextStyle,
   ViewStyle,
 } from "react-native";
+import { ThemedText } from "./ThemedText";
 
 interface ButtonProps extends PressableProps {
   title: string;
@@ -30,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   const borderColor = variant === "Outlined" ? backgroundColor : "transparent";
 
   const containerStyle: ViewStyle = {
-    height: 45,
+    height: 40,
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
@@ -40,13 +39,6 @@ const Button: React.FC<ButtonProps> = ({
     borderColor: borderColor,
     opacity: props.disabled ? 0.5 : 1,
     flexDirection: "row",
-  };
-
-  const textStyle: TextStyle = {
-    color: textColor,
-    fontFamily: "RobotoSerifBold",
-    fontSize: 16,
-    marginLeft: loading ? 8 : 0,
   };
 
   return (
@@ -61,8 +53,13 @@ const Button: React.FC<ButtonProps> = ({
         color: useThemeColor("primaryLight"),
       }}
     >
-      {loading && <ActivityIndicator size="small" color={textColor} />}
-      <Text style={textStyle}>{loading ? " " : title}</Text>
+      {loading ? (
+        <ActivityIndicator size="small" color={textColor} />
+      ) : (
+        <ThemedText color="white" type="defaultSemiBold">
+          {title}
+        </ThemedText>
+      )}
     </Pressable>
   );
 };
