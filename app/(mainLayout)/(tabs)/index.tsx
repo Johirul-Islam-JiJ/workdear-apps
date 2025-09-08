@@ -1,12 +1,12 @@
 import { ThemedText } from "@/components/libs/ThemedText";
-import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
+import { View } from "react-native";
 
 const HomeSreen = () => {
   return (
-    <ThemedView>
+    <View style={{ flex: 1 }}>
       <ThemedText>Home</ThemedText>
-    </ThemedView>
+    </View>
   );
 };
 
