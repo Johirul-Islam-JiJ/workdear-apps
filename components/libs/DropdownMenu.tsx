@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Button from "./Button";
 import { ThemedText } from "./ThemedText";
 
 type DropdownItem = {
@@ -19,9 +20,10 @@ type DropdownItem = {
 type DropdownProps = {
   items: DropdownItem[];
   placeholder: string;
-  onSelect: (item: DropdownItem) => void;
+  onSelect: (item: string) => void;
   error?: string;
   value?: string;
+  button?: boolean;
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -30,6 +32,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   onSelect,
   error,
   value,
+  button,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const [visible, setVisible] = useState(false);
@@ -51,23 +54,33 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {/* Dropdown Button */}
-      <Pressable
-        style={[styles.dropdownButton, { borderColor }]}
-        onPress={() => setVisible(true)}
-      >
-        <ThemedText
-          color={error ? "error" : !selected.label ? "placeHolder" : undefined}
-        >
-          {selected.label ? selected.label : placeholder}
-        </ThemedText>
-        <Ionicons
-          name={visible ? "chevron-up" : "chevron-down"}
-          size={18}
-          color={iconColor}
+      {button ? (
+        <Button
+          style={{ flex: 1 }}
+          title={selected.label ? selected.label : placeholder}
+          onPress={() => setVisible(true)}
         />
-      </Pressable>
+      ) : (
+        <Pressable
+          style={[styles.dropdownButton, { borderColor }]}
+          onPress={() => setVisible(true)}
+        >
+          <ThemedText
+            color={
+              error ? "error" : !selected.label ? "placeHolder" : undefined
+            }
+          >
+            {selected.label ? selected.label : placeholder}
+          </ThemedText>
+          <Ionicons
+            name={visible ? "chevron-up" : "chevron-down"}
+            size={18}
+            color={iconColor}
+          />
+        </Pressable>
+      )}
 
       {/* Modal for dropdown list */}
       <Modal visible={visible} transparent animationType="fade">
