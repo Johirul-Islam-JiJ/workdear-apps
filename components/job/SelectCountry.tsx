@@ -13,78 +13,81 @@ const SelectCountry = () => {
       id: 1,
       continent: "Africa",
       contries: [
-        { label: "Egypt", value: 13 },
-        { label: "Morocco", value: 14 },
-        { label: "Algeria", value: 15 },
-        { label: "Tunisia", value: 16 },
-        { label: "Libya", value: 17 },
-        { label: "Sudan", value: 18 },
-        { label: "Ethiopia", value: 19 },
-        { label: "Kenya", value: 20 },
-        { label: "Tanzania", value: 21 },
-        { label: "Uganda", value: 22 },
-        { label: "Rwanda", value: 23 },
-        { label: "Burundi", value: 24 },
-        { label: "Somalia", value: 25 },
-        { label: "Djibouti", value: 26 },
-        { label: "Eritrea", value: 27 },
-        { label: "South Sudan", value: 28 },
-        { label: "Nigeria", value: 29 },
-        { label: "Ghana", value: 30 },
-        { label: "Cameroon", value: 31 },
-        { label: "Congo", value: 32 },
-        { label: "South Africa", value: 33 },
-        { label: "Zambia", value: 34 },
-        { label: "Zimbabwe", value: 35 },
-        { label: "Mozambique", value: 36 },
-        { label: "Angola", value: 37 },
-        { label: "Namibia", value: 38 },
-        { label: "Botswana", value: 39 },
-        { label: "Malawi", value: 40 },
-        { label: "Lesotho", value: 41 },
-        { label: "Mauritius", value: 42 },
-        { label: "Mali", value: 43 },
-        { label: "Senegal", value: 44 },
-        { label: "Guinea", value: 45 },
+        { name: "Egypt", id: 13 },
+        { name: "Morocco", id: 14 },
+        { name: "Algeria", id: 15 },
+        { name: "Tunisia", id: 16 },
+        { name: "Libya", id: 17 },
+        { name: "Sudan", id: 18 },
+        { name: "Ethiopia", id: 19 },
+        { name: "Kenya", id: 20 },
+        { name: "Tanzania", id: 21 },
+        { name: "Uganda", id: 22 },
+        { name: "Rwanda", id: 23 },
+        { name: "Burundi", id: 24 },
+        { name: "Somalia", id: 25 },
+        { name: "Djibouti", id: 26 },
+        { name: "Eritrea", id: 27 },
+        { name: "South Sudan", id: 28 },
+        { name: "Nigeria", id: 29 },
+        { name: "Ghana", id: 30 },
+        { name: "Cameroon", id: 31 },
+        { name: "Congo", id: 32 },
+        { name: "South Africa", id: 33 },
+        { name: "Zambia", id: 34 },
+        { name: "Zimbabwe", id: 35 },
+        { name: "Mozambique", id: 36 },
+        { name: "Angola", id: 37 },
+        { name: "Namibia", id: 38 },
+        { name: "Botswana", id: 39 },
+        { name: "Malawi", id: 40 },
+        { name: "Lesotho", id: 41 },
+        { name: "Mauritius", id: 42 },
+        { name: "Mali", id: 43 },
+        { name: "Senegal", id: 44 },
+        { name: "Guinea", id: 45 },
       ],
     },
     {
       id: 2,
       continent: "Asia",
       contries: [
-        { label: "India", value: 1 },
-        { label: "Pakistan", value: 2 },
-        { label: "Bangladesh", value: 3 },
-        { label: "Nepal", value: 4 },
+        { name: "India", id: 1 },
+        { name: "Pakistan", id: 2 },
+        { name: "Bangladesh", id: 3 },
+        { name: "Nepal", id: 4 },
       ],
     },
     {
       id: 3,
       continent: "Europe",
       contries: [
-        { label: "Germany", value: 5 },
-        { label: "France", value: 6 },
-        { label: "Italy", value: 7 },
-        { label: "Spain", value: 8 },
+        { name: "Germany", id: 5 },
+        { name: "France", id: 6 },
+        { name: "Italy", id: 7 },
+        { name: "Spain", id: 8 },
       ],
     },
     {
       id: 4,
       continent: "America",
       contries: [
-        { label: "United States", value: 9 },
-        { label: "Canada", value: 10 },
-        { label: "Mexico", value: 11 },
-        { label: "Brazil", value: 12 },
+        { name: "United States", id: 9 },
+        { name: "Canada", id: 10 },
+        { name: "Mexico", id: 11 },
+        { name: "Brazil", id: 12 },
       ],
     },
   ];
 
   return (
     <View style={{ flex: 1, flexDirection: "column", gap: 7 }}>
+      <ThemedText type="defaultSemiBold" color="primaryDarker">
+        Select country you want to hide from the selected zone (optional)
+      </ThemedText>
       {countries.map((continent) => {
         const hasSelected = continent.contries.some((c) =>
-          selected.includes(c.value)
+          selected.includes(c.id)
         );
 
         return (
@@ -122,15 +125,15 @@ const SelectCountry = () => {
                   style={{ width: "49%" }}
                   onPress={() => {
                     setSelected(
-                      selected.includes(country.value)
-                        ? selected.filter((item) => item !== country.value)
-                        : selected.concat(country.value)
+                      selected.includes(country.id)
+                        ? selected.filter((item) => item !== country.id)
+                        : selected.concat(country.id)
                     );
                   }}
                   key={index}
-                  title={country.label}
+                  title={country.name}
                   variant={
-                    selected.includes(country.value) ? "Contained" : "Outlined"
+                    selected.includes(country.id) ? "Contained" : "Outlined"
                   }
                 />
               ))}

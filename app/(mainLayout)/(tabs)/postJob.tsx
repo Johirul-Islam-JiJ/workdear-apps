@@ -1,6 +1,6 @@
+import SelectCategory from "@/components/job/SelectCategory";
 import SelectCountry from "@/components/job/SelectCountry";
 import Button from "@/components/libs/Button";
-import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Stepper from "@/components/postJob/Stepper";
 import React from "react";
@@ -20,11 +20,8 @@ const PostJobScreen = () => {
       }}
     >
       <Stepper selected={step} />
-      <ThemedText type="defaultSemiBold" color="primaryDarker">
-        Select country you want to hide from the selected zone (optional)
-      </ThemedText>
 
-      <SelectCountry />
+      {step === 0 ? <SelectCountry /> : step === 1 ? <SelectCategory /> : null}
 
       <View
         style={{ flex: 1, flexDirection: "row", alignItems: "center", gap: 8 }}
