@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Modal, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
+import Modal from "../libs/Modal";
 import { ThemedText } from "../libs/ThemedText";
 
 const SelectCountry = () => {
@@ -96,86 +97,61 @@ const SelectCountry = () => {
         );
       })}
 
-      <Modal
-        visible={visible ? true : false}
-        onRequestClose={() => setVisible(0)}
-        animationType="fade"
-        transparent
-      >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.3)",
-          }}
+      <Modal visible={visible} setVisible={setVisible}>
+        <ThemedText
+          type="subtitle"
+          color="primaryDarker"
+          style={{ textAlign: "center", marginBottom: 15 }}
         >
+          Select Country
+        </ThemedText>
+
+        <ScrollView style={{ maxHeight: 400 }}>
           <View
             style={{
-              width: "90%",
-              backgroundColor: "white",
-              borderRadius: 10,
-              padding: 15,
+              flexDirection: "row",
+              flexWrap: "wrap",
+              rowGap: 7,
+              justifyContent: "space-between",
             }}
           >
-            <ThemedText
-              type="subtitle"
-              color="primaryDarker"
-              style={{ textAlign: "center", marginBottom: 15 }}
-            >
-              Select Country
-            </ThemedText>
-
-            <ScrollView style={{ maxHeight: 400 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  rowGap: 7,
-                  justifyContent: "space-between",
-                }}
-              >
-                {countries
-                  .find((country) => country.id === visible)
-                  ?.contries.map((country, index) => (
-                    <Button
-                      style={{ width: "49%" }}
-                      onPress={() => {
-                        setSelected(
-                          selected.includes(country.value)
-                            ? selected.filter((item) => item !== country.value)
-                            : selected.concat(country.value)
-                        );
-                      }}
-                      key={index}
-                      title={country.label}
-                      variant={
-                        selected.includes(country.value)
-                          ? "Contained"
-                          : "Outlined"
-                      }
-                    />
-                  ))}
-              </View>
-            </ScrollView>
-
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                gap: 7,
-                marginTop: 15,
-              }}
-            >
-              <Button
-                onPress={() => setVisible(0)}
-                title="Cancel"
-                variant="Outlined"
-              />
-              <Button onPress={() => setVisible(0)} title="Done" />
-            </View>
+            {countries
+              .find((country) => country.id === visible)
+              ?.contries.map((country, index) => (
+                <Button
+                  style={{ width: "49%" }}
+                  onPress={() => {
+                    setSelected(
+                      selected.includes(country.value)
+                        ? selected.filter((item) => item !== country.value)
+                        : selected.concat(country.value)
+                    );
+                  }}
+                  key={index}
+                  title={country.label}
+                  variant={
+                    selected.includes(country.value) ? "Contained" : "Outlined"
+                  }
+                />
+              ))}
           </View>
+        </ScrollView>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: 7,
+            marginTop: 15,
+          }}
+        >
+          <Button
+            onPress={() => setVisible(0)}
+            title="Cancel"
+            variant="Outlined"
+          />
+          <Button onPress={() => setVisible(0)} title="Done" />
         </View>
       </Modal>
     </View>
