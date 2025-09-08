@@ -50,13 +50,21 @@ const Button: React.FC<ButtonProps> = ({
         typeof style === "function" ? style(state) : style,
       ]}
       android_ripple={{
-        color: useThemeColor("primaryLight"),
+        color: useThemeColor(
+          variant === "Outlined" ? "placeHolder" : "primaryLight"
+        ),
       }}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={textColor} />
+        <ActivityIndicator
+          size="small"
+          color={variant === "Outlined" ? backgroundColor : textColor}
+        />
       ) : (
-        <ThemedText color="white" type="defaultSemiBold">
+        <ThemedText
+          color={variant === "Outlined" ? "primaryDarker" : "white"}
+          type="defaultSemiBold"
+        >
           {title}
         </ThemedText>
       )}

@@ -1,3 +1,4 @@
+import SelectCountry from "@/components/job/SelectCountry";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Stepper from "@/components/postJob/Stepper";
@@ -18,6 +19,8 @@ const PostJobScreen = () => {
       <ThemedText type="defaultSemiBold" color="primaryDarker">
         Select country you want to hide from the selected zone (optional)
       </ThemedText>
+
+      <SelectCountry />
     </ThemedView>
   );
 };

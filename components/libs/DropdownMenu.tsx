@@ -24,6 +24,7 @@ type DropdownProps = {
   error?: string;
   value?: string;
   button?: boolean;
+  buttonVariant?: "Contained" | "Outlined" | "Text";
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -33,6 +34,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   error,
   value,
   button,
+  buttonVariant,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const [visible, setVisible] = useState(false);
@@ -61,6 +63,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
           style={{ flex: 1 }}
           title={selected.label ? selected.label : placeholder}
           onPress={() => setVisible(true)}
+          variant={buttonVariant}
         />
       ) : (
         <Pressable
