@@ -1,5 +1,5 @@
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { ThemedView } from "@/components/libs/ThemedView";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -9,19 +9,19 @@ import React from "react";
 import { Platform } from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const tabActiveColor = useThemeColor("primaryDark");
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].primaryDark,
-        headerShown: false,
+        tabBarActiveTintColor: tabActiveColor,
         tabBarStyle: Platform.select({
           ios: {
             position: "absolute",
           },
           default: {},
         }),
+        header: () => <ThemedView color="primaryDark" style={{ height: 35 }} />,
       }}
     >
       <Tabs.Screen
@@ -40,7 +40,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="credit-card-search"
-              size={24}
+              size={26}
               color={color}
             />
           ),
@@ -52,7 +52,7 @@ export default function TabLayout() {
         options={{
           title: "Post Job",
           tabBarIcon: ({ color }) => (
-            <Entypo name="circle-with-plus" size={24} color={color} />
+            <Entypo name="circle-with-plus" size={30} color={color} />
           ),
         }}
       />
