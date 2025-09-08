@@ -1,9 +1,10 @@
 import { View } from "react-native";
 import { ThemedText } from "../libs/ThemedText";
+import PackageCard from "./PackageCard";
 
 const Packages = () => {
   return (
-    <View>
+    <View style={{ rowGap: 10 }}>
       <ThemedText
         type="subtitle"
         style={{ textAlign: "center" }}
@@ -11,6 +12,9 @@ const Packages = () => {
       >
         Unlock more with premium plans
       </ThemedText>
+      <PackageCard />
+      <PackageCard highlight />
+      <PackageCard />
     </View>
   );
 };
