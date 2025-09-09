@@ -82,7 +82,7 @@ const FirstForm = ({ step, setStep }: Props) => {
     });
 
     if (!result.canceled) {
-      setValue("thumbnail", result.assets[0]);
+      setValue("thumbnail", result.assets[0], { shouldValidate: true });
       setImage(result.assets[0].uri);
     }
   };
@@ -111,7 +111,9 @@ const FirstForm = ({ step, setStep }: Props) => {
           }}
         >
           <View>
-            <ThemedText>Write an accurate job title:</ThemedText>
+            <ThemedText type="defaultSemiBold">
+              Write an accurate job title:
+            </ThemedText>
             <Controller
               name="title"
               control={control}
@@ -127,7 +129,7 @@ const FirstForm = ({ step, setStep }: Props) => {
           </View>
 
           <View>
-            <ThemedText>Job Description</ThemedText>
+            <ThemedText type="defaultSemiBold">Job Description</ThemedText>
             <Controller
               name="description"
               control={control}
@@ -146,7 +148,9 @@ const FirstForm = ({ step, setStep }: Props) => {
           </View>
 
           <View>
-            <ThemedText>Write specific task you need to complete:</ThemedText>
+            <ThemedText type="defaultSemiBold">
+              Write specific task you need to complete:
+            </ThemedText>
             {steps.fields.map((field, index) => (
               <Controller
                 key={field.id}
@@ -202,7 +206,9 @@ const FirstForm = ({ step, setStep }: Props) => {
           </View>
 
           <View>
-            <ThemedText>Require the proof the job was completed:</ThemedText>
+            <ThemedText type="defaultSemiBold">
+              Require the proof the job was completed:
+            </ThemedText>
             {requiredProofs.fields.map((field, index) => (
               <View
                 key={field.id}
@@ -268,17 +274,19 @@ const FirstForm = ({ step, setStep }: Props) => {
                 )}
 
                 {index !== requiredProofs.fields.length - 1 && (
-                  <ThemedView
-                    color="primaryDark"
-                    style={{ height: 2, marginTop: 7 }}
-                  />
+                  <View style={{ alignItems: "center" }}>
+                    <ThemedView
+                      color="primaryDark"
+                      style={{ height: 2, marginTop: 7, width: 80 }}
+                    />
+                  </View>
                 )}
               </View>
             ))}
           </View>
 
           <View>
-            <ThemedText>Question condition:</ThemedText>
+            <ThemedText type="defaultSemiBold">Question condition:</ThemedText>
             {questionCondition.fields.map((field, index) => (
               <View
                 key={field.id}
@@ -381,16 +389,18 @@ const FirstForm = ({ step, setStep }: Props) => {
                 )}
 
                 {index !== questionCondition.fields.length - 1 && (
-                  <ThemedView
-                    color="primaryDark"
-                    style={{ height: 2, marginTop: 7 }}
-                  />
+                  <View style={{ alignItems: "center" }}>
+                    <ThemedView
+                      color="primaryDark"
+                      style={{ height: 2, marginTop: 7, width: 80 }}
+                    />
+                  </View>
                 )}
               </View>
             ))}
           </View>
           <View>
-            <ThemedText>Thumbnail Image:</ThemedText>
+            <ThemedText type="defaultSemiBold">Thumbnail Image:</ThemedText>
             <Button
               variant="Outlined"
               onPress={pickImage}
