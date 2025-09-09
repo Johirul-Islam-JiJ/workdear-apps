@@ -4,7 +4,12 @@ import Button from "../libs/Button";
 import Modal from "../libs/Modal";
 import { ThemedText } from "../libs/ThemedText";
 
-const SelectCountry = () => {
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const SelectCountry = ({ step, setStep }: Props) => {
   const [selected, setSelected] = useState<number[]>([]);
   const [visible, setVisible] = useState(0);
 
@@ -81,24 +86,40 @@ const SelectCountry = () => {
   ];
 
   return (
-    <View style={{ flex: 1, flexDirection: "column", gap: 7 }}>
-      <ThemedText type="defaultSemiBold" color="primaryDarker">
-        Select country you want to hide from the selected zone (optional)
-      </ThemedText>
-      {countries.map((continent) => {
-        const hasSelected = continent.contries.some((c) =>
-          selected.includes(c.id)
-        );
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: 15,
+      }}
+    >
+      <View style={{ gap: 7 }}>
+        <ThemedText type="defaultSemiBold" color="primaryDarker">
+          Select country you want to hide from the selected zone (optional)
+        </ThemedText>
+        {countries.map((continent) => {
+          const hasSelected = continent.contries.some((c) =>
+            selected.includes(c.id)
+          );
 
-        return (
-          <Button
-            key={continent.id}
-            onPress={() => setVisible(continent.id)}
-            title={continent.continent}
-            variant={hasSelected ? "Contained" : "Outlined"}
-          />
-        );
-      })}
+          return (
+            <Button
+              key={continent.id}
+              onPress={() => setVisible(continent.id)}
+              title={continent.continent}
+              variant={hasSelected ? "Contained" : "Outlined"}
+            />
+          );
+        })}
+      </View>
+
+      <View style={{ alignItems: "flex-end" }}>
+        <Button
+          title="Next"
+          style={{ width: "50%" }}
+          onPress={() => setStep(step + 1)}
+        />
+      </View>
 
       <Modal visible={visible} setVisible={setVisible}>
         <ThemedText

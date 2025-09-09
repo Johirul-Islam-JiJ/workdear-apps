@@ -10,7 +10,12 @@ type Category = {
   subCategories: { name: string; id: number }[];
 };
 
-const SelectCategory = () => {
+type Props = {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const SelectCategory = ({ step, setStep }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [selectedSubCategory, setSelectedSubCategory] = useState<number>(0);
 
@@ -82,22 +87,41 @@ const SelectCategory = () => {
   ];
 
   return (
-    <View style={{ flex: 1, flexDirection: "column", gap: 7 }}>
-      <ThemedText type="defaultSemiBold" color="primaryDarker">
-        Please select a category to continue
-      </ThemedText>
+    <View
+      style={{ flex: 1, justifyContent: "space-between", paddingBottom: 15 }}
+    >
+      <View style={{ gap: 7 }}>
+        <ThemedText type="defaultSemiBold" color="primaryDarker">
+          Please select a category to continue
+        </ThemedText>
 
-      {categories.map((category) => (
-        <Category
-          key={category.id}
-          category={category}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          categories={categories}
-          selectedSubCategory={selectedSubCategory}
-          setSelectedSubCategory={setSelectedSubCategory}
+        {categories.map((category) => (
+          <Category
+            key={category.id}
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            categories={categories}
+            selectedSubCategory={selectedSubCategory}
+            setSelectedSubCategory={setSelectedSubCategory}
+          />
+        ))}
+      </View>
+
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+        <Button
+          disabled={step === 0}
+          onPress={() => setStep(step - 1)}
+          title="Previews"
+          variant="Outlined"
+          style={{ flex: 1 }}
         />
-      ))}
+        <Button
+          title="Next"
+          style={{ flex: 1 }}
+          onPress={() => setStep(step + 1)}
+        />
+      </View>
     </View>
   );
 };

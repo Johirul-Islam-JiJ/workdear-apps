@@ -106,68 +106,88 @@ const FinalForm = ({ step, setStep }: Props) => {
             gap: 10,
           }}
         >
-          <View>
-            <ThemedText type="defaultSemiBold">Worker need</ThemedText>
-            <Controller
-              name="total_workers_required"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value?.toString()}
-                  onChangeText={onChange}
-                  placeholder="Enter worker need"
-                  error={errors.total_workers_required?.message}
-                />
-              )}
-            />
-          </View>
+          <View
+            style={{
+              gap: 10,
+              backgroundColor: "white",
+              paddingVertical: 15,
+              paddingHorizontal: 10,
+              borderRadius: 10,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}
+          >
+            <View>
+              <ThemedText type="defaultSemiBold">Worker need</ThemedText>
+              <Controller
+                name="total_workers_required"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    value={value?.toString()}
+                    onChangeText={onChange}
+                    placeholder="Enter worker need"
+                    error={errors.total_workers_required?.message}
+                  />
+                )}
+              />
+            </View>
 
-          <View>
-            <ThemedText type="defaultSemiBold">Each worker earn </ThemedText>
-            <Controller
-              name="pay_per_task"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value?.toString()}
-                  onChangeText={onChange}
-                  placeholder="Enter worker earn"
-                  error={errors.pay_per_task?.message}
-                />
-              )}
-            />
-          </View>
+            <View>
+              <ThemedText type="defaultSemiBold">Each worker earn </ThemedText>
+              <Controller
+                name="pay_per_task"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    value={value?.toString()}
+                    onChangeText={onChange}
+                    placeholder="Enter worker earn"
+                    error={errors.pay_per_task?.message}
+                  />
+                )}
+              />
+            </View>
 
-          <View>
-            <ThemedText type="defaultSemiBold">Required Screenshot</ThemedText>
-            <Controller
-              name="require_screenshots"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value?.toString()}
-                  onChangeText={onChange}
-                  placeholder="Enter screenshot amount"
-                  error={errors.require_screenshots?.message}
-                />
-              )}
-            />
-          </View>
+            <View>
+              <ThemedText type="defaultSemiBold">
+                Required Screenshot
+              </ThemedText>
+              <Controller
+                name="require_screenshots"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    value={value?.toString()}
+                    onChangeText={onChange}
+                    placeholder="Enter screenshot amount"
+                    error={errors.require_screenshots?.message}
+                  />
+                )}
+              />
+            </View>
 
-          <View>
-            <ThemedText type="defaultSemiBold">Estimated day</ThemedText>
-            <Controller
-              name="estimated_day"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value?.toString()}
-                  onChangeText={onChange}
-                  placeholder="Enter estimated day"
-                  error={errors.estimated_day?.message}
-                />
-              )}
-            />
+            <View>
+              <ThemedText type="defaultSemiBold">Estimated day</ThemedText>
+              <Controller
+                name="estimated_day"
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    value={value?.toString()}
+                    onChangeText={onChange}
+                    placeholder="Enter estimated day"
+                    error={errors.estimated_day?.message}
+                  />
+                )}
+              />
+            </View>
           </View>
 
           <Controller

@@ -103,7 +103,13 @@ const FirstForm = ({ step, setStep }: Props) => {
       enabled
     >
       <ScrollView>
-        <View style={{ flex: 1, rowGap: 10, paddingBottom: 15 }}>
+        <View
+          style={{
+            flex: 1,
+            rowGap: 10,
+            paddingBottom: 15,
+          }}
+        >
           <View>
             <ThemedText>Write an accurate job title:</ThemedText>
             <Controller

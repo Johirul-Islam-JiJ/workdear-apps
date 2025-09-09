@@ -21,9 +21,9 @@ const PostJobScreen = () => {
       <Stepper selected={step} />
 
       {step === 0 ? (
-        <SelectCountry />
+        <SelectCountry step={step} setStep={setStep} />
       ) : step === 1 ? (
-        <SelectCategory />
+        <SelectCategory step={step} setStep={setStep} />
       ) : step === 2 ? (
         <FirstForm step={step} setStep={setStep} />
       ) : step === 3 ? (
