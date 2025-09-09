@@ -1,3 +1,5 @@
+import { useAppSelector } from "@/hooks/redux";
+import { useGetcontinentQuery } from "@/store/features/jobs";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
@@ -12,6 +14,11 @@ type Props = {
 const SelectCountry = ({ step, setStep }: Props) => {
   const [selected, setSelected] = useState<number[]>([]);
   const [visible, setVisible] = useState(0);
+  const { data: countryData, isLoading: isLoadingCountryData } =
+    useGetcontinentQuery();
+  const { jobPostFinalForm, isUpdate } = useAppSelector(
+    (state) => state.jobForm
+  );
 
   const countries = [
     {

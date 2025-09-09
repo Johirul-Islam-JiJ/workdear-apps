@@ -1,5 +1,12 @@
 import { config } from "@/config/config";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
+import { RootState } from "../store";
 
 const apiFormDataUrl = [
   "/update-user-profile-image",
@@ -13,24 +20,29 @@ const apiFormDataUrl = [
   "/deposit-withdraw-manual",
 ];
 
-const isFormDataUrl = (formDataUrl, url) => {
+const isFormDataUrl = (formDataUrl: string[], url: string) => {
   return formDataUrl.some((path) => {
     const pattern = new RegExp(`^${path}(/|$)`);
     return pattern.test(url);
   });
 };
 
-const baseQueryWithAuth = async (args, api, extraOptions) => {
+const baseQueryWithAuth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: config.apiBaseUrl,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().user.token;
+      const token = (getState() as RootState).user.token;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
 
-      if (!isFormDataUrl(apiFormDataUrl, args?.url)) {
+      const url = typeof args === "string" ? args : args.url;
+      if (!isFormDataUrl(apiFormDataUrl, url)) {
         headers.set("Content-Type", "application/json");
         headers.set("Accept", "application/json");
       }
@@ -73,17 +85,22 @@ export const api = createApi({
 
 const supportFormDataUrl = ["/files/upload"];
 
-const baseQueryLiveSupport = async (args, api, extraOptions) => {
+const baseQueryLiveSupport: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: config.liveSupportApiBaseUrl,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().user.token;
+      const token = (getState() as RootState).user.token;
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
 
-      if (!isFormDataUrl(supportFormDataUrl, args?.url)) {
+      const url = typeof args === "string" ? args : args.url;
+      if (!isFormDataUrl(supportFormDataUrl, url)) {
         headers.set("Content-Type", "application/json");
         headers.set("Accept", "application/json");
       }

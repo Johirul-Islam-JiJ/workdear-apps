@@ -7,7 +7,7 @@ import Stepper from "@/components/postJob/Stepper";
 import React from "react";
 
 const PostJobScreen = () => {
-  const [step, setStep] = React.useState(2);
+  const [step, setStep] = React.useState(0);
 
   return (
     <ThemedView

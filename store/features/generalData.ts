@@ -5,7 +5,7 @@ import {
 } from "../slices/settings";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+export const generalDataApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getGeneralData: builder.query({
       query: () => ({
@@ -61,4 +61,4 @@ export const {
   useHomeJobsQuery,
   useGetAllCostQuery,
   useSubmitEmailForNewsLetterMutation,
-} = api;
+} = generalDataApi;

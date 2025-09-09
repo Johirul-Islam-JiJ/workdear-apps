@@ -1,7 +1,7 @@
-import { config } from "../../config";
+import { config } from "@/config/config";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+export const blogsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query({
       query: ({ page, job_category_id, search }) => ({
@@ -20,4 +20,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useGetBlogsQuery, useGetBlogCategoriesQuery } = api;
+export const { useGetBlogsQuery, useGetBlogCategoriesQuery } = blogsApi;

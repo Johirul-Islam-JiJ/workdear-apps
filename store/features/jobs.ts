@@ -1,7 +1,7 @@
-import { config } from "../../config";
+import { config } from "@/config/config";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+export const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCountries: builder.query({
       query: () => ({
@@ -109,7 +109,7 @@ api.injectEndpoints({
       }),
       invalidatesTags: ["alljobs", "tasks"],
     }),
-    getcontinent: builder.query({
+    getcontinent: builder.query<any, void>({
       query: () => ({
         url: "/country-categories",
         method: "GET",
@@ -166,4 +166,4 @@ export const {
   usePlayAndPauseJobMutation,
   useReportJobMutation,
   useReportSubmissionMutation,
-} = api;
+} = jobsApi;
