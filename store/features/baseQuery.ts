@@ -1,4 +1,5 @@
 import { config } from "@/config/config";
+import { SerializedError } from "@reduxjs/toolkit";
 import {
   BaseQueryFn,
   FetchArgs,
@@ -7,6 +8,23 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
+
+export type ErrorData = {
+  message: string;
+};
+
+export function isFetchBaseQueryError(
+  error: FetchBaseQueryError | SerializedError
+): error is FetchBaseQueryError & { data: ErrorData } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "data" in error &&
+    typeof (error as any).data === "object" &&
+    (error as any).data !== null &&
+    "message" in (error as any).data
+  );
+}
 
 const apiFormDataUrl = [
   "/update-user-profile-image",

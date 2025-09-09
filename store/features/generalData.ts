@@ -7,7 +7,7 @@ import { api } from "./baseQuery";
 
 export const generalDataApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getGeneralData: builder.query({
+    getGeneralData: builder.query<any, void>({
       query: () => ({
         url: "/general-data",
         method: "GET",
@@ -30,7 +30,7 @@ export const generalDataApi = api.injectEndpoints({
       }),
     }),
 
-    getAllCost: builder.query({
+    getAllCost: builder.query<any, void>({
       query: () => ({
         url: "/cost/center",
         method: "GET",

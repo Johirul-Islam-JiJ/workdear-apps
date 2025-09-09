@@ -7,8 +7,24 @@ import {
 } from "../slices/user";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    login: builder.mutation({
+      query: (data) => ({
+        url: "/login",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setToken(data?.data?.token));
+        } catch (error) {
+          console.log("Login mutation error:", error);
+        }
+      },
+      invalidatesTags: ["profile"],
+    }),
     register: builder.mutation({
       query: (data) => ({
         url: "/signup",
@@ -138,6 +154,7 @@ api.injectEndpoints({
 });
 
 export const {
+  useLoginMutation,
   useRegisterMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
@@ -151,4 +168,4 @@ export const {
   useReferredDataQuery,
   useAccountDeleteMutation,
   useUpdateAccountDeleteMutation,
-} = api;
+} = authApi;

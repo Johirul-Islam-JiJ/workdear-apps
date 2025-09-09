@@ -1,9 +1,12 @@
+import { useNavigation } from "@/hooks/useNavigation";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useLoginMutation } from "@/store/features/auth";
+import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
 import * as yup from "yup";
@@ -24,7 +27,9 @@ type Payload = {
 };
 
 const SignInForm = () => {
-  const [showPasswoard, setShowPassword] = React.useState(false);
+  const [showPasswoard, setShowPassword] = useState(false);
+  const [login, { isLoading, error }] = useLoginMutation();
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
@@ -42,7 +47,11 @@ const SignInForm = () => {
   );
 
   async function onSubmit(data: Payload) {
-    console.log(data);
+    try {
+      data.device_name = "mobile";
+      await login(data).unwrap();
+      navigation.navigate("(mainLayout)");
+    } catch (error) {}
   }
 
   return (
@@ -57,7 +66,7 @@ const SignInForm = () => {
     >
       <View style={{ gap: 7 }}>
         <View>
-          <ThemedText>Email</ThemedText>
+          <ThemedText type="defaultSemiBold">Email</ThemedText>
           <Controller
             control={control}
             name="email"
@@ -75,7 +84,7 @@ const SignInForm = () => {
           />
         </View>
         <View>
-          <ThemedText>Password</ThemedText>
+          <ThemedText type="defaultSemiBold">Password</ThemedText>
           <Controller
             name="password"
             control={control}
@@ -104,7 +113,18 @@ const SignInForm = () => {
         <ThemedText style={{ textAlign: "right" }} type="link">
           Forgot password?
         </ThemedText>
+
+        {error && isFetchBaseQueryError(error) && (
+          <ThemedText
+            color="error"
+            type="small"
+            style={{ textAlign: "center" }}
+          >
+            {error.data.message}
+          </ThemedText>
+        )}
         <Button
+          loading={isLoading}
           onPress={handleSubmit(onSubmit)}
           title="Sign in"
           variant="Contained"

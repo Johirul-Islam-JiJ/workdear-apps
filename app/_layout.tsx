@@ -1,4 +1,5 @@
 import { useColorScheme } from "@/hooks/useColorScheme";
+import ScreenProvider from "@/providers/ScreenProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import {
   DarkTheme,
@@ -6,7 +7,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -37,12 +37,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <StoreProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(mainLayout)" />
-          <Stack.Screen name="signin" />
-          <Stack.Screen name="signup" />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <ScreenProvider />
         <StatusBar style="light" />
       </StoreProvider>
     </ThemeProvider>
