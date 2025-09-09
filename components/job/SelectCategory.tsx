@@ -138,7 +138,7 @@ function Category({
           color="primaryDarker"
           style={{ textAlign: "center", marginBottom: 15 }}
         >
-          Select Country
+          Select Sub Category
         </ThemedText>
 
         <ScrollView style={{ maxHeight: 400 }}>

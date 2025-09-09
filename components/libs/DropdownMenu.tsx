@@ -43,11 +43,15 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   const dropdownBgColor = useThemeColor("white");
 
   useEffect(() => {
-    const item = items.find((item) => item.value === value);
-    if (item) {
-      setSelected(item);
+    if (value) {
+      const item = items.find((item) => item.value === value);
+      if (item) {
+        setSelected(item);
+      }
+    } else {
+      setSelected({ label: "", value: "" });
     }
-  }, []);
+  }, [value]);
 
   const handleSelect = (item: DropdownItem) => {
     setSelected(item);
@@ -56,7 +60,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       {/* Dropdown Button */}
       {button ? (
         <Button

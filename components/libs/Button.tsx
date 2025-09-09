@@ -10,7 +10,7 @@ import {
 import { ThemedText } from "./ThemedText";
 
 interface ButtonProps extends PressableProps {
-  title: string;
+  title: string | React.ReactNode;
   variant?: "Contained" | "Outlined" | "Text";
   color?: ColorScheme;
   loading?: boolean;

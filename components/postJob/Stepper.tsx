@@ -4,7 +4,7 @@ import { ThemedView } from "../libs/ThemedView";
 
 const Stepper = ({ selected = 0 }) => {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
       {Array.from({ length: 4 }, (_, index) => (
         <React.Fragment key={index}>
           <ThemedView
