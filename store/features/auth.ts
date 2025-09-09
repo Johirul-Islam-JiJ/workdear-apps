@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   logout,
   removeToken,
@@ -19,6 +20,7 @@ const authApi = api.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setToken(data?.data?.token));
+          AsyncStorage.setItem("token", data?.data?.token);
         } catch (error) {
           console.log("Login mutation error:", error);
         }
@@ -35,6 +37,7 @@ const authApi = api.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setToken(data?.data?.token));
+          AsyncStorage.setItem("token", data?.data?.token);
         } catch (error) {
           console.log("Register mutation error:", error);
         }
@@ -50,6 +53,7 @@ const authApi = api.injectEndpoints({
         try {
           await queryFulfilled;
           dispatch(logout());
+          AsyncStorage.removeItem("token");
         } catch (error) {
           console.log("Logout mutation error:", error);
         }

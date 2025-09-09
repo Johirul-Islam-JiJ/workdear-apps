@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
 
 const user = createSlice({
@@ -5,7 +6,7 @@ const user = createSlice({
   initialState: {
     user: null,
     token: null,
-    loading: false,
+    loading: true,
   },
   reducers: {
     setUser: (state, action) => {
@@ -20,12 +21,15 @@ const user = createSlice({
     },
     removeToken: (state) => {
       state.token = null;
+      AsyncStorage.removeItem("token");
     },
     updateUserBalance: (state, action) => {
-      state.user.wallet_balance.earning_balance = (
-        parseFloat(state.user.wallet_balance.earning_balance) +
-        parseFloat(action.payload)
-      ).toFixed(4);
+      if (state.user) {
+        state.user.wallet_balance.earning_balance = (
+          parseFloat(state.user.wallet_balance.earning_balance) +
+          parseFloat(action.payload)
+        ).toFixed(4);
+      }
     },
     setUserLoading: (state, action) => {
       state.loading = action.payload;

@@ -9,6 +9,7 @@ import { Link } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
+import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
@@ -51,7 +52,12 @@ const SignInForm = () => {
       data.device_name = "mobile";
       await login(data).unwrap();
       navigation.navigate("(mainLayout)");
-    } catch (error) {}
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: error?.data?.message || "Internal server error",
+      });
+    }
   }
 
   return (
@@ -66,7 +72,7 @@ const SignInForm = () => {
     >
       <View style={{ gap: 7 }}>
         <View>
-          <ThemedText type="defaultSemiBold">Email</ThemedText>
+          <ThemedText>Email</ThemedText>
           <Controller
             control={control}
             name="email"
@@ -84,7 +90,7 @@ const SignInForm = () => {
           />
         </View>
         <View>
-          <ThemedText type="defaultSemiBold">Password</ThemedText>
+          <ThemedText>Password</ThemedText>
           <Controller
             name="password"
             control={control}

@@ -1,12 +1,16 @@
+import { useNavigation } from "@/hooks/useNavigation";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useRegisterMutation } from "@/store/features/auth";
+import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, ScrollView, View } from "react-native";
+import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
@@ -39,8 +43,10 @@ const schema = yup.object().shape({
 });
 
 const SignUpForm = () => {
-  const [showPasswoard, setShowPassword] = React.useState(false);
-  const [showConfirmPasswoard, setShowConfirmPassword] = React.useState(false);
+  const [showConfirmPasswoard, setShowConfirmPassword] = useState(false);
+  const [showPasswoard, setShowPassword] = useState(false);
+  const [registation, { isLoading, error }] = useRegisterMutation();
+  const navigation = useNavigation();
 
   const {
     control,
@@ -73,7 +79,16 @@ const SignUpForm = () => {
   );
 
   async function onSubmit(data: any) {
-    console.log(data);
+    try {
+      data.device_name = "mobile";
+      await registation(data).unwrap();
+      navigation.navigate("(mainLayout)");
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: error?.data?.message || "Internal server error",
+      });
+    }
   }
 
   return (
@@ -253,11 +268,21 @@ const SignUpForm = () => {
           />
         </View>
 
+        {error && isFetchBaseQueryError(error) && (
+          <ThemedText
+            type="small"
+            color="error"
+            style={{ textAlign: "center" }}
+          >
+            {error.data.message}
+          </ThemedText>
+        )}
+
         <Button
           onPress={handleSubmit(onSubmit)}
+          loading={isLoading}
           title="Sign Up"
           variant="Contained"
-          style={{ marginTop: 10 }}
         />
       </View>
 
