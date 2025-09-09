@@ -92,8 +92,8 @@ const SelectCountry = () => {
 
         return (
           <Button
-            onPress={() => setVisible(continent.id)}
             key={continent.id}
+            onPress={() => setVisible(continent.id)}
             title={continent.continent}
             variant={hasSelected ? "Contained" : "Outlined"}
           />
@@ -122,6 +122,7 @@ const SelectCountry = () => {
               .find((country) => country.id === visible)
               ?.contries.map((country, index) => (
                 <Button
+                  key={index}
                   style={{ width: "49%" }}
                   onPress={() => {
                     setSelected(
@@ -130,7 +131,6 @@ const SelectCountry = () => {
                         : selected.concat(country.id)
                     );
                   }}
-                  key={index}
                   title={country.name}
                   variant={
                     selected.includes(country.id) ? "Contained" : "Outlined"

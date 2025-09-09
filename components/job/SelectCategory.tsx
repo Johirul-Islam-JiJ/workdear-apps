@@ -89,6 +89,7 @@ const SelectCategory = () => {
 
       {categories.map((category) => (
         <Category
+          key={category.id}
           category={category}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -128,7 +129,6 @@ function Category({
           setSelectedSubCategory(0);
           setVisible(1);
         }}
-        key={category.id}
         title={category.category}
         variant={category.id === selectedCategory ? "Contained" : "Outlined"}
       />
@@ -154,9 +154,9 @@ function Category({
               .find((category) => category.id === selectedCategory)
               ?.subCategories.map((subCategory, index) => (
                 <Button
+                  key={index}
                   style={{ width: "49%" }}
                   onPress={() => setSelectedSubCategory(subCategory.id)}
-                  key={index}
                   title={subCategory.name}
                   variant={
                     selectedSubCategory === subCategory.id
