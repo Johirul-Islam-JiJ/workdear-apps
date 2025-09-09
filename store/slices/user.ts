@@ -15,6 +15,7 @@ const user = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
+      AsyncStorage.removeItem("token");
     },
     setToken: (state, action) => {
       state.token = action.payload;
