@@ -65,6 +65,7 @@ const baseQueryWithAuth: BaseQueryFn<
         headers.set("Accept", "application/json");
       }
       headers.set("Accept", "application/json");
+      headers.set("X-API-Key", config.apiKey);
 
       return headers;
     },

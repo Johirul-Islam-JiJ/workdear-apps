@@ -1,4 +1,5 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { PremiumPackage } from "@/types/PremiumPackage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -6,17 +7,11 @@ import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const PackageCard = ({ highlight = false }) => {
+const PackageCard = ({ data }: { data: PremiumPackage }) => {
   const iconColor = useThemeColor("primaryDarker");
-  const features = [
-    "No ads",
-    "unlimited jobs provide",
-    "Premium support",
-    "Unlimited task submition",
-  ];
   return (
     <ThemedView style={styles.container}>
-      {highlight && (
+      {data.highlighted && (
         <ThemedView color="primaryDarker" style={styles.highlight}>
           <ThemedText
             style={{ textAlign: "center" }}
@@ -30,20 +25,21 @@ const PackageCard = ({ highlight = false }) => {
       <View style={{ alignItems: "center" }}>
         <ThemedView color="primaryDarker" style={styles.name}>
           <ThemedText color="white" type="defaultSemiBold">
-            Basic
+            {data.name}
           </ThemedText>
         </ThemedView>
         <ThemedText color="primaryDarker" type="subtitle">
-          $30
+          ${data.price}
         </ThemedText>
         <ThemedText color="placeHolder">3 months access</ThemedText>
       </View>
-      {features.map((item, index) => (
+      {data.feature.map((item, index) => (
         <View key={index} style={styles.features}>
           <FontAwesome name="check-square" size={24} color={iconColor} />
           <ThemedText>{item}</ThemedText>
         </View>
       ))}
+
       <Button title="Get started" style={{ marginTop: 10 }} />
     </ThemedView>
   );

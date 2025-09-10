@@ -1,8 +1,9 @@
+import { PremiumPackages } from "@/types/PremiumPackage";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const premiumApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getPremiumPackages: builder.query({
+    getPremiumPackages: builder.query<PremiumPackages, void>({
       query: () => ({
         url: "/subscription-packages",
         method: "GET",
@@ -19,4 +20,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useGetPremiumPackagesQuery, useBuyPremiumMutation } = api;
+export const { useGetPremiumPackagesQuery, useBuyPremiumMutation } = premiumApi;
