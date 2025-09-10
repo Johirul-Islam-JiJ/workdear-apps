@@ -1,9 +1,10 @@
 import { config } from "@/config/config";
+import { NotificationCount } from "@/types/Notification";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const notificationApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getNotificationCount: builder.query({
+    getNotificationCount: builder.query<NotificationCount, void>({
       query: () => ({
         url: "/notifications/unread-count",
         method: "GET",
@@ -47,4 +48,4 @@ export const {
   useGetNotificationQuery,
   useMarkSingleNotificationAsReadMutation,
   useMarkMultipleNotificationsAsReadMutation,
-} = api;
+} = notificationApi;

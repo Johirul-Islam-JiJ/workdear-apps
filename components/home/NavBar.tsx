@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/hooks/redux";
+import { useGetNotificationCountQuery } from "@/store/features/notification";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { DrawerActions } from "@react-navigation/native";
@@ -9,10 +10,9 @@ import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const NavBar = () => {
-  const navigation = useNavigation();
   const { user } = useAppSelector((state) => state.user);
-
-  console.log(user);
+  const { data: notificationCount } = useGetNotificationCountQuery();
+  const navigation = useNavigation();
 
   function openDrawer() {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -26,17 +26,19 @@ const NavBar = () => {
       <View style={styles.balanceContainer}>
         <ThemedView color="primaryDarker" style={styles.balance}>
           <ThemedText color="white" type="defaultSemiBold">
-            $9800.9999
+            ${user?.wallet_balance.earning_balance}
           </ThemedText>
         </ThemedView>
         <ThemedView color="primaryLight" style={styles.balance}>
           <ThemedText color="white" type="defaultSemiBold">
-            $9800.9999
+            ${user?.wallet_balance.deposit_balance}
           </ThemedText>
         </ThemedView>
         <View style={{ position: "relative" }}>
           <Ionicons name="notifications-sharp" size={24} color="yellow" />
-          <ThemedView color="primaryLight" style={styles.notification} />
+          {notificationCount && notificationCount?.data.unread_count > 0 && (
+            <ThemedView color="primaryLight" style={styles.notification} />
+          )}
         </View>
       </View>
     </ThemedView>
