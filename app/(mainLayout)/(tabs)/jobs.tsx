@@ -36,6 +36,11 @@ const JobsSreen = () => {
   });
 
   useEffect(() => {
+    setJobsData([]);
+    setPage(1);
+  }, [countryIds, category.id]);
+
+  useEffect(() => {
     if (jobs?.data?.data) {
       const data: Job[] = jobs
         ? Array.isArray(jobs.data.data)
@@ -65,7 +70,7 @@ const JobsSreen = () => {
           paddingTop: 10,
         }}
         ListEmptyComponent={() =>
-          isLoading ? (
+          isLoading || isFetching ? (
             <View style={{ gap: 10 }}>
               <LoadingJobCard />
               <LoadingJobCard />

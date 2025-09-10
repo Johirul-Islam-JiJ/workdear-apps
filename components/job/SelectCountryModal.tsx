@@ -69,6 +69,7 @@ const SelectCountryModal = ({
         <Button
           onPress={() => {
             setSelected([]);
+            setVisible(0);
           }}
           title="Clear All"
           variant="Outlined"

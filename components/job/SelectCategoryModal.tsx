@@ -50,6 +50,7 @@ const SelectCategoryModal = ({
                     ? { id: item.id, name: item.category_name }
                     : { id: null, name: null }
                 );
+                setVisible(0);
               }}
               title={item.category_name}
               variant={selected.id === item.id ? "Contained" : "Outlined"}
@@ -70,6 +71,7 @@ const SelectCategoryModal = ({
         <Button
           onPress={() => {
             setSelected({ id: null, name: null });
+            setVisible(0);
           }}
           title="Clear All"
           variant="Outlined"
