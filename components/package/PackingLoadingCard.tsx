@@ -1,9 +1,9 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing, View } from "react-native";
+import { Animated, Easing } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 
-const LoadingJobCard = () => {
+const PackageLoadingCard = () => {
   const placeHolderColor = useThemeColor("placeHolder");
   const pulseAnim = useRef(new Animated.Value(0.3)).current;
 
@@ -30,8 +30,6 @@ const LoadingJobCard = () => {
     <ThemedView
       color="white"
       style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
         paddingVertical: 10,
         paddingHorizontal: 10,
         gap: 10,
@@ -43,58 +41,43 @@ const LoadingJobCard = () => {
         elevation: 5,
       }}
     >
-      <View style={{ flex: 1, gap: 8 }}>
-        {[...Array(2)].map((_, i) => (
-          <Animated.View
-            key={i}
-            style={{
-              height: 10,
-              borderRadius: 5,
-              backgroundColor: placeHolderColor,
-              opacity: pulseAnim,
-            }}
-          />
-        ))}
+      <Animated.View
+        style={{
+          height: 30,
+          width: 150,
+          borderRadius: 5,
+          backgroundColor: placeHolderColor,
+          opacity: pulseAnim,
+          alignSelf: "center",
+        }}
+      />
+      <Animated.View
+        style={{
+          height: 10,
+          width: 200,
+          borderRadius: 5,
+          backgroundColor: placeHolderColor,
+          opacity: pulseAnim,
+          alignSelf: "center",
+        }}
+      />
 
+      {[...Array(5)].map((_, i) => (
         <Animated.View
+          key={i}
           style={{
             height: 10,
-            width: 150,
             borderRadius: 5,
             backgroundColor: placeHolderColor,
             opacity: pulseAnim,
           }}
         />
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          {[...Array(2)].map((_, i) => (
-            <Animated.View
-              key={i}
-              style={{
-                height: 10,
-                width: 50,
-                borderRadius: 5,
-                backgroundColor: placeHolderColor,
-                opacity: pulseAnim,
-              }}
-            />
-          ))}
-        </View>
-      </View>
-
+      ))}
       <Animated.View
         style={{
-          height: 50,
-          width: 50,
-          borderRadius: 25,
-          borderWidth: 10,
-          borderColor: placeHolderColor,
+          height: 30,
+          borderRadius: 5,
+          backgroundColor: placeHolderColor,
           opacity: pulseAnim,
         }}
       />
@@ -102,4 +85,4 @@ const LoadingJobCard = () => {
   );
 };
 
-export default LoadingJobCard;
+export default PackageLoadingCard;

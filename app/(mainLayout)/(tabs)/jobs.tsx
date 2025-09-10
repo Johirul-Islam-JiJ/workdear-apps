@@ -1,6 +1,6 @@
 import JobCard from "@/components/job/JobCard";
 import JobListHeader from "@/components/job/JobListHeader";
-import LoadingJobCard from "@/components/job/LoadingJobCard";
+import JobLoadingCard from "@/components/job/JobLoadingCard";
 import Button from "@/components/libs/Button";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { useFindJobsQuery } from "@/store/features/jobs";
@@ -72,11 +72,11 @@ const JobsSreen = () => {
         ListEmptyComponent={() =>
           isLoading || isFetching ? (
             <View style={{ gap: 10 }}>
-              <LoadingJobCard />
-              <LoadingJobCard />
-              <LoadingJobCard />
-              <LoadingJobCard />
-              <LoadingJobCard />
+              <JobLoadingCard />
+              <JobLoadingCard />
+              <JobLoadingCard />
+              <JobLoadingCard />
+              <JobLoadingCard />
             </View>
           ) : (
             <View style={{ alignItems: "center", marginVertical: 10 }}>

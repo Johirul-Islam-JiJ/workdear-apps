@@ -4,7 +4,7 @@ import { View } from "react-native";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
 import JobCard from "./JobCard";
-import LoadingJobCard from "./LoadingJobCard";
+import JobLoadingCard from "./JobLoadingCard";
 
 const HomeJobLists = () => {
   const { data: jobs, isLoading } = useGetJobsForHomeQuery();
@@ -12,13 +12,16 @@ const HomeJobLists = () => {
 
   return (
     <View style={{ rowGap: 10 }}>
+      <ThemedText type="defaultSemiBold" color="primaryDarker">
+        Latest Jobs
+      </ThemedText>
       {isLoading ? (
         <View style={{ rowGap: 10 }}>
-          <LoadingJobCard />
-          <LoadingJobCard />
-          <LoadingJobCard />
-          <LoadingJobCard />
-          <LoadingJobCard />
+          <JobLoadingCard />
+          <JobLoadingCard />
+          <JobLoadingCard />
+          <JobLoadingCard />
+          <JobLoadingCard />
         </View>
       ) : jobs?.data?.length > 0 ? (
         jobs?.data?.map((job, index) => <JobCard key={index} job={job} />)
@@ -28,9 +31,14 @@ const HomeJobLists = () => {
         </View>
       )}
 
-      <View style={{ alignItems: "center" }}>
-        <Button onPress={() => navigation.navigate("jobs")} title="View More" />
-      </View>
+      {jobs?.data?.length > 0 && (
+        <View style={{ alignItems: "center" }}>
+          <Button
+            onPress={() => navigation.navigate("jobs")}
+            title="View More"
+          />
+        </View>
+      )}
     </View>
   );
 };
