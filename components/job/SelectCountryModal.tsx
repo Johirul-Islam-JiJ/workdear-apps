@@ -11,6 +11,7 @@ type Props = {
   countries: Country[];
   selected: number[];
   setSelected: React.Dispatch<React.SetStateAction<number[]>>;
+  checkWhenInclude?: boolean;
 };
 
 const SelectCountryModal = ({
@@ -19,6 +20,7 @@ const SelectCountryModal = ({
   countries,
   selected,
   setSelected,
+  checkWhenInclude = true,
 }: Props) => {
   return (
     <Modal visible={visible} setVisible={setVisible}>
@@ -51,7 +53,15 @@ const SelectCountryModal = ({
                 );
               }}
               title={country.country_name}
-              variant={selected.includes(country.id) ? "Contained" : "Outlined"}
+              variant={
+                checkWhenInclude
+                  ? selected.includes(country.id)
+                    ? "Contained"
+                    : "Outlined"
+                  : !selected.includes(country.id)
+                  ? "Contained"
+                  : "Outlined"
+              }
             />
           ))}
         </View>
@@ -66,14 +76,16 @@ const SelectCountryModal = ({
           marginTop: 15,
         }}
       >
-        <Button
-          onPress={() => {
-            setSelected([]);
-            setVisible(0);
-          }}
-          title="Clear All"
-          variant="Outlined"
-        />
+        {checkWhenInclude && (
+          <Button
+            onPress={() => {
+              setSelected([]);
+              setVisible(0);
+            }}
+            title="Clear All"
+            variant="Outlined"
+          />
+        )}
         <Button onPress={() => setVisible(0)} title="Done" />
       </View>
     </Modal>

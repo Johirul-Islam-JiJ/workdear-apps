@@ -1,5 +1,6 @@
 import { config } from "@/config/config";
 import {
+  CountryCategoryList,
   CountryList,
   FindJobPayload,
   HomeJobList,
@@ -124,7 +125,7 @@ export const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["alljobs", "tasks"],
     }),
-    getcontinent: builder.query<any, void>({
+    getcontinent: builder.query<CountryCategoryList, void>({
       query: () => ({
         url: "/country-categories",
         method: "GET",
