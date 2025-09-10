@@ -50,15 +50,18 @@ function ScreenProvider() {
     );
   }
 
-  return !user ? (
+  if (user) {
+    return (
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(mainLayout)" />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    );
+  }
+  return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="signin" />
       <Stack.Screen name="signup" />
-    </Stack>
-  ) : (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(mainLayout)" />
-      <Stack.Screen name="+not-found" />
     </Stack>
   );
 }
