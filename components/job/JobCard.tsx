@@ -1,14 +1,16 @@
+import { timeCalculator } from "@/services/timeCalculator";
+import { Job } from "@/types/Job";
 import { StyleSheet, View } from "react-native";
 import DonutChat from "../libs/DonutChat";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const JobCard = () => {
+const JobCard = ({ job }: { job: Job }) => {
   return (
     <ThemedView style={styles.container}>
       <View style={{ flex: 1 }}>
-        <ThemedText type="subtitle">Job Title</ThemedText>
-        <ThemedText>Name</ThemedText>
+        <ThemedText type="subtitle">{job.title}</ThemedText>
+        <ThemedText>{job.provider.name}</ThemedText>
         <View
           style={{
             flexDirection: "row",
@@ -16,13 +18,21 @@ const JobCard = () => {
             justifyContent: "space-between",
           }}
         >
-          <ThemedText color="placeHolder">10 hrs ago</ThemedText>
+          <ThemedText color="placeHolder">
+            {timeCalculator(job.created_at)}
+          </ThemedText>
           <ThemedView style={styles.price} color="primaryDarker">
-            <ThemedText color="white">$0.50</ThemedText>
+            <ThemedText color="white">${job.pay_per_task}</ThemedText>
           </ThemedView>
         </View>
       </View>
-      <DonutChat cutout={70} description="70/100" />
+      <DonutChat
+        cutout={
+          (job.submission_information.REQUIRED_JOB_WORKER / 100) *
+          job.submission_information.TOTAL_SUBMISSIONS
+        }
+        description={`${job.submission_information.TOTAL_SUBMISSIONS}/${job.submission_information.REQUIRED_JOB_WORKER}`}
+      />
     </ThemedView>
   );
 };

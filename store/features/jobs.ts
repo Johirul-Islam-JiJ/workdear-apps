@@ -1,8 +1,17 @@
 import { config } from "@/config/config";
+import { JobList } from "@/types/Job";
 import { api } from "./baseQuery";
 
 export const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getJobsForHome: builder.query<JobList, void>({
+      query: () => ({
+        url: "/home/jobs",
+        method: "GET",
+      }),
+      providesTags: ["jobs-home"],
+    }),
+
     getCountries: builder.query({
       query: () => ({
         url: "/countries",
@@ -148,6 +157,7 @@ export const jobsApi = api.injectEndpoints({
 });
 
 export const {
+  useGetJobsForHomeQuery,
   useGetCountriesQuery,
   useCreateJobMutation,
   useGetMyJobsQuery,

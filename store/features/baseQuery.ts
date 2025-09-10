@@ -97,6 +97,7 @@ export const api = createApi({
     "costCenter",
     "blogs",
     "blogs-categories",
+    "jobs-home",
   ],
   endpoints: () => ({}),
 });
