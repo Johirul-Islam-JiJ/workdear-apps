@@ -28,15 +28,13 @@ const JobListHeader = ({
   const { data: countries } = useGetcountryQuery();
 
   return (
-    <View style={{ flexDirection: "row", gap: 10 }}>
+    <View style={{ flexDirection: "row", gap: 10, flexWrap: "wrap" }}>
       <Button
         onPress={() => setShowCategoryModal(1)}
-        style={{ flex: 1 }}
         title={category.name ? category.name : "Select Category"}
       />
       <Button
         onPress={() => setShowCountryModal(1)}
-        style={{ flex: 1 }}
         title={
           countryIds.length > 0
             ? `${countryIds.length} Selected`

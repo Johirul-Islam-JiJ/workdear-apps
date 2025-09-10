@@ -4,7 +4,8 @@ import LoadingJobCard from "@/components/job/LoadingJobCard";
 import Button from "@/components/libs/Button";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { useFindJobsQuery } from "@/store/features/jobs";
-import React, { useState } from "react";
+import { Job } from "@/types/Job";
+import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 
 export type CategoryState = {
@@ -13,23 +14,43 @@ export type CategoryState = {
 };
 
 const JobsSreen = () => {
+  const [jobsData, setJobsData] = useState<Job[]>([]);
+
   const [countryIds, setCountryIds] = useState<number[]>([]);
+  const [page, setPage] = useState(1);
   const [category, setCategory] = useState<CategoryState>({
     id: null,
     name: null,
   });
-  const [page, setPage] = useState(1);
 
-  const { data: jobs, isLoading } = useFindJobsQuery({
-    country_ids: null,
-    job_category_id: null,
+  const {
+    data: jobs,
+    isLoading,
+    isFetching,
+  } = useFindJobsQuery({
+    country_ids: countryIds.length > 0 ? countryIds : null,
+    job_category_id: category.id,
+    higest_pay: true,
+    recent: true,
     page,
-    higest_pay: false,
-    recent: false,
   });
 
+  useEffect(() => {
+    if (jobs?.data?.data) {
+      const data: Job[] = jobs
+        ? Array.isArray(jobs.data.data)
+          ? jobs.data.data
+          : typeof jobs.data.data === "object"
+          ? Object.values(jobs.data.data)
+          : []
+        : [];
+
+      setJobsData((prev) => [...prev, ...data]);
+    }
+  }, [jobs]);
+
   return (
-    <View style={{ paddingHorizontal: 10, paddingVertical: 15, gap: 10 }}>
+    <View style={{ paddingHorizontal: 10, paddingVertical: 15 }}>
       <JobListHeader
         countryIds={countryIds}
         setCountryIds={setCountryIds}
@@ -38,7 +59,11 @@ const JobsSreen = () => {
       />
 
       <FlatList
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingBottom: 40,
+          paddingTop: 10,
+        }}
         ListEmptyComponent={() =>
           isLoading ? (
             <View style={{ gap: 10 }}>
@@ -56,13 +81,18 @@ const JobsSreen = () => {
         }
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         renderItem={({ item }) => <JobCard job={item} />}
-        keyExtractor={(_, index) => index.toString()}
-        data={jobs?.data?.data || []}
+        keyExtractor={(item, index) => item.id.toString()}
+        data={jobsData}
         ListFooterComponent={() =>
           jobs?.data &&
-          jobs?.data.last_page > 1 && (
+          jobs?.data.last_page > 1 &&
+          page <= jobs?.data.last_page && (
             <View style={{ alignItems: "center", marginTop: 10 }}>
-              <Button title="View More" />
+              <Button
+                onPress={() => setPage(page + 1)}
+                title="View More"
+                loading={isFetching}
+              />
             </View>
           )
         }
