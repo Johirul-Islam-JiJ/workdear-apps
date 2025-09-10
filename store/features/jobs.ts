@@ -27,14 +27,6 @@ export const jobsApi = api.injectEndpoints({
       providesTags: ["countries"],
     }),
 
-    getCatagory: builder.query({
-      query: () => ({
-        url: "/job-categories",
-        method: "GET",
-      }),
-      providesTags: ["countries"],
-    }),
-
     getJobsSubCategory: builder.query({
       query: () => ({
         url: `/job-sub-categories`,
@@ -170,7 +162,6 @@ export const {
   useGetMyJobsQuery,
   useDeleteJobMutation,
   useUpdateJobMutation,
-  useGetCatagoryQuery,
   useJobbyidQuery,
   useGetJobsCategoryQuery,
   useGetJobsSubCategoryQuery,

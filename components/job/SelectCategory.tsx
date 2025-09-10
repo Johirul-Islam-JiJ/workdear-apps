@@ -1,3 +1,4 @@
+import { useGetJobsCategoryQuery } from "@/store/features/jobs";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
@@ -18,8 +19,11 @@ type Props = {
 const SelectCategory = ({ step, setStep }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [selectedSubCategory, setSelectedSubCategory] = useState<number>(0);
+  const { data: categories } = useGetJobsCategoryQuery();
 
-  const categories: Category[] = [
+  console.log(categories);
+
+  const categoriesdata: Category[] = [
     {
       category: "Category 1",
       id: 1,
@@ -95,13 +99,13 @@ const SelectCategory = ({ step, setStep }: Props) => {
           Please select a category to continue
         </ThemedText>
 
-        {categories.map((category) => (
+        {categoriesdata.map((category) => (
           <Category
             key={category.id}
             category={category}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
-            categories={categories}
+            categories={categoriesdata}
             selectedSubCategory={selectedSubCategory}
             setSelectedSubCategory={setSelectedSubCategory}
           />
