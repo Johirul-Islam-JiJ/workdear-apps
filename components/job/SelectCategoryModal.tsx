@@ -73,7 +73,7 @@ const SelectCategoryModal = ({
             setSelected({ id: null, name: null });
             setVisible(0);
           }}
-          title="Clear All"
+          title="Clear"
           variant="Outlined"
         />
         <Button onPress={() => setVisible(0)} title="Done" />
