@@ -1,7 +1,7 @@
 import { useGetcontinentQuery } from "@/store/features/jobs";
 import { Continent } from "@/types/Job";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
 import ButtonCardLoader from "./ButtonCardLoader";
@@ -33,7 +33,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
         paddingBottom: 15,
       }}
     >
-      <View style={{ gap: 7 }}>
+      <ScrollView contentContainerStyle={{ gap: 7 }} style={{ flex: 1 }}>
         <ThemedText type="defaultSemiBold" color="primaryDarker">
           Select country you want to hide from the selected zone (optional)
         </ThemedText>
@@ -56,7 +56,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
             No countries found
           </ThemedText>
         )}
-      </View>
+      </ScrollView>
       <View style={{ alignItems: "flex-end" }}>
         <Button
           title="Next"
