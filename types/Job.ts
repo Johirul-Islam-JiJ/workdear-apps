@@ -109,6 +109,16 @@ export interface Job {
   job_promotions: JobPromotion[];
 }
 
-export type JobList = {
+export type HomeJobList = {
   data: Job[];
+};
+
+export type JobList = {
+  data: {
+    current_page: number;
+    data: Job[];
+    last_page: number;
+    per_page: number;
+    total: number;
+  };
 };

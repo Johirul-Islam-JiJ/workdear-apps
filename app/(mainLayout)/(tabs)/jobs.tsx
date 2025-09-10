@@ -1,12 +1,17 @@
 import JobCard from "@/components/job/JobCard";
+import LoadingJobCard from "@/components/job/LoadingJobCard";
 import Button from "@/components/libs/Button";
 import { DropdownMenu } from "@/components/libs/DropdownMenu";
+import { ThemedText } from "@/components/libs/ThemedText";
+import { useFindJobsQuery } from "@/store/features/jobs";
 import React from "react";
 import { FlatList, View } from "react-native";
 
 const JobsSreen = () => {
   const [category, setCategory] = React.useState("");
   const [location, setLocation] = React.useState("");
+  const { data: jobs, isLoading } = useFindJobsQuery();
+
   const categories = [
     {
       label: "All",
@@ -70,15 +75,33 @@ const JobsSreen = () => {
         paddingHorizontal: 10,
         paddingVertical: 15,
       }}
+      ListEmptyComponent={() =>
+        isLoading ? (
+          <View style={{ gap: 10 }}>
+            <LoadingJobCard />
+            <LoadingJobCard />
+            <LoadingJobCard />
+            <LoadingJobCard />
+            <LoadingJobCard />
+          </View>
+        ) : (
+          <View style={{ alignItems: "center", marginVertical: 10 }}>
+            <ThemedText color="placeHolder">No job found</ThemedText>
+          </View>
+        )
+      }
       ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-      renderItem={() => <JobCard />}
-      keyExtractor={(item, index) => index.toString()}
-      data={Array(20).fill(0)}
-      ListFooterComponent={() => (
-        <View style={{ alignItems: "center", marginTop: 10 }}>
-          <Button title="View More" />
-        </View>
-      )}
+      renderItem={({ item }) => <JobCard job={item} />}
+      keyExtractor={(_, index) => index.toString()}
+      data={jobs?.data?.data || []}
+      ListFooterComponent={() =>
+        jobs?.data &&
+        jobs?.data.last_page > 1 && (
+          <View style={{ alignItems: "center", marginTop: 10 }}>
+            <Button title="View More" />
+          </View>
+        )
+      }
     />
   );
 };

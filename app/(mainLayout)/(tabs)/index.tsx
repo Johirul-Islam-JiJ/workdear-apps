@@ -1,5 +1,5 @@
 import Banner from "@/components/home/Banner";
-import JobLists from "@/components/job/JobLists";
+import HomeJobLists from "@/components/job/HomeJobLists";
 import Button from "@/components/libs/Button";
 import Packages from "@/components/package/Packages";
 import { useAppDispatch } from "@/hooks/redux";
@@ -28,7 +28,7 @@ const HomeScreen = () => {
           rowGap: 15,
         }}
       >
-        <JobLists />
+        <HomeJobLists />
         <Packages />
 
         <Button title="Logout" color="error" onPress={handleLogout} />

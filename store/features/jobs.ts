@@ -1,10 +1,10 @@
 import { config } from "@/config/config";
-import { JobList } from "@/types/Job";
+import { HomeJobList, JobList } from "@/types/Job";
 import { api } from "./baseQuery";
 
 export const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getJobsForHome: builder.query<JobList, void>({
+    getJobsForHome: builder.query<HomeJobList, void>({
       query: () => ({
         url: "/home/jobs",
         method: "GET",
@@ -44,7 +44,7 @@ export const jobsApi = api.injectEndpoints({
       invalidatesTags: ["jobs"],
     }),
 
-    findJobs: builder.query({
+    findJobs: builder.query<JobList, void>({
       query: (data) => ({
         url: `/jobs/find-jobs?paginate=${config.dataLimit}`,
         method: "POST",
