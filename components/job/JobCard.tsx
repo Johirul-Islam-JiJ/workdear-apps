@@ -15,7 +15,9 @@ const JobCard = ({ job }: { job: Job }) => {
   return (
     <ThemedView style={styles.container}>
       <View style={{ flex: 1 }}>
-        <ThemedText type="subtitle">{job.title}</ThemedText>
+        <ThemedText type="subtitle" numberOfLines={2} ellipsizeMode="tail">
+          {job.title}
+        </ThemedText>
         <ThemedText>{job.provider.name}</ThemedText>
         <View
           style={{
