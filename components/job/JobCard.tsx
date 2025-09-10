@@ -6,6 +6,12 @@ import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const JobCard = ({ job }: { job: Job }) => {
+  const { REQUIRED_JOB_WORKER, TOTAL_SUBMISSIONS } = job.submission_information;
+  const progress =
+    TOTAL_SUBMISSIONS === 0
+      ? 100
+      : 100 - (TOTAL_SUBMISSIONS / REQUIRED_JOB_WORKER) * 100;
+
   return (
     <ThemedView style={styles.container}>
       <View style={{ flex: 1 }}>
@@ -27,10 +33,7 @@ const JobCard = ({ job }: { job: Job }) => {
         </View>
       </View>
       <DonutChat
-        cutout={
-          (job.submission_information.REQUIRED_JOB_WORKER / 100) *
-          job.submission_information.TOTAL_SUBMISSIONS
-        }
+        cutout={progress}
         description={`${job.submission_information.TOTAL_SUBMISSIONS}/${job.submission_information.REQUIRED_JOB_WORKER}`}
       />
     </ThemedView>
