@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
-import CountryCardLoader from "./CountryCardLoader";
+import ButtonCardLoader from "./ButtonCardLoader";
 import SelectCountryModal from "./SelectCountryModal";
 
 type Props = {
@@ -38,7 +38,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
           Select country you want to hide from the selected zone (optional)
         </ThemedText>
         {isLoading ? (
-          <CountryCardLoader />
+          <ButtonCardLoader />
         ) : countryData?.data.length ? (
           countryData?.data.map((continent) => (
             <ContinentList

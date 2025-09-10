@@ -2,7 +2,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
 import { Animated, Easing, View } from "react-native";
 
-const CountryCardLoader = () => {
+const ButtonCardLoader = () => {
   const placeHolderColor = useThemeColor("placeHolder");
   const pulseAnim = useRef(new Animated.Value(0.3)).current;
 
@@ -42,4 +42,4 @@ const CountryCardLoader = () => {
   );
 };
 
-export default CountryCardLoader;
+export default ButtonCardLoader;
