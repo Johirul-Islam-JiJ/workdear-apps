@@ -7,9 +7,17 @@ import { useFindJobsQuery } from "@/store/features/jobs";
 import React, { useState } from "react";
 import { FlatList, View } from "react-native";
 
+export type CategoryState = {
+  id: null | number;
+  name: null | string;
+};
+
 const JobsSreen = () => {
   const [countryIds, setCountryIds] = useState<number[]>([]);
-  const [categoryId, setCategoryId] = useState<number | null>(null);
+  const [category, setCategory] = useState<CategoryState>({
+    id: null,
+    name: null,
+  });
   const [page, setPage] = useState(1);
 
   const { data: jobs, isLoading } = useFindJobsQuery({
@@ -25,8 +33,8 @@ const JobsSreen = () => {
       <JobListHeader
         countryIds={countryIds}
         setCountryIds={setCountryIds}
-        categoryId={categoryId}
-        setCategoryId={setCategoryId}
+        category={category}
+        setCategory={setCategory}
       />
 
       <FlatList

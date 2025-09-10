@@ -154,28 +154,6 @@ export interface JobCategories {
   data: JobCategory[];
 }
 
-// {
-//             "id": 1,
-//             "country_name": "India",
-//             "country_code": null,
-//             "deleted_at": null,
-//             "created_at": "2025-08-06T16:10:03.000000Z",
-//             "updated_at": "2025-08-06T16:10:03.000000Z",
-//             "category": [
-//                 {
-//                     "id": 1,
-//                     "country_category_name": "Asia",
-//                     "deleted_at": null,
-//                     "created_at": "2025-08-06T16:08:44.000000Z",
-//                     "updated_at": "2025-08-06T16:08:44.000000Z",
-//                     "pivot": {
-//                         "country_id": "1",
-//                         "country_category_id": "1"
-//                     }
-//                 }
-//             ]
-//         },
-
 export interface CountryCategory {
   id: number;
   country_category_name: string;
