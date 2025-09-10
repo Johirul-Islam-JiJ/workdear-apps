@@ -1,5 +1,11 @@
 import { config } from "@/config/config";
-import { HomeJobList, JobList } from "@/types/Job";
+import {
+  CountryList,
+  FindJobPayload,
+  HomeJobList,
+  JobCategories,
+  JobList,
+} from "@/types/Job";
 import { api } from "./baseQuery";
 
 export const jobsApi = api.injectEndpoints({
@@ -44,7 +50,7 @@ export const jobsApi = api.injectEndpoints({
       invalidatesTags: ["jobs"],
     }),
 
-    findJobs: builder.query<JobList, void>({
+    findJobs: builder.query<JobList, FindJobPayload>({
       query: (data) => ({
         url: `/jobs/find-jobs?paginate=${config.dataLimit}`,
         method: "POST",
@@ -60,7 +66,7 @@ export const jobsApi = api.injectEndpoints({
       }),
     }),
 
-    getJobsByCategory: builder.query({
+    getJobsCategory: builder.query<JobCategories, void>({
       query: () => ({
         url: `/job-categories`,
         method: "GET",
@@ -124,7 +130,7 @@ export const jobsApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    getcountry: builder.query({
+    getcountry: builder.query<CountryList, void>({
       query: () => ({
         url: "/countries",
         method: "GET",
@@ -165,7 +171,7 @@ export const {
   useUpdateJobMutation,
   useGetCatagoryQuery,
   useJobbyidQuery,
-  useGetJobsByCategoryQuery,
+  useGetJobsCategoryQuery,
   useGetJobsSubCategoryQuery,
   useBoostJobMutation,
   usePinJobMutation,

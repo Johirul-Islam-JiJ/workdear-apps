@@ -1,0 +1,52 @@
+import {
+  useGetcountryQuery,
+  useGetJobsCategoryQuery,
+} from "@/store/features/jobs";
+import React, { useState } from "react";
+import { View } from "react-native";
+import Button from "../libs/Button";
+import SelectCountryModal from "./SelectCountryModal";
+
+type Props = {
+  countryIds: number[];
+  setCountryIds: React.Dispatch<React.SetStateAction<number[]>>;
+  categoryId: number | null;
+  setCategoryId: React.Dispatch<React.SetStateAction<number | null>>;
+};
+
+const JobListHeader = ({
+  countryIds,
+  setCountryIds,
+  categoryId,
+  setCategoryId,
+}: Props) => {
+  const [showCategoryModal, setShowCategoryModal] = useState(0);
+  const [showCountryModal, setShowCountryModal] = useState(0);
+  const { data: categories } = useGetJobsCategoryQuery();
+  const { data: countries } = useGetcountryQuery();
+
+  return (
+    <View style={{ flexDirection: "row", gap: 10 }}>
+      <Button style={{ flex: 1 }} title={"Select Category"} />
+      <Button
+        onPress={() => setShowCountryModal(1)}
+        style={{ flex: 1 }}
+        title={
+          countryIds.length > 0
+            ? `${countryIds.length} Selected`
+            : "Select Country"
+        }
+      />
+
+      <SelectCountryModal
+        visible={showCountryModal}
+        setVisible={setShowCountryModal}
+        countries={countries?.data || []}
+        selected={countryIds}
+        setSelected={setCountryIds}
+      />
+    </View>
+  );
+};
+
+export default JobListHeader;

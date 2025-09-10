@@ -20,7 +20,7 @@ export type Steps = {
   instruction: string;
 };
 
-type Country = {
+type JobCountry = {
   country_code: null | string;
   country_name: string;
   created_at: string;
@@ -77,7 +77,7 @@ type JobSubCategory = {
 };
 
 export interface Job {
-  countries: Country[];
+  countries: JobCountry[];
   created_at: string;
   deleted_at: null;
   description: string;
@@ -122,3 +122,82 @@ export type JobList = {
     total: number;
   };
 };
+
+export type FindJobPayload = {
+  job_category_id: number | null;
+  country_ids: number[] | null;
+  page: number;
+  higest_pay: boolean;
+  recent: boolean;
+};
+
+export interface SingleJobSubCategory {
+  id: number;
+  sub_category_name: string;
+  parent_category_id: number;
+  minimum_pay: string;
+  status: string;
+  deleted_at: null;
+  created_at: string;
+  updated_at: string;
+}
+export interface JobCategory {
+  id: number;
+  category_name: string;
+  deleted_at: null;
+  created_at: string;
+  updated_at: string;
+  sub_categories: SingleJobSubCategory[];
+}
+
+export interface JobCategories {
+  data: JobCategory[];
+}
+
+// {
+//             "id": 1,
+//             "country_name": "India",
+//             "country_code": null,
+//             "deleted_at": null,
+//             "created_at": "2025-08-06T16:10:03.000000Z",
+//             "updated_at": "2025-08-06T16:10:03.000000Z",
+//             "category": [
+//                 {
+//                     "id": 1,
+//                     "country_category_name": "Asia",
+//                     "deleted_at": null,
+//                     "created_at": "2025-08-06T16:08:44.000000Z",
+//                     "updated_at": "2025-08-06T16:08:44.000000Z",
+//                     "pivot": {
+//                         "country_id": "1",
+//                         "country_category_id": "1"
+//                     }
+//                 }
+//             ]
+//         },
+
+export interface CountryCategory {
+  id: number;
+  country_category_name: string;
+  deleted_at: null;
+  created_at: string;
+  updated_at: string;
+  pivot: {
+    country_id: string;
+    country_category_id: string;
+  };
+}
+
+export interface Country {
+  id: number;
+  country_name: string;
+  country_code: null;
+  deleted_at: null;
+  created_at: string;
+  updated_at: string;
+  category: CountryCategory[];
+}
+
+export interface CountryList {
+  data: Country[];
+}
