@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/hooks/redux";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { DrawerActions } from "@react-navigation/native";
@@ -9,6 +10,9 @@ import { ThemedView } from "../libs/ThemedView";
 
 const NavBar = () => {
   const navigation = useNavigation();
+  const { user } = useAppSelector((state) => state.user);
+
+  console.log(user);
 
   function openDrawer() {
     navigation.dispatch(DrawerActions.openDrawer());
