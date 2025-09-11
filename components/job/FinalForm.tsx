@@ -1,9 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
+import { useCreateJobMutation } from "@/store/features/jobs";
 import { setJobPostFinalForm } from "@/store/slices/jobform";
 import { CostName } from "@/types/CostCenter";
+import { JobPayload } from "@/types/Job";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
+import { ImagePickerAsset } from "expo-image-picker";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -27,6 +30,7 @@ type Props = {
 
 const FinalForm = ({ step, setStep }: Props) => {
   const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
+  const [createJob, { isLoading }] = useCreateJobMutation();
   const { generalData } = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
   const { jobPostFinalForm, jobPostFirstForm } = useAppSelector(
@@ -108,18 +112,53 @@ const FinalForm = ({ step, setStep }: Props) => {
 
   async function onSubmit(data: any) {
     try {
-      const payload = {
+      const payload: JobPayload = {
         ...jobPostFinalForm,
         ...data,
         ...jobPostFirstForm,
       };
+
       delete payload.minimum_pay;
-      console.log(payload);
+
+      if (!JSON.parse(payload.required_proofs || "[]")[0]?.type) {
+        delete payload.required_proofs;
+      }
+
+      if (!JSON.parse(payload.question_condition || "[]")[0]?.answer_type) {
+        delete payload.question_condition;
+      }
+
+      const formData = new FormData();
+
+      Object.entries(payload).forEach(([key, value]) => {
+        if (key === "country_ids" && Array.isArray(value)) {
+          value.forEach((countryId) => {
+            formData.append("country_ids[]", String(countryId));
+          });
+        } else if (key === "thumbnail" && value) {
+          const file = value as ImagePickerAsset;
+          formData.append("thumbnail", {
+            uri: file.uri,
+            type: file.mimeType || "image/jpeg", // fallback
+            name: file.fileName || `upload_${Date.now()}.jpg`,
+          } as any);
+        } else if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
+      });
+
+      await createJob(formData).unwrap();
+
+      Toast.show({
+        type: "success",
+        text1: "Job created successfully",
+      });
     } catch (error: any) {
       Toast.show({
         type: "error",
         text1: error?.data?.message || "Internal server error",
       });
+      console.log(error);
     }
   }
 
@@ -298,6 +337,7 @@ const FinalForm = ({ step, setStep }: Props) => {
             style={{ flex: 1 }}
           />
           <Button
+            loading={isLoading}
             onPress={handleSubmit(onSubmit)}
             title="Submit"
             style={{ flex: 1 }}

@@ -91,7 +91,7 @@ const SelectCategory = ({ step, setStep }: Props) => {
           style={{ flex: 1 }}
         />
         <Button
-          disabled={selectedCategory === null || selectedSubCategory === null}
+          disabled={!selectedCategory || !selectedSubCategory.id}
           title="Next"
           style={{ flex: 1 }}
           onPress={handleNext}

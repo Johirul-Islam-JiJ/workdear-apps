@@ -143,7 +143,6 @@ const FirstForm = ({ step, setStep }: Props) => {
                 render={({ field }) => (
                   <View
                     style={{
-                      position: "relative",
                       flex: 1,
                       flexDirection: "row",
                       alignItems: "flex-start",
@@ -151,25 +150,27 @@ const FirstForm = ({ step, setStep }: Props) => {
                       marginTop: 7,
                     }}
                   >
-                    <Input
-                      placeholder={`Step ${index + 1}`}
-                      value={field.value}
-                      onChangeText={field.onChange}
-                      error={errors.steps?.[index]?.instruction?.message}
-                    />
-                    {/* not show for the last element */}
-                    {index !== steps.fields.length - 1 && (
-                      <Pressable
-                        onPress={() => steps.remove(index)}
-                        style={{ position: "absolute", right: -2, top: -10 }}
-                      >
-                        <Ionicons
-                          name="remove-circle"
-                          size={24}
-                          color="#FA1E00"
-                        />
-                      </Pressable>
-                    )}
+                    <View style={{ position: "relative", flex: 1 }}>
+                      <Input
+                        placeholder={`Step ${index + 1}`}
+                        value={field.value}
+                        onChangeText={field.onChange}
+                        error={errors.steps?.[index]?.instruction?.message}
+                      />
+
+                      {index !== 0 && (
+                        <Pressable
+                          onPress={() => steps.remove(index)}
+                          style={{ position: "absolute", right: -2, top: -10 }}
+                        >
+                          <Ionicons
+                            name="remove-circle"
+                            size={24}
+                            color="#FA1E00"
+                          />
+                        </Pressable>
+                      )}
+                    </View>
                     {/* show only for the last element */}
                     {index === steps.fields.length - 1 && (
                       <Button
@@ -344,7 +345,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                           watch(`question_condition.${index}.answer_type`) ===
                           "number"
                             ? "numeric"
-                            : "default"
+                            : "name-phone-pad"
                         }
                         placeholder="Answer"
                         value={field.value as string}

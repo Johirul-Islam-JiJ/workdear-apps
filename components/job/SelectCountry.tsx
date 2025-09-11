@@ -93,7 +93,6 @@ function ContinentList({
 }: ContinentListProps) {
   const [visible, setVisible] = useState(0);
   const hasSelected = continent.countries.some((c) => !selected.includes(c.id));
-  console.log({ hasSelected, selected });
 
   return (
     <>

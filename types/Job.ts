@@ -214,3 +214,21 @@ export interface JobPostForm {
   jobPostFirstForm: JobPostFirstForm;
   jobPostFinalForm: JobPostFinalForm;
 }
+
+export interface JobPayload {
+  title: string;
+  description: string;
+  steps: string;
+  required_proofs?: string;
+  question_condition?: string;
+  thumbnail: ImagePickerAsset | undefined;
+  status: string;
+  total_workers_required: number;
+  pay_per_task: number;
+  require_screenshots: number;
+  estimated_day: number;
+  job_category_id: number | null;
+  job_sub_category_id: number | null;
+  country_ids: number[];
+  minimum_pay?: string;
+}
