@@ -36,6 +36,7 @@ const FirstForm = ({ step, setStep }: Props) => {
     handleSubmit,
     formState: { errors },
     control,
+    watch,
     setValue,
   } = useForm({
     resolver: yupResolver(firstFormSchema),
@@ -275,7 +276,18 @@ const FirstForm = ({ step, setStep }: Props) => {
                       items={selectOptions.job.question_condition_type}
                       placeholder="Select Answer Type"
                       value={field.value as string}
-                      onSelect={field.onChange}
+                      onSelect={(value) => {
+                        field.onChange(value);
+                        if (value === "text") {
+                          setValue(
+                            `question_condition.${index}.condition.operator`,
+                            "==",
+                            {
+                              shouldValidate: true,
+                            }
+                          );
+                        }
+                      }}
                       error={
                         errors.question_condition?.[index]?.answer_type?.message
                       }
@@ -308,6 +320,10 @@ const FirstForm = ({ step, setStep }: Props) => {
                     control={control}
                     render={({ field }) => (
                       <DropdownMenu
+                        disabled={
+                          watch(`question_condition.${index}.answer_type`) ===
+                          "text"
+                        }
                         items={selectOptions.job.question_condition_operator}
                         placeholder="Condition"
                         value={field.value as string}
@@ -324,6 +340,12 @@ const FirstForm = ({ step, setStep }: Props) => {
                     control={control}
                     render={({ field }) => (
                       <Input
+                        keyboardType={
+                          watch(`question_condition.${index}.answer_type`) ===
+                          "number"
+                            ? "numeric"
+                            : "default"
+                        }
                         placeholder="Answer"
                         value={field.value as string}
                         onChangeText={field.onChange}

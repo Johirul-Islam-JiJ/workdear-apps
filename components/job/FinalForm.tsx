@@ -86,11 +86,17 @@ const FinalForm = ({ step, setStep }: Props) => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      total_workers_required: parseInt(generalData.job_minimum_worker),
-      pay_per_task: parseFloat(jobPostFinalForm.minimum_pay),
-      require_screenshots: 0,
-      estimated_day: parseInt(generalData.job_minimum_estimated_day),
-      status: "DRAFT",
+      total_workers_required:
+        jobPostFinalForm.total_workers_required ||
+        parseInt(generalData.job_minimum_worker),
+      pay_per_task:
+        jobPostFinalForm.pay_per_task ||
+        parseFloat(jobPostFinalForm.minimum_pay),
+      require_screenshots: jobPostFinalForm.require_screenshots,
+      estimated_day:
+        jobPostFinalForm.estimated_day ||
+        parseInt(generalData.job_minimum_estimated_day),
+      status: jobPostFinalForm.status,
     },
   });
 

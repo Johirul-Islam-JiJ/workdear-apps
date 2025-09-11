@@ -5,24 +5,28 @@ export const firstFormSchema = yup.object({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
   thumbnail: yup
-    .mixed<ImagePickerAsset>()
+    .mixed()
     .test(
       "fileType",
       "Thumbnail must be in jpg,jpeg or png format",
       (value) => {
         if (value) {
+          const file = value as ImagePickerAsset;
           return (
-            value.mimeType === "image/jpeg" ||
-            value.mimeType === "image/png" ||
-            value.mimeType === "image/jpg"
+            file.mimeType === "image/jpeg" ||
+            file.mimeType === "image/png" ||
+            file.mimeType === "image/jpg"
           );
         }
         return true;
       }
     )
     .test("fileSize", "Thumbnail size must be less than 2MB", (value) => {
-      if (value?.fileSize) {
-        return value.fileSize <= 2 * 1024 * 1024;
+      if (value) {
+        const file = value as ImagePickerAsset;
+        if (file?.fileSize) {
+          return file.fileSize <= 2 * 1024 * 1024;
+        }
       }
       return true;
     })

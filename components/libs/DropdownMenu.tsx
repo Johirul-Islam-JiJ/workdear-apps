@@ -22,6 +22,7 @@ type DropdownProps = {
   onSelect: (item: string) => void;
   error?: string;
   value?: string;
+  disabled?: boolean;
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -30,6 +31,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   onSelect,
   error,
   value,
+  disabled,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const [visible, setVisible] = useState(false);
@@ -58,6 +60,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
     <View>
       {/* Dropdown Button */}
       <Pressable
+        disabled={disabled}
         style={[styles.dropdownButton, { borderColor }]}
         onPress={() => setVisible(true)}
       >
