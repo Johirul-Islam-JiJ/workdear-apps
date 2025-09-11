@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { api, liveSupportApi } from "./features/baseQuery";
 import jobForm from "./slices/jobform";
+import notification from "./slices/notification";
 import settings from "./slices/settings";
 import user from "./slices/user";
 
@@ -10,6 +11,7 @@ export const store = configureStore({
     settings,
     user,
     jobForm,
+    notification,
     [api.reducerPath]: api.reducer,
     [liveSupportApi.reducerPath]: liveSupportApi.reducer,
   },

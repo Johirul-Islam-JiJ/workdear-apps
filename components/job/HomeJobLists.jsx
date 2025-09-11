@@ -1,5 +1,5 @@
-import { useNavigation } from "@/hooks/useNavigation";
 import { useGetJobsForHomeQuery } from "@/store/features/jobs";
+import { useRouter } from "expo-router";
 import { View } from "react-native";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
@@ -8,7 +8,7 @@ import JobLoadingCard from "./JobLoadingCard";
 
 const HomeJobLists = () => {
   const { data: jobs, isLoading } = useGetJobsForHomeQuery();
-  const navigation = useNavigation();
+  const navigation = useRouter();
 
   return (
     <View style={{ rowGap: 10 }}>
@@ -34,7 +34,7 @@ const HomeJobLists = () => {
       {jobs?.data?.length > 0 && (
         <View style={{ alignItems: "center" }}>
           <Button
-            onPress={() => navigation.navigate("jobs")}
+            onPress={() => navigation.navigate("/(mainLayout)/(tabs)/jobs")}
             title="View More"
           />
         </View>

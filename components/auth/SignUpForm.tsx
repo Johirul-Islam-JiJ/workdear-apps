@@ -1,16 +1,16 @@
-import { useNavigation } from "@/hooks/useNavigation";
+import { useAppDispatch } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useRegisterMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
+import { showNotification } from "@/store/slices/notification";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, ScrollView, View } from "react-native";
-import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
@@ -46,7 +46,8 @@ const SignUpForm = () => {
   const [showConfirmPasswoard, setShowConfirmPassword] = useState(false);
   const [showPasswoard, setShowPassword] = useState(false);
   const [registation, { isLoading, error }] = useRegisterMutation();
-  const navigation = useNavigation();
+  const navigation = useRouter();
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -82,12 +83,14 @@ const SignUpForm = () => {
     try {
       data.device_name = "mobile";
       await registation(data).unwrap();
-      navigation.navigate("(mainLayout)");
+      navigation.navigate("/(mainLayout)/(tabs)");
     } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: error?.data?.message || "Internal server error",
-      });
+      dispatch(
+        showNotification({
+          message: error.data.message || "Internal server error",
+          type: "error",
+        })
+      );
     }
   }
 

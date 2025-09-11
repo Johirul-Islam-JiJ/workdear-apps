@@ -1,12 +1,17 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
 import { useCreateJobMutation } from "@/store/features/jobs";
-import { setJobPostFinalForm } from "@/store/slices/jobform";
+import {
+  setClearJobPostForm,
+  setJobPostFinalForm,
+} from "@/store/slices/jobform";
+import { showNotification } from "@/store/slices/notification";
 import { CostName } from "@/types/CostCenter";
 import { JobPayload } from "@/types/Job";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
 import { ImagePickerAsset } from "expo-image-picker";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -16,7 +21,6 @@ import {
   ScrollView,
   View,
 } from "react-native";
-import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
@@ -32,6 +36,7 @@ const FinalForm = ({ step, setStep }: Props) => {
   const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
   const [createJob, { isLoading }] = useCreateJobMutation();
   const { generalData } = useAppSelector((state) => state.settings);
+  const navigation = useRouter();
   const dispatch = useAppDispatch();
   const { jobPostFinalForm, jobPostFirstForm } = useAppSelector(
     (state) => state.jobForm
@@ -149,15 +154,21 @@ const FinalForm = ({ step, setStep }: Props) => {
 
       await createJob(formData).unwrap();
 
-      Toast.show({
-        type: "success",
-        text1: "Job created successfully",
-      });
+      dispatch(
+        showNotification({
+          message: "Job created successfully",
+          type: "success",
+        })
+      );
+      navigation.navigate("/(mainLayout)/(tabs)");
+      dispatch(setClearJobPostForm());
     } catch (error: any) {
-      Toast.show({
-        type: "error",
-        text1: error?.data?.message || "Internal server error",
-      });
+      dispatch(
+        showNotification({
+          message: error.data.message || "Internal server error",
+          type: "error",
+        })
+      );
       console.log(error);
     }
   }
