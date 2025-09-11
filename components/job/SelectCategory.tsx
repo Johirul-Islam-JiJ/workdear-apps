@@ -20,14 +20,16 @@ export type SubCategoryValue = {
 };
 
 const SelectCategory = ({ step, setStep }: Props) => {
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(
+    jobPostFinalForm.job_category_id
+  );
   const { data: categories, isLoading } = useGetJobsCategoryQuery();
   const dispatch = useAppDispatch();
   const [selectedSubCategory, setSelectedSubCategory] =
     useState<SubCategoryValue>({
-      id: null,
-      price: null,
+      id: jobPostFinalForm.job_sub_category_id,
+      price: jobPostFinalForm.minimum_pay,
     });
 
   const handleNext = () => {

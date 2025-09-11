@@ -1,3 +1,4 @@
+import { ImagePickerAsset } from "expo-image-picker";
 import { User } from "./User";
 
 export type QuestionCondition = {
@@ -194,6 +195,7 @@ export interface JobPostFirstForm {
   steps: string;
   required_proofs: string;
   question_condition: string;
+  thumbnail: ImagePickerAsset | undefined;
 }
 
 export interface JobPostFinalForm {

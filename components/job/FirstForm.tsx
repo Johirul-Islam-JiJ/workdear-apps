@@ -1,5 +1,5 @@
 import { selectOptions } from "@/_mock/selectOptions";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { setJobPostFirstForm } from "@/store/slices/jobform";
 import { Entypo } from "@expo/vector-icons";
@@ -28,9 +28,10 @@ type Props = {
 };
 
 const FirstForm = ({ step, setStep }: Props) => {
-  const [image, setImage] = useState<string | null>(null);
   const primaryDarker = useThemeColor("primaryDarker");
   const dispatch = useAppDispatch();
+  const { jobPostFirstForm } = useAppSelector((state) => state.jobForm);
+  const [image, setImage] = useState<string | null>(null);
   const {
     handleSubmit,
     formState: { errors },
@@ -39,32 +40,12 @@ const FirstForm = ({ step, setStep }: Props) => {
   } = useForm({
     resolver: yupResolver(firstFormSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      steps: [
-        {
-          step_number: 1,
-          instruction: "",
-        },
-      ],
-      required_proofs: [
-        {
-          type: "",
-          description: "",
-        },
-      ],
-      question_condition: [
-        {
-          id: 1,
-          answer_type: "",
-          text: "",
-          condition: {
-            operator: "",
-            value: "",
-          },
-        },
-      ],
-      thumbnail: undefined,
+      title: jobPostFirstForm.title,
+      description: jobPostFirstForm.description,
+      steps: JSON.parse(jobPostFirstForm.steps),
+      required_proofs: JSON.parse(jobPostFirstForm.required_proofs),
+      question_condition: JSON.parse(jobPostFirstForm.question_condition),
+      thumbnail: jobPostFirstForm.thumbnail,
     },
   });
 
@@ -404,12 +385,17 @@ const FirstForm = ({ step, setStep }: Props) => {
             {errors.thumbnail && (
               <ThemedText color="error">{errors.thumbnail.message}</ThemedText>
             )}
-            {image && (
+            {image ? (
               <Image
                 source={{ uri: image }}
                 style={{ height: 100, borderRadius: 10, marginTop: 5 }}
               />
-            )}
+            ) : jobPostFirstForm.thumbnail?.uri ? (
+              <Image
+                source={{ uri: jobPostFirstForm.thumbnail.uri }}
+                style={{ height: 100, borderRadius: 10, marginTop: 5 }}
+              />
+            ) : null}
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
             <Button

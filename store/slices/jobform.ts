@@ -18,6 +18,7 @@ const initialState: JobPostForm = {
         },
       },
     ]),
+    thumbnail: undefined,
   },
   jobPostFinalForm: {
     status: "PENDING",

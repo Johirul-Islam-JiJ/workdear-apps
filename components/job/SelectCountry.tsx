@@ -15,18 +15,22 @@ type Props = {
 };
 
 const SelectCountry = ({ step, setStep }: Props) => {
+  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
   const { data: countryData, isLoading } = useGetcontinentQuery();
   const [selected, setSelected] = useState<number[]>([]);
   const dispatch = useAppDispatch();
-  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
 
   useEffect(() => {
     if (!countryData?.data) return;
-    const countryIds = countryData?.data
-      .map((c) => c.countries.map((c) => c.id))
-      .flat();
-    if (countryIds) {
-      setSelected(countryIds);
+    if (jobPostFinalForm.country_ids.length > 0) {
+      setSelected(jobPostFinalForm.country_ids);
+    } else {
+      const countryIds = countryData?.data
+        .map((c) => c.countries.map((c) => c.id))
+        .flat();
+      if (countryIds) {
+        setSelected(countryIds);
+      }
     }
   }, [countryData]);
 
@@ -89,6 +93,7 @@ function ContinentList({
 }: ContinentListProps) {
   const [visible, setVisible] = useState(0);
   const hasSelected = continent.countries.some((c) => !selected.includes(c.id));
+  console.log({ hasSelected, selected });
 
   return (
     <>
