@@ -6,7 +6,7 @@ export interface SettingsState {
   showSidebar: boolean;
   theme: string;
   advertisement: any;
-  generalData: AppConfig | {};
+  generalData: AppConfig;
   costCenter: CostCenter[] | [];
 }
 

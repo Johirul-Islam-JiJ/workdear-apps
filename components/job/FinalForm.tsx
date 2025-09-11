@@ -1,4 +1,6 @@
 import { useAppSelector } from "@/hooks/redux";
+import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
+import { CostName } from "@/types/CostCenter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
 import React from "react";
@@ -10,6 +12,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
@@ -21,28 +24,22 @@ type Props = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const generalData = {
-  job_minimum_worker: 1,
-  job_minimum_estimated_day: 1,
-  job_maximum_estimated_day: 1,
-};
 const jobPostFinalForm = {
   minimum_pay: "1",
 };
 
 const FinalForm = ({ step, setStep }: Props) => {
-  const { generalData: data, costCenter } = useAppSelector(
-    (state) => state.settings
+  const jobPostFee: number = useGetCostFromCostCenter(
+    CostName.job_post_fee_percentage
   );
-  console.log(costCenter);
-
+  const { generalData } = useAppSelector((state) => state.settings);
   const schema = yup.object({
     total_workers_required: yup
       .number()
       .transform((value, originalValue) =>
         String(originalValue).trim() === "" ? undefined : value
       )
-      .min(generalData?.job_minimum_worker, "minimum worker need 1")
+      .min(parseInt(generalData.job_minimum_worker), "minimum worker need 1")
       .required("Worker is required"),
     pay_per_task: yup
       .number()
@@ -60,7 +57,10 @@ const FinalForm = ({ step, setStep }: Props) => {
         String(originalValue).trim() === "" ? undefined : value
       )
       .typeError("Required screenshot must be a number")
-      .max(3, "Maximum 3 required screenshot is required")
+      .max(
+        parseInt(generalData.job_required_screenshot_limit),
+        `Maximum ${generalData.job_required_screenshot_limit} screenshot`
+      )
       .required("Required screenshot is required"),
     estimated_day: yup
       .number()
@@ -68,14 +68,14 @@ const FinalForm = ({ step, setStep }: Props) => {
         String(originalValue).trim() === "" ? undefined : value
       )
       .min(
-        generalData?.job_minimum_estimated_day,
+        parseInt(generalData?.job_minimum_estimated_day),
         `Minimum ${generalData?.job_minimum_estimated_day} day`
       )
-      .required("Estimated day is required")
       .max(
-        generalData?.job_maximum_estimated_day,
-        `Maximum ${generalData?.job_maximum_estimated_day} days`
-      ),
+        parseInt(generalData?.job_maximum_estimated_day),
+        `Maximum ${generalData?.job_maximum_estimated_day} day`
+      )
+      .required("Estimated day is required"),
     status: yup.string().trim().required("Status is required"),
   });
   const {
@@ -86,16 +86,32 @@ const FinalForm = ({ step, setStep }: Props) => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      total_workers_required: 1,
+      total_workers_required: parseInt(generalData.job_minimum_worker),
       pay_per_task: 1,
       require_screenshots: 0,
-      estimated_day: 1,
+      estimated_day: parseInt(generalData.job_minimum_estimated_day),
       status: "DRAFT",
     },
   });
 
+  type FormData = yup.InferType<typeof schema>;
+
   const totalWorker = watch("total_workers_required");
   const payPerTask = watch("pay_per_task");
+  const estimatedCost = totalWorker * payPerTask;
+  const fee = estimatedCost * jobPostFee;
+  const totalCost = estimatedCost + fee;
+
+  async function onSubmit(data: FormData) {
+    try {
+      console.log(data);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: error?.data?.message || "Internal server error",
+      });
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -140,6 +156,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    keyboardType="numeric"
                     value={value?.toString()}
                     onChangeText={onChange}
                     placeholder="Enter worker need"
@@ -156,6 +173,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    keyboardType="numeric"
                     value={value?.toString()}
                     onChangeText={onChange}
                     placeholder="Enter worker earn"
@@ -174,6 +192,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    keyboardType="numeric"
                     value={value?.toString()}
                     onChangeText={onChange}
                     placeholder="Enter screenshot amount"
@@ -190,6 +209,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Input
+                    keyboardType="numeric"
                     value={value?.toString()}
                     onChangeText={onChange}
                     placeholder="Enter estimated day"
@@ -236,9 +256,13 @@ const FinalForm = ({ step, setStep }: Props) => {
               marginTop: 15,
             }}
           >
-            <ThemedText color="error">Job post fee 10%</ThemedText>
+            <ThemedText color="error">Job post fee {jobPostFee}%</ThemedText>
             <ThemedText type="defaultSemiBold">Total Cost</ThemedText>
-            <Input editable={false} placeholder="Enter total cost" />
+            <Input
+              editable={false}
+              value={`$${totalCost.toFixed(4)}`}
+              placeholder="Enter total cost"
+            />
           </ThemedView>
         </View>
 
@@ -250,7 +274,11 @@ const FinalForm = ({ step, setStep }: Props) => {
             variant="Outlined"
             style={{ flex: 1 }}
           />
-          <Button title="Submit" style={{ flex: 1 }} />
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            title="Submit"
+            style={{ flex: 1 }}
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
