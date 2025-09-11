@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   const borderColor = variant === "Outlined" ? backgroundColor : "transparent";
 
   const containerStyle: ViewStyle = {
-    height: 40,
+    minHeight: 40,
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",

@@ -23,7 +23,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
     if (countryIds) {
       setSelected(countryIds);
     }
-  }, []);
+  }, [countryData]);
 
   return (
     <View

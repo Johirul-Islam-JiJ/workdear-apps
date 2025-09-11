@@ -45,7 +45,7 @@ const SelectSubCategoryModal = ({
               style={{ minWidth: "49%" }}
               onPress={() => {
                 setSelected(selected !== item.id ? item.id : null);
-                // setVisible(0);
+                setVisible(0);
               }}
               title={item.sub_category_name}
               variant={selected === item.id ? "Contained" : "Outlined"}
@@ -69,9 +69,9 @@ const SelectSubCategoryModal = ({
             setVisible(0);
           }}
           title="Cancel"
-          variant="Outlined"
+          variant="Contained"
+          color="error"
         />
-        <Button onPress={() => setVisible(0)} title="Done" />
       </View>
     </Modal>
   );
