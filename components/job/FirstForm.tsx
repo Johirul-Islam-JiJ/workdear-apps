@@ -1,11 +1,13 @@
 import { selectOptions } from "@/_mock/selectOptions";
+import { useAppDispatch } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { setJobPostFirstForm } from "@/store/slices/jobform";
 import { Entypo } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import {
   KeyboardAvoidingView,
@@ -18,7 +20,7 @@ import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { firstFormSchema, FistFormData } from "./types";
+import { firstFormSchema } from "./types";
 
 type Props = {
   step: number;
@@ -26,8 +28,9 @@ type Props = {
 };
 
 const FirstForm = ({ step, setStep }: Props) => {
+  const [image, setImage] = useState<string | null>(null);
   const primaryDarker = useThemeColor("primaryDarker");
-  const [image, setImage] = React.useState<string | null>(null);
+  const dispatch = useAppDispatch();
   const {
     handleSubmit,
     formState: { errors },
@@ -86,13 +89,12 @@ const FirstForm = ({ step, setStep }: Props) => {
     }
   };
 
-  async function onSubmit(data: FistFormData) {
-    try {
-      setStep(step + 1);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+  async function onSubmit(data: any) {
+    data.steps = JSON.stringify(data.steps);
+    data.required_proofs = JSON.stringify(data.required_proofs);
+    data.question_condition = JSON.stringify(data.question_condition);
+    dispatch(setJobPostFirstForm(data));
+    setStep(step + 1);
   }
 
   return (

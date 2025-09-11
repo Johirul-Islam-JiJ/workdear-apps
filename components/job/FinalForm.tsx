@@ -1,5 +1,6 @@
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
+import { setJobPostFinalForm } from "@/store/slices/jobform";
 import { CostName } from "@/types/CostCenter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
@@ -24,15 +25,13 @@ type Props = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const jobPostFinalForm = {
-  minimum_pay: "1",
-};
-
 const FinalForm = ({ step, setStep }: Props) => {
-  const jobPostFee: number = useGetCostFromCostCenter(
-    CostName.job_post_fee_percentage
-  );
+  const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
   const { generalData } = useAppSelector((state) => state.settings);
+  const dispatch = useAppDispatch();
+  const { jobPostFinalForm, jobPostFirstForm } = useAppSelector(
+    (state) => state.jobForm
+  );
   const schema = yup.object({
     total_workers_required: yup
       .number()
@@ -82,19 +81,18 @@ const FinalForm = ({ step, setStep }: Props) => {
     control,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       total_workers_required: parseInt(generalData.job_minimum_worker),
-      pay_per_task: 1,
+      pay_per_task: parseFloat(jobPostFinalForm.minimum_pay),
       require_screenshots: 0,
       estimated_day: parseInt(generalData.job_minimum_estimated_day),
       status: "DRAFT",
     },
   });
-
-  type FormData = yup.InferType<typeof schema>;
 
   const totalWorker = watch("total_workers_required");
   const payPerTask = watch("pay_per_task");
@@ -102,15 +100,34 @@ const FinalForm = ({ step, setStep }: Props) => {
   const fee = estimatedCost * jobPostFee;
   const totalCost = estimatedCost + fee;
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: any) {
     try {
-      console.log(data);
+      const payload = {
+        ...jobPostFinalForm,
+        ...data,
+        ...jobPostFirstForm,
+      };
+      delete payload.minimum_pay;
+      console.log(payload);
     } catch (error: any) {
       Toast.show({
         type: "error",
         text1: error?.data?.message || "Internal server error",
       });
     }
+  }
+
+  function handlePrevStep() {
+    const payload = {
+      ...jobPostFinalForm,
+      total_workers_required: getValues("total_workers_required"),
+      pay_per_task: getValues("pay_per_task"),
+      require_screenshots: getValues("require_screenshots"),
+      estimated_day: getValues("estimated_day"),
+      status: getValues("status"),
+    };
+    dispatch(setJobPostFinalForm(payload));
+    setStep((prev) => prev - 1);
   }
 
   return (
@@ -269,7 +286,7 @@ const FinalForm = ({ step, setStep }: Props) => {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <Button
             disabled={step === 0}
-            onPress={() => setStep(step - 1)}
+            onPress={handlePrevStep}
             title="Previews"
             variant="Outlined"
             style={{ flex: 1 }}

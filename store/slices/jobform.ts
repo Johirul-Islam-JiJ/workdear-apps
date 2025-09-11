@@ -1,6 +1,7 @@
+import { JobPostForm } from "@/types/Job";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: JobPostForm = {
   jobPostFirstForm: {
     title: "",
     description: "",
@@ -27,7 +28,15 @@ const initialState = {
     job_category_id: null,
     job_sub_category_id: null,
     country_ids: [],
+    minimum_pay: "",
   },
+};
+
+type JobFormState = {
+  jobPostFirstForm: JobPostForm["jobPostFirstForm"];
+  jobPostFinalForm: JobPostForm["jobPostFinalForm"];
+  isUpdate: boolean;
+  jobId: number | null;
 };
 
 export const jobForm = createSlice({
@@ -37,7 +46,7 @@ export const jobForm = createSlice({
     jobPostFinalForm: initialState.jobPostFinalForm,
     isUpdate: false,
     jobId: null,
-  },
+  } as JobFormState,
   reducers: {
     setJobPostFirstForm: (state, action) => {
       state.jobPostFirstForm = action.payload;
@@ -45,11 +54,9 @@ export const jobForm = createSlice({
     setJobPostFinalForm: (state, action) => {
       state.jobPostFinalForm = action.payload;
     },
-    setClearJobPostFirstForm: (state) => {
-      state.jobPostFirstForm = initialState.jobPostFirstForm;
-    },
-    setClearJobPostFinalForm: (state) => {
+    setClearJobPostForm: (state) => {
       state.jobPostFinalForm = initialState.jobPostFinalForm;
+      state.jobPostFirstForm = initialState.jobPostFirstForm;
     },
     setIsUpdate: (state, action) => {
       state.isUpdate = action.payload;
@@ -63,8 +70,9 @@ export const jobForm = createSlice({
 export const {
   setJobPostFirstForm,
   setJobPostFinalForm,
-  setClearJobPostFinalForm,
-  setClearJobPostFirstForm,
+  setClearJobPostForm,
   setIsUpdate,
   setJobId,
 } = jobForm.actions;
+
+export default jobForm.reducer;

@@ -1,4 +1,6 @@
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useGetcontinentQuery } from "@/store/features/jobs";
+import { setJobPostFinalForm } from "@/store/slices/jobform";
 import { Continent } from "@/types/Job";
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
@@ -13,10 +15,13 @@ type Props = {
 };
 
 const SelectCountry = ({ step, setStep }: Props) => {
-  const [selected, setSelected] = useState<number[]>([]);
   const { data: countryData, isLoading } = useGetcontinentQuery();
+  const [selected, setSelected] = useState<number[]>([]);
+  const dispatch = useAppDispatch();
+  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
 
   useEffect(() => {
+    if (!countryData?.data) return;
     const countryIds = countryData?.data
       .map((c) => c.countries.map((c) => c.id))
       .flat();
@@ -24,6 +29,13 @@ const SelectCountry = ({ step, setStep }: Props) => {
       setSelected(countryIds);
     }
   }, [countryData]);
+
+  const handleNext = () => {
+    setStep(step + 1);
+    dispatch(
+      setJobPostFinalForm({ ...jobPostFinalForm, country_ids: selected })
+    );
+  };
 
   return (
     <View
@@ -39,7 +51,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
         </ThemedText>
         {isLoading ? (
           <ButtonCardLoader />
-        ) : countryData?.data.length ? (
+        ) : countryData?.data && countryData?.data.length ? (
           countryData?.data.map((continent) => (
             <ContinentList
               key={continent.id}
@@ -58,11 +70,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
         )}
       </ScrollView>
       <View style={{ alignItems: "flex-end" }}>
-        <Button
-          title="Next"
-          style={{ width: "50%" }}
-          onPress={() => setStep(step + 1)}
-        />
+        <Button title="Next" style={{ width: "50%" }} onPress={handleNext} />
       </View>
     </View>
   );

@@ -1,4 +1,6 @@
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useGetJobsCategoryQuery } from "@/store/features/jobs";
+import { setJobPostFinalForm } from "@/store/slices/jobform";
 import { JobCategory } from "@/types/Job";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
@@ -12,12 +14,33 @@ type Props = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
+export type SubCategoryValue = {
+  id: number | null;
+  price: string | null;
+};
+
 const SelectCategory = ({ step, setStep }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(
-    null
-  );
+  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
   const { data: categories, isLoading } = useGetJobsCategoryQuery();
+  const dispatch = useAppDispatch();
+  const [selectedSubCategory, setSelectedSubCategory] =
+    useState<SubCategoryValue>({
+      id: null,
+      price: null,
+    });
+
+  const handleNext = () => {
+    dispatch(
+      setJobPostFinalForm({
+        ...jobPostFinalForm,
+        job_category_id: selectedCategory,
+        job_sub_category_id: selectedSubCategory.id,
+        minimum_pay: selectedSubCategory.price,
+      })
+    );
+    setStep(step + 1);
+  };
 
   return (
     <View
@@ -69,7 +92,7 @@ const SelectCategory = ({ step, setStep }: Props) => {
           disabled={selectedCategory === null || selectedSubCategory === null}
           title="Next"
           style={{ flex: 1 }}
-          onPress={() => setStep(step + 1)}
+          onPress={handleNext}
         />
       </View>
     </View>
@@ -80,8 +103,10 @@ type CategoryProp = {
   category: JobCategory;
   selectedCategory: number | null;
   setSelectedCategory: React.Dispatch<React.SetStateAction<number | null>>;
-  selectedSubCategory: number | null;
-  setSelectedSubCategory: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedSubCategory: SubCategoryValue;
+  setSelectedSubCategory: React.Dispatch<
+    React.SetStateAction<SubCategoryValue>
+  >;
 };
 
 function Category({
@@ -98,7 +123,7 @@ function Category({
       <Button
         onPress={() => {
           setSelectedCategory(category.id);
-          setSelectedSubCategory(null);
+          setSelectedSubCategory({ id: null, price: null });
           setVisible(1);
         }}
         title={category.category_name}

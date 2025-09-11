@@ -187,3 +187,63 @@ export type Continent = {
   created_at: string;
   updated_at: string;
 };
+
+export interface JobPostFirstForm {
+  title: string;
+  description: string;
+  steps: string;
+  required_proofs: string;
+  question_condition: string;
+}
+
+export interface JobPostFinalForm {
+  status: string;
+  total_workers_required: string;
+  pay_per_task: string;
+  require_screenshots: string;
+  estimated_day: string;
+  job_category_id: number | null;
+  job_sub_category_id: number | null;
+  country_ids: number[];
+  minimum_pay: string;
+}
+
+export interface JobPostForm {
+  jobPostFirstForm: JobPostFirstForm;
+  jobPostFinalForm: JobPostFinalForm;
+}
+
+const ksd = {
+  countryIds: [1, 3],
+  country_ids: [],
+  description: "Description ",
+  estimated_day: 20,
+  job_category_id: 3,
+  job_sub_category_id: 5,
+  minimum_pay: "0.0280",
+  pay_per_task: 0.35,
+  question_condition:
+    '[{"id":1,"answer_type":"number","text":"What is your name","condition":{"operator":"==","value":"Iqbal"}},{"id":2,"answer_type":"number","text":"What is your age","condition":{"operator":"<","value":"22"}}]',
+  require_screenshots: 1,
+  required_proofs:
+    '[{"type":"text","description":"Text prrof"},{"type":"number","description":"Nubmer proof"}]',
+  status: "DRAFT",
+  steps:
+    '[{"step_number":1,"instruction":"Step 1"},{"step_number":2,"instruction":"Step 2"},{"step_number":3,"instruction":"Step 3"}]',
+  thumbnail: {
+    assetId: null,
+    base64: null,
+    duration: null,
+    exif: null,
+    fileName: "7925ead7-9828-47c4-82ea-4af88ea68704.jpeg",
+    fileSize: 101148,
+    height: 522,
+    mimeType: "image/jpeg",
+    rotation: null,
+    type: "image",
+    uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FMicro%2BJob%2BApp-a34149e7-9eaf-45b2-b4cb-48a921f10c88/ImagePicker/7925ead7-9828-47c4-82ea-4af88ea68704.jpeg",
+    width: 696,
+  },
+  title: "Titke",
+  total_workers_required: 50,
+};

@@ -1,11 +1,11 @@
 import { CostCenter } from "@/types/CostCenter";
-import { AppConfig } from "@/types/GeneralData";
+import { Advertisement, AppConfig } from "@/types/GeneralData";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface SettingsState {
   showSidebar: boolean;
   theme: string;
-  advertisement: any;
+  advertisement: Advertisement[] | [];
   generalData: AppConfig;
   costCenter: CostCenter[] | [];
 }

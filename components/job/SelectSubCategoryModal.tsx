@@ -4,13 +4,14 @@ import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
 import Modal from "../libs/Modal";
 import { ThemedText } from "../libs/ThemedText";
+import { SubCategoryValue } from "./SelectCategory";
 
 type Props = {
   visible: number;
   setVisible: React.Dispatch<React.SetStateAction<number>>;
   category: SingleJobSubCategory[];
-  selected: number | null;
-  setSelected: React.Dispatch<React.SetStateAction<number | null>>;
+  selected: SubCategoryValue;
+  setSelected: React.Dispatch<React.SetStateAction<SubCategoryValue>>;
 };
 
 const SelectSubCategoryModal = ({
@@ -44,11 +45,15 @@ const SelectSubCategoryModal = ({
               key={index}
               style={{ minWidth: "49%" }}
               onPress={() => {
-                setSelected(selected !== item.id ? item.id : null);
+                setSelected(
+                  selected.id !== item.id
+                    ? { id: item.id, price: item.minimum_pay }
+                    : { id: null, price: null }
+                );
                 setVisible(0);
               }}
               title={item.sub_category_name}
-              variant={selected === item.id ? "Contained" : "Outlined"}
+              variant={selected.id === item.id ? "Contained" : "Outlined"}
             />
           ))}
         </View>
@@ -65,7 +70,7 @@ const SelectSubCategoryModal = ({
       >
         <Button
           onPress={() => {
-            setSelected(null);
+            setSelected({ id: null, price: null });
             setVisible(0);
           }}
           title="Cancel"
