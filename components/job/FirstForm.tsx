@@ -18,7 +18,6 @@ import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
 import { firstFormSchema, FistFormData } from "./types";
 
 type Props = {
@@ -147,6 +146,7 @@ const FirstForm = ({ step, setStep }: Props) => {
             />
           </View>
 
+          {/* steps  */}
           <View>
             <ThemedText type="defaultSemiBold">
               Write specific task you need to complete:
@@ -205,15 +205,14 @@ const FirstForm = ({ step, setStep }: Props) => {
             ))}
           </View>
 
-          <View>
-            <ThemedText type="defaultSemiBold">
-              Require the proof the job was completed:
-            </ThemedText>
-            {requiredProofs.fields.map((field, index) => (
-              <View
-                key={field.id}
-                style={{ marginTop: 7, position: "relative" }}
-              >
+          {/* required proof  */}
+          {requiredProofs.fields.map((field, index) => (
+            <View key={field.id}>
+              <ThemedText type="defaultSemiBold">
+                Require the proof{" "}
+                {index === 0 ? "the job was completed" : index + 1}:
+              </ThemedText>
+              <View style={{ marginTop: 7, position: "relative" }}>
                 <Controller
                   name={`required_proofs.${index}.type`}
                   control={control}
@@ -272,33 +271,26 @@ const FirstForm = ({ step, setStep }: Props) => {
                     <Ionicons name="remove-circle" size={24} color="#FA1E00" />
                   </Pressable>
                 )}
-
-                {index !== requiredProofs.fields.length - 1 && (
-                  <View style={{ alignItems: "center" }}>
-                    <ThemedView
-                      color="primaryDark"
-                      style={{ height: 2, marginTop: 7, width: 80 }}
-                    />
-                  </View>
-                )}
               </View>
-            ))}
-          </View>
+            </View>
+          ))}
 
-          <View>
-            <ThemedText type="defaultSemiBold">Question condition:</ThemedText>
-            {questionCondition.fields.map((field, index) => (
-              <View
-                key={field.id}
-                style={{ marginTop: 7, position: "relative" }}
-              >
+          {/* question condition  */}
+          {questionCondition.fields.map((field, index) => (
+            <View key={field.id}>
+              <ThemedText type="defaultSemiBold">
+                {index === 0
+                  ? "Require the answer of question:"
+                  : `Question ${index + 1}:`}
+              </ThemedText>
+              <View style={{ marginTop: 7, position: "relative" }}>
                 <Controller
                   name={`question_condition.${index}.answer_type`}
                   control={control}
                   render={({ field }) => (
                     <DropdownMenu
                       items={selectOptions.job.question_condition_type}
-                      placeholder="Select Type"
+                      placeholder="Select Answer Type"
                       value={field.value as string}
                       onSelect={field.onChange}
                       error={
@@ -312,7 +304,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                   control={control}
                   render={({ field }) => (
                     <Input
-                      placeholder={`Question ${index + 1}`}
+                      placeholder="Enter question"
                       style={{ marginTop: 7 }}
                       value={field.value as string}
                       onChangeText={field.onChange}
@@ -334,7 +326,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                     render={({ field }) => (
                       <DropdownMenu
                         items={selectOptions.job.question_condition_operator}
-                        placeholder="Select Oparator"
+                        placeholder="Condition"
                         value={field.value as string}
                         onSelect={field.onChange}
                         error={
@@ -349,7 +341,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                     control={control}
                     render={({ field }) => (
                       <Input
-                        placeholder="Value"
+                        placeholder="Answer"
                         value={field.value as string}
                         onChangeText={field.onChange}
                         error={
@@ -359,11 +351,12 @@ const FirstForm = ({ step, setStep }: Props) => {
                       />
                     )}
                   />
+                  {/* add another */}
                   {index === questionCondition.fields.length - 1 && (
                     <Button
                       onPress={() =>
                         questionCondition.append({
-                          id: field.id + 1,
+                          id: questionCondition.fields.length + 1,
                           answer_type: "",
                           text: "",
                           condition: {
@@ -387,18 +380,9 @@ const FirstForm = ({ step, setStep }: Props) => {
                     <Ionicons name="remove-circle" size={24} color="#FA1E00" />
                   </Pressable>
                 )}
-
-                {index !== questionCondition.fields.length - 1 && (
-                  <View style={{ alignItems: "center" }}>
-                    <ThemedView
-                      color="primaryDark"
-                      style={{ height: 2, marginTop: 7, width: 80 }}
-                    />
-                  </View>
-                )}
               </View>
-            ))}
-          </View>
+            </View>
+          ))}
           <View>
             <ThemedText type="defaultSemiBold">Thumbnail Image:</ThemedText>
             <Button
