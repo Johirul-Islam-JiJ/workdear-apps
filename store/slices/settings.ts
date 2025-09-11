@@ -1,4 +1,14 @@
+import { CostCenter } from "@/types/CostCenter";
+import { AppConfig } from "@/types/GeneralData";
 import { createSlice } from "@reduxjs/toolkit";
+
+export interface SettingsState {
+  showSidebar: boolean;
+  theme: string;
+  advertisement: any;
+  generalData: AppConfig | {};
+  costCenter: CostCenter[] | [];
+}
 
 const settings = createSlice({
   name: "settings",
@@ -8,7 +18,7 @@ const settings = createSlice({
     advertisement: [],
     generalData: {},
     costCenter: [],
-  },
+  } as SettingsState,
   reducers: {
     toggleSideBar: (state, action) => {
       if (action.payload === undefined) {

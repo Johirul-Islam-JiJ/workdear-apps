@@ -1,17 +1,18 @@
 import { config } from "@/config/config";
+import { ApiResponse } from "@/types/APIResponse";
 import {
-  CountryCategoryList,
-  CountryList,
+  Continent,
+  Country,
   FindJobPayload,
-  HomeJobList,
-  JobCategories,
+  Job,
+  JobCategory,
   JobList,
 } from "@/types/Job";
 import { api } from "./baseQuery";
 
 export const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getJobsForHome: builder.query<HomeJobList, void>({
+    getJobsForHome: builder.query<ApiResponse<Job[]>, void>({
       query: () => ({
         url: "/home/jobs",
         method: "GET",
@@ -59,7 +60,7 @@ export const jobsApi = api.injectEndpoints({
       }),
     }),
 
-    getJobsCategory: builder.query<JobCategories, void>({
+    getJobsCategory: builder.query<ApiResponse<JobCategory[]>, void>({
       query: () => ({
         url: `/job-categories`,
         method: "GET",
@@ -117,13 +118,13 @@ export const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["alljobs", "tasks"],
     }),
-    getcontinent: builder.query<CountryCategoryList, void>({
+    getcontinent: builder.query<ApiResponse<Continent[]>, void>({
       query: () => ({
         url: "/country-categories",
         method: "GET",
       }),
     }),
-    getcountry: builder.query<CountryList, void>({
+    getcountry: builder.query<ApiResponse<Country[]>, void>({
       query: () => ({
         url: "/countries",
         method: "GET",

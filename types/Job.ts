@@ -10,11 +10,17 @@ export type QuestionCondition = {
   };
 };
 
+/**
+ * Represents a required proof for a job submission.
+ */
 export type RequiredProofs = {
   type: string;
   description: string;
 };
 
+/**
+ * Represents a single step in a job's instructions.
+ */
 export type Steps = {
   step_number: number;
   instruction: string;
@@ -33,10 +39,16 @@ type JobCountry = {
   updated_at: string;
 };
 
+/**
+ * Represents a report associated with a job.
+ */
 type Report = {
   id: number;
 };
 
+/**
+ * Represents a promotion associated with a job.
+ */
 type JobPromotion = {
   id: number;
 };
@@ -109,10 +121,6 @@ export interface Job {
   job_promotions: JobPromotion[];
 }
 
-export type HomeJobList = {
-  data: Job[];
-};
-
 export type JobList = {
   data: {
     current_page: number;
@@ -150,10 +158,6 @@ export interface JobCategory {
   sub_categories: SingleJobSubCategory[];
 }
 
-export interface JobCategories {
-  data: JobCategory[];
-}
-
 export interface CountryCategory {
   id: number;
   country_category_name: string;
@@ -176,10 +180,6 @@ export interface Country {
   category: CountryCategory[];
 }
 
-export interface CountryList {
-  data: Country[];
-}
-
 export type Continent = {
   countries: Country[];
   country_category_name: string;
@@ -187,6 +187,3 @@ export type Continent = {
   created_at: string;
   updated_at: string;
 };
-export interface CountryCategoryList {
-  data: Continent[];
-}

@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/hooks/redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
 import React from "react";
@@ -30,6 +31,11 @@ const jobPostFinalForm = {
 };
 
 const FinalForm = ({ step, setStep }: Props) => {
+  const { generalData: data, costCenter } = useAppSelector(
+    (state) => state.settings
+  );
+  console.log(costCenter);
+
   const schema = yup.object({
     total_workers_required: yup
       .number()
@@ -75,6 +81,7 @@ const FinalForm = ({ step, setStep }: Props) => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -86,6 +93,9 @@ const FinalForm = ({ step, setStep }: Props) => {
       status: "DRAFT",
     },
   });
+
+  const totalWorker = watch("total_workers_required");
+  const payPerTask = watch("pay_per_task");
 
   return (
     <KeyboardAvoidingView
@@ -106,10 +116,10 @@ const FinalForm = ({ step, setStep }: Props) => {
             gap: 10,
           }}
         >
-          <View
+          <ThemedView
+            color="white"
             style={{
               gap: 10,
-              backgroundColor: "white",
               paddingVertical: 15,
               paddingHorizontal: 10,
               borderRadius: 10,
@@ -188,7 +198,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 )}
               />
             </View>
-          </View>
+          </ThemedView>
 
           <Controller
             name="status"
