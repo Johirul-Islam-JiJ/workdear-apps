@@ -1,26 +1,33 @@
-import { ThemedText } from "@/components/libs/ThemedText";
-import { ThemedView } from "@/components/libs/ThemedView";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useGetProfileQuery } from "@/store/features/auth";
 import {
   useGetAllCostQuery,
   useGetGeneralDataQuery,
 } from "@/store/features/generalData";
-import { setToken, setUserLoading } from "@/store/slices/user";
+import { removeToken, setToken, setUser } from "@/store/slices/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { View } from "react-native";
 
 function ScreenProvider() {
-  const {
-    user,
-    token,
-    loading: userLoading,
-  } = useAppSelector((state) => state.user);
+  const [fontLoaded] = useFonts({
+    RobotoSerifExtraLight: require("../assets/fonts/RobotoSerif_28pt-ExtraLight.ttf"),
+    RobotoSerifLight: require("../assets/fonts/RobotoSerif_28pt-Light.ttf"),
+    RobotoSerifSemiBold: require("../assets/fonts/RobotoSerif_28pt-Medium.ttf"),
+    RobotoSerifRegular: require("../assets/fonts/RobotoSerif_28pt-Regular.ttf"),
+    RobotoSerifBold: require("../assets/fonts/RobotoSerif_28pt-Bold.ttf"),
+  });
+
+  const { user, token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
-  useGetProfileQuery(token, { skip: !token });
+  const {
+    data: profileData,
+    isLoading,
+    isError,
+  } = useGetProfileQuery(token, { skip: !token });
   useGetGeneralDataQuery();
   useGetAllCostQuery();
 
@@ -29,39 +36,47 @@ function ScreenProvider() {
       const tokenFromStorage = await AsyncStorage.getItem("token");
       if (tokenFromStorage) {
         dispatch(setToken(tokenFromStorage));
-      } else {
-        dispatch(setUserLoading(false));
       }
     };
 
     bootstrapAsync();
   }, []);
 
-  if (userLoading) {
-    return (
-      <View style={{ flex: 1 }}>
-        <ThemedView color="primaryDarker" style={{ height: 35 }} />
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ThemedText type="subtitle">Loading...</ThemedText>
-        </View>
-      </View>
-    );
+  useEffect(() => {
+    if (profileData) {
+      dispatch(setUser(profileData.data));
+    }
+  }, [profileData]);
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(removeToken());
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (fontLoaded && !isLoading) {
+      SplashScreen.hide();
+    }
+  }, [fontLoaded, isLoading]);
+
+  if (!fontLoaded) {
+    return null;
   }
 
-  if (user) {
-    return (
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(mainLayout)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    );
-  }
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="signin" />
-      <Stack.Screen name="signup" />
+      <Stack.Protected guard={isLoading}>
+        <Stack.Screen name="loading" />
+      </Stack.Protected>
+      <Stack.Protected guard={!user}>
+        <Stack.Screen name="signup" />
+        <Stack.Screen name="signin" />
+      </Stack.Protected>
+      <Stack.Protected guard={!!user}>
+        <Stack.Screen name="(mainLayout)" />
+        <Stack.Screen name="+not-found" />
+      </Stack.Protected>
     </Stack>
   );
 }

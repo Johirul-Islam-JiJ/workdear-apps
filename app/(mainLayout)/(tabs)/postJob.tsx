@@ -4,10 +4,10 @@ import SelectCategory from "@/components/job/SelectCategory";
 import SelectCountry from "@/components/job/SelectCountry";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Stepper from "@/components/postJob/Stepper";
-import React from "react";
+import React, { useState } from "react";
 
 const PostJobScreen = () => {
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = useState(0);
 
   return (
     <ThemedView

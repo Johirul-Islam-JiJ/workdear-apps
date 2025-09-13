@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Workdear",
-    "slug": "Micro Job App",
+    "slug": "micro-job-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon/icon.png",
@@ -16,7 +16,11 @@
         "foregroundImage": "./assets/icon/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.iqbalhossen60483.microjobapp"
     },
     "plugins": [
       "expo-router",
@@ -39,6 +43,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "dc2eda97-5f9c-4c7f-8d48-5bc0889a35f9"
+      }
     }
   }
 }

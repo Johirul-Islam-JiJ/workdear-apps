@@ -1,11 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  logout,
-  removeToken,
-  setToken,
-  setUser,
-  setUserLoading,
-} from "../slices/user";
+import { logout, setToken } from "../slices/user";
 import { api } from "./baseQuery";
 
 const authApi = api.injectEndpoints({
@@ -80,18 +74,6 @@ const authApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["profile"],
-      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
-        try {
-          dispatch(setUserLoading(true));
-          const { data } = await queryFulfilled;
-          dispatch(setUser(data.data));
-        } catch (error) {
-          dispatch(removeToken());
-          console.log("error from get user: ", error);
-        } finally {
-          dispatch(setUserLoading(false));
-        }
-      },
     }),
     updateProfile: builder.mutation({
       query: (data) => ({

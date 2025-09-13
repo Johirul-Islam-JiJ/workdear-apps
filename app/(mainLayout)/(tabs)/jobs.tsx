@@ -3,6 +3,8 @@ import JobListHeader from "@/components/job/JobListHeader";
 import JobLoadingCard from "@/components/job/JobLoadingCard";
 import Button from "@/components/libs/Button";
 import { ThemedText } from "@/components/libs/ThemedText";
+import { useAppSelector } from "@/hooks/redux";
+import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { useFindJobsQuery } from "@/store/features/jobs";
 import { Job } from "@/types/Job";
 import React, { useEffect, useState } from "react";
@@ -15,8 +17,8 @@ export type CategoryState = {
 
 const JobsSreen = () => {
   const [jobsData, setJobsData] = useState<Job[]>([]);
-
   const [countryIds, setCountryIds] = useState<number[]>([]);
+  const { token, user } = useAppSelector((state) => state.user);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<CategoryState>({
     id: null,
@@ -27,6 +29,7 @@ const JobsSreen = () => {
     data: jobs,
     isLoading,
     isFetching,
+    error,
   } = useFindJobsQuery({
     country_ids: countryIds.length > 0 ? countryIds : null,
     job_category_id: category.id,
@@ -80,7 +83,12 @@ const JobsSreen = () => {
             </View>
           ) : (
             <View style={{ alignItems: "center", marginVertical: 10 }}>
-              <ThemedText color="placeHolder">No job found</ThemedText>
+              <ThemedText color="placeHolder">
+                No job found, error:{" "}
+                {error && isFetchBaseQueryError(error) && error.data.message}
+                token: {token}
+                user: {JSON.stringify(user)}
+              </ThemedText>
             </View>
           )
         }
