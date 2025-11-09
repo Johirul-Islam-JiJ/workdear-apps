@@ -1,7 +1,6 @@
 import { timeCalculator } from "@/services/timeCalculator";
 import { Job } from "@/types/Job";
 import { StyleSheet, View } from "react-native";
-import DonutChat from "../libs/DonutChat";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
@@ -34,10 +33,10 @@ const JobCard = ({ job }: { job: Job }) => {
           </ThemedView>
         </View>
       </View>
-      <DonutChat
+      {/* <DonutChat
         cutout={progress}
         description={`${job.submission_information.TOTAL_SUBMISSIONS}/${job.submission_information.REQUIRED_JOB_WORKER}`}
-      />
+      /> */}
     </ThemedView>
   );
 };
