@@ -36,11 +36,11 @@ export default function DrawerFooter() {
 
       {/* App Version */}
       <ThemedText
-        type="small"
+        variant="small"
         color="gray.700"
         style={{ textAlign: "center", marginTop: 10, marginBottom: 5 }}
       >
-        Version 1.0.0
+        VERSION: 1.0.0
       </ThemedText>
     </View>
   );

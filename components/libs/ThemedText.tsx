@@ -1,75 +1,118 @@
-import { StyleSheet, Text, type TextProps } from "react-native";
-
 import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { StyleSheet, Text, TextProps } from "react-native";
 
-type ThemedTextProps = TextProps & {
+export type TextVariant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "body"
+  | "bodySemiBold"
+  | "subtitle"
+  | "caption"
+  | "button"
+  | "link"
+  | "small"
+  | "overline";
+
+interface ThemedTextProps extends TextProps {
   color?: ColorScheme;
-  type?:
-    | "default"
-    | "title"
-    | "defaultSemiBold"
-    | "subtitle"
-    | "link"
-    | "small";
+  variant?: TextVariant;
   underline?: boolean;
-};
+}
 
-export function ThemedText({
+export const ThemedText: React.FC<ThemedTextProps> = ({
   style,
   color = "text",
-  type = "default",
+  variant = "body",
   underline = false,
   ...rest
-}: ThemedTextProps) {
-  const textColor = useThemeColor(type === "link" ? "primarydark" : color);
+}) => {
+  const textColor = useThemeColor(variant === "link" ? "primarydark" : color);
+
+  const variantStyles: Record<TextVariant, object> = {
+    h1: styles.H1,
+    h2: styles.H2,
+    h3: styles.H3,
+    body: styles.Body,
+    bodySemiBold: styles.BodySemiBold,
+    subtitle: styles.Subtitle,
+    caption: styles.Caption,
+    button: styles.Button,
+    link: styles.Link,
+    small: styles.Small,
+    overline: styles.Overline,
+  };
 
   return (
     <Text
       style={[
         { color: textColor },
-        type === "default" ? styles.default : undefined,
-        type === "title" ? styles.title : undefined,
-        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
-        type === "subtitle" ? styles.subtitle : undefined,
-        type === "link" ? styles.link : undefined,
-        type === "small" ? styles.small : undefined,
+        variantStyles[variant],
         underline && { textDecorationLine: "underline" },
         style,
       ]}
       {...rest}
     />
   );
-}
+};
 
 const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontFamily: "RobotoSerifRegular",
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
+  H1: {
+    fontSize: 36,
+    lineHeight: 44,
     fontFamily: "RobotoSerifBold",
   },
-  title: {
-    fontSize: 32,
+  H2: {
+    fontSize: 30,
+    lineHeight: 38,
+    fontFamily: "RobotoSerifSemiBold",
+  },
+  H3: {
+    fontSize: 24,
     lineHeight: 32,
     fontFamily: "RobotoSerifSemiBold",
   },
-  subtitle: {
-    fontSize: 20,
+  Body: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: "RobotoSerifRegular",
+  },
+  BodySemiBold: {
+    fontSize: 16,
+    lineHeight: 24,
     fontFamily: "RobotoSerifBold",
   },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    fontFamily: "RobotoSerifSemiBold",
+  Subtitle: {
+    fontSize: 20,
+    lineHeight: 28,
+    fontFamily: "RobotoSerifBold",
   },
-  small: {
-    fontSize: 14,
+  Caption: {
+    fontSize: 12,
     lineHeight: 16,
     fontFamily: "RobotoSerifRegular",
+  },
+  Button: {
+    fontSize: 12,
+    lineHeight: 20,
+    fontFamily: "RobotoSerifSemiBold",
+  },
+  Link: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: "RobotoSerifSemiBold",
+  },
+  Small: {
+    fontSize: 14,
+    lineHeight: 18,
+    fontFamily: "RobotoSerifRegular",
+  },
+  Overline: {
+    fontSize: 10,
+    lineHeight: 12,
+    fontFamily: "RobotoSerifRegular",
+    textTransform: "uppercase",
+    letterSpacing: 1,
   },
 });

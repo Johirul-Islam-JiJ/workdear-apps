@@ -1,4 +1,4 @@
-import NavBar from "@/components/home/NavBar";
+import NavBar from "@/components/common/NavBar";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import Entypo from "@expo/vector-icons/Entypo";

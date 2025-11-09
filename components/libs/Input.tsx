@@ -18,8 +18,8 @@ const Input: React.FC<InputProps> = ({
   style,
   ...props
 }) => {
-  const borderColor = useThemeColor(error ? "error" : "borderColor");
-  const placeholderColor = useThemeColor(error ? "error" : "placeHolder");
+  const borderColor = useThemeColor(error ? "error" : "border");
+  const placeholderColor = useThemeColor(error ? "error" : "placeholder");
 
   return (
     <View style={{ flexGrow: 1 }}>

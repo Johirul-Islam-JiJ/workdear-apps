@@ -114,6 +114,7 @@ const Button: React.FC<ButtonProps> = ({
 
             {typeof title === "string" ? (
               <ThemedText
+                variant="button"
                 color={textColor}
                 style={{ fontSize: sizes.fontSize }}
               >
