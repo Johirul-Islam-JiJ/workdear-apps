@@ -15,12 +15,22 @@ export const Colors = {
     infolight: "#c2edfe",
     info: "#0074fe",
 
-    borderColor: "#808080",
-    placeHolder: "#9F9F9F",
+    border: "#e5e7eb",
+    placeholder: "#9F9F9F",
 
     white: "#FFFFFF",
     text: "#000000",
     black: "#000000",
+
+    "gray.100": "#f8f9fa",
+    "gray.200": "#e9ecef",
+    "gray.300": "#dee2e6",
+    "gray.400": "#ced4da",
+    "gray.500": "#adb5bd",
+    "gray.600": "#868e96",
+    "gray.700": "#495057",
+    "gray.800": "#343a40",
+    "gray.900": "#212529",
   },
   dark: {
     background: "#e5e7ec",
@@ -38,12 +48,22 @@ export const Colors = {
     infolight: "#c2edfe",
     info: "#0074fe",
 
-    borderColor: "#808080",
-    placeHolder: "#9F9F9F",
+    border: "#e5e7eb",
+    placeholder: "#9F9F9F",
 
     white: "#FFFFFF",
     text: "#000000",
     black: "#000000",
+
+    "gray.100": "#f8f9fa",
+    "gray.200": "#e9ecef",
+    "gray.300": "#dee2e6",
+    "gray.400": "#ced4da",
+    "gray.500": "#adb5bd",
+    "gray.600": "#868e96",
+    "gray.700": "#495057",
+    "gray.800": "#343a40",
+    "gray.900": "#212529",
   },
 };
 
