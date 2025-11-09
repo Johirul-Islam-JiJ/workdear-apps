@@ -1,12 +1,13 @@
+import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { useGetNotificationCountQuery } from "@/store/features/notification";
+import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { DrawerActions } from "@react-navigation/native";
+import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const NavBar = () => {
@@ -18,28 +19,27 @@ const NavBar = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   }
 
+  const source = user?.profile_image
+    ? { uri: config.fileBaseUrl + user.profile_image }
+    : require("@/assets/images/default.png");
   return (
-    <ThemedView color="primaryDark" style={styles.navBar}>
+    <ThemedView color="primarydark" style={styles.navBar}>
       <Pressable onPress={openDrawer}>
-        <FontAwesome6 name="bars" size={24} color="white" />
+        <FontAwesome6 name="bars" size={22} color="white" />
       </Pressable>
-      <View style={styles.balanceContainer}>
-        <ThemedView color="primaryDarker" style={styles.balance}>
-          <ThemedText color="white" type="defaultSemiBold">
-            ${user?.wallet_balance.earning_balance}
-          </ThemedText>
-        </ThemedView>
-        <ThemedView color="primaryLight" style={styles.balance}>
-          <ThemedText color="white" type="defaultSemiBold">
-            ${user?.wallet_balance.deposit_balance}
-          </ThemedText>
-        </ThemedView>
+
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
         <View style={{ position: "relative" }}>
-          <Ionicons name="notifications-sharp" size={24} color="yellow" />
+          <Ionicons name="notifications-sharp" size={24} color="white" />
           {notificationCount && notificationCount?.data.unread_count > 0 && (
-            <ThemedView color="primaryLight" style={styles.notification} />
+            <ThemedView color="primarylight" style={styles.notification} />
           )}
         </View>
+        <Image
+          style={{ height: 30, width: 40 }}
+          contentFit="contain"
+          source={source}
+        />
       </View>
     </ThemedView>
   );
@@ -55,16 +55,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "sticky",
     top: 0,
-  },
-  balanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 3,
-  },
-  balance: {
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    borderRadius: 100,
   },
   notification: {
     position: "absolute",

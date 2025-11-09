@@ -10,7 +10,7 @@ import React from "react";
 import { Platform } from "react-native";
 
 export default function TabLayout() {
-  const tabActiveColor = useThemeColor("primaryDark");
+  const tabActiveColor = useThemeColor("primarydark");
 
   return (
     <Tabs
@@ -24,7 +24,7 @@ export default function TabLayout() {
         }),
         header: () => (
           <>
-            <ThemedView color="primaryDark" style={{ height: 35 }} />
+            <ThemedView color="primarydark" style={{ height: 35 }} />
             <NavBar />
           </>
         ),
