@@ -40,9 +40,27 @@ const Button: React.FC<ButtonProps> = ({
 
   // ─── Size Config ──────────────────────────────────────────────
   const sizes = {
-    small: { minHeight: 32, paddingHorizontal: 12, fontSize: 13, gap: 4 },
-    medium: { minHeight: 40, paddingHorizontal: 16, fontSize: 15, gap: 6 },
-    large: { minHeight: 48, paddingHorizontal: 20, fontSize: 17, gap: 8 },
+    small: {
+      minHeight: 32,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      fontSize: 13,
+      gap: 4,
+    },
+    medium: {
+      minHeight: 40,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+      fontSize: 15,
+      gap: 6,
+    },
+    large: {
+      minHeight: 48,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      fontSize: 17,
+      gap: 8,
+    },
   }[size];
 
   // ─── Color Logic ──────────────────────────────────────────────
@@ -66,6 +84,7 @@ const Button: React.FC<ButtonProps> = ({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: sizes.paddingHorizontal,
+    paddingVertical: sizes.paddingVertical,
     flexDirection: "row",
     backgroundColor,
     borderWidth: variant === "outlined" ? 1 : 0,

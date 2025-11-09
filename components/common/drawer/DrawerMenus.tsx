@@ -24,7 +24,6 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
             title={menu.label}
             endIcon="chevron-forward"
             variant="soft"
-            size="medium"
             color={menu.color}
             startIcon={
               <IconButton icon={menu.icon} size="sm" color={menu.color} />
