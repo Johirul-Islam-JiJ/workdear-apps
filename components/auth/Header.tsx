@@ -19,7 +19,7 @@ const Header = ({ title }: { title: string }) => {
         contentFit="contain"
       />
       <ThemedText
-        type="title"
+        variant="subtitle"
         color="white"
         style={{ marginBottom: 5, marginTop: 5 }}
       >

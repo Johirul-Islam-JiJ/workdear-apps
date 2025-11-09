@@ -107,6 +107,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     gap: 12,
+    borderTopEndRadius: 15,
   },
   contentWrapper: {
     flexDirection: "row",
