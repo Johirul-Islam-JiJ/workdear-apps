@@ -34,10 +34,10 @@ const SignUpForm = () => {
   });
   const checkbox = watch("acceptedTerms");
   const checkboxColor = useThemeColor(
-    checkbox ? "primaryDarker" : "placeHolder"
+    checkbox ? "primarydarker" : "placeHolder"
   );
   const checkboxBorderColor = useThemeColor(
-    errors.acceptedTerms ? "error" : checkbox ? "primaryDarker" : "borderColor"
+    errors.acceptedTerms ? "error" : checkbox ? "primarydark" : "borderColor"
   );
 
   const emailIconColor = useThemeColor(errors.email ? "error" : "placeHolder");
@@ -202,7 +202,8 @@ const SignUpForm = () => {
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-start",
-                  gap: 6,
+                  gap: 5,
+                  marginRight: 5,
                 }}
               >
                 <Checkbox
@@ -212,20 +213,9 @@ const SignUpForm = () => {
                   color={value ? checkboxColor : undefined}
                 />
                 <ThemedText>
-                  I agree to Workdear’s{" "}
-                  <ThemedText
-                    style={{ textDecorationLine: "underline" }}
-                    type="link"
-                  >
-                    Terms of Service
-                  </ThemedText>{" "}
-                  and{" "}
-                  <ThemedText
-                    style={{ textDecorationLine: "underline" }}
-                    type="link"
-                  >
-                    Privacy Policy
-                  </ThemedText>
+                  I agree to Workdear's{" "}
+                  <ThemedText underline>Terms of Service</ThemedText> and{" "}
+                  <ThemedText underline>Privacy Policy</ThemedText>
                 </ThemedText>
               </Pressable>
             )}
@@ -256,11 +246,14 @@ const SignUpForm = () => {
           flexDirection: "row",
           gap: 4,
           justifyContent: "center",
+          marginTop: 10,
         }}
       >
         <ThemedText>Already have an account?</ThemedText>
         <Link href="/signin">
-          <ThemedText type="link">Login</ThemedText>
+          <ThemedText type="link" underline>
+            Login
+          </ThemedText>
         </Link>
       </View>
     </ScrollView>

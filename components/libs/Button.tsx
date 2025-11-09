@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = "Contained",
   style,
   loading,
-  color = "primaryDarker",
+  color = "primarydark",
   ...props
 }) => {
   const backgroundColor = useThemeColor(color);
@@ -51,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({
       ]}
       android_ripple={{
         color: useThemeColor(
-          variant === "Outlined" ? "placeHolder" : "primaryLight"
+          variant === "Outlined" ? "placeHolder" : "primarylight"
         ),
       }}
     >
@@ -62,7 +62,7 @@ const Button: React.FC<ButtonProps> = ({
         />
       ) : (
         <ThemedText
-          color={variant === "Outlined" ? "primaryDarker" : "white"}
+          color={variant === "Outlined" ? "primarydark" : "white"}
           type="defaultSemiBold"
         >
           {title}

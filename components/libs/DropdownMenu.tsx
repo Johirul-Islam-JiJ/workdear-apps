@@ -76,6 +76,13 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
         />
       </Pressable>
 
+      {/* Error message */}
+      {error && (
+        <ThemedText color="error" type="small">
+          {error}
+        </ThemedText>
+      )}
+
       {/* Modal for dropdown list */}
       <Modal visible={visible} transparent animationType="fade">
         <TouchableOpacity

@@ -38,7 +38,6 @@ const Input: React.FC<InputProps> = ({
               borderColor: borderColor,
               borderWidth: 1,
               borderRadius: 7,
-              fontFamily: "RobotoSerifRegular",
               paddingLeft: startIcon ? 40 : 10,
               paddingRight: endIcon ? 40 : 10,
             },

@@ -5,7 +5,7 @@ import React from "react";
 
 const SignIn = () => {
   return (
-    <ThemedView color="white" style={{ flex: 1 }}>
+    <ThemedView style={{ flex: 1 }}>
       <Header title="Sign in to continue your journey" />
 
       <SignInForm />

@@ -12,15 +12,17 @@ type ThemedTextProps = TextProps & {
     | "subtitle"
     | "link"
     | "small";
+  underline?: boolean;
 };
 
 export function ThemedText({
   style,
   color = "text",
   type = "default",
+  underline = false,
   ...rest
 }: ThemedTextProps) {
-  const textColor = useThemeColor(type === "link" ? "primaryDarker" : color);
+  const textColor = useThemeColor(type === "link" ? "primarydark" : color);
 
   return (
     <Text
@@ -32,6 +34,7 @@ export function ThemedText({
         type === "subtitle" ? styles.subtitle : undefined,
         type === "link" ? styles.link : undefined,
         type === "small" ? styles.small : undefined,
+        underline && { textDecorationLine: "underline" },
         style,
       ]}
       {...rest}

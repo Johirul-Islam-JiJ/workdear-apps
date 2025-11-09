@@ -6,7 +6,7 @@ import React from "react";
 const Header = ({ title }: { title: string }) => {
   return (
     <ThemedView
-      color="primaryDarker"
+      color="primarydark"
       style={{
         height: 200,
         justifyContent: "center",
@@ -15,10 +15,14 @@ const Header = ({ title }: { title: string }) => {
     >
       <Image
         source={require("@/assets/images/logo-white.png")}
-        style={{ height: 30, width: 120 }}
+        style={{ height: 50, width: 160 }}
         contentFit="contain"
       />
-      <ThemedText type="subtitle" color="primaryLighter">
+      <ThemedText
+        type="title"
+        color="white"
+        style={{ marginBottom: 5, marginTop: 5 }}
+      >
         Welcome back
       </ThemedText>
       <ThemedText color="white">{title}</ThemedText>

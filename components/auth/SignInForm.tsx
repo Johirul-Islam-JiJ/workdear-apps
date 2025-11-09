@@ -57,7 +57,7 @@ const SignInForm = () => {
 
   return (
     <ThemedView
-      color="lightGray"
+      color="card"
       style={{
         flex: 1,
         justifyContent: "space-between",
