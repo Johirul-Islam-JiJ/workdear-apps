@@ -1,8 +1,8 @@
-import { useAppDispatch } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useToast } from "@/hooks/useToast";
+import { loginDefaultValues } from "@/schema/auth";
 import { useLoginMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
-import { showNotification } from "@/store/slices/notification";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,7 +30,7 @@ type Payload = {
 const SignInForm = () => {
   const [showPasswoard, setShowPassword] = useState(false);
   const [login, { isLoading, error }] = useLoginMutation();
-  const dispatch = useAppDispatch();
+  const toast = useToast();
   const navigation = useRouter();
   const {
     control,
@@ -38,10 +38,7 @@ const SignInForm = () => {
     formState: { errors },
   } = useForm<Payload>({
     resolver: yupResolver(schema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+    defaultValues: loginDefaultValues,
   });
   const emailIconColor = useThemeColor(errors.email ? "error" : "placeHolder");
   const passwordIconColor = useThemeColor(
@@ -54,12 +51,7 @@ const SignInForm = () => {
       await login(data).unwrap();
       navigation.navigate("/(mainLayout)/(tabs)");
     } catch (error: any) {
-      dispatch(
-        showNotification({
-          message: error.data.message || "Internal server error",
-          type: "error",
-        })
-      );
+      toast.error(error.data.message || "Internal server error");
     }
   }
 

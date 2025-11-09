@@ -61,13 +61,13 @@ const ToastNotification = () => {
       }}
     >
       {type === "success" ? (
-        <AntDesign name="checkcircle" size={50} color={textColor} />
+        <AntDesign name="check-circle" size={50} color={textColor} />
       ) : type === "error" ? (
         <MaterialIcons name="error" size={50} color={textColor} />
       ) : (
         <Entypo name="info-with-circle" size={50} color={textColor} />
       )}
-      <ThemedText type="subtitle" style={{ color: textColor }}>
+      <ThemedText style={{ color: textColor, textAlign: "center" }}>
         {message}
       </ThemedText>
     </Animated.View>

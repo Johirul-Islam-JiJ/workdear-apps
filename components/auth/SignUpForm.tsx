@@ -1,8 +1,8 @@
-import { useAppDispatch } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useToast } from "@/hooks/useToast";
+import { signUpDefaultValues, SignUpSchema } from "@/schema/auth";
 import { useRegisterMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
-import { showNotification } from "@/store/slices/notification";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,43 +11,17 @@ import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, ScrollView, View } from "react-native";
-import * as yup from "yup";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Name is required")
-    .min(3, "Minimum 3 characters"),
-  email: yup
-    .string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
-  password_confirmation: yup
-    .string()
-    .required("Re-enter password is required")
-    .min(6, "Password must be at least 6 characters"),
-  country_id: yup.string().required("Country is required"),
-  manager_id: yup.string(),
-  acceptedTerms: yup
-    .boolean()
-    .oneOf([true], "You must accept the Terms and Privacy Policy")
-    .required(),
-});
 
 const SignUpForm = () => {
   const [showConfirmPasswoard, setShowConfirmPassword] = useState(false);
   const [showPasswoard, setShowPassword] = useState(false);
   const [registation, { isLoading, error }] = useRegisterMutation();
   const navigation = useRouter();
-  const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const {
     control,
@@ -55,16 +29,8 @@ const SignUpForm = () => {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
-      country_id: "",
-      manager_id: "",
-      acceptedTerms: false,
-    },
+    resolver: yupResolver(SignUpSchema),
+    defaultValues: signUpDefaultValues,
   });
   const checkbox = watch("acceptedTerms");
   const checkboxColor = useThemeColor(
@@ -85,12 +51,7 @@ const SignUpForm = () => {
       await registation(data).unwrap();
       navigation.navigate("/(mainLayout)/(tabs)");
     } catch (error: any) {
-      dispatch(
-        showNotification({
-          message: error.data.message || "Internal server error",
-          type: "error",
-        })
-      );
+      toast.error(error.data.message || "Internal server error");
     }
   }
 

@@ -6,7 +6,7 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 
 const SignUp = () => {
   return (
-    <ThemedView color="lightGray" style={{ flex: 1 }}>
+    <ThemedView color="white" style={{ flex: 1 }}>
       <Header title="Sign up to start your journey" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
