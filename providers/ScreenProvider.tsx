@@ -5,19 +5,26 @@ import {
   useGetGeneralDataQuery,
 } from "@/store/features/generalData";
 import { removeToken, setToken, setUser } from "@/store/slices/user";
+import {
+  PlusJakartaSans_200ExtraLight,
+  PlusJakartaSans_300Light,
+  PlusJakartaSans_400Regular,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+  useFonts,
+} from "@expo-google-fonts/plus-jakarta-sans";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
 function ScreenProvider() {
   const [fontLoaded] = useFonts({
-    RobotoSerifExtraLight: require("../assets/fonts/RobotoSerif_28pt-ExtraLight.ttf"),
-    RobotoSerifLight: require("../assets/fonts/RobotoSerif_28pt-Light.ttf"),
-    RobotoSerifSemiBold: require("../assets/fonts/RobotoSerif_28pt-Medium.ttf"),
-    RobotoSerifRegular: require("../assets/fonts/RobotoSerif_28pt-Regular.ttf"),
-    RobotoSerifBold: require("../assets/fonts/RobotoSerif_28pt-Bold.ttf"),
+    RobotoSerifExtraLight: PlusJakartaSans_200ExtraLight,
+    RobotoSerifLight: PlusJakartaSans_300Light,
+    RobotoSerifSemiBold: PlusJakartaSans_600SemiBold,
+    RobotoSerifRegular: PlusJakartaSans_400Regular,
+    RobotoSerifBold: PlusJakartaSans_700Bold,
   });
 
   const { user, token } = useAppSelector((state) => state.user);
