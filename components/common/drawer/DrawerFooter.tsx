@@ -18,7 +18,7 @@ export default function DrawerFooter() {
   };
 
   return (
-    <View style={{ paddingHorizontal: 8 }}>
+    <View style={{ paddingHorizontal: 8, gap: 10 }}>
       <Divider />
 
       <Button
@@ -27,9 +27,7 @@ export default function DrawerFooter() {
         color="error"
         variant="soft"
         style={{ justifyContent: "space-between" }}
-        startIcon={
-          <IconButton icon="log-out-outline" color="error" size="sm" />
-        }
+        startIcon={<IconButton icon="log-out-outline" color="error" />}
         endIcon="chevron-forward"
       />
 
@@ -37,7 +35,7 @@ export default function DrawerFooter() {
       <ThemedText
         variant="small"
         color="gray.700"
-        style={{ textAlign: "center", marginTop: 10, marginBottom: 5 }}
+        style={{ textAlign: "center", marginBottom: 5 }}
       >
         VERSION: 1.0.0
       </ThemedText>

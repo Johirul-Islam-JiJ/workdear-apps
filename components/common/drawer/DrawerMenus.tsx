@@ -23,11 +23,9 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
             key={index}
             title={menu.label}
             endIcon="chevron-forward"
-            variant="soft"
-            color={menu.color}
-            startIcon={
-              <IconButton icon={menu.icon} size="sm" color={menu.color} />
-            }
+            variant="text"
+            color="black"
+            startIcon={<IconButton icon={menu.icon} size="md" color="black" />}
             style={{ justifyContent: "space-between" }}
           />
         );

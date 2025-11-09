@@ -1,12 +1,15 @@
 import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
 import { ThemedText } from "./ThemedText";
 
+type IconName = keyof typeof Ionicons.glyphMap;
+
 interface BadgeProps {
   label?: string;
-  icon?: React.ReactNode;
+  icon?: IconName;
   color?: ColorScheme;
   variant?: "Contained" | "Outlined" | "Dot";
   size?: "small" | "medium" | "large";
@@ -24,9 +27,9 @@ const Badge: React.FC<BadgeProps> = ({
   const backgroundColor = useThemeColor(color);
 
   const sizeStyles = {
-    small: { paddingHorizontal: 6, paddingVertical: 2, fontSize: 10 },
-    medium: { paddingHorizontal: 8, paddingVertical: 3, fontSize: 12 },
-    large: { paddingHorizontal: 10, paddingVertical: 4, fontSize: 14 },
+    small: { paddingHorizontal: 6, paddingVertical: 2, fontSize: 12 },
+    medium: { paddingHorizontal: 8, paddingVertical: 3, fontSize: 14 },
+    large: { paddingHorizontal: 10, paddingVertical: 4, fontSize: 16 },
   }[size];
 
   if (variant === "Dot") {
@@ -61,11 +64,18 @@ const Badge: React.FC<BadgeProps> = ({
         style,
       ]}
     >
-      {icon && <View style={{ marginRight: label ? 4 : 0 }}>{icon}</View>}
+      {icon && (
+        <Ionicons
+          name={icon}
+          size={sizeStyles.fontSize}
+          color={variant === "Contained" ? "white" : (color as ColorScheme)}
+        />
+      )}
       {label && (
         <ThemedText
           color={variant === "Contained" ? "white" : (color as ColorScheme)}
-          style={{ fontSize: sizeStyles.fontSize, fontWeight: "600" }}
+          variant="button"
+          style={{ fontSize: sizeStyles.fontSize }}
         >
           {label}
         </ThemedText>

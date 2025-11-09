@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     fontFamily: "RobotoSerifRegular",
   },
   Button: {
-    fontSize: 12,
+    fontSize: 16,
     lineHeight: 20,
     fontFamily: "RobotoSerifSemiBold",
   },

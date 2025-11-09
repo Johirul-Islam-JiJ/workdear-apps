@@ -111,13 +111,13 @@ export const drawerMenus: DrawerMenu[] = [
     label: "My profile",
     path: menus.userProfile,
     icon: "person-outline",
-    color: "primarydark",
+    color: "primarymain",
   },
   {
     label: "Ticket",
     path: menus.ticket,
     icon: "ticket-outline",
-    color: "primarydarker",
+    color: "primarymain",
   },
   {
     label: "Deposit",
@@ -129,13 +129,13 @@ export const drawerMenus: DrawerMenu[] = [
     label: "Wallet",
     path: menus.wallet,
     icon: "wallet-outline",
-    color: "primarydarker",
+    color: "primarydark",
   },
   {
     label: "Transactions History",
     path: menus["transaction-history"],
     icon: "receipt-outline",
-    color: "primarylight",
+    color: "primarydark",
   },
   {
     label: "Join Telegram",
