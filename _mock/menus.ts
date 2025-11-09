@@ -1,83 +1,21 @@
-import { BiSupport } from "react-icons/bi";
-import {
-  FaCreditCard,
-  FaHome,
-  FaNetworkWired,
-  FaSearch,
-  FaTelegramPlane,
-  FaTrophy,
-  FaUser,
-} from "react-icons/fa";
-import { GrTransaction, GrUserWorker } from "react-icons/gr";
-import { HiArrowTrendingUp } from "react-icons/hi2";
-import { IoIosWallet, IoMdNotifications } from "react-icons/io";
-import { IoShareSocial, IoStar, IoTicket } from "react-icons/io5";
-import { MdOutlineWork, MdVerifiedUser } from "react-icons/md";
-import { PiUserCheckFill } from "react-icons/pi";
-import { RiAdvertisementFill } from "react-icons/ri";
-import { SiCloudflareworkers } from "react-icons/si";
+import { ColorScheme } from "@/constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 import { menus } from "./paths";
+
+type IconName = keyof typeof Ionicons.glyphMap;
 
 export const dashboardMenuItems = [
   {
-    label: "Home",
-    icon: <FaHome />,
-    path: menus.home,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-  },
-  {
-    label: "Verify now",
-    icon: <MdVerifiedUser />,
-    path: menus.verification,
-    hideOnVerified: true,
-    disabledOnNotVerified: false,
-  },
-  {
-    label: "Find Jobs",
-    icon: <FaSearch />,
-    path: menus.jobs,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-find-job",
-  },
-  {
     label: "Premium",
-    icon: <IoStar />,
+    // icon: <IoStar />,
     path: menus.premium,
     hideOnVerified: false,
     disabledOnNotVerified: false,
     className: "step-purchase-package",
   },
   {
-    label: "Post New Job",
-    icon: <FaNetworkWired />,
-    path: menus.postJob,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-post-job",
-  },
-  {
-    label: "My work",
-    icon: <SiCloudflareworkers />,
-    path: null,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-my-work",
-    subMenus: [
-      {
-        label: "All Task",
-        path: menus.myWork,
-      },
-      {
-        label: "Accepted Task",
-        path: menus.acceptedTask,
-      },
-    ],
-  },
-  {
     label: "My Jobs",
-    icon: <MdOutlineWork />,
+    // icon: <MdOutlineWork />,
     path: menus.myJobs,
     hideOnVerified: false,
     disabledOnNotVerified: false,
@@ -85,49 +23,24 @@ export const dashboardMenuItems = [
   },
   {
     label: "Notification",
-    icon: <IoMdNotifications />,
+    // icon: <IoMdNotifications />,
     path: menus.notification,
     hideOnVerified: false,
     disabledOnNotVerified: false,
     className: "step-notification",
   },
-  {
-    label: "Deposit",
-    icon: <FaCreditCard />,
-    path: menus.deposit,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-deposit",
-  },
+
   {
     label: "Share & Earn",
-    icon: <IoShareSocial />,
+    // icon: <IoShareSocial />,
     path: menus.shareAndEarn,
     hideOnVerified: false,
     disabledOnNotVerified: false,
     className: "step-share-earn",
   },
   {
-    label: "Transactions History",
-    icon: <GrTransaction />,
-    path: null,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-transaction",
-    subMenus: [
-      {
-        label: "Deposit",
-        path: menus["deposit-history"],
-      },
-      {
-        label: "Withdraw",
-        path: menus["withdraw-history"],
-      },
-    ],
-  },
-  {
     label: "Advertisement",
-    icon: <RiAdvertisementFill />,
+    // icon: <RiAdvertisementFill />,
     path: null,
     hideOnVerified: false,
     disabledOnNotVerified: false,
@@ -143,72 +56,99 @@ export const dashboardMenuItems = [
       },
     ],
   },
-  {
-    label: "Ticket",
-    icon: <IoTicket />,
-    path: menus.ticket,
-    hideOnVerified: false,
-    disabledOnNotVerified: false,
-    className: "step-tickets",
-  },
+
   {
     label: "Play & Earn ",
-    icon: <FaTrophy />,
+    // icon: <FaTrophy />,
     path: menus.playandearn,
     hideOnVerified: false,
     disabledOnNotVerified: false,
     className: "step-play-and-earn",
   },
-];
-
-export const userPopOverMenus = [
   {
-    icon: FaUser,
-    label: "My profile",
-    path: menus.userProfile,
-    external: false,
-  },
-  {
-    icon: GrUserWorker,
+    // icon: GrUserWorker,
     label: "Top worker",
     path: menus.topWorkers,
     external: false,
   },
   {
-    icon: HiArrowTrendingUp,
+    // icon: HiArrowTrendingUp,
     label: "Top job poster",
     path: menus.topJobPoster,
     external: false,
   },
   {
-    icon: HiArrowTrendingUp,
+    // icon: HiArrowTrendingUp,
     label: "Top refer",
     path: menus.topReffer,
     external: false,
   },
   {
-    icon: PiUserCheckFill,
+    // icon: PiUserCheckFill,
     label: "Top users",
     path: menus.bestUsers,
     external: false,
   },
+];
+
+export type DrawerMenu = {
+  label: string;
+  path: string;
+  icon: IconName;
+  external?: boolean;
+  color: ColorScheme;
+  hideOnVerified?: boolean;
+};
+export const drawerMenus: DrawerMenu[] = [
   {
-    icon: IoIosWallet,
+    label: "Verify now",
+    path: menus.verification,
+    icon: "checkmark-circle-outline",
+    color: "warning",
+    hideOnVerified: true,
+  },
+  {
+    label: "My profile",
+    path: menus.userProfile,
+    icon: "person-outline",
+    color: "primarydark",
+  },
+  {
+    label: "Ticket",
+    path: menus.ticket,
+    icon: "ticket-outline",
+    color: "primarydarker",
+  },
+  {
+    label: "Deposit",
+    path: menus.deposit,
+    icon: "cash-outline",
+    color: "primarydark",
+  },
+  {
     label: "Wallet",
     path: menus.wallet,
-    external: false,
+    icon: "wallet-outline",
+    color: "primarydarker",
   },
   {
-    icon: FaTelegramPlane,
+    label: "Transactions History",
+    path: menus["transaction-history"],
+    icon: "receipt-outline",
+    color: "primarylight",
+  },
+  {
     label: "Join Telegram",
     path: "https://t.me/joinchat/AAAAAEc-5_45Y095",
+    icon: "logo-tableau",
     external: true,
+    color: "info",
   },
   {
-    icon: BiSupport,
     label: "Live support",
     path: menus["live-support"],
-    external: false,
+    icon: "chatbox-ellipses-outline",
+    color: "info",
   },
 ];
 

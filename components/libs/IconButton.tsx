@@ -18,7 +18,7 @@ type IconButtonProps = {
 const IconButton: React.FC<IconButtonProps> = ({
   icon,
   size = "md",
-  color = "primarydark",
+  color = "background",
   variant = "solid",
   onPress,
   disabled = false,

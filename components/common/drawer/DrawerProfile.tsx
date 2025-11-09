@@ -49,7 +49,7 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
         </View>
         <View style={{ flex: 1, gap: 8 }}>
           <View style={{ gap: 4 }}>
-            <ThemedText color="white" type="subtitle" numberOfLines={1}>
+            <ThemedText color="white" variant="subtitle" numberOfLines={1}>
               {user?.name || "Guest User"}
             </ThemedText>
           </View>

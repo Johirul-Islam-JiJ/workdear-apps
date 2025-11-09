@@ -4,7 +4,6 @@ import {
 } from "@react-navigation/drawer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import DrawerBalance from "./drawer/DrawerBalance";
 import DrawerFooter from "./drawer/DrawerFooter";
 import DrawerMenus from "./drawer/DrawerMenus";
 import DrawerProfile from "./drawer/DrawerProfile";
@@ -17,7 +16,6 @@ function DrawerContent(props: DrawerContentComponentProps) {
     >
       <View>
         <DrawerProfile navigation={props.navigation} />
-        <DrawerBalance />
         <DrawerMenus navigation={props.navigation} />
       </View>
       <DrawerFooter />

@@ -21,7 +21,8 @@ export const menus = {
   bestUsers: "/top-users",
   userProfile: "/user-profile",
   wallet: "/wallet",
-  playandearn:"/play-and-earn",
+  playandearn: "/play-and-earn",
   "live-support": "/live-support",
   "join-telegram": "/join-telegram",
+  "transaction-history": "/transaction-history",
 };
