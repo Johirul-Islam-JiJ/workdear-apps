@@ -1,6 +1,6 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing, View } from "react-native";
+import { Animated, Easing, View, ViewStyle } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 
 const JobLoadingCard = () => {
@@ -26,65 +26,43 @@ const JobLoadingCard = () => {
     ).start();
   }, []);
 
+  const container: ViewStyle = {
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    gap: 12,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  };
+
+  const item: ViewStyle = {
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: placeHolderColor,
+    opacity: pulseAnim,
+  };
+
   return (
-    <ThemedView
-      color="card"
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        gap: 10,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
-    >
-      <View style={{ flex: 1, gap: 8 }}>
+    <ThemedView color="card" style={container}>
+      <View style={{ gap: 7 }}>
         {[...Array(2)].map((_, i) => (
-          <Animated.View
-            key={i}
-            style={{
-              height: 10,
-              borderRadius: 5,
-              backgroundColor: placeHolderColor,
-              opacity: pulseAnim,
-            }}
-          />
+          <Animated.View key={i} style={item} />
         ))}
+      </View>
 
-        <Animated.View
-          style={{
-            height: 10,
-            width: 150,
-            borderRadius: 5,
-            backgroundColor: placeHolderColor,
-            opacity: pulseAnim,
-          }}
-        />
-
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          {[...Array(2)].map((_, i) => (
-            <Animated.View
-              key={i}
-              style={{
-                height: 10,
-                width: 50,
-                borderRadius: 5,
-                backgroundColor: placeHolderColor,
-                opacity: pulseAnim,
-              }}
-            />
-          ))}
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ width: "78%", gap: 7 }}>
+          <View style={{ alignItems: "center" }}>
+            <Animated.View style={[item, { width: "30%" }]} />
+          </View>
+          <Animated.View style={item} />
+        </View>
+        <View style={{ width: "20%", gap: 7 }}>
+          <Animated.View style={item} />
+          <Animated.View style={item} />
         </View>
       </View>
     </ThemedView>
