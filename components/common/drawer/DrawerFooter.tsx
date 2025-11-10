@@ -2,17 +2,23 @@ import Button from "@/components/libs/Button";
 import Divider from "@/components/libs/Divider";
 import IconButton from "@/components/libs/IconButton";
 import { ThemedText } from "@/components/libs/ThemedText";
+import { useAppDispatch } from "@/hooks/redux";
+import { logout } from "@/store/slices/user";
 import React from "react";
 import { Alert, View } from "react-native";
 
 export default function DrawerFooter() {
+  const dispatch = useAppDispatch();
+
   const handleLogout = () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
       { text: "Cancel", style: "cancel" },
       {
         text: "Logout",
         style: "destructive",
-        onPress: () => {},
+        onPress: () => {
+          dispatch(logout());
+        },
       },
     ]);
   };

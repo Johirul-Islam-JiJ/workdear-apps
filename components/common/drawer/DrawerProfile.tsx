@@ -36,7 +36,7 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
             source={source}
           />
           {/* Premium Badge */}
-          {!isPremium && (
+          {isPremium && (
             <View style={[style.badge]}>
               <MaterialCommunityIcons
                 name="crown-circle"
