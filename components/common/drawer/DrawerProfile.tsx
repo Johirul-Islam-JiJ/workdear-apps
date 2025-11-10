@@ -26,6 +26,8 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
   const isVerified = user?.is_verified;
   const isPremium = user?.is_premium;
 
+  console.log("user", user);
+
   return (
     <ThemedView color="primarydark" style={style.profileContainer}>
       <View style={style.contentWrapper}>
