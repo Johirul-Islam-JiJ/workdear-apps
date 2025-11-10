@@ -6,4 +6,5 @@ export const config = {
   liveSupportApiBaseUrl: "https://support-server-t0yb.onrender.com/api",
   socketUrl: "ws://support-server-t0yb.onrender.com/live-support",
   liveSupportServerUrl: "https://support-server-t0yb.onrender.com",
+  geolocationApiKey: "AIzaSyA2y9j0Rd1I1ynHqRphdWDAi7fDfzAolAU",
 };

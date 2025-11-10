@@ -202,8 +202,8 @@ const SignUpForm = () => {
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-start",
-                  gap: 5,
-                  marginRight: 5,
+                  gap: 10,
+                  width: "95%",
                 }}
               >
                 <Checkbox

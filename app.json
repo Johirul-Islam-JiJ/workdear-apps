@@ -9,7 +9,10 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We need your location to determine your country."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -18,12 +21,14 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION"
       ],
       "package": "com.iqbalhossen60483.microjobapp"
     },
     "plugins": [
       "expo-router",
+      "expo-font",
       [
         "expo-splash-screen",
         {
@@ -33,7 +38,6 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-font",
       [
         "expo-image-picker",
         {
