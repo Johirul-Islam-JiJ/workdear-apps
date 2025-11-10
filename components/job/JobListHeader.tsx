@@ -31,10 +31,12 @@ const JobListHeader = ({
     <View style={{ flexDirection: "row", gap: 10, flexWrap: "wrap" }}>
       <Button
         onPress={() => setShowCategoryModal(1)}
+        variant={category.id ? "contained" : "outlined"}
         title={category.name ? category.name : "Select Category"}
       />
       <Button
         onPress={() => setShowCountryModal(1)}
+        variant={countryIds.length > 0 ? "contained" : "outlined"}
         title={
           countryIds.length > 0
             ? `${countryIds.length} Selected`
@@ -46,8 +48,8 @@ const JobListHeader = ({
         visible={showCountryModal}
         setVisible={setShowCountryModal}
         countries={countries?.data || []}
-        selected={countryIds}
-        setSelected={setCountryIds}
+        countryIds={countryIds}
+        setCountryIds={setCountryIds}
       />
       <SelectCategoryModal
         visible={showCategoryModal}

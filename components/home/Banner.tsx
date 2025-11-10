@@ -1,5 +1,6 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { BlurView } from "expo-blur";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -38,36 +39,33 @@ const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [fadeAnim] = useState(new Animated.Value(0));
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // fade out
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 600,
-        useNativeDriver: true,
-      }).start(() => {
-        // switch slide
-        setCurrentSlide((prev) => (prev + 1) % heroData.length);
-
-        // fade in
+  useFocusEffect(
+    useCallback(() => {
+      const interval = setInterval(() => {
         Animated.timing(fadeAnim, {
-          toValue: 1,
+          toValue: 0,
           duration: 600,
           useNativeDriver: true,
-          easing: Easing.out(Easing.ease),
-        }).start();
-      });
-    }, 5000);
+        }).start(() => {
+          setCurrentSlide((prev) => (prev + 1) % heroData.length);
+          Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 600,
+            useNativeDriver: true,
+            easing: Easing.out(Easing.ease),
+          }).start();
+        });
+      }, 5000);
 
-    // initial fade in
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 800,
-      useNativeDriver: true,
-    }).start();
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }).start();
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }, [])
+  );
 
   return (
     <ImageBackground

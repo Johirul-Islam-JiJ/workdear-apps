@@ -15,8 +15,8 @@ export type CategoryState = {
 };
 
 const JobsSreen = () => {
-  const [jobsData, setJobsData] = useState<Job[]>([]);
   const [countryIds, setCountryIds] = useState<number[]>([]);
+  const [jobsData, setJobsData] = useState<Job[]>([]);
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<CategoryState>({
     id: null,

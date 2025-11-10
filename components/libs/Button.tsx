@@ -93,14 +93,6 @@ const Button: React.FC<ButtonProps> = ({
     gap: sizes.gap,
   };
 
-  // ─── Ripple Effect ─────────────────────────────────────────────
-  const rippleColor =
-    variant === "outlined"
-      ? placeholderColor
-      : variant === "soft"
-      ? lightColor
-      : lightColor;
-
   // ─── Render Icon ───────────────────────────────────────────────
   const renderIcon = (
     icon?: React.ReactNode | keyof typeof Ionicons.glyphMap
@@ -122,7 +114,6 @@ const Button: React.FC<ButtonProps> = ({
         containerStyle,
         typeof style === "function" ? style(state) : style,
       ]}
-      android_ripple={{ color: rippleColor }}
     >
       {loading ? (
         <ActivityIndicator size="small" color={iconColor} />

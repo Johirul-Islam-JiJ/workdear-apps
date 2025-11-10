@@ -24,8 +24,8 @@ const SelectCategoryModal = ({
   return (
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
-        type="subtitle"
-        color="primaryDarker"
+        variant="subtitle"
+        color="primarydarker"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
         Select Category
@@ -53,7 +53,7 @@ const SelectCategoryModal = ({
                 setVisible(0);
               }}
               title={item.category_name}
-              variant={selected.id === item.id ? "Contained" : "Outlined"}
+              variant={selected.id === item.id ? "contained" : "outlined"}
             />
           ))}
         </View>
@@ -73,8 +73,8 @@ const SelectCategoryModal = ({
             setSelected({ id: null, name: null });
             setVisible(0);
           }}
-          title="Clear"
-          variant="Outlined"
+          title={selected.id ? "Reset" : "Cancel"}
+          variant="outlined"
         />
         <Button onPress={() => setVisible(0)} title="Done" />
       </View>

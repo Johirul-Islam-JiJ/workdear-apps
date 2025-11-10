@@ -1,5 +1,5 @@
 import { Country } from "@/types/Job";
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Button from "../libs/Button";
 import Modal from "../libs/Modal";
@@ -9,24 +9,47 @@ type Props = {
   visible: number;
   setVisible: React.Dispatch<React.SetStateAction<number>>;
   countries: Country[];
-  selected: number[];
-  setSelected: React.Dispatch<React.SetStateAction<number[]>>;
-  checkWhenInclude?: boolean;
+  countryIds: number[];
+  setCountryIds: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
 const SelectCountryModal = ({
   visible,
   setVisible,
   countries,
-  selected,
-  setSelected,
-  checkWhenInclude = true,
+  countryIds,
+  setCountryIds,
 }: Props) => {
+  const [selected, setSelected] = useState<number[]>(countryIds);
+
+  function handleClear() {
+    if (!selected.length) {
+      setVisible(0);
+      return;
+    }
+    setSelected([]);
+    setCountryIds([]);
+    setVisible(0);
+  }
+
+  function handleCountrySelect() {
+    setCountryIds(selected);
+    setVisible(0);
+  }
+
+  function handleToggleId(id: number) {
+    setSelected(
+      selected.includes(id)
+        ? selected.filter((item) => item !== id)
+        : selected.concat(id)
+    );
+  }
+
   return (
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
-        type="subtitle"
-        color="primaryDarker"
+        variant="subtitle"
+        color="primarydarker"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
         Select Country
@@ -41,29 +64,18 @@ const SelectCountryModal = ({
             justifyContent: "space-between",
           }}
         >
-          {countries.map((country, index) => (
-            <Button
-              key={index}
-              style={{ width: "49%" }}
-              onPress={() => {
-                setSelected(
-                  selected.includes(country.id)
-                    ? selected.filter((item) => item !== country.id)
-                    : selected.concat(country.id)
-                );
-              }}
-              title={country.country_name}
-              variant={
-                checkWhenInclude
-                  ? selected.includes(country.id)
-                    ? "Contained"
-                    : "Outlined"
-                  : !selected.includes(country.id)
-                  ? "Contained"
-                  : "Outlined"
-              }
-            />
-          ))}
+          {countries.map((country, index) => {
+            const isSelected = selected.includes(country.id);
+            return (
+              <Button
+                key={index}
+                style={{ minWidth: "49%" }}
+                onPress={() => handleToggleId(country.id)}
+                title={country.country_name}
+                variant={isSelected ? "contained" : "outlined"}
+              />
+            );
+          })}
         </View>
       </ScrollView>
 
@@ -76,17 +88,12 @@ const SelectCountryModal = ({
           marginTop: 15,
         }}
       >
-        {checkWhenInclude && (
-          <Button
-            onPress={() => {
-              setSelected([]);
-              setVisible(0);
-            }}
-            title="Clear All"
-            variant="Outlined"
-          />
-        )}
-        <Button onPress={() => setVisible(0)} title="Done" />
+        <Button
+          onPress={handleClear}
+          title={selected.length > 0 ? "Reset" : "Cancel"}
+          variant="outlined"
+        />
+        <Button onPress={handleCountrySelect} title="Done" />
       </View>
     </Modal>
   );

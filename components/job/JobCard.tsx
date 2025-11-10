@@ -31,7 +31,7 @@ const JobCard = ({ job }: { job: Job }) => {
           <ThemedText color="text" style={{ textAlign: "right" }}>
             ${job.pay_per_task}
           </ThemedText>
-          <ThemedText color="gray.300" variant="small">
+          <ThemedText darkColor="gray.300" color="gray.600" variant="small">
             {timeCalculator(job.created_at)}
           </ThemedText>
         </View>
