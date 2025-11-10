@@ -35,8 +35,8 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const [visible, setVisible] = useState(false);
-  const borderColor = useThemeColor(error ? "error" : "borderColor");
-  const iconColor = useThemeColor(error ? "error" : "placeHolder");
+  const borderColor = useThemeColor(error ? "error" : "border");
+  const iconColor = useThemeColor(error ? "error" : "placeholder");
   const dropdownBgColor = useThemeColor("white");
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
         onPress={() => setVisible(true)}
       >
         <ThemedText
-          color={error ? "error" : !selected.label ? "placeHolder" : undefined}
+          color={error ? "error" : !selected.label ? "placeholder" : undefined}
         >
           {selected.label ? selected.label : placeholder}
         </ThemedText>
@@ -78,7 +78,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
 
       {/* Error message */}
       {error && (
-        <ThemedText color="error" type="small">
+        <ThemedText color="error" variant="small">
           {error}
         </ThemedText>
       )}

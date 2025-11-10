@@ -40,9 +40,9 @@ const SignInForm = () => {
     resolver: yupResolver(schema),
     defaultValues: loginDefaultValues,
   });
-  const emailIconColor = useThemeColor(errors.email ? "error" : "placeHolder");
+  const emailIconColor = useThemeColor(errors.email ? "error" : "placeholder");
   const passwordIconColor = useThemeColor(
-    errors.password ? "error" : "placeHolder"
+    errors.password ? "error" : "placeholder"
   );
 
   async function onSubmit(data: Payload) {
@@ -111,24 +111,25 @@ const SignInForm = () => {
             )}
           />
         </View>
-        <ThemedText style={{ textAlign: "right" }} type="link">
+        <ThemedText style={{ textAlign: "right" }} variant="link">
           Forgot password?
         </ThemedText>
 
         {error && isFetchBaseQueryError(error) && (
           <ThemedText
             color="error"
-            type="small"
+            variant="small"
             style={{ textAlign: "center" }}
           >
             {error.data.message}
           </ThemedText>
         )}
         <Button
+          style={{ marginTop: 10 }}
           loading={isLoading}
           onPress={handleSubmit(onSubmit)}
           title="Sign in"
-          variant="Contained"
+          variant="contained"
         />
       </View>
 
@@ -142,7 +143,7 @@ const SignInForm = () => {
       >
         <ThemedText>Don’t have an account?</ThemedText>
         <Link href="/signup">
-          <ThemedText type="link">Sign up</ThemedText>
+          <ThemedText variant="link">Sign up</ThemedText>
         </Link>
       </View>
     </ThemedView>

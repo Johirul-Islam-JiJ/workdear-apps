@@ -3,7 +3,7 @@ import { ThemedView } from "@/components/libs/ThemedView";
 import { Image } from "expo-image";
 import React from "react";
 
-const Header = ({ title }: { title: string }) => {
+const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
   return (
     <ThemedView
       color="primarydark"
@@ -23,9 +23,9 @@ const Header = ({ title }: { title: string }) => {
         color="white"
         style={{ marginBottom: 5, marginTop: 5 }}
       >
-        Welcome back
+        {title}
       </ThemedText>
-      <ThemedText color="white">{title}</ThemedText>
+      <ThemedText color="white">{subTitle}</ThemedText>
     </ThemedView>
   );
 };

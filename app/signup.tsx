@@ -7,7 +7,10 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 const SignUp = () => {
   return (
     <ThemedView color="card" style={{ flex: 1 }}>
-      <Header title="Sign up to start your journey" />
+      <Header
+        subTitle="Sign up with your real information"
+        title="Let's get started"
+      />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}

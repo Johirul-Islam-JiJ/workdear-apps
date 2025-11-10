@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({
   error,
   startIcon = null,
   endIcon = null,
-  height = 40,
+  height = 45,
   style,
   ...props
 }) => {
@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
     <View style={{ flexGrow: 1 }}>
       <View style={{ position: "relative" }}>
         {startIcon && (
-          <View style={{ position: "absolute", left: 10, top: 10 }}>
+          <View style={{ position: "absolute", left: 10, top: 12 }}>
             {startIcon}
           </View>
         )}
@@ -40,18 +40,19 @@ const Input: React.FC<InputProps> = ({
               borderRadius: 7,
               paddingLeft: startIcon ? 40 : 10,
               paddingRight: endIcon ? 40 : 10,
+              fontSize: 16,
             },
             style,
           ]}
         />
         {endIcon && (
-          <View style={{ position: "absolute", right: 10, top: 10 }}>
+          <View style={{ position: "absolute", right: 10, top: 12 }}>
             {endIcon}
           </View>
         )}
       </View>
       {error && (
-        <ThemedText style={{ marginTop: 2 }} type="small" color="error">
+        <ThemedText style={{ marginTop: 2 }} variant="small" color="error">
           {error}
         </ThemedText>
       )}

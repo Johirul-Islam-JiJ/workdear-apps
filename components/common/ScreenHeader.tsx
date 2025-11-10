@@ -6,7 +6,7 @@ import NavBar from "./NavBar";
 const ScreenHeader = () => {
   return (
     <View>
-      <ThemedView color="primarydark" style={{ height: 25 }} />
+      <ThemedView color="primarydark" style={{ height: 22 }} />
       <NavBar />
     </View>
   );

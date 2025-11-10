@@ -6,7 +6,10 @@ import React from "react";
 const SignIn = () => {
   return (
     <ThemedView style={{ flex: 1 }}>
-      <Header title="Sign in to continue your journey" />
+      <Header
+        subTitle="You have been missed, Good to see you again!"
+        title="Welcome back"
+      />
 
       <SignInForm />
     </ThemedView>

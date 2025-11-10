@@ -34,15 +34,15 @@ const SignUpForm = () => {
   });
   const checkbox = watch("acceptedTerms");
   const checkboxColor = useThemeColor(
-    checkbox ? "primarydarker" : "placeHolder"
+    checkbox ? "primarydarker" : "placeholder"
   );
   const checkboxBorderColor = useThemeColor(
-    errors.acceptedTerms ? "error" : checkbox ? "primarydark" : "borderColor"
+    errors.acceptedTerms ? "error" : checkbox ? "primarydark" : "border"
   );
 
-  const emailIconColor = useThemeColor(errors.email ? "error" : "placeHolder");
+  const emailIconColor = useThemeColor(errors.email ? "error" : "placeholder");
   const passwordIconColor = useThemeColor(
-    errors.password ? "error" : "placeHolder"
+    errors.password ? "error" : "placeholder"
   );
 
   async function onSubmit(data: any) {
@@ -224,7 +224,7 @@ const SignUpForm = () => {
 
         {error && isFetchBaseQueryError(error) && (
           <ThemedText
-            type="small"
+            variant="small"
             color="error"
             style={{ textAlign: "center" }}
           >
@@ -236,7 +236,7 @@ const SignUpForm = () => {
           onPress={handleSubmit(onSubmit)}
           loading={isLoading}
           title="Sign Up"
-          variant="Contained"
+          variant="contained"
         />
       </View>
 
@@ -251,7 +251,7 @@ const SignUpForm = () => {
       >
         <ThemedText>Already have an account?</ThemedText>
         <Link href="/signin">
-          <ThemedText type="link" underline>
+          <ThemedText variant="link" underline>
             Login
           </ThemedText>
         </Link>
