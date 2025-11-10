@@ -174,6 +174,7 @@ export interface CountryCategory {
 export interface Country {
   id: number;
   country_name: string;
+  short_name: string;
   country_code: null;
   deleted_at: null;
   created_at: string;

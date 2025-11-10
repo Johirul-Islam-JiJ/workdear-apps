@@ -12,9 +12,9 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, ScrollView, View } from "react-native";
 import Button from "../libs/Button";
-import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
+import CountrySelectField from "./CountrySelectField";
 
 const SignUpForm = () => {
   const [showConfirmPasswoard, setShowConfirmPassword] = useState(false);
@@ -26,6 +26,7 @@ const SignUpForm = () => {
   const {
     control,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({
@@ -156,25 +157,12 @@ const SignUpForm = () => {
             )}
           />
         </View>
-        <View>
-          <ThemedText>Country</ThemedText>
-          <Controller
-            name="country_id"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <DropdownMenu
-                value={value}
-                items={[
-                  { label: "Bangladesh", value: "1" },
-                  { label: "India", value: "2" },
-                ]}
-                placeholder="Select your country"
-                onSelect={onChange}
-                error={errors.country_id?.message}
-              />
-            )}
-          />
-        </View>
+
+        <CountrySelectField
+          control={control}
+          setValue={setValue}
+          errors={errors}
+        />
 
         <View>
           <ThemedText>Manager ID</ThemedText>
