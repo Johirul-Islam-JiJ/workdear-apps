@@ -14,7 +14,7 @@ function DrawerContent(props: DrawerContentComponentProps) {
       style={style.container}
       contentContainerStyle={style.contentContainer}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         <DrawerProfile navigation={props.navigation} />
         <DrawerMenus navigation={props.navigation} />
       </View>
