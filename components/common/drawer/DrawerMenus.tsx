@@ -54,14 +54,14 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
             <View style={style.linkLabel}>
               <FontAwesome5 name="telegram-plane" size={24} color={gray} />
               <ThemedText color="black" variant="button">
-                Join Telegram
+                Join telegram
               </ThemedText>
             </View>
             <Ionicons name="chevron-forward" size={24} color="black" />
           </View>
         </ExternalLink>
         <Button
-          title="Theme Mode"
+          title="Theme mode"
           endIcon={<ThemeSwitch value={value} onValueChange={setValue} />}
           variant="text"
           color="black"

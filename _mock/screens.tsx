@@ -37,12 +37,12 @@ export const drawerScreens = [
   {
     id: 7,
     name: "transaction-history",
-    drawerLabel: "Transaction History",
+    drawerLabel: "Transaction history",
   },
   {
     id: 8,
     name: "live-support",
-    drawerLabel: "Live Support",
+    drawerLabel: "Live support",
   },
 ];
 
