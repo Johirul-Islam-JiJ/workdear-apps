@@ -23,7 +23,11 @@ const NavBar = () => {
     ? { uri: config.fileBaseUrl + user.profile_image }
     : require("@/assets/images/default.png");
   return (
-    <ThemedView color="primarydark" style={styles.navBar}>
+    <ThemedView
+      color="primarydark"
+      darkColor="primarydarker"
+      style={styles.navBar}
+    >
       <Pressable onPress={openDrawer}>
         <FontAwesome6 name="bars" size={22} color="white" />
       </Pressable>
@@ -44,7 +48,7 @@ const NavBar = () => {
 const styles = StyleSheet.create({
   navBar: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 8,
     zIndex: 2,
     flexDirection: "row",
     justifyContent: "space-between",

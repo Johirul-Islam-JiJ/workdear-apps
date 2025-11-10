@@ -23,12 +23,12 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
   const { user } = useAppSelector((state) => state.user);
   const isVerified = user?.is_verified;
   const darkColor = useThemeColor("primarydarker");
-  const gray = useThemeColor("gray.700");
   const theme = useColorScheme() ?? "light";
   const textColor = useThemeColor("text");
+  const backgroundColor = useThemeColor("background");
 
   return (
-    <View style={style.quickActionsSection}>
+    <View style={[style.quickActionsSection, { backgroundColor }]}>
       <View style={{ gap: 8 }}>
         {drawerMenus.map(({ hideOnVerified, Icon, label, path }, index) => {
           if (hideOnVerified && isVerified) return null;

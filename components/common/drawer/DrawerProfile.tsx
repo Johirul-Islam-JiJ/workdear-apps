@@ -27,7 +27,11 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
   const isPremium = user?.is_premium;
 
   return (
-    <ThemedView color="primarydark" style={style.profileContainer}>
+    <ThemedView
+      color="primarydark"
+      darkColor="primarydarker"
+      style={style.profileContainer}
+    >
       <View style={style.contentWrapper}>
         <View style={style.profileImageContainer}>
           <Image
