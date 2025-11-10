@@ -28,6 +28,7 @@ export const ThemedText: React.FC<ThemedTextProps> = ({
   darkColor = null,
   variant = "body",
   underline = false,
+  children,
   ...rest
 }) => {
   const theme = useColorScheme() ?? "light";
@@ -60,7 +61,9 @@ export const ThemedText: React.FC<ThemedTextProps> = ({
         style,
       ]}
       {...rest}
-    />
+    >
+      {children}
+    </Text>
   );
 };
 

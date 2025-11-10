@@ -34,7 +34,7 @@ const HomeJobLists = () => {
         </View>
       )}
 
-      {data?.length && (
+      {data?.length > 0 && (
         <View style={{ alignItems: "center" }}>
           <Button
             onPress={() => navigation.navigate("/(mainLayout)/(tabs)/jobs")}
