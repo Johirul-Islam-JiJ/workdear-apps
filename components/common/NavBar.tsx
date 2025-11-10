@@ -28,18 +28,14 @@ const NavBar = () => {
         <FontAwesome6 name="bars" size={22} color="white" />
       </Pressable>
 
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+      <View style={styles.wrapper}>
         <View style={{ position: "relative" }}>
           <Ionicons name="notifications-sharp" size={24} color="white" />
           {notificationCount && notificationCount?.data.unread_count > 0 && (
             <ThemedView color="primarylight" style={styles.notification} />
           )}
         </View>
-        <Image
-          style={{ height: 30, width: 40 }}
-          contentFit="contain"
-          source={source}
-        />
+        <Image style={styles.profile} contentFit="contain" source={source} />
       </View>
     </ThemedView>
   );
@@ -56,6 +52,7 @@ const styles = StyleSheet.create({
     position: "sticky",
     top: 0,
   },
+  wrapper: { flexDirection: "row", alignItems: "center", gap: 10 },
   notification: {
     position: "absolute",
     top: 0,
@@ -64,6 +61,7 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 100,
   },
+  profile: { height: 30, width: 30, borderRadius: 50 },
 });
 
 export default NavBar;
