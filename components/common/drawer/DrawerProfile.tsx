@@ -1,4 +1,6 @@
 import Badge from "@/components/libs/Badge";
+import { ThemedText } from "@/components/libs/ThemedText";
+import { ThemedView } from "@/components/libs/ThemedView";
 import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
@@ -7,8 +9,6 @@ import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Image } from "expo-image";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { ThemedText } from "../../libs/ThemedText";
-import { ThemedView } from "../../libs/ThemedView";
 
 interface DrawerProfileProps {
   navigation: DrawerContentComponentProps["navigation"];

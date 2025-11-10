@@ -1,6 +1,6 @@
-import { ColorScheme } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { menus } from "./paths";
+import { drawerScreens } from "./screens";
 
 type IconName = keyof typeof Ionicons.glyphMap;
 
@@ -96,59 +96,44 @@ export type DrawerMenu = {
   path: string;
   icon: IconName;
   external?: boolean;
-  color: ColorScheme;
   hideOnVerified?: boolean;
 };
 export const drawerMenus: DrawerMenu[] = [
   {
-    label: "Verify now",
-    path: menus.verification,
+    label: drawerScreens[1].drawerLabel,
+    path: drawerScreens[1].name,
     icon: "checkmark-circle-outline",
-    color: "warning",
     hideOnVerified: true,
   },
   {
-    label: "My profile",
-    path: menus.userProfile,
+    label: drawerScreens[2].drawerLabel,
+    path: drawerScreens[2].name,
     icon: "person-outline",
-    color: "primarymain",
   },
   {
-    label: "Ticket",
-    path: menus.ticket,
+    label: drawerScreens[3].drawerLabel,
+    path: drawerScreens[3].name,
     icon: "ticket-outline",
-    color: "primarymain",
   },
   {
-    label: "Deposit",
-    path: menus.deposit,
+    label: drawerScreens[4].drawerLabel,
+    path: drawerScreens[4].name,
     icon: "cash-outline",
-    color: "primarydark",
   },
   {
-    label: "Wallet",
-    path: menus.wallet,
+    label: drawerScreens[5].drawerLabel,
+    path: drawerScreens[5].name,
     icon: "wallet-outline",
-    color: "primarydark",
   },
   {
-    label: "Transactions History",
-    path: menus["transaction-history"],
+    label: drawerScreens[6].drawerLabel,
+    path: drawerScreens[6].name,
     icon: "receipt-outline",
-    color: "primarydark",
   },
   {
-    label: "Join Telegram",
-    path: "https://t.me/joinchat/AAAAAEc-5_45Y095",
-    icon: "logo-tableau",
-    external: true,
-    color: "info",
-  },
-  {
-    label: "Live support",
-    path: menus["live-support"],
+    label: drawerScreens[7].drawerLabel,
+    path: drawerScreens[7].name,
     icon: "chatbox-ellipses-outline",
-    color: "info",
   },
 ];
 

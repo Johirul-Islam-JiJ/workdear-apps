@@ -1,7 +1,7 @@
 import { drawerMenus } from "@/_mock/menus";
 import Button from "@/components/libs/Button";
-import IconButton from "@/components/libs/IconButton";
 import { useAppSelector } from "@/hooks/redux";
+import { Ionicons } from "@expo/vector-icons";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -14,6 +14,15 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
   const { user } = useAppSelector((state) => state.user);
   const isVerified = user?.is_verified;
 
+  const extraMenus = [
+    {
+      label: "Join Telegram",
+      path: "https://t.me/joinchat/AAAAAEc-5_45Y095",
+      icon: "logo-tableau",
+      external: true,
+    },
+  ];
+
   return (
     <View style={style.quickActionsSection}>
       {drawerMenus.map((menu, index) => {
@@ -25,8 +34,9 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
             endIcon="chevron-forward"
             variant="text"
             color="black"
-            startIcon={<IconButton icon={menu.icon} size="md" color="black" />}
+            startIcon={<Ionicons name={menu.icon} size={24} color="black" />}
             style={{ justifyContent: "space-between" }}
+            onPress={() => navigation.navigate(menu.path)}
           />
         );
       })}

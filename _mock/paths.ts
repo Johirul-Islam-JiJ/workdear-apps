@@ -1,6 +1,15 @@
 export const menus = {
+  // drawer menus
+  verification: "verification",
+  ticket: "ticket",
+  userProfile: "user-profile",
+  wallet: "wallet",
+  deposit: "deposit",
+  "transaction-history": "/transaction-history",
+  "live-support": "live-support",
+
+  //more menus
   home: "/",
-  verification: "/verification",
   jobs: "/jobs",
   premium: "/premium",
   postJob: "/post-jobs",
@@ -8,21 +17,13 @@ export const menus = {
   acceptedTask: "/my-works/accepted-task",
   myJobs: "/my-jobs",
   notification: "/notification",
-  deposit: "/deposit",
   shareAndEarn: "/share",
-  "deposit-history": "/history/deposit-history",
-  "withdraw-history": "/history/withdraw-history",
   "add-new-ads": "/add-new-ads",
   history: "/history",
-  ticket: "/ticket",
   topJobPoster: "/top-job-poster",
   topReffer: "/top-reffer",
   topWorkers: "/top-workers",
   bestUsers: "/top-users",
-  userProfile: "/user-profile",
-  wallet: "/wallet",
   playandearn: "/play-and-earn",
-  "live-support": "/live-support",
   "join-telegram": "/join-telegram",
-  "transaction-history": "/transaction-history",
 };
