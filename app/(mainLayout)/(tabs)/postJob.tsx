@@ -11,7 +11,7 @@ const PostJobScreen = () => {
 
   return (
     <ThemedView
-      color="lightGray"
+      color="background"
       style={{
         flex: 1,
         paddingHorizontal: 10,

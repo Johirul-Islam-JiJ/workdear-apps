@@ -4,7 +4,7 @@ import React from "react";
 
 const MyWorkScreen = () => {
   return (
-    <ThemedView>
+    <ThemedView color="background" style={{ flex: 1 }}>
       <ThemedText>My Work</ThemedText>
     </ThemedView>
   );

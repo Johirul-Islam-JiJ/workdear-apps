@@ -4,7 +4,7 @@ import React from "react";
 
 const MoreScreen = () => {
   return (
-    <ThemedView>
+    <ThemedView color="background" style={{ flex: 1 }}>
       <ThemedText>More</ThemedText>
     </ThemedView>
   );
