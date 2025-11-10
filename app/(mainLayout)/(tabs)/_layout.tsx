@@ -1,86 +1,38 @@
-import NavBar from "@/components/common/NavBar";
-import { ThemedView } from "@/components/libs/ThemedView";
+import { tabScreens } from "@/_mock/screens";
+import ScreenHeader from "@/components/common/ScreenHeader";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import Entypo from "@expo/vector-icons/Entypo";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Animated, Platform, StyleProp, ViewStyle } from "react-native";
 
 export default function TabLayout() {
   const tabActiveColor = useThemeColor("primarydark");
+  const tabBarStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> =
+    Platform.select({
+      ios: {
+        position: "absolute",
+      },
+      default: {},
+    });
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: tabActiveColor,
-        tabBarStyle: Platform.select({
-          ios: {
-            position: "absolute",
-          },
-          default: {},
-        }),
-        header: () => (
-          <>
-            <ThemedView color="primarydark" style={{ height: 35 }} />
-            <NavBar />
-          </>
-        ),
+        tabBarStyle: tabBarStyle,
+        header: ScreenHeader,
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <Entypo name="home" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="jobs"
-        options={{
-          title: "Find Job",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="credit-card-search"
-              size={26}
-              color={color}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="postJob"
-        options={{
-          title: "Post Job",
-          tabBarIcon: ({ color }) => (
-            <Entypo name="circle-with-plus" size={30} color={color} />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="myWork"
-        options={{
-          title: "My Work",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="list-alt" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="more"
-        options={{
-          title: "More",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="more" size={24} color={color} />
-          ),
-        }}
-      />
+      {tabScreens.map(({ id, name, title, Icon }) => (
+        <Tabs.Screen
+          key={id}
+          name={name}
+          options={{
+            title: title,
+            tabBarIcon: ({ color }) => <Icon color={color} />,
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
