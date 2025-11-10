@@ -4,7 +4,7 @@ import { ThemedView } from "./ThemedView";
 const Divider = () => {
   return (
     <ThemedView
-      color="border"
+      color="gray.400"
       style={{
         height: 1,
       }}

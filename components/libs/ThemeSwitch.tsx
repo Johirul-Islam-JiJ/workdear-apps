@@ -15,8 +15,9 @@ const ThemeSwitch = () => {
   const value = theme === "dark";
 
   const [isEnabled, setIsEnabled] = useState(value || false);
-  const darkColor = useThemeColor("primarydarker");
   const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
+  const darkColor = useThemeColor("primarydarker");
+  const backgroundColor = useThemeColor("gray.400");
 
   const toggleTheme = () => {
     const currentScheme = Appearance.getColorScheme();
@@ -40,7 +41,10 @@ const ThemeSwitch = () => {
   });
 
   return (
-    <TouchableOpacity onPress={toggleSwitch} style={styles.switchContainer}>
+    <TouchableOpacity
+      onPress={toggleSwitch}
+      style={[styles.switchContainer, { backgroundColor }]}
+    >
       <Animated.View
         style={[
           styles.thumb,
@@ -66,7 +70,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 20,
     borderRadius: 15,
-    backgroundColor: "#E0E0E0",
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",

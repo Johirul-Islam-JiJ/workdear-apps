@@ -22,10 +22,10 @@ interface DrawerQuickActionsProps {
 export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
   const { user } = useAppSelector((state) => state.user);
   const isVerified = user?.is_verified;
-  const [value, setValue] = React.useState(false);
   const darkColor = useThemeColor("primarydarker");
   const gray = useThemeColor("gray.700");
   const theme = useColorScheme() ?? "light";
+  const textColor = useThemeColor("text");
 
   return (
     <View style={style.quickActionsSection}>
@@ -38,8 +38,8 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
               title={label}
               endIcon="chevron-forward"
               variant="text"
-              color="black"
-              startIcon={<Icon size={24} color="black" />}
+              color="text"
+              startIcon={<Icon size={24} color={textColor} />}
               style={{ justifyContent: "space-between" }}
               onPress={() => navigation.navigate(path)}
             />
@@ -51,22 +51,22 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
         <ExternalLink href="https://t.me/joinchat/AAAAAEc-5_45Y095">
           <View style={style.telegram}>
             <View style={style.linkLabel}>
-              <FontAwesome5 name="telegram-plane" size={24} color={gray} />
-              <ThemedText color="black" variant="button">
+              <FontAwesome5 name="telegram-plane" size={22} color={textColor} />
+              <ThemedText color="text" variant="button">
                 Join telegram
               </ThemedText>
             </View>
-            <Ionicons name="chevron-forward" size={24} color="black" />
+            <Ionicons name="chevron-forward" size={18} color={textColor} />
           </View>
         </ExternalLink>
         <Button
           title="Theme mode"
           endIcon={<ThemeSwitch />}
           variant="text"
-          color="black"
+          color="text"
           startIcon={
             theme === "dark" ? (
-              <Entypo name="light-down" size={22} color="black" />
+              <Entypo name="light-down" size={26} color="white" />
             ) : (
               <MaterialIcons name="dark-mode" size={20} color={darkColor} />
             )

@@ -1,3 +1,4 @@
+import { useThemeColor } from "@/hooks/useThemeColor";
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
@@ -9,9 +10,10 @@ import DrawerMenus from "./drawer/DrawerMenus";
 import DrawerProfile from "./drawer/DrawerProfile";
 
 function DrawerContent(props: DrawerContentComponentProps) {
+  const backgroundColor = useThemeColor("background");
   return (
     <DrawerContentScrollView
-      style={style.container}
+      style={[style.container, { backgroundColor }]}
       contentContainerStyle={style.contentContainer}
     >
       <View style={{ flex: 1 }}>

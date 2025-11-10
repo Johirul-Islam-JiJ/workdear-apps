@@ -40,7 +40,8 @@ export default function DrawerFooter() {
       {/* App Version */}
       <ThemedText
         variant="small"
-        color="gray.700"
+        color="gray.600"
+        darkColor="gray.400"
         style={{ textAlign: "center", marginBottom: 5 }}
       >
         VERSION: 1.0.0

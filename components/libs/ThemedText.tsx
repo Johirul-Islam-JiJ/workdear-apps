@@ -1,6 +1,6 @@
 import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { StyleSheet, Text, TextProps } from "react-native";
+import { StyleSheet, Text, TextProps, useColorScheme } from "react-native";
 
 export type TextVariant =
   | "h1"
@@ -19,16 +19,23 @@ interface ThemedTextProps extends TextProps {
   color?: ColorScheme;
   variant?: TextVariant;
   underline?: boolean;
+  darkColor?: ColorScheme;
 }
 
 export const ThemedText: React.FC<ThemedTextProps> = ({
   style,
   color = "text",
+  darkColor = null,
   variant = "body",
   underline = false,
   ...rest
 }) => {
-  const textColor = useThemeColor(variant === "link" ? "primarydark" : color);
+  const theme = useColorScheme() ?? "light";
+  const dark = theme === "dark";
+  const themeTextColor = darkColor && dark ? darkColor : color;
+  const textColor = useThemeColor(
+    variant === "link" ? "primarydark" : themeTextColor
+  );
 
   const variantStyles: Record<TextVariant, object> = {
     h1: styles.H1,
