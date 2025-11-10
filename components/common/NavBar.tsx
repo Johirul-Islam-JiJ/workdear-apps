@@ -48,7 +48,7 @@ const NavBar = () => {
 const styles = StyleSheet.create({
   navBar: {
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 10,
     zIndex: 2,
     flexDirection: "row",
     justifyContent: "space-between",

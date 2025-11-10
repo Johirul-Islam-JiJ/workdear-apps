@@ -98,7 +98,8 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
 const style = StyleSheet.create({
   profileContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 20,
+    paddingBottom: 20,
+    paddingTop: 35,
     gap: 12,
     borderTopEndRadius: 15,
   },

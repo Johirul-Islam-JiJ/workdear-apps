@@ -9,7 +9,7 @@ export default function Layout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         screenOptions={{
-          drawerHideStatusBarOnOpen: true,
+          drawerHideStatusBarOnOpen: false,
           header: ScreenHeader,
         }}
         drawerContent={(props) => <DrawerContent {...props} />}
