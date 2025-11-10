@@ -37,7 +37,7 @@ const ThemeSwitch = () => {
 
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 20],
+    outputRange: [0, 16],
   });
 
   return (

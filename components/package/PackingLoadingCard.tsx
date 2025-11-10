@@ -1,10 +1,10 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing } from "react-native";
+import { Animated, Easing, View, ViewStyle } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 
 const PackageLoadingCard = () => {
-  const placeHolderColor = useThemeColor("placeHolder");
+  const placeHolderColor = useThemeColor("placeholder");
   const pulseAnim = useRef(new Animated.Value(0.3)).current;
 
   useEffect(() => {
@@ -26,21 +26,20 @@ const PackageLoadingCard = () => {
     ).start();
   }, []);
 
+  const container: ViewStyle = {
+    paddingVertical: 15,
+    paddingHorizontal: 12,
+    gap: 15,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  };
+
   return (
-    <ThemedView
-      color="white"
-      style={{
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        gap: 10,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
-    >
+    <ThemedView color="card" style={container}>
       <Animated.View
         style={{
           height: 30,
@@ -62,17 +61,20 @@ const PackageLoadingCard = () => {
         }}
       />
 
-      {[...Array(5)].map((_, i) => (
-        <Animated.View
-          key={i}
-          style={{
-            height: 10,
-            borderRadius: 5,
-            backgroundColor: placeHolderColor,
-            opacity: pulseAnim,
-          }}
-        />
-      ))}
+      <View style={{ gap: 8 }}>
+        {[...Array(5)].map((_, i) => (
+          <Animated.View
+            key={i}
+            style={{
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: placeHolderColor,
+              opacity: pulseAnim,
+            }}
+          />
+        ))}
+      </View>
+
       <Animated.View
         style={{
           height: 30,
