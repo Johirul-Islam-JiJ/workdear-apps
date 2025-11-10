@@ -2,7 +2,7 @@ import Badge from "@/components/libs/Badge";
 import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Image } from "expo-image";
 import React from "react";
@@ -16,7 +16,6 @@ interface DrawerProfileProps {
 
 export default function DrawerProfile({ navigation }: DrawerProfileProps) {
   const { user } = useAppSelector((state) => state.user);
-  const primaryColor = useThemeColor("primarylight");
   const warningColor = useThemeColor("warning");
   const borderColor = useThemeColor("border");
 
@@ -36,20 +35,14 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
             contentFit="cover"
             source={source}
           />
-          {/* Verified Badge */}
-          {isVerified && !isPremium && (
-            <View style={[style.badge, style.verifiedBadge]}>
-              <Ionicons
-                name="checkmark-circle"
-                size={18}
-                color={primaryColor}
-              />
-            </View>
-          )}
           {/* Premium Badge */}
-          {isPremium && (
-            <View style={[style.badge, style.premiumBadge]}>
-              <Ionicons name="star" size={16} color={warningColor} />
+          {!isPremium && (
+            <View style={[style.badge]}>
+              <MaterialCommunityIcons
+                name="crown-circle"
+                size={20}
+                color={warningColor}
+              />
             </View>
           )}
         </View>
@@ -121,7 +114,6 @@ const style = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 30,
-    backgroundColor: "#ffffff20",
     borderWidth: 2,
     borderColor: "#ffffff30",
   },
@@ -129,18 +121,6 @@ const style = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#ffffff",
     borderRadius: 12,
-    padding: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  verifiedBadge: {
-    bottom: -2,
-    right: -2,
-  },
-  premiumBadge: {
     top: -2,
     right: -2,
   },
@@ -155,7 +135,6 @@ const style = StyleSheet.create({
     gap: 6,
     flexWrap: "wrap",
   },
-
   balanceContainer: {
     borderRadius: 10,
     padding: 10,
