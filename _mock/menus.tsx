@@ -1,8 +1,59 @@
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { menus } from "./paths";
 import { drawerScreens } from "./screens";
 
-type IconName = keyof typeof Ionicons.glyphMap;
+export const drawerMenus = [
+  {
+    label: drawerScreens[1].drawerLabel,
+    path: drawerScreens[1].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="checkmark-circle-outline" size={size} color={color} />
+    ),
+    hideOnVerified: true,
+  },
+  {
+    label: drawerScreens[2].drawerLabel,
+    path: drawerScreens[2].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <FontAwesome name="user-o" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[3].drawerLabel,
+    path: drawerScreens[3].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="ticket-outline" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[4].drawerLabel,
+    path: drawerScreens[4].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="cash-outline" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[5].drawerLabel,
+    path: drawerScreens[5].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="wallet-outline" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[6].drawerLabel,
+    path: drawerScreens[6].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="receipt-outline" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[7].drawerLabel,
+    path: drawerScreens[7].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="chatbox-ellipses-outline" size={size} color={color} />
+    ),
+  },
+];
 
 export const dashboardMenuItems = [
   {
@@ -88,52 +139,6 @@ export const dashboardMenuItems = [
     label: "Top users",
     path: menus.bestUsers,
     external: false,
-  },
-];
-
-export type DrawerMenu = {
-  label: string;
-  path: string;
-  icon: IconName;
-  external?: boolean;
-  hideOnVerified?: boolean;
-};
-export const drawerMenus: DrawerMenu[] = [
-  {
-    label: drawerScreens[1].drawerLabel,
-    path: drawerScreens[1].name,
-    icon: "checkmark-circle-outline",
-    hideOnVerified: true,
-  },
-  {
-    label: drawerScreens[2].drawerLabel,
-    path: drawerScreens[2].name,
-    icon: "person-outline",
-  },
-  {
-    label: drawerScreens[3].drawerLabel,
-    path: drawerScreens[3].name,
-    icon: "ticket-outline",
-  },
-  {
-    label: drawerScreens[4].drawerLabel,
-    path: drawerScreens[4].name,
-    icon: "cash-outline",
-  },
-  {
-    label: drawerScreens[5].drawerLabel,
-    path: drawerScreens[5].name,
-    icon: "wallet-outline",
-  },
-  {
-    label: drawerScreens[6].drawerLabel,
-    path: drawerScreens[6].name,
-    icon: "receipt-outline",
-  },
-  {
-    label: drawerScreens[7].drawerLabel,
-    path: drawerScreens[7].name,
-    icon: "chatbox-ellipses-outline",
   },
 ];
 

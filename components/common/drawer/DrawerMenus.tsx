@@ -1,7 +1,6 @@
 import { drawerMenus } from "@/_mock/menus";
 import Button from "@/components/libs/Button";
 import { useAppSelector } from "@/hooks/redux";
-import { Ionicons } from "@expo/vector-icons";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -25,18 +24,18 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
 
   return (
     <View style={style.quickActionsSection}>
-      {drawerMenus.map((menu, index) => {
-        if (menu.hideOnVerified && isVerified) return null;
+      {drawerMenus.map(({ hideOnVerified, Icon, label, path }, index) => {
+        if (hideOnVerified && isVerified) return null;
         return (
           <Button
             key={index}
-            title={menu.label}
+            title={label}
             endIcon="chevron-forward"
             variant="text"
             color="black"
-            startIcon={<Ionicons name={menu.icon} size={24} color="black" />}
+            startIcon={<Icon size={24} color="black" />}
             style={{ justifyContent: "space-between" }}
-            onPress={() => navigation.navigate(menu.path)}
+            onPress={() => navigation.navigate(path)}
           />
         );
       })}
