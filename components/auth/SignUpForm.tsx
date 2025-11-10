@@ -221,6 +221,7 @@ const SignUpForm = () => {
         )}
 
         <Button
+          style={{ marginTop: 15 }}
           onPress={handleSubmit(onSubmit)}
           loading={isLoading}
           title="Sign Up"

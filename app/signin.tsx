@@ -5,7 +5,7 @@ import React from "react";
 
 const SignIn = () => {
   return (
-    <ThemedView style={{ flex: 1 }}>
+    <ThemedView color="card" style={{ flex: 1 }}>
       <Header
         subTitle="You have been missed, Good to see you again!"
         title="Welcome back"

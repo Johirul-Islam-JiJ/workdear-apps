@@ -20,6 +20,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const borderColor = useThemeColor(error ? "error" : "border");
   const placeholderColor = useThemeColor(error ? "error" : "placeholder");
+  const textColor = useThemeColor("text");
 
   return (
     <View style={{ flexGrow: 1 }}>
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = ({
               paddingLeft: startIcon ? 40 : 10,
               paddingRight: endIcon ? 40 : 10,
               fontSize: 16,
+              color: textColor,
             },
             style,
           ]}

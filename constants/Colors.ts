@@ -48,7 +48,7 @@ export const Colors = {
     infolight: "#c2edfe",
     info: "#0074fe",
 
-    border: "#e5e7eb",
+    border: "#e5e7eb6e",
     placeholder: "#9F9F9F",
 
     white: "#FFFFFF",

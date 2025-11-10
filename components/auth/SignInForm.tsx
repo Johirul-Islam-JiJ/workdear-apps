@@ -14,7 +14,6 @@ import * as yup from "yup";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -56,8 +55,7 @@ const SignInForm = () => {
   }
 
   return (
-    <ThemedView
-      color="card"
+    <View
       style={{
         flex: 1,
         justifyContent: "space-between",
@@ -125,7 +123,7 @@ const SignInForm = () => {
           </ThemedText>
         )}
         <Button
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 15 }}
           loading={isLoading}
           onPress={handleSubmit(onSubmit)}
           title="Sign in"
@@ -146,7 +144,7 @@ const SignInForm = () => {
           <ThemedText variant="link">Sign up</ThemedText>
         </Link>
       </View>
-    </ThemedView>
+    </View>
   );
 };
 

@@ -7,6 +7,7 @@ const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
   return (
     <ThemedView
       color="primarydark"
+      darkColor="primarydarker"
       style={{
         height: 200,
         justifyContent: "center",
