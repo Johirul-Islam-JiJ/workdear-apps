@@ -1,5 +1,4 @@
 import ToastNotification from "@/components/libs/ToastNotification";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import ScreenProvider from "@/providers/ScreenProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import {
@@ -9,15 +8,16 @@ import {
 } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "react-native";
 import "react-native-reanimated";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const theme = useColorScheme() ?? "light";
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
       <StoreProvider>
         <ScreenProvider />
         <ToastNotification />

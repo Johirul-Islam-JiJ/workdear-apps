@@ -12,9 +12,8 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
-import { useTheme } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, useColorScheme, View } from "react-native";
 
 interface DrawerQuickActionsProps {
   navigation: DrawerContentComponentProps["navigation"];
@@ -26,7 +25,7 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
   const [value, setValue] = React.useState(false);
   const darkColor = useThemeColor("primarydarker");
   const gray = useThemeColor("gray.700");
-  const theme = useTheme();
+  const theme = useColorScheme() ?? "light";
 
   return (
     <View style={style.quickActionsSection}>
@@ -62,11 +61,11 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
         </ExternalLink>
         <Button
           title="Theme mode"
-          endIcon={<ThemeSwitch value={value} onValueChange={setValue} />}
+          endIcon={<ThemeSwitch />}
           variant="text"
           color="black"
           startIcon={
-            theme.dark ? (
+            theme === "dark" ? (
               <Entypo name="light-down" size={22} color="black" />
             ) : (
               <MaterialIcons name="dark-mode" size={20} color={darkColor} />

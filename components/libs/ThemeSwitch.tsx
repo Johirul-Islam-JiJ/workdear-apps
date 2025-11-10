@@ -1,22 +1,32 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import React, { useRef, useState } from "react";
-import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  Appearance,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 
-type SwitchProps = {
-  value?: boolean;
-  onValueChange?: (value: boolean) => void;
-};
+const ThemeSwitch = () => {
+  const theme = useColorScheme() ?? "light";
+  const value = theme === "dark";
 
-const ThemeSwitch = ({ value, onValueChange }: SwitchProps) => {
   const [isEnabled, setIsEnabled] = useState(value || false);
   const darkColor = useThemeColor("primarydarker");
   const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
 
+  const toggleTheme = () => {
+    const currentScheme = Appearance.getColorScheme();
+    Appearance.setColorScheme(currentScheme === "dark" ? "light" : "dark");
+  };
+
   const toggleSwitch = () => {
     const newValue = !isEnabled;
     setIsEnabled(newValue);
-    onValueChange?.(newValue);
+    toggleTheme();
     Animated.timing(animatedValue, {
       toValue: newValue ? 1 : 0,
       duration: 200,
