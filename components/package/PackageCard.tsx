@@ -8,30 +8,42 @@ import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const PackageCard = ({ data }: { data: PremiumPackage }) => {
-  const iconColor = useThemeColor("primaryDarker");
+  const iconColor = useThemeColor("primarydarker");
+
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView color="card" style={styles.container}>
       {data.highlighted && (
-        <ThemedView color="primaryDarker" style={styles.highlight}>
+        <ThemedView color="primarydarker" style={styles.highlight}>
           <ThemedText
             style={{ textAlign: "center" }}
-            color="warning"
-            type="small"
+            color="white"
+            variant="small"
           >
             Popular
           </ThemedText>
         </ThemedView>
       )}
       <View style={{ alignItems: "center" }}>
-        <ThemedView color="primaryDarker" style={styles.name}>
-          <ThemedText color="white" type="defaultSemiBold">
+        <ThemedView color="primarydarker" style={styles.name}>
+          <ThemedText color="white" variant="bodySemiBold">
             {data.name}
           </ThemedText>
         </ThemedView>
-        <ThemedText color="primaryDarker" type="subtitle">
+        <ThemedText
+          color="primarydarker"
+          darkColor="primarydark"
+          variant="subtitle"
+          style={{ marginTop: 10 }}
+        >
           ${data.price}
         </ThemedText>
-        <ThemedText color="placeHolder">3 months access</ThemedText>
+        <ThemedText
+          color="gray.800"
+          darkColor="gray.300"
+          style={{ marginBottom: 5 }}
+        >
+          3 months access
+        </ThemedText>
       </View>
       {data.feature.map((item, index) => (
         <View key={index} style={styles.features}>
@@ -40,14 +52,15 @@ const PackageCard = ({ data }: { data: PremiumPackage }) => {
         </View>
       ))}
 
-      <Button title="Get started" style={{ marginTop: 10 }} />
+      <Button title="Get started" style={{ marginTop: 15 }} />
     </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
   },
   name: {
     paddingHorizontal: 20,
-    borderRadius: 100,
+    borderRadius: 5,
     paddingVertical: 2,
   },
   features: {

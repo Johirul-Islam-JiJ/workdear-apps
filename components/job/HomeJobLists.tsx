@@ -27,8 +27,10 @@ const HomeJobLists = () => {
       ) : data?.length ? (
         data?.map((job, index) => <JobCard key={index} job={job} />)
       ) : (
-        <View style={{ alignItems: "center", marginVertical: 10 }}>
-          <ThemedText color="placeholder">No job found</ThemedText>
+        <View style={{ alignItems: "center", marginVertical: 20 }}>
+          <ThemedText color="gray.800" darkColor="gray.300" variant="body">
+            No job found
+          </ThemedText>
         </View>
       )}
 

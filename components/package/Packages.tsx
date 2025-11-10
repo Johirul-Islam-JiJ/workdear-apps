@@ -6,10 +6,11 @@ import PackageLoadingCard from "./PackingLoadingCard";
 
 const Packages = () => {
   const { data: packageData, isLoading } = useGetPremiumPackagesQuery();
+  const packages = packageData?.subscription_package_list ?? [];
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText type="subtitle" color="primaryDarker">
+      <ThemedText variant="subtitle" color="primarydarker" darkColor="white">
         Unlock more with premium plans
       </ThemedText>
       {isLoading ? (
@@ -18,13 +19,13 @@ const Packages = () => {
           <PackageLoadingCard />
           <PackageLoadingCard />
         </View>
-      ) : packageData?.subscription_package_list?.length > 0 ? (
-        packageData?.subscription_package_list?.map((pack, index) => (
-          <PackageCard key={index} data={pack} />
-        ))
+      ) : packages.length ? (
+        packages?.map((pack, index) => <PackageCard key={index} data={pack} />)
       ) : (
-        <View style={{ alignItems: "center", marginVertical: 10 }}>
-          <ThemedText color="placeHolder">No package found</ThemedText>
+        <View style={{ alignItems: "center", marginVertical: 20 }}>
+          <ThemedText color="gray.800" darkColor="gray.300" variant="body">
+            No package found
+          </ThemedText>
         </View>
       )}
     </View>
