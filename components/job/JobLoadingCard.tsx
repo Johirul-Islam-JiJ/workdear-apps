@@ -4,7 +4,7 @@ import { Animated, Easing, View } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 
 const JobLoadingCard = () => {
-  const placeHolderColor = useThemeColor("placeHolder");
+  const placeHolderColor = useThemeColor("placeholder");
   const pulseAnim = useRef(new Animated.Value(0.3)).current;
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const JobLoadingCard = () => {
 
   return (
     <ThemedView
-      color="white"
+      color="card"
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
@@ -87,17 +87,6 @@ const JobLoadingCard = () => {
           ))}
         </View>
       </View>
-
-      <Animated.View
-        style={{
-          height: 50,
-          width: 50,
-          borderRadius: 25,
-          borderWidth: 10,
-          borderColor: placeHolderColor,
-          opacity: pulseAnim,
-        }}
-      />
     </ThemedView>
   );
 };

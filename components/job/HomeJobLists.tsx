@@ -9,10 +9,11 @@ import JobLoadingCard from "./JobLoadingCard";
 const HomeJobLists = () => {
   const { data: jobs, isLoading } = useGetJobsForHomeQuery();
   const navigation = useRouter();
+  const data = jobs?.data ?? [];
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText type="defaultSemiBold" color="primaryDarker">
+      <ThemedText variant="subtitle" color="primarydarker" darkColor="white">
         Latest Jobs
       </ThemedText>
       {isLoading ? (
@@ -23,15 +24,15 @@ const HomeJobLists = () => {
           <JobLoadingCard />
           <JobLoadingCard />
         </View>
-      ) : jobs?.data?.length > 0 ? (
-        jobs?.data?.map((job, index) => <JobCard key={index} job={job} />)
+      ) : data?.length ? (
+        data?.map((job, index) => <JobCard key={index} job={job} />)
       ) : (
         <View style={{ alignItems: "center", marginVertical: 10 }}>
-          <ThemedText color="placeHolder">No job found</ThemedText>
+          <ThemedText color="placeholder">No job found</ThemedText>
         </View>
       )}
 
-      {jobs?.data?.length > 0 && (
+      {data?.length && (
         <View style={{ alignItems: "center" }}>
           <Button
             onPress={() => navigation.navigate("/(mainLayout)/(tabs)/jobs")}

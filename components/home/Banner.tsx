@@ -18,19 +18,19 @@ const heroData = [
     id: 1,
     title: "Best Microjob & Freelancing Site to Make Money Online",
     buttonText: "Start earning now",
-    image: require("../../assets/images/banner-1.png"),
+    image: require("@/assets/images/banner-1.png"),
   },
   {
     id: 2,
     title: "Turn Your Skills Into Income, Join the Top Microjob Platform",
     buttonText: "Start Your First Job",
-    image: require("../../assets/images/banner-2.jpg"),
+    image: require("@/assets/images/banner-2.jpg"),
   },
   {
     id: 3,
     title: "Work Anytime, Anywhere Earn Online with Microjobs",
     buttonText: "Begin Your Journey",
-    image: require("../../assets/images/banner-3.jpg"),
+    image: require("@/assets/images/banner-3.jpg"),
   },
 ];
 
@@ -80,12 +80,11 @@ const Banner = () => {
 
         {/* slider */}
         <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
-          <ThemedText type="subtitle" color="white">
+          <ThemedText variant="subtitle" color="white">
             {heroData[currentSlide].title}
           </ThemedText>
           <Button
             title={heroData[currentSlide].buttonText}
-            color="primaryLight"
             style={{ width: 200 }}
           />
         </Animated.View>

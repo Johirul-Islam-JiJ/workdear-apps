@@ -54,7 +54,12 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
         {/* User Info */}
         <View style={style.userInfo}>
           <View style={{ gap: 2 }}>
-            <ThemedText color="white" variant="subtitle" numberOfLines={1}>
+            <ThemedText
+              color="white"
+              variant="subtitle"
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {user?.name}
             </ThemedText>
 

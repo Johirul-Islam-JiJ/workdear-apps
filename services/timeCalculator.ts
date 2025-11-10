@@ -1,25 +1,53 @@
 // calculing time how long ago the job was created
 export function timeCalculator(date: string) {
-  const today = new Date();
-  const timeDiff = Math.abs(today.getTime() - new Date(date).getTime());
-  const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  const now = new Date();
+  const target = new Date(date);
 
-  if (diffDays === 0) {
-    const diffHours = Math.ceil(timeDiff / (1000 * 3600));
-    if (diffHours === 0) {
-      const diffMinutes = Math.ceil(timeDiff / (1000 * 60));
-      if (diffMinutes === 0) {
-        const diffSeconds = Math.ceil(timeDiff / 1000);
-        return `${diffSeconds} seconds ago`;
-      } else {
-        return `${diffMinutes} minutes ago`;
-      }
-    } else {
-      return `${diffHours} hours ago`;
-    }
+  const diffMs = now.getTime() - target.getTime();
+
+  if (diffMs < 0) return "In the future";
+
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffSeconds < 60) {
+    return `${diffSeconds} second${diffSeconds !== 1 ? "s" : ""} ago`;
+  } else if (diffMinutes < 60) {
+    return `${diffMinutes} minute${diffMinutes !== 1 ? "s" : ""} ago`;
+  } else if (diffHours < 24) {
+    return `${diffHours} hour${diffHours !== 1 ? "s" : ""} ago`;
   } else if (diffDays === 1) {
     return "Yesterday";
   } else {
     return `${diffDays} days ago`;
   }
+}
+
+export function getRemainingDays(endDateStr: string) {
+  const now = new Date();
+  const endDate = new Date(endDateStr);
+  const diffTime = endDate.getTime() - now.getTime();
+
+  if (diffTime <= 0) {
+    return "0 Days 0 Hours";
+  }
+
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffHours = Math.floor(
+    (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+
+  if (diffDays === 0) {
+    return `${diffHours} Hour${diffHours !== 1 ? "s" : ""}`;
+  }
+
+  if (diffHours === 0) {
+    return `${diffDays} Day${diffDays !== 1 ? "s" : ""}`;
+  }
+
+  return `${diffDays} Day${diffDays !== 1 ? "s" : ""} ${diffHours} Hour${
+    diffHours !== 1 ? "s" : ""
+  }`;
 }
