@@ -25,14 +25,13 @@ import * as yup from "yup";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
 
 type Props = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const FinalForm = ({ step, setStep }: Props) => {
+const JobsEstimationForm = ({ step, setStep }: Props) => {
   const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
   const [createJob, { isLoading }] = useCreateJobMutation();
   const { generalData } = useAppSelector((state) => state.settings);
@@ -169,7 +168,6 @@ const FinalForm = ({ step, setStep }: Props) => {
           type: "error",
         })
       );
-      console.log(error);
     }
   }
 
@@ -202,28 +200,12 @@ const FinalForm = ({ step, setStep }: Props) => {
         <View
           style={{
             flexGrow: 1,
-            gap: 10,
+            gap: 20,
           }}
         >
-          <ThemedView
-            color="white"
-            style={{
-              gap: 10,
-              paddingVertical: 15,
-              paddingHorizontal: 10,
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
-          >
+          <View style={{ gap: 10 }}>
             <View>
-              <ThemedText type="defaultSemiBold">Worker need</ThemedText>
+              <ThemedText>Worker need</ThemedText>
               <Controller
                 name="total_workers_required"
                 control={control}
@@ -240,7 +222,7 @@ const FinalForm = ({ step, setStep }: Props) => {
             </View>
 
             <View>
-              <ThemedText type="defaultSemiBold">Each worker earn </ThemedText>
+              <ThemedText>Each worker earn </ThemedText>
               <Controller
                 name="pay_per_task"
                 control={control}
@@ -257,9 +239,7 @@ const FinalForm = ({ step, setStep }: Props) => {
             </View>
 
             <View>
-              <ThemedText type="defaultSemiBold">
-                Required Screenshot
-              </ThemedText>
+              <ThemedText>Required Screenshot</ThemedText>
               <Controller
                 name="require_screenshots"
                 control={control}
@@ -276,7 +256,7 @@ const FinalForm = ({ step, setStep }: Props) => {
             </View>
 
             <View>
-              <ThemedText type="defaultSemiBold">Estimated day</ThemedText>
+              <ThemedText>Estimated day</ThemedText>
               <Controller
                 name="estimated_day"
                 control={control}
@@ -291,7 +271,7 @@ const FinalForm = ({ step, setStep }: Props) => {
                 )}
               />
             </View>
-          </ThemedView>
+          </View>
 
           <Controller
             name="status"
@@ -311,32 +291,20 @@ const FinalForm = ({ step, setStep }: Props) => {
                     )
                   }
                 />
-                <ThemedText type="defaultSemiBold">Save as Draft</ThemedText>
+                <ThemedText>Save as Draft</ThemedText>
               </Pressable>
             )}
           />
 
-          <ThemedView
-            color="white"
-            style={{
-              padding: 10,
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-              marginTop: 15,
-            }}
-          >
+          <View>
             <ThemedText color="error">Job post fee {jobPostFee}%</ThemedText>
-            <ThemedText type="defaultSemiBold">Total Cost</ThemedText>
+            <ThemedText variant="bodySemiBold">Total Cost</ThemedText>
             <Input
               editable={false}
               value={`$${totalCost.toFixed(4)}`}
               placeholder="Enter total cost"
             />
-          </ThemedView>
+          </View>
         </View>
 
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
@@ -344,7 +312,7 @@ const FinalForm = ({ step, setStep }: Props) => {
             disabled={step === 0}
             onPress={handlePrevStep}
             title="Previews"
-            variant="Outlined"
+            variant="outlined"
             style={{ flex: 1 }}
           />
           <Button
@@ -359,4 +327,4 @@ const FinalForm = ({ step, setStep }: Props) => {
   );
 };
 
-export default FinalForm;
+export default JobsEstimationForm;

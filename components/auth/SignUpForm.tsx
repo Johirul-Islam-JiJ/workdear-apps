@@ -1,6 +1,6 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { useToast } from "@/hooks/useToast";
-import { signUpDefaultValues, SignUpSchema } from "@/schema/auth";
+import { RegisterSchema, signUpDefaultValues } from "@/schema/auth";
 import { useRegisterMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { Fontisto } from "@expo/vector-icons";
@@ -30,7 +30,7 @@ const SignUpForm = () => {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(SignUpSchema),
+    resolver: yupResolver(RegisterSchema),
     defaultValues: signUpDefaultValues,
   });
   const checkbox = watch("acceptedTerms");

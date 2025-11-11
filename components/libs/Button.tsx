@@ -35,8 +35,6 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const mainColor = useThemeColor(color);
-  const lightColor = useThemeColor("primarylight");
-  const placeholderColor = useThemeColor("placeholder");
 
   // ─── Size Config ──────────────────────────────────────────────
   const sizes = {

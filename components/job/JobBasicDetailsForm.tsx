@@ -1,6 +1,7 @@
 import { selectOptions } from "@/_mock/selectOptions";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { JobBasicDetailsSchema } from "@/schema/jobs";
 import { setJobPostFirstForm } from "@/store/slices/jobform";
 import { Entypo } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -20,15 +21,15 @@ import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { firstFormSchema } from "./types";
 
 type Props = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const FirstForm = ({ step, setStep }: Props) => {
-  const primaryDarker = useThemeColor("primaryDarker");
+const JobBasicDetailsForm = ({ step, setStep }: Props) => {
+  const primaryDark = useThemeColor("primarydark");
+  const errorColor = useThemeColor("error");
   const dispatch = useAppDispatch();
   const { jobPostFirstForm } = useAppSelector((state) => state.jobForm);
   const [image, setImage] = useState<string | null>(null);
@@ -39,7 +40,7 @@ const FirstForm = ({ step, setStep }: Props) => {
     watch,
     setValue,
   } = useForm({
-    resolver: yupResolver(firstFormSchema),
+    resolver: yupResolver(JobBasicDetailsSchema),
     defaultValues: {
       title: jobPostFirstForm.title,
       description: jobPostFirstForm.description,
@@ -79,6 +80,8 @@ const FirstForm = ({ step, setStep }: Props) => {
     setStep(step + 1);
   }
 
+  console.log(errors);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -94,9 +97,7 @@ const FirstForm = ({ step, setStep }: Props) => {
           }}
         >
           <View>
-            <ThemedText type="defaultSemiBold">
-              Write an accurate job title:
-            </ThemedText>
+            <ThemedText>Write an accurate job title:</ThemedText>
             <Controller
               name="title"
               control={control}
@@ -112,7 +113,7 @@ const FirstForm = ({ step, setStep }: Props) => {
           </View>
 
           <View>
-            <ThemedText type="defaultSemiBold">Job Description</ThemedText>
+            <ThemedText>Job Description</ThemedText>
             <Controller
               name="description"
               control={control}
@@ -132,9 +133,7 @@ const FirstForm = ({ step, setStep }: Props) => {
 
           {/* steps  */}
           <View>
-            <ThemedText type="defaultSemiBold">
-              Write specific task you need to complete:
-            </ThemedText>
+            <ThemedText>Write specific task you need to complete:</ThemedText>
             {steps.fields.map((field, index) => (
               <Controller
                 key={field.id}
@@ -166,7 +165,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                           <Ionicons
                             name="remove-circle"
                             size={24}
-                            color="#FA1E00"
+                            color={errorColor}
                           />
                         </Pressable>
                       )}
@@ -180,8 +179,10 @@ const FirstForm = ({ step, setStep }: Props) => {
                             instruction: "",
                           })
                         }
-                        title={<Entypo name="plus" size={20} color="black" />}
-                        variant="Outlined"
+                        title={
+                          <Entypo name="plus" size={20} color={primaryDark} />
+                        }
+                        variant="outlined"
                       />
                     )}
                   </View>
@@ -193,7 +194,7 @@ const FirstForm = ({ step, setStep }: Props) => {
           {/* required proof  */}
           {requiredProofs.fields.map((field, index) => (
             <View key={field.id}>
-              <ThemedText type="defaultSemiBold">
+              <ThemedText>
                 Require the proof{" "}
                 {index === 0 ? "the job was completed" : index + 1}:
               </ThemedText>
@@ -207,6 +208,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                       placeholder="Proof type"
                       value={field.value as string}
                       onSelect={field.onChange}
+                      error={errors.required_proofs?.[index]?.type?.message}
                     />
                   )}
                 />
@@ -233,7 +235,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                       />
                     )}
                   />
-                  {index === requiredProofs.fields.length - 1 && (
+                  {/* {index === requiredProofs.fields.length - 1 && (
                     <Button
                       onPress={() =>
                         requiredProofs.append({
@@ -241,21 +243,27 @@ const FirstForm = ({ step, setStep }: Props) => {
                           description: "",
                         })
                       }
-                      title={<Entypo name="plus" size={20} color="black" />}
-                      variant="Outlined"
+                      title={
+                        <Entypo name="plus" size={20} color={primaryDark} />
+                      }
+                      variant="outlined"
                     />
-                  )}
+                  )} */}
                 </View>
 
                 {/* remove button */}
-                {index !== 0 && (
+                {/* {index !== 0 && (
                   <Pressable
                     onPress={() => requiredProofs.remove(index)}
                     style={{ position: "absolute", right: -2, top: -10 }}
                   >
-                    <Ionicons name="remove-circle" size={24} color="#FA1E00" />
+                    <Ionicons
+                      name="remove-circle"
+                      size={24}
+                      color={errorColor}
+                    />
                   </Pressable>
-                )}
+                )} */}
               </View>
             </View>
           ))}
@@ -263,7 +271,7 @@ const FirstForm = ({ step, setStep }: Props) => {
           {/* question condition  */}
           {questionCondition.fields.map((field, index) => (
             <View key={field.id}>
-              <ThemedText type="defaultSemiBold">
+              <ThemedText>
                 {index === 0
                   ? "Require the answer of question:"
                   : `Question ${index + 1}:`}
@@ -358,7 +366,7 @@ const FirstForm = ({ step, setStep }: Props) => {
                     )}
                   />
                   {/* add another */}
-                  {index === questionCondition.fields.length - 1 && (
+                  {/* {index === questionCondition.fields.length - 1 && (
                     <Button
                       onPress={() =>
                         questionCondition.append({
@@ -371,37 +379,50 @@ const FirstForm = ({ step, setStep }: Props) => {
                           },
                         })
                       }
-                      title={<Entypo name="plus" size={20} color="black" />}
-                      variant="Outlined"
+                      title={
+                        <Entypo name="plus" size={20} color={primaryDark} />
+                      }
+                      variant="outlined"
                     />
-                  )}
+                  )} */}
                 </View>
 
                 {/* remove button */}
-                {index !== 0 && (
+                {/* {index !== 0 && (
                   <Pressable
                     onPress={() => questionCondition.remove(index)}
                     style={{ position: "absolute", right: -2, top: -10 }}
                   >
-                    <Ionicons name="remove-circle" size={24} color="#FA1E00" />
+                    <Ionicons
+                      name="remove-circle"
+                      size={24}
+                      color={errorColor}
+                    />
                   </Pressable>
-                )}
+                )} */}
               </View>
             </View>
           ))}
           <View>
-            <ThemedText type="defaultSemiBold">Thumbnail Image:</ThemedText>
+            <ThemedText style={{ marginBottom: 5 }}>
+              Thumbnail Image:
+            </ThemedText>
             <Button
-              variant="Outlined"
+              variant="outlined"
               onPress={pickImage}
+              color={errors.thumbnail?.message ? "error" : undefined}
               title={
                 <View style={{ flexDirection: "row", columnGap: 4 }}>
                   <Ionicons
                     name="document-attach"
                     size={20}
-                    color={primaryDarker}
+                    color={errors.thumbnail?.message ? errorColor : primaryDark}
                   />
-                  <ThemedText color="primaryDarker">Select Image</ThemedText>
+                  <ThemedText
+                    color={errors.thumbnail?.message ? "error" : "primarydark"}
+                  >
+                    Select Image
+                  </ThemedText>
                 </View>
               }
             />
@@ -420,12 +441,19 @@ const FirstForm = ({ step, setStep }: Props) => {
               />
             ) : null}
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 8,
+              marginTop: 10,
+            }}
+          >
             <Button
               disabled={step === 0}
               onPress={() => setStep(step - 1)}
               title="Previews"
-              variant="Outlined"
+              variant="outlined"
               style={{ flex: 1 }}
             />
             <Button
@@ -441,4 +469,4 @@ const FirstForm = ({ step, setStep }: Props) => {
   );
 };
 
-export default FirstForm;
+export default JobBasicDetailsForm;

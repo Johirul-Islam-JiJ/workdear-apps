@@ -21,8 +21,6 @@ const SelectSubCategoryModal = ({
   selected,
   setSelected,
 }: Props) => {
-  console.log("selected", selected);
-
   return (
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
@@ -72,10 +70,7 @@ const SelectSubCategoryModal = ({
         }}
       >
         <Button
-          onPress={() => {
-            setSelected({ id: null, price: null });
-            setVisible(0);
-          }}
+          onPress={() => setVisible(0)}
           title="Cancel"
           variant="contained"
         />
