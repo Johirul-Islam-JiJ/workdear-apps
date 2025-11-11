@@ -1,5 +1,6 @@
 import Banner from "@/components/home/Banner";
 import HomeJobLists from "@/components/home/HomeJobLists";
+import HowItWorks from "@/components/home/HowItWorks";
 import Services from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
 import { ThemedView } from "@/components/libs/ThemedView";
@@ -19,9 +20,10 @@ const HomeScreen = () => {
       <Banner />
       <ThemedView color="background" style={wrapper}>
         <Statistics />
-        <Services />
         <HomeJobLists />
+        <Services />
         <Packages />
+        <HowItWorks />
       </ThemedView>
     </ScrollView>
   );
