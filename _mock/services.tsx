@@ -1,11 +1,23 @@
-import { FaRegMoneyBillAlt } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa6";
-import { MdWorkHistory } from "react-icons/md";
+import {
+  FontAwesome6,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 
-export const services = [
+export type Service = {
+  id: number;
+  Icon: ({ color, size }: { color: string; size: number }) => React.JSX.Element;
+  title: string;
+  description: string;
+  features: string[];
+};
+
+export const services: Service[] = [
   {
     id: 1,
-    icon: MdWorkHistory,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <MaterialIcons name="work-history" size={size} color={color} />
+    ),
     title: "Find Work",
     description:
       "Access thousands of high-quality projects from verified clients worldwide",
@@ -20,7 +32,9 @@ export const services = [
   },
   {
     id: 2,
-    icon: FaCheck,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <FontAwesome6 name="check" size={size} color={color} />
+    ),
     title: "Post Jobs",
     description:
       "Connect with skilled professionals and get your projects completed efficiently",
@@ -35,7 +49,9 @@ export const services = [
   },
   {
     id: 3,
-    icon: FaRegMoneyBillAlt,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <MaterialCommunityIcons name="cash-lock-open" size={size} color={color} />
+    ),
     title: "Secure Payments",
     description:
       "Enjoy fast, secure, and reliable payment processing with multiple options",

@@ -1,5 +1,6 @@
 import Banner from "@/components/home/Banner";
 import HomeJobLists from "@/components/home/HomeJobLists";
+import Services from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Packages from "@/components/package/Packages";
@@ -11,13 +12,14 @@ const HomeScreen = () => {
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 15,
-    rowGap: 15,
+    rowGap: 20,
   };
   return (
     <ScrollView style={{ flex: 1, position: "relative" }}>
       <Banner />
       <ThemedView color="background" style={wrapper}>
         <Statistics />
+        <Services />
         <HomeJobLists />
         <Packages />
       </ThemedView>
