@@ -4,6 +4,7 @@ import HomeJobLists from "@/components/home/HomeJobLists";
 import HowItWorks from "@/components/home/HowItWorks";
 import Services from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
+import Testimonials from "@/components/home/Testimonials";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Packages from "@/components/package/Packages";
 import React from "react";
@@ -26,6 +27,7 @@ const HomeScreen = () => {
         <Packages />
         <HowItWorks />
         <FAQ />
+        <Testimonials />
       </ThemedView>
     </ScrollView>
   );
