@@ -21,14 +21,17 @@ const SelectSubCategoryModal = ({
   selected,
   setSelected,
 }: Props) => {
+  console.log("selected", selected);
+
   return (
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
-        type="subtitle"
-        color="primaryDarker"
+        variant="subtitle"
+        color="primarydarker"
+        darkColor="white"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
-        Select Category
+        Select Sub Category
       </ThemedText>
 
       <ScrollView style={{ maxHeight: 400 }}>
@@ -53,7 +56,7 @@ const SelectSubCategoryModal = ({
                 setVisible(0);
               }}
               title={item.sub_category_name}
-              variant={selected.id === item.id ? "Contained" : "Outlined"}
+              variant={selected.id === item.id ? "contained" : "outlined"}
             />
           ))}
         </View>
@@ -74,8 +77,7 @@ const SelectSubCategoryModal = ({
             setVisible(0);
           }}
           title="Cancel"
-          variant="Contained"
-          color="error"
+          variant="contained"
         />
       </View>
     </Modal>

@@ -53,41 +53,55 @@ const SelectCategory = ({ step, setStep }: Props) => {
         flex: 1,
       }}
     >
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ gap: 7 }}>
-          <ThemedText type="defaultSemiBold" color="primaryDarker">
-            Please select a category to continue
-          </ThemedText>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          gap: 7,
+        }}
+        style={{ flex: 1 }}
+      >
+        <ThemedText
+          variant="bodySemiBold"
+          color="primarydarker"
+          darkColor="white"
+          style={{ marginBottom: 10 }}
+        >
+          Please select a category to continue
+        </ThemedText>
 
-          {isLoading ? (
-            <ButtonCardLoader />
-          ) : categories?.data?.length ? (
-            categories?.data.map((category) => (
-              <Category
-                key={category.id}
-                category={category}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                selectedSubCategory={selectedSubCategory}
-                setSelectedSubCategory={setSelectedSubCategory}
-              />
-            ))
-          ) : (
-            <ThemedText
-              color="placeHolder"
-              style={{ textAlign: "center", marginVertical: 10 }}
-            >
+        {isLoading ? (
+          <ButtonCardLoader />
+        ) : categories?.data?.length ? (
+          categories?.data.map((category) => (
+            <Category
+              key={category.id}
+              category={category}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedSubCategory={selectedSubCategory}
+              setSelectedSubCategory={setSelectedSubCategory}
+            />
+          ))
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ThemedText color="gray.800" darkColor="gray.300">
               Category not found
             </ThemedText>
-          )}
-        </View>
+          </View>
+        )}
       </ScrollView>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <Button
           disabled={step === 0}
           onPress={() => setStep(step - 1)}
           title="Previews"
-          variant="Outlined"
+          variant="outlined"
           style={{ flex: 1 }}
         />
         <Button
@@ -120,25 +134,34 @@ function Category({
 }: CategoryProp) {
   const [visible, setVisible] = useState(0);
 
+  function handleSelect() {
+    setSelectedCategory(category.id);
+    setVisible(1);
+    if (category.id !== selectedCategory) {
+      setSelectedSubCategory({
+        id: null,
+        price: null,
+      });
+    }
+  }
+
   return (
     <>
       <Button
-        onPress={() => {
-          setSelectedCategory(category.id);
-          setSelectedSubCategory({ id: null, price: null });
-          setVisible(1);
-        }}
+        onPress={handleSelect}
         title={category.category_name}
-        variant={category.id === selectedCategory ? "Contained" : "Outlined"}
+        variant={category.id === selectedCategory ? "contained" : "outlined"}
       />
 
-      <SelectSubCategoryModal
-        category={category.sub_categories}
-        selected={selectedSubCategory}
-        setSelected={setSelectedSubCategory}
-        visible={visible}
-        setVisible={setVisible}
-      />
+      {!!visible && (
+        <SelectSubCategoryModal
+          category={category.sub_categories}
+          selected={selectedSubCategory}
+          setSelected={setSelectedSubCategory}
+          visible={visible}
+          setVisible={setVisible}
+        />
+      )}
     </>
   );
 }

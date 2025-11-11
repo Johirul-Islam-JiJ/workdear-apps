@@ -56,6 +56,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
           variant="bodySemiBold"
           color="primarydarker"
           darkColor="white"
+          style={{ marginBottom: 10 }}
         >
           Select country you want to hide from the selected zone (optional)
         </ThemedText>
