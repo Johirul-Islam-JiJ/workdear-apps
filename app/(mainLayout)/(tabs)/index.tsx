@@ -1,5 +1,6 @@
 import Banner from "@/components/home/Banner";
-import HomeJobLists from "@/components/job/HomeJobLists";
+import HomeJobLists from "@/components/home/HomeJobLists";
+import Statistics from "@/components/home/Statistics";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Packages from "@/components/package/Packages";
 import React from "react";
@@ -16,6 +17,7 @@ const HomeScreen = () => {
     <ScrollView style={{ flex: 1, position: "relative" }}>
       <Banner />
       <ThemedView color="background" style={wrapper}>
+        <Statistics />
         <HomeJobLists />
         <Packages />
       </ThemedView>

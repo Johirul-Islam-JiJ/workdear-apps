@@ -1,10 +1,10 @@
 import { useGetJobsForHomeQuery } from "@/store/features/jobs";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
+import JobCard from "../job/JobCard";
+import JobLoadingCard from "../job/JobLoadingCard";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
-import JobCard from "./JobCard";
-import JobLoadingCard from "./JobLoadingCard";
 
 const HomeJobLists = () => {
   const { data: jobs, isLoading } = useGetJobsForHomeQuery();
