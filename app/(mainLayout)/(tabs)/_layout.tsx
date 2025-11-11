@@ -1,4 +1,5 @@
 import { tabScreens } from "@/_mock/screens";
+import ScreenHeader from "@/components/common/ScreenHeader";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Tabs } from "expo-router";
 import React from "react";
@@ -36,7 +37,9 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: tabActiveColor,
         tabBarStyle: tabBarStyle,
-        headerShown: false,
+        header: (props) => (
+          <ScreenHeader route={props.options.title as string} />
+        ),
       }}
     >
       {tabScreens.map(({ id, name, title, Icon }) => (

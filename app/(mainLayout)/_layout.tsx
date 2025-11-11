@@ -10,12 +10,19 @@ export default function Layout() {
       <Drawer
         screenOptions={{
           drawerHideStatusBarOnOpen: false,
-          header: ScreenHeader,
+          header: (props) =>
+            props.route.name !== "(tabs)" && (
+              <ScreenHeader route={props.options.drawerLabel as string} />
+            ),
         }}
         drawerContent={(props) => <DrawerContent {...props} />}
       >
         {drawerScreens.map(({ id, name, drawerLabel }) => (
-          <Drawer.Screen key={id} name={name} options={{ drawerLabel }} />
+          <Drawer.Screen
+            key={id}
+            name={name}
+            options={{ drawerLabel: drawerLabel }}
+          />
         ))}
       </Drawer>
     </GestureHandlerRootView>

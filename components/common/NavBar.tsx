@@ -8,9 +8,10 @@ import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
+import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const NavBar = () => {
+const NavBar = ({ route }: { route: string }) => {
   const { user } = useAppSelector((state) => state.user);
   const { data: notificationCount } = useGetNotificationCountQuery();
   const navigation = useNavigation();
@@ -31,6 +32,10 @@ const NavBar = () => {
       <Pressable onPress={openDrawer}>
         <FontAwesome6 name="bars" size={22} color="white" />
       </Pressable>
+
+      <ThemedText color="white" style={{ fontSize: 18, fontWeight: "bold" }}>
+        {route}
+      </ThemedText>
 
       <View style={styles.wrapper}>
         <View style={{ position: "relative" }}>
