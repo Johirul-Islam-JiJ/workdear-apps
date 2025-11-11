@@ -37,7 +37,7 @@ const ThemeSwitch = () => {
 
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 16],
+    outputRange: [0, 25],
   });
 
   return (
@@ -67,7 +67,7 @@ const ThemeSwitch = () => {
 
 const styles = StyleSheet.create({
   switchContainer: {
-    width: 40,
+    width: 45,
     height: 20,
     borderRadius: 15,
     justifyContent: "center",

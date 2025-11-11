@@ -19,13 +19,15 @@ const SelectCountry = ({ step, setStep }: Props) => {
   const { data: countryData, isLoading } = useGetcontinentQuery();
   const [selected, setSelected] = useState<number[]>([]);
   const dispatch = useAppDispatch();
+  const countries = countryData?.data ?? [];
 
   useEffect(() => {
-    if (!countryData?.data) return;
+    if (countries.length === 0) return;
+
     if (jobPostFinalForm.country_ids.length > 0) {
       setSelected(jobPostFinalForm.country_ids);
     } else {
-      const countryIds = countryData?.data
+      const countryIds = countries
         .map((c) => c.countries.map((c) => c.id))
         .flat();
       if (countryIds) {
@@ -50,13 +52,17 @@ const SelectCountry = ({ step, setStep }: Props) => {
       }}
     >
       <ScrollView contentContainerStyle={{ gap: 7 }} style={{ flex: 1 }}>
-        <ThemedText type="defaultSemiBold" color="primaryDarker">
+        <ThemedText
+          variant="bodySemiBold"
+          color="primarydarker"
+          darkColor="white"
+        >
           Select country you want to hide from the selected zone (optional)
         </ThemedText>
         {isLoading ? (
           <ButtonCardLoader />
-        ) : countryData?.data && countryData?.data.length ? (
-          countryData?.data.map((continent) => (
+        ) : countries.length ? (
+          countries.map((continent) => (
             <ContinentList
               key={continent.id}
               continent={continent}
@@ -66,10 +72,11 @@ const SelectCountry = ({ step, setStep }: Props) => {
           ))
         ) : (
           <ThemedText
-            style={{ textAlign: "center", marginVertical: 10 }}
-            color="placeHolder"
+            color="gray.800"
+            darkColor="gray.300"
+            style={{ textAlign: "center", width: "100%" }}
           >
-            No countries found
+            No country found
           </ThemedText>
         )}
       </ScrollView>
@@ -99,16 +106,18 @@ function ContinentList({
       <Button
         onPress={() => setVisible(continent.id)}
         title={continent.country_category_name}
-        variant={hasSelected ? "Contained" : "Outlined"}
+        variant={hasSelected ? "contained" : "outlined"}
       />
-      <SelectCountryModal
-        visible={visible}
-        setVisible={setVisible}
-        countries={continent.countries}
-        selected={selected}
-        setSelected={setSelected}
-        checkWhenInclude={false}
-      />
+      {!!visible && (
+        <SelectCountryModal
+          visible={visible}
+          setVisible={setVisible}
+          countries={continent.countries}
+          countryIds={selected}
+          setCountryIds={setSelected}
+          highlightOnSelect={false}
+        />
+      )}
     </>
   );
 }

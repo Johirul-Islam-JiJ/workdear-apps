@@ -11,6 +11,7 @@ type Props = {
   countries: Country[];
   countryIds: number[];
   setCountryIds: React.Dispatch<React.SetStateAction<number[]>>;
+  highlightOnSelect: boolean;
 };
 
 const SelectCountryModal = ({
@@ -19,6 +20,7 @@ const SelectCountryModal = ({
   countries,
   countryIds,
   setCountryIds,
+  highlightOnSelect,
 }: Props) => {
   const [selected, setSelected] = useState<number[]>(countryIds);
 
@@ -27,8 +29,14 @@ const SelectCountryModal = ({
       setVisible(0);
       return;
     }
-    setSelected([]);
-    setCountryIds([]);
+    if (highlightOnSelect) {
+      setSelected([]);
+      setCountryIds([]);
+    } else {
+      const ids = countries.map((country) => country.id);
+      setSelected(ids);
+      setCountryIds(ids);
+    }
     setVisible(0);
   }
 
@@ -37,11 +45,10 @@ const SelectCountryModal = ({
     setVisible(0);
   }
 
-  function handleToggleId(id: number) {
+  function handleToggleSelect(id: number) {
+    const isSelected = selected.includes(id);
     setSelected(
-      selected.includes(id)
-        ? selected.filter((item) => item !== id)
-        : selected.concat(id)
+      isSelected ? selected.filter((item) => item !== id) : selected.concat(id)
     );
   }
 
@@ -50,7 +57,8 @@ const SelectCountryModal = ({
       <ThemedText
         variant="subtitle"
         color="primarydarker"
-        style={{ textAlign: "center", marginBottom: 15 }}
+        darkColor="white"
+        style={{ textAlign: "center", marginBottom: 20 }}
       >
         Select Country
       </ThemedText>
@@ -60,22 +68,35 @@ const SelectCountryModal = ({
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
-            rowGap: 7,
+            rowGap: 10,
             justifyContent: "space-between",
           }}
         >
-          {countries.map((country, index) => {
-            const isSelected = selected.includes(country.id);
-            return (
-              <Button
-                key={index}
-                style={{ minWidth: "49%" }}
-                onPress={() => handleToggleId(country.id)}
-                title={country.country_name}
-                variant={isSelected ? "contained" : "outlined"}
-              />
-            );
-          })}
+          {countries.length ? (
+            countries.map((country, index) => {
+              const isSelected = highlightOnSelect
+                ? selected.includes(country.id)
+                : !selected.includes(country.id);
+
+              return (
+                <Button
+                  key={index}
+                  style={{ minWidth: "49%" }}
+                  onPress={() => handleToggleSelect(country.id)}
+                  title={country.country_name}
+                  variant={isSelected ? "contained" : "outlined"}
+                />
+              );
+            })
+          ) : (
+            <ThemedText
+              color="gray.800"
+              darkColor="gray.300"
+              style={{ textAlign: "center", width: "100%" }}
+            >
+              No country found
+            </ThemedText>
+          )}
         </View>
       </ScrollView>
 
@@ -84,8 +105,8 @@ const SelectCountryModal = ({
           flexDirection: "row",
           justifyContent: "flex-end",
           alignItems: "center",
-          gap: 7,
-          marginTop: 15,
+          gap: 10,
+          marginTop: 25,
         }}
       >
         <Button

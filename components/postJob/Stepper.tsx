@@ -8,12 +8,14 @@ const Stepper = ({ selected = 0 }) => {
       {Array.from({ length: 4 }, (_, index) => (
         <React.Fragment key={index}>
           <ThemedView
-            color={selected >= index ? "error" : "placeHolder"}
+            color={selected >= index ? "success" : "gray.500"}
+            darkColor={selected >= index ? "success" : "gray.100"}
             style={{ width: 20, height: 20, borderRadius: 100 }}
           />
           {index !== 3 && (
             <ThemedView
-              color={selected > index ? "error" : "placeHolder"}
+              color={selected > index ? "success" : "gray.500"}
+              darkColor={selected > index ? "success" : "gray.100"}
               style={{
                 flex: 1,
                 height: 2,

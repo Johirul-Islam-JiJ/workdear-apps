@@ -50,6 +50,7 @@ const JobListHeader = ({
         countries={countries?.data || []}
         countryIds={countryIds}
         setCountryIds={setCountryIds}
+        highlightOnSelect={true}
       />
       <SelectCategoryModal
         visible={showCategoryModal}

@@ -42,6 +42,7 @@ export default function DrawerFooter() {
         title="Logout"
         color="error"
         variant="soft"
+        size="small"
         style={{ justifyContent: "space-between" }}
         startIcon={<IconButton icon="log-out-outline" color="error" />}
         endIcon="chevron-forward"

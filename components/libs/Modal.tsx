@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal as RNModal, View } from "react-native";
+import { ThemedView } from "./ThemedView";
 
 type Props = {
   visible: number;
@@ -10,7 +11,7 @@ type Props = {
 const Modal = ({ visible, setVisible, children }: Props) => {
   return (
     <RNModal
-      visible={visible ? true : false}
+      visible={!!visible}
       onRequestClose={() => setVisible(0)}
       animationType="fade"
       transparent
@@ -23,16 +24,16 @@ const Modal = ({ visible, setVisible, children }: Props) => {
           backgroundColor: "rgba(0,0,0,0.3)",
         }}
       >
-        <View
+        <ThemedView
+          color="card"
           style={{
             width: "90%",
-            backgroundColor: "white",
             borderRadius: 10,
             padding: 15,
           }}
         >
           {children}
-        </View>
+        </ThemedView>
       </View>
     </RNModal>
   );
