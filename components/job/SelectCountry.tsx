@@ -99,7 +99,8 @@ function ContinentList({
   setSelected,
 }: ContinentListProps) {
   const [visible, setVisible] = useState(0);
-  const hasSelected = continent.countries.some((c) => !selected.includes(c.id));
+  const countries = continent.countries;
+  const hasSelected = countries.some((c) => !selected.includes(c.id));
 
   return (
     <>
@@ -112,8 +113,8 @@ function ContinentList({
         <SelectCountryModal
           visible={visible}
           setVisible={setVisible}
-          countries={continent.countries}
-          countryIds={selected}
+          countries={countries}
+          countryIds={countries.length ? selected : []}
           setCountryIds={setSelected}
           highlightOnSelect={false}
         />

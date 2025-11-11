@@ -25,17 +25,13 @@ const SelectCountryModal = ({
   const [selected, setSelected] = useState<number[]>(countryIds);
 
   function handleClear() {
-    if (!selected.length) {
+    if (!countryIds.length) {
       setVisible(0);
       return;
     }
     if (highlightOnSelect) {
       setSelected([]);
       setCountryIds([]);
-    } else {
-      const ids = countries.map((country) => country.id);
-      setSelected(ids);
-      setCountryIds(ids);
     }
     setVisible(0);
   }
@@ -111,7 +107,7 @@ const SelectCountryModal = ({
       >
         <Button
           onPress={handleClear}
-          title={selected.length > 0 ? "Reset" : "Cancel"}
+          title={!!countryIds.length && highlightOnSelect ? "Reset" : "Cancel"}
           variant="outlined"
         />
         <Button onPress={handleCountrySelect} title="Done" />

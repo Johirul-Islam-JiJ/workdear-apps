@@ -44,21 +44,25 @@ const JobListHeader = ({
         }
       />
 
-      <SelectCountryModal
-        visible={showCountryModal}
-        setVisible={setShowCountryModal}
-        countries={countries?.data || []}
-        countryIds={countryIds}
-        setCountryIds={setCountryIds}
-        highlightOnSelect={true}
-      />
-      <SelectCategoryModal
-        visible={showCategoryModal}
-        setVisible={setShowCategoryModal}
-        category={categories?.data || []}
-        selected={category}
-        setSelected={setCategory}
-      />
+      {!!showCountryModal && (
+        <SelectCountryModal
+          visible={showCountryModal}
+          setVisible={setShowCountryModal}
+          countries={countries?.data || []}
+          countryIds={countryIds}
+          setCountryIds={setCountryIds}
+          highlightOnSelect={true}
+        />
+      )}
+      {!!showCategoryModal && (
+        <SelectCategoryModal
+          visible={showCategoryModal}
+          setVisible={setShowCategoryModal}
+          category={categories?.data || []}
+          selected={category}
+          setSelected={setCategory}
+        />
+      )}
     </View>
   );
 };

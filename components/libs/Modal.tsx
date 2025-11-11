@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal as RNModal, View } from "react-native";
+import { Pressable, Modal as RNModal } from "react-native";
 import { ThemedView } from "./ThemedView";
 
 type Props = {
@@ -16,7 +16,8 @@ const Modal = ({ visible, setVisible, children }: Props) => {
       animationType="fade"
       transparent
     >
-      <View
+      <Pressable
+        onPress={() => setVisible(0)}
         style={{
           flex: 1,
           justifyContent: "center",
@@ -34,7 +35,7 @@ const Modal = ({ visible, setVisible, children }: Props) => {
         >
           {children}
         </ThemedView>
-      </View>
+      </Pressable>
     </RNModal>
   );
 };
