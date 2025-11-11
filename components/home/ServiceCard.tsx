@@ -25,7 +25,7 @@ const ServiceCard = ({ item }: { item: Service }) => {
         {item.title}
       </ThemedText>
       <ThemedText
-        color="gray.500"
+        color="gray.700"
         darkColor="gray.300"
         style={{ textAlign: "center", marginTop: 5 }}
       >

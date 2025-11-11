@@ -1,6 +1,5 @@
 import { selectOptions } from "@/_mock/selectOptions";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { JobBasicDetailsSchema } from "@/schema/jobs";
 import { setJobPostFirstForm } from "@/store/slices/jobform";
 import { Entypo } from "@expo/vector-icons";
@@ -17,6 +16,7 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import AppIcon from "../libs/AppIcon";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
@@ -28,8 +28,6 @@ type Props = {
 };
 
 const JobBasicDetailsForm = ({ step, setStep }: Props) => {
-  const primaryDark = useThemeColor("primarydark");
-  const errorColor = useThemeColor("error");
   const dispatch = useAppDispatch();
   const { jobPostFirstForm } = useAppSelector((state) => state.jobForm);
   const [image, setImage] = useState<string | null>(null);
@@ -168,27 +166,27 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                           onPress={() => steps.remove(index)}
                           style={{ position: "absolute", right: -2, top: -10 }}
                         >
-                          <Ionicons
-                            name="remove-circle"
-                            size={24}
-                            color={errorColor}
-                          />
+                          <AppIcon size={24} color="error">
+                            <Ionicons name="remove-circle" />
+                          </AppIcon>
                         </Pressable>
                       )}
                     </View>
                     {/* show only for the last element */}
                     {index === steps.fields.length - 1 && (
                       <Button
+                        title={
+                          <AppIcon size={20} color="primarydark">
+                            <Entypo name="plus" />
+                          </AppIcon>
+                        }
+                        variant="outlined"
                         onPress={() =>
                           steps.append({
                             step_number: steps.fields.length + 1,
                             instruction: "",
                           })
                         }
-                        title={
-                          <Entypo name="plus" size={20} color={primaryDark} />
-                        }
-                        variant="outlined"
                       />
                     )}
                   </View>
@@ -250,7 +248,9 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                         })
                       }
                       title={
-                        <Entypo name="plus" size={20} color={primaryDark} />
+                        <AppIcon size={20} color="primarydark">
+                            <Entypo name="plus" />
+                          </AppIcon>
                       }
                       variant="outlined"
                     />
@@ -263,11 +263,9 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                     onPress={() => requiredProofs.remove(index)}
                     style={{ position: "absolute", right: -2, top: -10 }}
                   >
-                    <Ionicons
-                      name="remove-circle"
-                      size={24}
-                      color={errorColor}
-                    />
+                    <AppIcon size={24} color="error">
+                            <Ionicons name="remove-circle" />
+                          </AppIcon>
                   </Pressable>
                 )} */}
               </View>
@@ -386,7 +384,9 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                         })
                       }
                       title={
-                        <Entypo name="plus" size={20} color={primaryDark} />
+                        <AppIcon size={20} color="primarydark">
+                            <Entypo name="plus" />
+                          </AppIcon>
                       }
                       variant="outlined"
                     />
@@ -399,11 +399,9 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                     onPress={() => questionCondition.remove(index)}
                     style={{ position: "absolute", right: -2, top: -10 }}
                   >
-                    <Ionicons
-                      name="remove-circle"
-                      size={24}
-                      color={errorColor}
-                    />
+                    <AppIcon size={24} color="error">
+                            <Ionicons name="remove-circle" />
+                          </AppIcon>
                   </Pressable>
                 )} */}
               </View>
@@ -419,11 +417,12 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
               color={errors.thumbnail?.message ? "error" : undefined}
               title={
                 <View style={{ flexDirection: "row", columnGap: 4 }}>
-                  <Ionicons
-                    name="document-attach"
+                  <AppIcon
                     size={20}
-                    color={errors.thumbnail?.message ? errorColor : primaryDark}
-                  />
+                    color={errors.thumbnail?.message ? "error" : "primarydark"}
+                  >
+                    <Ionicons name="document-attach" />
+                  </AppIcon>
                   <ThemedText
                     color={errors.thumbnail?.message ? "error" : "primarydark"}
                   >

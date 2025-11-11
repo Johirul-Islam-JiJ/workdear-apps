@@ -1,15 +1,13 @@
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { PremiumPackage } from "@/types/PremiumPackage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import AppIcon from "../libs/AppIcon";
 import Button from "../libs/Button";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const PackageCard = ({ data }: { data: PremiumPackage }) => {
-  const iconColor = useThemeColor("primarydarker");
-
   return (
     <ThemedView color="card" style={styles.container}>
       {data.highlighted && (
@@ -47,7 +45,9 @@ const PackageCard = ({ data }: { data: PremiumPackage }) => {
       </View>
       {data.feature.map((item, index) => (
         <View key={index} style={styles.features}>
-          <FontAwesome name="check-square" size={24} color={iconColor} />
+          <AppIcon color="primarydarker">
+            <FontAwesome name="check-square" />
+          </AppIcon>
           <ThemedText>{item}</ThemedText>
         </View>
       ))}
@@ -62,14 +62,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 12,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     position: "relative",
     overflow: "hidden",
   },

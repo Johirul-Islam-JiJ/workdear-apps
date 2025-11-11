@@ -42,18 +42,10 @@ const JobCard = ({ job }: { job: Job }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 14,
+    paddingVertical: 15,
     paddingHorizontal: 12,
     borderRadius: 8,
     gap: 6,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
 });
 
