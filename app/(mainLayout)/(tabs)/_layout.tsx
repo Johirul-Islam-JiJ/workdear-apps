@@ -2,16 +2,33 @@ import { tabScreens } from "@/_mock/screens";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Tabs } from "expo-router";
 import React from "react";
-import { Animated, Platform, StyleProp, ViewStyle } from "react-native";
+import {
+  Animated,
+  Platform,
+  StyleProp,
+  useColorScheme,
+  ViewStyle,
+} from "react-native";
 
 export default function TabLayout() {
   const tabActiveColor = useThemeColor("primarydark");
+  const tabBarBackgroundColor = useThemeColor("card");
+  const whiteColor = useThemeColor("white");
+  const blackColor = useThemeColor("black");
+  const colorScheme = useColorScheme();
+  const dark = colorScheme === "dark";
+
   const tabBarStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> =
     Platform.select({
       ios: {
         position: "absolute",
+        backgroundColor: tabBarBackgroundColor,
+        shadowColor: dark ? whiteColor : blackColor,
       },
-      default: {},
+      default: {
+        backgroundColor: tabBarBackgroundColor,
+        shadowColor: dark ? whiteColor : blackColor,
+      },
     });
 
   return (
