@@ -1,3 +1,4 @@
+import AppIcon from "@/components/libs/AppIcon";
 import Badge from "@/components/libs/Badge";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
@@ -16,7 +17,6 @@ interface DrawerProfileProps {
 
 export default function DrawerProfile({ navigation }: DrawerProfileProps) {
   const { user } = useAppSelector((state) => state.user);
-  const warningColor = useThemeColor("warning");
   const borderColor = useThemeColor("border");
 
   const source = user?.profile_image
@@ -42,11 +42,9 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
           {/* Premium Badge */}
           {isPremium && (
             <View style={[style.badge]}>
-              <MaterialCommunityIcons
-                name="crown-circle"
-                size={20}
-                color={warningColor}
-              />
+              <AppIcon size={20} color="warning">
+                <MaterialCommunityIcons name="crown-circle" />
+              </AppIcon>
             </View>
           )}
         </View>
