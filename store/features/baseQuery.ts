@@ -65,7 +65,7 @@ const baseQueryWithAuth: BaseQueryFn<
         headers.set("Accept", "application/json");
       }
       headers.set("Accept", "application/json");
-      headers.set("X-API-Key", config.apiKey);
+      headers.set("X-API-Key", config.apiKey as string);
 
       return headers;
     },
@@ -99,6 +99,7 @@ export const api = createApi({
     "blogs",
     "blogs-categories",
     "jobs-home",
+    "faqs",
   ],
   endpoints: () => ({}),
 });

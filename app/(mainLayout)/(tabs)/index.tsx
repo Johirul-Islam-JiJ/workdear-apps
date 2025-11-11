@@ -1,4 +1,5 @@
 import Banner from "@/components/home/Banner";
+import FAQ from "@/components/home/FAQ";
 import HomeJobLists from "@/components/home/HomeJobLists";
 import HowItWorks from "@/components/home/HowItWorks";
 import Services from "@/components/home/Services";
@@ -24,6 +25,7 @@ const HomeScreen = () => {
         <Services />
         <Packages />
         <HowItWorks />
+        <FAQ />
       </ThemedView>
     </ScrollView>
   );

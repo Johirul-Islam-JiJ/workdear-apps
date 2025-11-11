@@ -1,6 +1,6 @@
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const depositApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getmanualPaymentMethods: builder.query({
       query: (type) => ({
@@ -11,4 +11,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useGetmanualPaymentMethodsQuery } = api;
+export const { useGetmanualPaymentMethodsQuery } = depositApi;

@@ -2,7 +2,12 @@ import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 
 type IconName = keyof typeof Ionicons.glyphMap;
 
@@ -10,6 +15,7 @@ type IconButtonProps = {
   icon: IconName;
   size?: "sm" | "md" | "lg";
   color?: ColorScheme;
+  darkColor?: ColorScheme | null;
   variant?: "solid" | "outline" | "ghost";
   onPress?: () => void;
   disabled?: boolean;
@@ -19,11 +25,15 @@ const IconButton: React.FC<IconButtonProps> = ({
   icon,
   size = "md",
   color = "background",
+  darkColor = null,
   variant = "solid",
   onPress,
   disabled = false,
 }) => {
-  const colorValue = useThemeColor(color);
+  const theme = useColorScheme() ?? "light";
+  const dark = theme === "dark";
+  const colorToUse = darkColor && dark ? darkColor : color;
+  const colorValue = useThemeColor(colorToUse);
   const sizeMap = {
     sm: 32,
     md: 40,
