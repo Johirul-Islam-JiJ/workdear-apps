@@ -31,7 +31,11 @@ const UserVoiceCard = ({ item }: { item: UserReview }) => {
         }}
       >
         <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
-          <Image source={item.image} style={profileStyle} contentFit="cover" />
+          <Image
+            source={{ uri: item.image }}
+            style={profileStyle}
+            contentFit="cover"
+          />
           <View>
             <ThemedText
               style={{ fontWeight: "bold", fontSize: 18 }}

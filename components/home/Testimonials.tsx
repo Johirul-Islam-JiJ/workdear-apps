@@ -20,7 +20,7 @@ const Testimonials = () => {
       title: "Graphic Designer",
       quote:
         "WorkDear has completely transformed my freelancing career. I've landed over 50 projects and built lasting relationships with amazing clients. The platform's security and payment protection give me peace of mind.",
-      image: require("@/assets/images/profile.jpg"),
+      image: "https://www.workdear.com/profile.jpg",
       rating: 4.8,
     },
     {
@@ -28,7 +28,7 @@ const Testimonials = () => {
       title: "Web Developer",
       quote:
         "The quality of projects on WorkDear is outstanding. I've found clients who truly value my expertise and are willing to pay premium rates. It's not just about quantity, it's about quality partnerships",
-      image: require("@/assets/images/profile1.jpg"),
+      image: "https://www.workdear.com/profile1.jpg",
       rating: 4.8,
     },
     {
@@ -36,7 +36,7 @@ const Testimonials = () => {
       title: "Content Writer",
       quote:
         "As a client, finding the right talent was always a challenge until I discovered WorkDear. The platform's vetting process ensures I work with skilled professionals who deliver exceptional results every time.",
-      image: require("@/assets/images/profile3.jpg"),
+      image: "https://www.workdear.com/profile3.jpg",
       rating: 4.8,
     },
     {
@@ -44,7 +44,7 @@ const Testimonials = () => {
       title: "Digital Marketer",
       quote:
         "The quality of projects on WorkDear is outstanding. I've found clients who truly value my expertise and are willing to pay premium rates. It's not just about quantity, it's about quality partnerships.",
-      image: require("@/assets/images/profile4.jpg"),
+      image: "https://www.workdear.com/profile4.jpg",
       rating: 4.8,
     },
   ];
@@ -67,6 +67,7 @@ const Testimonials = () => {
           renderItem={({ item, index }) => (
             <UserVoiceCard key={index} item={item} />
           )}
+          // renderItem={() => <View></View>}
         />
       </View>
     </View>
