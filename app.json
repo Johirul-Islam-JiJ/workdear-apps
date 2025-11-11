@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Workdear",
-    "slug": "micro-job-app",
+    "slug": "workdear",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon/icon.png",
@@ -22,7 +22,7 @@
       "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.RECORD_AUDIO",
-        "ACCESS_FINE_LOCATION"
+        "android.permission.ACCESS_FINE_LOCATION"
       ],
       "package": "com.iqbalhossen60483.microjobapp"
     },
@@ -51,7 +51,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "dc2eda97-5f9c-4c7f-8d48-5bc0889a35f9"
+        "projectId": "2827a3cb-0c56-4151-a75d-d379d412307c"
       }
     }
   }
