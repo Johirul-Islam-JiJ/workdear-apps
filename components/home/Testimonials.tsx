@@ -1,5 +1,6 @@
 import React from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
 import { ThemedText } from "../libs/ThemedText";
 import UserVoiceCard from "./UserVoiceCard";
 
@@ -12,6 +13,7 @@ export type UserReview = {
 };
 
 const Testimonials = () => {
+  const { width } = Dimensions.get("window");
   const userVoices: UserReview[] = [
     {
       name: "Sarah Johnson",
@@ -53,10 +55,19 @@ const Testimonials = () => {
         What Our Community Says
       </ThemedText>
 
-      <View style={{ rowGap: 10, marginTop: 15 }}>
-        {userVoices.map((item, index) => (
-          <UserVoiceCard key={index} item={item} />
-        ))}
+      <View style={{ marginTop: 10 }}>
+        <Carousel
+          loop
+          width={width - 20}
+          height={220}
+          data={userVoices}
+          scrollAnimationDuration={500}
+          autoPlay={true}
+          autoPlayInterval={3000}
+          renderItem={({ item, index }) => (
+            <UserVoiceCard key={index} item={item} />
+          )}
+        />
       </View>
     </View>
   );
