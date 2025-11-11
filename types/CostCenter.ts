@@ -14,6 +14,7 @@ export enum CostName {
   job_review_fee_per_job = "job_review_fee_per_job",
   job_post_fee_percentage = "job_post_fee_percentage",
   dollar_rate = "dollar_rate",
+  job_post_screenshot_fee = "job_post_screenshot_fee",
 }
 
 export interface CostCenter {

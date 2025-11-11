@@ -80,8 +80,6 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
     setStep(step + 1);
   }
 
-  console.log(errors);
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -96,6 +94,14 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
             paddingBottom: 15,
           }}
         >
+          <ThemedText
+            variant="bodySemiBold"
+            color="primarydarker"
+            darkColor="white"
+          >
+            Job basic information
+          </ThemedText>
+
           <View>
             <ThemedText>Write an accurate job title:</ThemedText>
             <Controller

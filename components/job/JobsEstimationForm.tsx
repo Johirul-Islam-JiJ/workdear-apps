@@ -20,11 +20,14 @@ import {
   Pressable,
   ScrollView,
   View,
+  ViewStyle,
 } from "react-native";
 import * as yup from "yup";
 import Button from "../libs/Button";
+import Divider from "../libs/Divider";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
+import { ThemedView } from "../libs/ThemedView";
 
 type Props = {
   step: number;
@@ -33,6 +36,7 @@ type Props = {
 
 const JobsEstimationForm = ({ step, setStep }: Props) => {
   const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
+  const jobSSfee = useGetCostFromCostCenter(CostName.job_post_screenshot_fee);
   const [createJob, { isLoading }] = useCreateJobMutation();
   const { generalData } = useAppSelector((state) => state.settings);
   const navigation = useRouter();
@@ -108,12 +112,6 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
     },
   });
 
-  const totalWorker = watch("total_workers_required");
-  const payPerTask = watch("pay_per_task");
-  const estimatedCost = totalWorker * payPerTask;
-  const fee = estimatedCost * jobPostFee;
-  const totalCost = estimatedCost + fee;
-
   async function onSubmit(data: any) {
     try {
       const payload: JobPayload = {
@@ -184,6 +182,23 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
     setStep((prev) => prev - 1);
   }
 
+  const worker = watch("total_workers_required") || "0";
+  const workerEarn = watch("pay_per_task") || "0";
+  const requiredScreenshot = watch("require_screenshots") || "0";
+
+  const totalCost =
+    parseInt(worker as string) * parseFloat(workerEarn as string);
+  const jobSSfeeCost = parseFloat(requiredScreenshot as string) * jobSSfee;
+  const platformFee = jobPostFee + jobSSfeeCost;
+  const jobPostFeeCost = totalCost * (platformFee / 100);
+  const score = 100 - platformFee;
+
+  const listStyle: ViewStyle = {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  };
+  const pointStyle: ViewStyle = { height: 8, width: 8, borderRadius: 10 };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -204,6 +219,13 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
           }}
         >
           <View style={{ gap: 10 }}>
+            <ThemedText
+              variant="bodySemiBold"
+              color="primarydarker"
+              darkColor="white"
+            >
+              Worker configuration
+            </ThemedText>
             <View>
               <ThemedText>Worker need</ThemedText>
               <Controller
@@ -271,39 +293,93 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
                 )}
               />
             </View>
-          </View>
 
-          <Controller
-            name="status"
-            control={control}
-            render={({ field }) => (
-              <Pressable
-                onPress={() =>
-                  field.onChange(field.value === "DRAFT" ? "PENDING" : "DRAFT")
-                }
-                style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
-              >
-                <Checkbox
-                  value={field.value === "DRAFT"}
-                  onChange={() =>
+            <Controller
+              name="status"
+              control={control}
+              render={({ field }) => (
+                <Pressable
+                  onPress={() =>
                     field.onChange(
                       field.value === "DRAFT" ? "PENDING" : "DRAFT"
                     )
                   }
-                />
-                <ThemedText>Save as Draft</ThemedText>
-              </Pressable>
-            )}
-          />
-
-          <View>
-            <ThemedText color="error">Job post fee {jobPostFee}%</ThemedText>
-            <ThemedText variant="bodySemiBold">Total Cost</ThemedText>
-            <Input
-              editable={false}
-              value={`$${totalCost.toFixed(4)}`}
-              placeholder="Enter total cost"
+                  style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+                >
+                  <Checkbox
+                    value={field.value === "DRAFT"}
+                    onChange={() =>
+                      field.onChange(
+                        field.value === "DRAFT" ? "PENDING" : "DRAFT"
+                      )
+                    }
+                  />
+                  <ThemedText>Save as Draft</ThemedText>
+                </Pressable>
+              )}
             />
+          </View>
+
+          <View style={{ gap: 10 }}>
+            <ThemedText
+              variant="bodySemiBold"
+              color="primarydarker"
+              darkColor="white"
+            >
+              Cost summary
+            </ThemedText>
+
+            <View>
+              <View style={listStyle}>
+                <ThemedText>Base Cost</ThemedText>
+                <ThemedText style={{ fontWeight: "bold" }}>
+                  ${totalCost.toFixed(4)}
+                </ThemedText>
+              </View>
+
+              <View style={listStyle}>
+                <ThemedText>Platform Fee ({platformFee}%)</ThemedText>
+                <ThemedText style={{ fontWeight: "bold" }} color="warning">
+                  ${jobPostFeeCost.toFixed(4)}
+                </ThemedText>
+              </View>
+            </View>
+
+            <Divider />
+
+            <View>
+              <View style={listStyle}>
+                <ThemedText style={{ fontWeight: "bold" }}>
+                  Total Cost
+                </ThemedText>
+                <ThemedText style={{ fontWeight: "bold" }} color="success">
+                  ${(totalCost + jobPostFeeCost).toFixed(4)}
+                </ThemedText>
+              </View>
+              <ThemedView
+                color="warning"
+                style={{ height: 7, borderRadius: 10, overflow: "hidden" }}
+              >
+                <ThemedView
+                  color="success"
+                  style={{ height: "100%", width: `${score}%` }}
+                />
+              </ThemedView>
+              <View style={listStyle}>
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
+                >
+                  <ThemedView color="success" style={pointStyle} />
+                  <ThemedText variant="small">Worder payment</ThemedText>
+                </View>
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
+                >
+                  <ThemedView color="warning" style={pointStyle} />
+                  <ThemedText variant="small">Fee</ThemedText>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
 
