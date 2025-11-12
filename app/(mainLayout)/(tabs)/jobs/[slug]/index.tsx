@@ -1,4 +1,5 @@
 import HeaderPart from "@/components/job/job-details/HeaderPart";
+import PlatFormGuide from "@/components/job/job-details/PlatFormGuide";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { useJobbyidQuery } from "@/store/features/jobs";
@@ -23,6 +24,7 @@ const JobDetails = () => {
   return (
     <ThemedView color="background" style={containerStyle}>
       <HeaderPart job={job} />
+      <PlatFormGuide />
     </ThemedView>
   );
 };
