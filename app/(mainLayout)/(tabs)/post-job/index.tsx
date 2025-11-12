@@ -1,7 +1,7 @@
-import JobBasicDetailsForm from "@/components/job/JobBasicDetailsForm";
-import JobsEstimationForm from "@/components/job/JobsEstimationForm";
-import SelectCategory from "@/components/job/SelectCategory";
-import SelectCountry from "@/components/job/SelectCountry";
+import JobBasicDetailsForm from "@/components/job/post-job/JobBasicDetailsForm";
+import JobsEstimationForm from "@/components/job/post-job/JobsEstimationForm";
+import SelectCategory from "@/components/job/post-job/SelectCategory";
+import SelectCountry from "@/components/job/post-job/SelectCountry";
 import { ThemedView } from "@/components/libs/ThemedView";
 import Stepper from "@/components/postJob/Stepper";
 import React, { useState } from "react";

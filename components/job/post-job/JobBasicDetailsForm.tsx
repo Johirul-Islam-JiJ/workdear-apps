@@ -1,4 +1,9 @@
 import { selectOptions } from "@/_mock/selectOptions";
+import AppIcon from "@/components/libs/AppIcon";
+import Button from "@/components/libs/Button";
+import { DropdownMenu } from "@/components/libs/DropdownMenu";
+import Input from "@/components/libs/Input";
+import { ThemedText } from "@/components/libs/ThemedText";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { JobBasicDetailsSchema } from "@/schema/jobs";
 import { setJobPostFirstForm } from "@/store/slices/jobform";
@@ -16,11 +21,6 @@ import {
   ScrollView,
   View,
 } from "react-native";
-import AppIcon from "../libs/AppIcon";
-import Button from "../libs/Button";
-import { DropdownMenu } from "../libs/DropdownMenu";
-import Input from "../libs/Input";
-import { ThemedText } from "../libs/ThemedText";
 
 type Props = {
   step: number;

@@ -1,9 +1,9 @@
+import Button from "@/components/libs/Button";
+import Modal from "@/components/libs/Modal";
+import { ThemedText } from "@/components/libs/ThemedText";
 import { Country } from "@/types/Job";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import Button from "../libs/Button";
-import Modal from "../libs/Modal";
-import { ThemedText } from "../libs/ThemedText";
 
 type Props = {
   visible: number;

@@ -1,6 +1,6 @@
+import Skeleton from "@/components/libs/Skeleton";
 import React from "react";
 import { View } from "react-native";
-import Skeleton from "../libs/Skeleton";
 
 const ButtonCardLoader = () => {
   return (

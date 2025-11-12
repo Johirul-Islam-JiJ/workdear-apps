@@ -1,7 +1,7 @@
-import { config } from "../../../config";
+import { config } from "@/config/config";
 import { api } from "../baseQuery";
 
-api.injectEndpoints({
+const checkTaskProfsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllSubmitedTaskProfs: builder.query({
       query: ({ id, page, filter }) => ({
@@ -72,10 +72,6 @@ api.injectEndpoints({
   }),
 });
 
-api.enhanceEndpoints({
-  addTagTypes: ["getingSubmitedTaskProfs"], // ✅ declare tag type here
-});
-
 export const {
   useGetAllSubmitedTaskProfsQuery,
   useGetSubmitedTaskByIdProfsQuery,
@@ -85,4 +81,4 @@ export const {
   useUnsetisfiedJobSingleMutation,
   useSetisfiedJobMultipleMutation,
   useUnsetisfiedJobMultipleMutation,
-} = api;
+} = checkTaskProfsApi;

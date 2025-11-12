@@ -1,20 +1,20 @@
-import { SingleJobSubCategory } from "@/types/Job";
+import { CategoryState } from "@/app/(mainLayout)/(tabs)/jobs";
+import Button from "@/components/libs/Button";
+import Modal from "@/components/libs/Modal";
+import { ThemedText } from "@/components/libs/ThemedText";
+import { JobCategory } from "@/types/Job";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import Button from "../libs/Button";
-import Modal from "../libs/Modal";
-import { ThemedText } from "../libs/ThemedText";
-import { SubCategoryValue } from "./SelectCategory";
 
 type Props = {
   visible: number;
   setVisible: React.Dispatch<React.SetStateAction<number>>;
-  category: SingleJobSubCategory[];
-  selected: SubCategoryValue;
-  setSelected: React.Dispatch<React.SetStateAction<SubCategoryValue>>;
+  category: JobCategory[];
+  selected: CategoryState;
+  setSelected: React.Dispatch<React.SetStateAction<CategoryState>>;
 };
 
-const SelectSubCategoryModal = ({
+const SelectCategoryModal = ({
   visible,
   setVisible,
   category,
@@ -26,10 +26,9 @@ const SelectSubCategoryModal = ({
       <ThemedText
         variant="subtitle"
         color="primarydarker"
-        darkColor="white"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
-        Select Sub Category
+        Select Category
       </ThemedText>
 
       <ScrollView style={{ maxHeight: 400 }}>
@@ -48,12 +47,12 @@ const SelectSubCategoryModal = ({
               onPress={() => {
                 setSelected(
                   selected.id !== item.id
-                    ? { id: item.id, price: item.minimum_pay }
-                    : { id: null, price: null }
+                    ? { id: item.id, name: item.category_name }
+                    : { id: null, name: null }
                 );
                 setVisible(0);
               }}
-              title={item.sub_category_name}
+              title={item.category_name}
               variant={selected.id === item.id ? "contained" : "outlined"}
             />
           ))}
@@ -70,13 +69,17 @@ const SelectSubCategoryModal = ({
         }}
       >
         <Button
-          onPress={() => setVisible(0)}
-          title="Cancel"
-          variant="contained"
+          onPress={() => {
+            setSelected({ id: null, name: null });
+            setVisible(0);
+          }}
+          title={selected.id ? "Reset" : "Cancel"}
+          variant="outlined"
         />
+        <Button onPress={() => setVisible(0)} title="Done" />
       </View>
     </Modal>
   );
 };
 
-export default SelectSubCategoryModal;
+export default SelectCategoryModal;

@@ -6,8 +6,8 @@ import {
 import React, { useState } from "react";
 import { View } from "react-native";
 import Button from "../libs/Button";
-import SelectCategoryModal from "./SelectCategoryModal";
-import SelectCountryModal from "./SelectCountryModal";
+import SelectCategoryModal from "./common/SelectCategoryModal";
+import SelectCountryModal from "./common/SelectCountryModal";
 
 type Props = {
   countryIds: number[];

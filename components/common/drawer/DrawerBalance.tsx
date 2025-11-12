@@ -1,9 +1,9 @@
+import { ThemedText } from "@/components/libs/ThemedText";
+import { ThemedView } from "@/components/libs/ThemedView";
 import { useAppSelector } from "@/hooks/redux";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { ThemedText } from "../../libs/ThemedText";
-import { ThemedView } from "../../libs/ThemedView";
 
 export default function DrawerBalance() {
   const { user } = useAppSelector((state) => state.user);
