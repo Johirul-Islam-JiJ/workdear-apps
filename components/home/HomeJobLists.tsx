@@ -13,7 +13,7 @@ const HomeJobLists = () => {
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText variant="subtitle" color="primarydarker" darkColor="white">
+      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
         Latest Jobs
       </ThemedText>
       {isLoading ? (

@@ -10,7 +10,7 @@ const Packages = () => {
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText variant="subtitle" color="primarydarker" darkColor="white">
+      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
         Unlock Premium Features
       </ThemedText>
       {isLoading ? (

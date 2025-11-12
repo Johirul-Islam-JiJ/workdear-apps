@@ -71,12 +71,7 @@ const JobDetailsBody = ({ job }: { job: Job }) => {
         <ThemedText style={{ fontWeight: "bold" }}>Reqiured proofs:</ThemedText>
         {JSON.parse(job.required_proofs).map(
           (proof: RequiredProofs, index: number) => (
-            <View key={index}>
-              <ThemedText style={{ fontWeight: "bold" }}>
-                Proof type: {proof.type}
-              </ThemedText>
-              <ThemedText>{proof.description}</ThemedText>
-            </View>
+            <ThemedText key={index}>{proof.description}</ThemedText>
           )
         )}
       </View>

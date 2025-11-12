@@ -141,7 +141,7 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
           const file = value as ImagePickerAsset;
           formData.append("thumbnail", {
             uri: file.uri,
-            type: file.mimeType || "image/jpeg", // fallback
+            type: file.mimeType || "image/jpeg",
             name: file.fileName || `upload_${Date.now()}.jpg`,
           } as any);
         } else if (value !== undefined && value !== null) {

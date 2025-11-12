@@ -1,5 +1,6 @@
 import HeaderPart from "@/components/job/job-details/HeaderPart";
 import JobDetailsBody from "@/components/job/job-details/JobDetailsBody";
+import JobSubmissionForm from "@/components/job/job-details/JobSubmissionForm";
 import PlatFormGuide from "@/components/job/job-details/PlatFormGuide";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
 import { ThemedView } from "@/components/libs/ThemedView";
@@ -28,6 +29,7 @@ const JobDetails = () => {
         <HeaderPart job={job} />
         <PlatFormGuide />
         <JobDetailsBody job={job} />
+        <JobSubmissionForm job={job} />
       </ThemedView>
     </ScrollView>
   );

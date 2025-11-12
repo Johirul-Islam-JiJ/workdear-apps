@@ -67,7 +67,6 @@ const Testimonials = () => {
           renderItem={({ item, index }) => (
             <UserVoiceCard key={index} item={item} />
           )}
-          // renderItem={() => <View></View>}
         />
       </View>
     </View>

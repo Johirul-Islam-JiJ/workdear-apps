@@ -18,7 +18,7 @@ const JobCard = ({ job }: { job: Job }) => {
     <Link href={`/(mainLayout)/(tabs)/jobs/${job.slug}`} asChild>
       <Pressable style={{ flex: 1 }}>
         <ThemedView color="card" style={styles.container}>
-          <ThemedText variant="subtitle" numberOfLines={2} ellipsizeMode="tail">
+          <ThemedText variant="body2" numberOfLines={2} ellipsizeMode="tail">
             {job.title}
           </ThemedText>
 
