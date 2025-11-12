@@ -42,7 +42,7 @@ export default function DonutChat({ cutout = 0, description }: Props) {
           strokeWidth={strokeWidth}
         />
         <AnimatedCircle
-          stroke="#FA1E00"
+          stroke="#2ea3b4"
           fill="none"
           cx={radius + strokeWidth / 2}
           cy={radius + strokeWidth / 2}

@@ -7,6 +7,7 @@ export type TextVariant =
   | "h2"
   | "h3"
   | "body"
+  | "body2"
   | "bodySemiBold"
   | "subtitle"
   | "caption"
@@ -50,6 +51,7 @@ export const ThemedText: React.FC<ThemedTextProps> = ({
     link: styles.Link,
     small: styles.Small,
     overline: styles.Overline,
+    body2: styles.Body2,
   };
 
   return (
@@ -88,6 +90,13 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontFamily: "RobotoSerifRegular",
   },
+  Body2: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontFamily: "RobotoSerifRegular",
+    fontWeight: "bold",
+  },
+
   BodySemiBold: {
     fontSize: 16,
     lineHeight: 24,

@@ -1,5 +1,5 @@
+import HeaderPart from "@/components/job/job-details/HeaderPart";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
-import { ThemedText } from "@/components/libs/ThemedText";
 import { useJobbyidQuery } from "@/store/features/jobs";
 import { Job } from "@/types/Job";
 import { useLocalSearchParams } from "expo-router";
@@ -14,8 +14,8 @@ const JobDetails = () => {
   if (isLoading) return <LoadingIndicator fullScreen />;
 
   return (
-    <View>
-      <ThemedText>JobDetails ID: {slug}</ThemedText>
+    <View style={{ rowGap: 20, paddingHorizontal: 10, paddingVertical: 15 }}>
+      <HeaderPart job={job} />
     </View>
   );
 };
