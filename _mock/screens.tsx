@@ -2,6 +2,8 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React from "react";
+import { Animated, StyleProp, ViewStyle } from "react-native";
 
 export const drawerScreens = [
   {
@@ -46,7 +48,16 @@ export const drawerScreens = [
   },
 ];
 
-export const tabScreens = [
+export type TabScreen = {
+  id: number;
+  name: string;
+  title: string;
+  Icon: ({ color }: { color: string }) => React.JSX.Element | null;
+  href?: null;
+  tabBarStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+};
+
+export const tabScreens: TabScreen[] = [
   {
     id: 1,
     name: "index",
@@ -97,5 +108,6 @@ export const tabScreens = [
     title: "Job information",
     Icon: () => null,
     href: null,
+    tabBarStyle: { display: "none" },
   },
 ];

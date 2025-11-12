@@ -42,14 +42,15 @@ export default function TabLayout() {
         ),
       }}
     >
-      {tabScreens.map(({ id, name, title, Icon, href }) => (
+      {tabScreens.map((screen) => (
         <Tabs.Screen
-          key={id}
-          name={name}
+          key={screen.id}
+          name={screen.name}
           options={{
-            title: title,
-            tabBarIcon: ({ color }) => <Icon color={color} />,
-            href: href,
+            title: screen.title,
+            tabBarIcon: ({ color }) => <screen.Icon color={color} />,
+            href: screen.href,
+            tabBarStyle: screen.tabBarStyle,
           }}
         />
       ))}
