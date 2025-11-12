@@ -74,11 +74,11 @@ function ScreenProvider() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={isLoading}>
-        <Stack.Screen name="loading" />
+        <Stack.Screen name="loading/index" />
       </Stack.Protected>
       <Stack.Protected guard={!user}>
-        <Stack.Screen name="signup" />
-        <Stack.Screen name="signin" />
+        <Stack.Screen name="signup/index" />
+        <Stack.Screen name="signin/index" />
       </Stack.Protected>
       <Stack.Protected guard={!!user}>
         <Stack.Screen name="(mainLayout)" />
