@@ -1,7 +1,7 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { Image } from "expo-image";
+import { Image, ImageStyle } from "expo-image";
 import React from "react";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 import Rating from "../libs/Rating";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
@@ -10,12 +10,17 @@ import { UserReview } from "./Testimonials";
 const UserVoiceCard = ({ item }: { item: UserReview }) => {
   const borderColor = useThemeColor("primarydark");
 
-  const profileStyle = {
+  const profileStyle: ImageStyle = {
     height: 60,
     width: 60,
     borderRadius: 50,
     borderWidth: 3,
     borderColor: borderColor,
+  };
+  const profileWrapper: ViewStyle = {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
   };
 
   return (
@@ -23,13 +28,7 @@ const UserVoiceCard = ({ item }: { item: UserReview }) => {
       color="card"
       style={{ borderRadius: 10, padding: 15, rowGap: 8 }}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-        }}
-      >
+      <View style={profileWrapper}>
         <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
           <Image
             source={{ uri: item.image }}

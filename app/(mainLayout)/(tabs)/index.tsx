@@ -26,8 +26,8 @@ const HomeScreen = () => {
         <Services />
         <Packages />
         <HowItWorks />
-        <FAQ />
         <Testimonials />
+        <FAQ />
       </ThemedView>
     </ScrollView>
   );
