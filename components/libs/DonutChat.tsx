@@ -1,3 +1,4 @@
+import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
@@ -16,6 +17,8 @@ type Props = {
 };
 
 export default function DonutChat({ cutout = 0, description }: Props) {
+  const primaryColor = useThemeColor("primarydark");
+  const borderColor = useThemeColor("border");
   const radius = 35;
   const strokeWidth = 10;
   const circumference = 2 * Math.PI * radius;
@@ -34,7 +37,7 @@ export default function DonutChat({ cutout = 0, description }: Props) {
     <View style={styles.container}>
       <Svg height={radius * 2 + strokeWidth} width={radius * 2 + strokeWidth}>
         <Circle
-          stroke="#EEEEEE"
+          stroke={borderColor}
           fill="none"
           cx={radius + strokeWidth / 2}
           cy={radius + strokeWidth / 2}
@@ -42,7 +45,7 @@ export default function DonutChat({ cutout = 0, description }: Props) {
           strokeWidth={strokeWidth}
         />
         <AnimatedCircle
-          stroke="#2ea3b4"
+          stroke={primaryColor}
           fill="none"
           cx={radius + strokeWidth / 2}
           cy={radius + strokeWidth / 2}
