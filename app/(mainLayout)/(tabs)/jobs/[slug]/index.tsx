@@ -1,10 +1,11 @@
 import HeaderPart from "@/components/job/job-details/HeaderPart";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
+import { ThemedView } from "@/components/libs/ThemedView";
 import { useJobbyidQuery } from "@/store/features/jobs";
 import { Job } from "@/types/Job";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { ViewStyle } from "react-native";
 
 const JobDetails = () => {
   const { slug } = useLocalSearchParams();
@@ -13,10 +14,16 @@ const JobDetails = () => {
 
   if (isLoading) return <LoadingIndicator fullScreen />;
 
+  const containerStyle: ViewStyle = {
+    rowGap: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    flex: 1,
+  };
   return (
-    <View style={{ rowGap: 20, paddingHorizontal: 10, paddingVertical: 15 }}>
+    <ThemedView color="background" style={containerStyle}>
       <HeaderPart job={job} />
-    </View>
+    </ThemedView>
   );
 };
 
