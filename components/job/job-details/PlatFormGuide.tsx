@@ -10,7 +10,7 @@ const PlatFormGuide = () => {
   const containerStyle: ViewStyle = {
     borderWidth: 1,
     borderColor: warningColor,
-    borderRadius: 8,
+    borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 8,
   };
