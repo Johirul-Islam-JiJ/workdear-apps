@@ -6,7 +6,7 @@ import JobProviderInfoCard from "./JobProviderInfoCard";
 
 const HeaderPart = ({ job }: { job: Job }) => {
   return (
-    <View>
+    <View style={{ rowGap: 10 }}>
       <JobHeaderInfoCard job={job} />
       <JobProviderInfoCard provider={job.provider} />
     </View>
