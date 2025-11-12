@@ -57,7 +57,7 @@ export const tabScreens = [
   },
   {
     id: 2,
-    name: "jobs",
+    name: "jobs/index",
     title: "Find Job",
     Icon: ({ color }: { color: string }) => (
       <MaterialCommunityIcons
@@ -69,7 +69,7 @@ export const tabScreens = [
   },
   {
     id: 3,
-    name: "postJob",
+    name: "post-job/index",
     title: "Post Job",
     Icon: ({ color }: { color: string }) => (
       <Entypo name="circle-with-plus" size={30} color={color} />
@@ -77,7 +77,7 @@ export const tabScreens = [
   },
   {
     id: 4,
-    name: "myWork",
+    name: "my-work/index",
     title: "My Work",
     Icon: ({ color }: { color: string }) => (
       <FontAwesome name="list-alt" size={24} color={color} />
@@ -85,7 +85,7 @@ export const tabScreens = [
   },
   {
     id: 5,
-    name: "more",
+    name: "more/index",
     title: "More",
     Icon: ({ color }: { color: string }) => (
       <MaterialIcons name="more" size={24} color={color} />
