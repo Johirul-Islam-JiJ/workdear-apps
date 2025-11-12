@@ -11,37 +11,37 @@ export const drawerScreens = [
   },
   {
     id: 2,
-    name: "verification",
+    name: "verification/index",
     drawerLabel: "Verify now",
   },
   {
     id: 3,
-    name: "user-profile",
+    name: "user-profile/index",
     drawerLabel: "My profile",
   },
   {
     id: 4,
-    name: "ticket",
+    name: "ticket/index",
     drawerLabel: "Ticket",
   },
   {
     id: 5,
-    name: "deposit",
+    name: "deposit/index",
     drawerLabel: "Deposit",
   },
   {
     id: 6,
-    name: "wallet",
+    name: "wallet/index",
     drawerLabel: "Wallet",
   },
   {
     id: 7,
-    name: "transaction-history",
+    name: "transaction-history/index",
     drawerLabel: "Transaction history",
   },
   {
     id: 8,
-    name: "live-support",
+    name: "live-support/index",
     drawerLabel: "Live support",
   },
 ];

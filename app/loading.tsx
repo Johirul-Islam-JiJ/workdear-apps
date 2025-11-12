@@ -6,9 +6,9 @@ import { View } from "react-native";
 const loading = () => {
   return (
     <View style={{ flex: 1 }}>
-      <ThemedView color="primaryDarker" style={{ height: 35 }} />
+      <ThemedView color="primarydark" style={{ height: 35 }} />
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ThemedText type="subtitle">Loading...</ThemedText>
+        <ThemedText variant="subtitle">Loading...</ThemedText>
       </View>
     </View>
   );
