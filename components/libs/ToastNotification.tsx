@@ -15,7 +15,7 @@ const ToastNotification = () => {
   );
 
   const textColor = useThemeColor(
-    type === "error" ? "error" : type === "success" ? "primaryDarker" : "text"
+    type === "error" ? "error" : type === "success" ? "primarydark" : "text"
   );
   const opacity = new Animated.Value(0);
 
