@@ -100,6 +100,7 @@ export const api = createApi({
     "blogs-categories",
     "jobs-home",
     "faqs",
+    "single-jobs",
   ],
   endpoints: () => ({}),
 });

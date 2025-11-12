@@ -58,6 +58,7 @@ export const jobsApi = api.injectEndpoints({
         url: `/jobs/job/${id}`,
         method: "GET",
       }),
+      providesTags: ["single-jobs"],
     }),
 
     getJobsCategory: builder.query<ApiResponse<JobCategory[]>, void>({
