@@ -49,13 +49,13 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
   const questions: QuestionCondition[] = JSON.parse(
     job.question_condition || "[]"
   );
-  const require_screenshots = parseInt(job.require_screenshots);
+  const requireScreenshots = parseInt(job.require_screenshots);
 
   useEffect(() => {
     reset();
-    if (require_screenshots) {
+    if (requireScreenshots) {
       const initialImages = Array.from(
-        { length: require_screenshots },
+        { length: requireScreenshots },
         () => null
       );
       replaceImage(initialImages);
@@ -151,8 +151,8 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
       })}
 
       <ThemedText>
-        Attach required {require_screenshots}{" "}
-        {require_screenshots > 1 ? "screenshots" : "screenshot"}
+        Attach required {requireScreenshots}{" "}
+        {requireScreenshots > 1 ? "screenshots" : "screenshot"}
       </ThemedText>
       <View style={{ rowGap: 10 }}>
         {images.map((_image, index) => {
