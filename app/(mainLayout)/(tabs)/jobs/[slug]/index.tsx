@@ -4,11 +4,11 @@ import React from "react";
 import { View } from "react-native";
 
 const JobDetails = () => {
-  const { id } = useLocalSearchParams();
+  const { slug } = useLocalSearchParams();
 
   return (
     <View>
-      <ThemedText>JobDetails ID: {id}</ThemedText>
+      <ThemedText>JobDetails ID: {slug}</ThemedText>
     </View>
   );
 };

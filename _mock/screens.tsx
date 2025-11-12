@@ -91,4 +91,11 @@ export const tabScreens = [
       <MaterialIcons name="more" size={24} color={color} />
     ),
   },
+  {
+    id: 6,
+    name: "jobs/[slug]/index",
+    title: "Job information",
+    Icon: () => null,
+    href: null,
+  },
 ];

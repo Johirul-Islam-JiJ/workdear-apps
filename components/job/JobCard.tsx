@@ -1,6 +1,7 @@
 import { timeCalculator } from "@/services/timeCalculator";
 import { Job } from "@/types/Job";
-import { StyleSheet, View } from "react-native";
+import { Link } from "expo-router";
+import { Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 import LineChart from "./LineChart";
@@ -14,29 +15,33 @@ const JobCard = ({ job }: { job: Job }) => {
   const label = `${TOTAL_SUBMISSIONS} OF ${REQUIRED_JOB_WORKER}`;
 
   return (
-    <ThemedView color="card" style={styles.container}>
-      <ThemedText variant="subtitle" numberOfLines={2} ellipsizeMode="tail">
-        {job.title}
-      </ThemedText>
+    <Link href={`/(mainLayout)/(tabs)/jobs/${job.slug}`} asChild>
+      <Pressable style={{ flex: 1 }}>
+        <ThemedView color="card" style={styles.container}>
+          <ThemedText variant="subtitle" numberOfLines={2} ellipsizeMode="tail">
+            {job.title}
+          </ThemedText>
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <LineChart label={label} value={progress} />
-        <View>
-          <ThemedText color="text" style={{ textAlign: "right" }}>
-            ${job.pay_per_task}
-          </ThemedText>
-          <ThemedText darkColor="gray.300" color="gray.600" variant="small">
-            {timeCalculator(job.created_at)}
-          </ThemedText>
-        </View>
-      </View>
-    </ThemedView>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <LineChart label={label} value={progress} />
+            <View>
+              <ThemedText color="text" style={{ textAlign: "right" }}>
+                ${job.pay_per_task}
+              </ThemedText>
+              <ThemedText darkColor="gray.300" color="gray.600" variant="small">
+                {timeCalculator(job.created_at)}
+              </ThemedText>
+            </View>
+          </View>
+        </ThemedView>
+      </Pressable>
+    </Link>
   );
 };
 
