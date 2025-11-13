@@ -64,7 +64,12 @@ const JobDetailsBody = ({ job }: { job: Job }) => {
       </View>
 
       <View style={{ width: "30%", alignSelf: "flex-end" }}>
-        <JobReport />
+        <JobReport
+          title="Submit a report agains this job"
+          type="job"
+          jobId={job.id}
+          submissionId={null}
+        />
       </View>
 
       <View>

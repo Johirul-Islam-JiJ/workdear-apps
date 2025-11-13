@@ -1,14 +1,15 @@
 import React from "react";
-import { Pressable, Modal as RNModal } from "react-native";
+import { Pressable, Modal as RNModal, ViewStyle } from "react-native";
 import { ThemedView } from "./ThemedView";
 
 type Props = {
   visible: number;
   setVisible: React.Dispatch<React.SetStateAction<number>>;
   children: React.ReactNode;
+  style?: ViewStyle;
 };
 
-const Modal = ({ visible, setVisible, children }: Props) => {
+const Modal = ({ visible, setVisible, children, style = {} }: Props) => {
   return (
     <RNModal
       visible={!!visible}
@@ -31,6 +32,7 @@ const Modal = ({ visible, setVisible, children }: Props) => {
             width: "90%",
             borderRadius: 10,
             padding: 15,
+            ...style,
           }}
         >
           {children}
