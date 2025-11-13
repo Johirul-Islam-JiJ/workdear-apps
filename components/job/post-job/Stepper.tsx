@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { ThemedView } from "../libs/ThemedView";
+import { ThemedView } from "../../libs/ThemedView";
 
 const Stepper = ({ selected = 0 }) => {
   return (

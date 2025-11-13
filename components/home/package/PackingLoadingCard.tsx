@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ViewStyle } from "react-native";
-import Skeleton from "../libs/Skeleton";
-import { ThemedView } from "../libs/ThemedView";
+import Skeleton from "../../libs/Skeleton";
+import { ThemedView } from "../../libs/ThemedView";
 
 const PackageLoadingCard = () => {
   const container: ViewStyle = {

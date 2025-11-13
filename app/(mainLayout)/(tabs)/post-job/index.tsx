@@ -2,8 +2,8 @@ import JobBasicDetailsForm from "@/components/job/post-job/JobBasicDetailsForm";
 import JobsEstimationForm from "@/components/job/post-job/JobsEstimationForm";
 import SelectCategory from "@/components/job/post-job/SelectCategory";
 import SelectCountry from "@/components/job/post-job/SelectCountry";
+import Stepper from "@/components/job/post-job/Stepper";
 import { ThemedView } from "@/components/libs/ThemedView";
-import Stepper from "@/components/postJob/Stepper";
 import React, { useState } from "react";
 
 const PostJobScreen = () => {

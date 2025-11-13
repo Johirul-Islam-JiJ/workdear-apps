@@ -2,10 +2,10 @@ import { PremiumPackage } from "@/types/PremiumPackage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import AppIcon from "../libs/AppIcon";
-import Button from "../libs/Button";
-import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
+import AppIcon from "../../libs/AppIcon";
+import Button from "../../libs/Button";
+import { ThemedText } from "../../libs/ThemedText";
+import { ThemedView } from "../../libs/ThemedView";
 
 const PackageCard = ({ data }: { data: PremiumPackage }) => {
   return (

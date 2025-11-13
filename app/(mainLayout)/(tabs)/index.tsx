@@ -2,11 +2,11 @@ import Banner from "@/components/home/Banner";
 import FAQ from "@/components/home/FAQ";
 import HomeJobLists from "@/components/home/HomeJobLists";
 import HowItWorks from "@/components/home/HowItWorks";
+import Packages from "@/components/home/package/Packages";
 import Services from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
 import Testimonials from "@/components/home/Testimonials";
 import { ThemedView } from "@/components/libs/ThemedView";
-import Packages from "@/components/package/Packages";
 import React from "react";
 import { ScrollView } from "react-native";
 

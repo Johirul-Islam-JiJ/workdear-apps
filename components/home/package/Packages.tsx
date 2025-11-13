@@ -1,6 +1,6 @@
 import { useGetPremiumPackagesQuery } from "@/store/features/premium";
 import { View } from "react-native";
-import { ThemedText } from "../libs/ThemedText";
+import { ThemedText } from "../../libs/ThemedText";
 import PackageCard from "./PackageCard";
 import PackageLoadingCard from "./PackingLoadingCard";
 
