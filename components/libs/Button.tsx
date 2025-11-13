@@ -9,7 +9,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { ThemedText } from "./ThemedText";
+import { TextVariant, ThemedText } from "./ThemedText";
 
 type IconName = keyof typeof Ionicons.glyphMap;
 
@@ -21,6 +21,7 @@ interface ButtonProps extends PressableProps {
   size?: "small" | "medium" | "large";
   startIcon?: IconName | React.ReactNode;
   endIcon?: IconName | React.ReactNode;
+  textStyle?: TextVariant;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -32,6 +33,7 @@ const Button: React.FC<ButtonProps> = ({
   startIcon,
   endIcon,
   style,
+  textStyle = "button",
   ...props
 }) => {
   const mainColor = useThemeColor(color);
@@ -122,7 +124,7 @@ const Button: React.FC<ButtonProps> = ({
 
             {typeof title === "string" ? (
               <ThemedText
-                variant="button"
+                variant={textStyle}
                 color={textColor}
                 style={{ fontSize: sizes.fontSize }}
               >

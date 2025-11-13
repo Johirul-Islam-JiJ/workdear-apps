@@ -85,26 +85,22 @@ const MyWorkSummary = ({ data }: { data: MyWorkSummaryType }) => {
 
       <ThemedView style={rateWrapper} color="card">
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={{ flexDirection: "row", gap: 5 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
             <AppIcon color="success" size={20}>
               <Ionicons name="happy" />
             </AppIcon>
-            <ThemedText color="success" style={{ fontWeight: "bold" }}>
-              Completion Rate
-            </ThemedText>
+            <ThemedText color="success">Completion Rate</ThemedText>
           </View>
           <ThemedText color="success" style={{ fontWeight: "bold" }}>
             {completionRate}%
           </ThemedText>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={{ flexDirection: "row", gap: 5 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
             <AppIcon color="error" size={22}>
               <Ionicons name="close" />
             </AppIcon>
-            <ThemedText color="error" style={{ fontWeight: "bold" }}>
-              Rejection Rate
-            </ThemedText>
+            <ThemedText color="error">Rejection Rate</ThemedText>
           </View>
           <ThemedText color="error" style={{ fontWeight: "bold" }}>
             {rejectionRate}%

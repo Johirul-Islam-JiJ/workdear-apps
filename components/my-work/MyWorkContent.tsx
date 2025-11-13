@@ -16,7 +16,7 @@ const MyWorkContent = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
   const workSummary: MyWorkSummaryType = response?.data?.statistics || {};
 
   return (
-    <View>
+    <View style={{ rowGap: 10 }}>
       <MyWorkSummary data={workSummary} />
       <MyWorkList />
     </View>

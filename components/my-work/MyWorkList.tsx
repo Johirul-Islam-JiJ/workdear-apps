@@ -1,19 +1,35 @@
-import { MyWorkStatus } from "@/types/myWork";
 import React from "react";
-import { View, ViewStyle } from "react-native";
+import { View } from "react-native";
+import { DropdownMenu } from "../libs/DropdownMenu";
 import { ThemedText } from "../libs/ThemedText";
+import { ThemedView } from "../libs/ThemedView";
 
-const MyWorkList = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
-  const containerStyle: ViewStyle = {
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-  };
+const MyWorkList = ({}: {}) => {
+  const filterOptions = [
+    { label: "All", value: "" },
+    { label: "Under Review", value: "UNDER_REVIEW" },
+    { label: "Satisfied", value: "SATISFIED" },
+    { label: "Unsatisfied", value: "UNSATISFIED" },
+  ];
+
   return (
-    <View>
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
       <ThemedText variant="subtitle" color="primarydark" darkColor="white">
         Your submissions
       </ThemedText>
+      <ThemedView color="card" style={{ borderRadius: 10 }}>
+        <DropdownMenu
+          items={filterOptions}
+          placeholder="Filter"
+          onSelect={() => {}}
+        />
+      </ThemedView>
     </View>
   );
 };
