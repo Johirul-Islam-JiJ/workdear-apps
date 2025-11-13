@@ -19,7 +19,7 @@ export interface MyWork {
   };
 }
 
-export interface MyWorkSummary {
+export interface MyWorkSummaryType {
   star_count: number;
   total_earn: number;
   total_review: number;
