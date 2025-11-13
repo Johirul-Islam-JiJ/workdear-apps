@@ -19,7 +19,7 @@ const MyWorkContent = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
   if (isLoading) return <LoadingIndicator fullScreen />;
 
   return (
-    <View style={{ rowGap: 20 }}>
+    <View style={{ rowGap: 20, padding: 10 }}>
       <MyWorkSummary data={workSummary} />
       <MyWorkList onChangeStatus={setStatus} data={tasks} />
     </View>

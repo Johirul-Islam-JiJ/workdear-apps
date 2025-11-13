@@ -6,7 +6,7 @@ import { ScrollView } from "react-native";
 const MyWorkScreen = () => {
   return (
     <ThemedView color="background" style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1, padding: 10 }}>
+      <ScrollView style={{ flex: 1 }}>
         <MyWorkContent />
       </ScrollView>
     </ThemedView>
