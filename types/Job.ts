@@ -11,17 +11,13 @@ export type QuestionCondition = {
   };
 };
 
-/**
- * Represents a required proof for a job submission.
- */
+export type Answer = Record<string, string> | null;
+
 export type RequiredProofs = {
   type: string;
   description: string;
 };
 
-/**
- * Represents a single step in a job's instructions.
- */
 export type Steps = {
   step_number: number;
   instruction: string;
@@ -40,16 +36,10 @@ type JobCountry = {
   updated_at: string;
 };
 
-/**
- * Represents a report associated with a job.
- */
 type Report = {
   id: number;
 };
 
-/**
- * Represents a promotion associated with a job.
- */
 type JobPromotion = {
   id: number;
 };

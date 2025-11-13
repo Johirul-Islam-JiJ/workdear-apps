@@ -40,7 +40,7 @@ export interface JobSubmissionImage {
 }
 
 export interface MyWorkDetils {
-  answer: null;
+  answer: null | string;
   created_at: string;
   deleted_at: null | string;
   id: number;
