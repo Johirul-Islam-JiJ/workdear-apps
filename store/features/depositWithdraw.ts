@@ -1,6 +1,6 @@
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const depositWithdrawApi = api.injectEndpoints({
   endpoints: (builder) => ({
     depositeWithdraw: builder.mutation({
       query: (data) => ({
@@ -13,4 +13,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useDepositeWithdrawMutation } = api;
+export const { useDepositeWithdrawMutation } = depositWithdrawApi;

@@ -1,6 +1,6 @@
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const ticketApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getTicket: builder.query({
       query: () => ({
@@ -21,4 +21,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useGetTicketQuery, useBuyticketMutation } = api;
+export const { useGetTicketQuery, useBuyticketMutation } = ticketApi;

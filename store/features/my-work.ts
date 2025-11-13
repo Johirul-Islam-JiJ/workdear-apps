@@ -1,7 +1,7 @@
 import { config } from "@/config/config";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const taskApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getTasks: builder.query({
       query: (body) => ({
@@ -14,4 +14,4 @@ api.injectEndpoints({
   }),
 });
 
-export const { useGetTasksQuery } = api;
+export const { useGetTasksQuery } = taskApi;

@@ -1,6 +1,6 @@
 import { liveSupportApi } from "./baseQuery";
 
-liveSupportApi.injectEndpoints({
+const supportApi = liveSupportApi.injectEndpoints({
   endpoints: (builder) => ({
     getMessage: builder.query({
       query: (id) => `/live-chat/conversation_by_user_id/${id}`,
@@ -17,5 +17,4 @@ liveSupportApi.injectEndpoints({
   }),
 });
 
-export const { useGetMessageQuery, useSaveSupportFileMutation } =
-  liveSupportApi;
+export const { useGetMessageQuery, useSaveSupportFileMutation } = supportApi;

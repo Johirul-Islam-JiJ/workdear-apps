@@ -1,6 +1,6 @@
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const advertisementApi = api.injectEndpoints({
   endpoints: (builder) => ({
     createAd: builder.mutation({
       query: (data) => ({
@@ -11,7 +11,7 @@ api.injectEndpoints({
       invalidatesTags: ["ads"],
     }),
     getAds: builder.query({
-      query: (status, page) => ({
+      query: ({ status, page }) => ({
         url: `/advertisement/V1/search-by-status?search=${status}&page=${page}`,
         method: "GET",
       }),
@@ -48,4 +48,4 @@ export const {
   useGetAdCostsQuery,
   useUpdateAdvertisementMutation,
   useDeleteAdvertisementMutation,
-} = api;
+} = advertisementApi;

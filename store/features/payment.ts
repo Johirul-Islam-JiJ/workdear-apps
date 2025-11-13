@@ -1,7 +1,7 @@
 import { config } from "@/config/config";
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+const paymentApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getDepositTransactionHistory: builder.query({
       query: ({ page, status }) => ({
@@ -23,4 +23,4 @@ api.injectEndpoints({
 export const {
   useGetDepositTransactionHistoryQuery,
   useGetWithdrawTransactionHistoryQuery,
-} = api;
+} = paymentApi;

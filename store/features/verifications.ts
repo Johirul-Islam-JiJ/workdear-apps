@@ -1,6 +1,6 @@
 import { api } from "./baseQuery";
 
-api.injectEndpoints({
+export const verificationsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     manualVarification: builder.mutation({
       query: (data) => ({
@@ -31,4 +31,4 @@ export const {
   useManualVarificationMutation,
   useInstansVerificationMutation,
   useUpdateVerificationTypeMutation,
-} = api;
+} = verificationsApi;

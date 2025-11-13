@@ -1,4 +1,4 @@
-import { useGetTasksQuery } from "@/store/features/task";
+import { useGetTasksQuery } from "@/store/features/my-work";
 import { MyWork, MyWorkStatus, MyWorkSummaryType } from "@/types/myWork";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";

@@ -1,5 +1,5 @@
 import { config } from "@/config/config";
-import { api } from "../baseQuery";
+import { api } from "./baseQuery";
 
 const checkTaskProfsApi = api.injectEndpoints({
   endpoints: (builder) => ({
