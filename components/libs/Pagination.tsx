@@ -49,8 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         onPress={handlePrev}
         disabled={currentPage === 1}
-        color={currentPage === 1 ? "border" : "primarydark"}
-        style={styles.iconButton}
+        style={[styles.iconButton, { opacity: currentPage === 1 ? 0.5 : 1 }]}
         title={
           <AppIcon color="white">
             <MaterialIcons name="chevron-left" />
