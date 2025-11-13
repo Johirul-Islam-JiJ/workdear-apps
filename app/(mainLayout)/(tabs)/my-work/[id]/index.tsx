@@ -38,7 +38,7 @@ const MyWorkDetails = () => {
             >
               Job information
             </ThemedText>
-            <JobInfoCard job={task.job} rating={task.rating} />
+            <JobInfoCard job={task.job} />
           </View>
         </View>
       </ScrollView>

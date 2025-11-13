@@ -3,13 +3,13 @@ import Badge from "@/components/libs/Badge";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { Job } from "@/types/Job";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Octicons } from "@expo/vector-icons";
 import React from "react";
 import { View, ViewStyle } from "react-native";
 import JobReportCard, { JobSummaryCardProps } from "./JobReportCard";
 import SubmissionRequirement from "./SubmissionRequirement";
 
-const JobInfoCard = ({ job, rating }: { job: Job; rating: string }) => {
+const JobInfoCard = ({ job }: { job: Job }) => {
   const jobReports: JobSummaryCardProps[] = [
     {
       label: "Payment",
@@ -23,7 +23,7 @@ const JobInfoCard = ({ job, rating }: { job: Job; rating: string }) => {
     },
     {
       label: "Workers",
-      value: job.total_workers_required,
+      value: `${job.submission_information.APPROVED}/${job.total_workers_required}`,
       color: "info",
       Icon: (
         <AppIcon color="info" size={20}>
@@ -33,7 +33,7 @@ const JobInfoCard = ({ job, rating }: { job: Job; rating: string }) => {
     },
     {
       label: "Duration",
-      value: job.estimated_day,
+      value: `${job.estimated_day} days`,
       color: "primarydark",
       Icon: (
         <AppIcon color="primarydark" size={20}>
@@ -42,12 +42,12 @@ const JobInfoCard = ({ job, rating }: { job: Job; rating: string }) => {
       ),
     },
     {
-      label: "Rating (You)",
-      value: `${rating}/5`,
+      label: "Pending",
+      value: job.submission_information.UNDER_REVIEW,
       color: "warning",
       Icon: (
         <AppIcon color="warning" size={20}>
-          <FontAwesome name="star" />
+          <Octicons name="stopwatch" />
         </AppIcon>
       ),
     },

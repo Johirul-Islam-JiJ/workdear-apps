@@ -1,25 +1,31 @@
 import Badge from "@/components/libs/Badge";
+import Rating from "@/components/libs/Rating";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { config } from "@/config/config";
 import { Answer } from "@/types/Job";
 import { MyWorkDetils, MyWorkStatus } from "@/types/myWork";
-import { Image } from "expo-image";
+import { Image, ImageStyle } from "expo-image";
 import React from "react";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 
 const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
   const answers: Answer = data.answer ? JSON.parse(data.answer) : null;
 
+  const rowStyle: ViewStyle = {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+  const imageStyle: ImageStyle = {
+    height: 200,
+    width: "100%",
+    borderRadius: 10,
+    marginBottom: 10,
+  };
   return (
     <ThemedView color="card" style={{ padding: 10, borderRadius: 10, gap: 10 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <View style={rowStyle}>
         <ThemedText style={{ fontWeight: "bold" }}>Current status:</ThemedText>
         <Badge
           label={data.status}
@@ -32,6 +38,12 @@ const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
               : "error"
           }
         />
+      </View>
+      <View style={rowStyle}>
+        <ThemedText style={{ fontWeight: "bold" }}>
+          Rating (This task):
+        </ThemedText>
+        <Rating value={parseInt(data.rating)} />
       </View>
       <View>
         <ThemedText style={{ fontWeight: "bold" }}>Answer:</ThemedText>
@@ -56,12 +68,7 @@ const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
             key={index}
             source={{ uri: config.fileBaseUrl + image.image_path }}
             alt={`screenshot-${index}`}
-            style={{
-              height: 200,
-              width: "100%",
-              borderRadius: 10,
-              marginBottom: 10,
-            }}
+            style={imageStyle}
             contentFit="contain"
           />
         ))}
