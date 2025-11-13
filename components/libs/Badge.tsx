@@ -11,7 +11,7 @@ interface BadgeProps {
   label?: string;
   icon?: IconName;
   color?: ColorScheme;
-  variant?: "contained" | "outlined" | "dot";
+  variant?: "contained" | "outlined" | "dot" | "soft";
   size?: "small" | "medium" | "large";
   style?: ViewStyle;
 }
@@ -25,6 +25,7 @@ const Badge: React.FC<BadgeProps> = ({
   style,
 }) => {
   const backgroundColor = useThemeColor(color);
+  const backgroundColorSoft = `${backgroundColor}20`;
 
   const sizeStyles = {
     small: { paddingHorizontal: 6, paddingVertical: 2, fontSize: 12 },
@@ -55,7 +56,11 @@ const Badge: React.FC<BadgeProps> = ({
         styles.container,
         {
           backgroundColor:
-            variant === "contained" ? backgroundColor : "transparent",
+            variant === "contained"
+              ? backgroundColor
+              : variant === "soft"
+              ? backgroundColorSoft
+              : "transparent",
           borderColor: variant === "outlined" ? backgroundColor : "transparent",
           borderWidth: variant === "outlined" ? 1 : 0,
           paddingHorizontal: sizeStyles.paddingHorizontal,

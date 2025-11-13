@@ -9,16 +9,23 @@ import {
 } from "@/store/features/jobs";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 
 interface JobReportProps {
   jobId: number | null;
   submissionId: number | null;
   type: "job" | "job_submission";
   title: string;
+  style?: ViewStyle;
 }
 
-const JobReport = ({ jobId, submissionId, type, title }: JobReportProps) => {
+const JobReport = ({
+  jobId,
+  submissionId,
+  type,
+  title,
+  style,
+}: JobReportProps) => {
   const [reportJob, { isLoading }] = useReportJobMutation();
   const [showModal, setShowModal] = useState(0);
   const toast = useToast();
@@ -53,7 +60,12 @@ const JobReport = ({ jobId, submissionId, type, title }: JobReportProps) => {
 
   return (
     <>
-      <Button onPress={() => setShowModal(1)} title="Report" color="warning" />
+      <Button
+        onPress={() => setShowModal(1)}
+        title="Report"
+        color="warning"
+        style={style}
+      />
       {!!showModal && (
         <Modal
           visible={showModal}
