@@ -26,7 +26,7 @@ const MyWorkCard = ({ task }: { task: MyWork }) => {
     borderRadius: 6,
   };
   return (
-    <ThemedView style={conainerStyle} key={task.task.id}>
+    <ThemedView color="card" style={conainerStyle} key={task.task.id}>
       <View>
         <ThemedText
           style={{ fontWeight: "bold" }}
@@ -35,7 +35,7 @@ const MyWorkCard = ({ task }: { task: MyWork }) => {
         >
           {task.job.title}
         </ThemedText>
-        <ThemedText color="gray.700" variant="small">
+        <ThemedText color="gray.700" darkColor="gray.300" variant="small">
           {new Date(task.task.created_at).toLocaleDateString("en-BN", {
             day: "numeric",
             month: "short",
