@@ -31,7 +31,11 @@ const MyWorkContent = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
     <View style={{ rowGap: 20, padding: 10 }}>
       <MyWorkSummary data={workSummary} />
       <MyWorkList onChangeStatus={setStatus} data={tasks} />
-      <Pagination totalPages={100} currentPage={page} onChange={setPage} />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={page}
+        onChange={setPage}
+      />
     </View>
   );
 };
