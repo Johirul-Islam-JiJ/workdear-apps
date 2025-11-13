@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     fontFamily: "RobotoSerifBold",
   },
   Subtitle: {
-    fontSize: 20,
-    lineHeight: 28,
+    fontSize: 18,
+    lineHeight: 26,
     fontFamily: "RobotoSerifBold",
   },
   Caption: {

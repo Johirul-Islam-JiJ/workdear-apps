@@ -11,7 +11,12 @@ type props = {
 const LineChart = ({ label, value }: props) => {
   return (
     <View style={{ flex: 1, gap: 3 }}>
-      <ThemedText style={{ textAlign: "center" }}>{label}</ThemedText>
+      <ThemedText
+        variant="small"
+        style={{ textAlign: "center", fontWeight: "bold" }}
+      >
+        {label}
+      </ThemedText>
       <ThemedView
         color="gray.400"
         style={{ height: 6, borderRadius: 10, overflow: "hidden" }}

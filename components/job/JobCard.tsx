@@ -18,7 +18,11 @@ const JobCard = ({ job }: { job: Job }) => {
     <Link href={`/(mainLayout)/(tabs)/jobs/${job.slug}`} asChild>
       <Pressable style={{ flex: 1 }}>
         <ThemedView color="card" style={styles.container}>
-          <ThemedText variant="body2" numberOfLines={2} ellipsizeMode="tail">
+          <ThemedText
+            style={{ fontWeight: "bold" }}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          >
             {job.title}
           </ThemedText>
 
@@ -31,7 +35,11 @@ const JobCard = ({ job }: { job: Job }) => {
           >
             <LineChart label={label} value={progress} />
             <View>
-              <ThemedText color="text" style={{ textAlign: "right" }}>
+              <ThemedText
+                color="text"
+                variant="small"
+                style={{ textAlign: "right", fontWeight: "bold" }}
+              >
                 ${job.pay_per_task}
               </ThemedText>
               <ThemedText darkColor="gray.300" color="gray.600" variant="small">
