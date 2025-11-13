@@ -3,6 +3,7 @@ import { MyWork, MyWorkStatus, MyWorkSummaryType } from "@/types/myWork";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
+import Pagination from "../libs/Pagination";
 import MyWorkList from "./MyWorkList";
 import MyWorkSummary from "./MyWorkSummary";
 
@@ -30,6 +31,7 @@ const MyWorkContent = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
     <View style={{ rowGap: 20, padding: 10 }}>
       <MyWorkSummary data={workSummary} />
       <MyWorkList onChangeStatus={setStatus} data={tasks} />
+      <Pagination totalPages={100} currentPage={page} onChange={setPage} />
     </View>
   );
 };
