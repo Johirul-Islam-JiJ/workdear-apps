@@ -1,10 +1,10 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View, ViewStyle } from "react-native";
 
 interface LoadingIndicatorProps {
   fullScreen?: boolean;
-  style?: object;
+  style?: ViewStyle;
 }
 
 export default function LoadingIndicator({
