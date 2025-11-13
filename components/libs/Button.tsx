@@ -110,9 +110,10 @@ const Button: React.FC<ButtonProps> = ({
     <Pressable
       {...props}
       disabled={loading || props.disabled}
-      style={(state) => [
+      style={({ pressed, hovered }) => [
         containerStyle,
-        typeof style === "function" ? style(state) : style,
+        pressed && { opacity: 0.7 },
+        typeof style === "function" ? style({ pressed, hovered }) : style,
       ]}
     >
       {loading ? (
