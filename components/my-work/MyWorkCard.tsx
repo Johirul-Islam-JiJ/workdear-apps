@@ -75,7 +75,10 @@ const MyWorkCard = ({ task }: { task: MyWork }) => {
             buttonSize="small"
           />
         )}
-        <Link href={`/(mainLayout)/(tabs)/jobs/${task.job.slug}`} asChild>
+        <Link
+          href={`/(mainLayout)/(tabs)/jobs/details/${task.job.slug}`}
+          asChild
+        >
           <Button style={buttonStyle} title="View Job" size="small" />
         </Link>
         <Link href={`/(mainLayout)/(tabs)/my-work/${task.task.id}`} asChild>

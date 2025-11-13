@@ -4,15 +4,15 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { ScrollView } from "react-native";
 
-const MyWorkDetails = () => {
-  const { id } = useLocalSearchParams();
+const JobDetails = () => {
+  const { slug } = useLocalSearchParams();
   return (
     <ThemedView color="background" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        <ThemedText>My work details ID: {id}</ThemedText>
+        <ThemedText>Job details Slug: {slug}</ThemedText>
       </ScrollView>
     </ThemedView>
   );
 };
 
-export default MyWorkDetails;
+export default JobDetails;
