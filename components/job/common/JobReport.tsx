@@ -17,6 +17,7 @@ interface JobReportProps {
   type: "job" | "job_submission";
   title: string;
   style?: ViewStyle;
+  buttonSize?: "small" | "medium" | "large";
 }
 
 const JobReport = ({
@@ -25,6 +26,7 @@ const JobReport = ({
   type,
   title,
   style,
+  buttonSize,
 }: JobReportProps) => {
   const [reportJob, { isLoading }] = useReportJobMutation();
   const [showModal, setShowModal] = useState(0);
@@ -65,6 +67,8 @@ const JobReport = ({
         title="Report"
         color="warning"
         style={style}
+        startIcon="flag"
+        size={buttonSize}
       />
       {!!showModal && (
         <Modal

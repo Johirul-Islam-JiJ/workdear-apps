@@ -110,4 +110,12 @@ export const tabScreens: TabScreen[] = [
     href: null,
     tabBarStyle: { display: "none" },
   },
+  {
+    id: 7,
+    name: "my-work/[id]/index",
+    title: "Task information",
+    Icon: () => null,
+    href: null,
+    tabBarStyle: { display: "none" },
+  },
 ];
