@@ -11,7 +11,14 @@ const taskApi = api.injectEndpoints({
       }),
       providesTags: ["tasks"],
     }),
+    getTaskById: builder.query({
+      query: (id) => ({
+        url: `/my-task/show/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["single-tasks"],
+    }),
   }),
 });
 
-export const { useGetTasksQuery } = taskApi;
+export const { useGetTasksQuery, useGetTaskByIdQuery } = taskApi;

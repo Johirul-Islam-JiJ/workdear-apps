@@ -102,6 +102,7 @@ export const api = createApi({
     "faqs",
     "single-jobs",
     "getingSubmitedTaskProfs",
+    "single-tasks",
   ],
   endpoints: () => ({}),
 });

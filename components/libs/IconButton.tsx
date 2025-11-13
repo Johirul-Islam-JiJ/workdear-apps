@@ -12,7 +12,7 @@ import {
 type IconName = keyof typeof Ionicons.glyphMap;
 
 type IconButtonProps = {
-  icon: IconName;
+  icon: IconName | React.ReactNode;
   size?: "sm" | "md" | "lg";
   color?: ColorScheme;
   darkColor?: ColorScheme | null;
@@ -76,7 +76,15 @@ const IconButton: React.FC<IconButtonProps> = ({
       ]}
     >
       <View>
-        <Ionicons name={icon} size={iconSize} color={colorValue} />
+        {typeof icon === "string" ? (
+          <Ionicons
+            name={icon as IconName}
+            size={iconSize}
+            color={colorValue}
+          />
+        ) : (
+          icon
+        )}
       </View>
     </TouchableOpacity>
   );

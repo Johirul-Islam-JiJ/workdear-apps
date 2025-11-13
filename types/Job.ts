@@ -61,6 +61,7 @@ export enum JobStatus {
   DRAFT = "DRAFT",
   COMPLETED = "COMPLETED",
   CLOSED = "CLOSED",
+  EXPIRED = "EXPIRED",
 }
 
 type SubmissionInformation = {
