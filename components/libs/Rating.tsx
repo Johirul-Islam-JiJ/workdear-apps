@@ -2,14 +2,16 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { View, ViewStyle } from "react-native";
 import AppIcon from "./AppIcon";
+import { ThemedText } from "./ThemedText";
 
 interface RatingProps {
   value: number;
   max?: number;
   size?: number;
+  ratingInfo?: string;
 }
 
-const Rating = ({ value, max = 5, size = 20 }: RatingProps) => {
+const Rating = ({ value, max = 5, size = 20, ratingInfo }: RatingProps) => {
   const stars = [];
   for (let i = 1; i <= max; i++) {
     if (i <= Math.floor(value)) {
@@ -42,7 +44,12 @@ const Rating = ({ value, max = 5, size = 20 }: RatingProps) => {
     columnGap: 2,
   };
 
-  return <View style={containerStyle}>{stars}</View>;
+  return (
+    <View style={containerStyle}>
+      {stars}
+      <ThemedText variant="small">{ratingInfo}</ThemedText>
+    </View>
+  );
 };
 
 export default Rating;

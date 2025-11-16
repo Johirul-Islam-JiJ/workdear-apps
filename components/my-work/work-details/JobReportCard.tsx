@@ -41,7 +41,9 @@ const JobReportCard = ({
       <IconButton icon={Icon} color={color} variant="solid" />
       <View>
         <ThemedText color={color}>{label}</ThemedText>
-        <ThemedText variant={variant}>{value}</ThemedText>
+        <ThemedText color={color} variant={variant}>
+          {value}
+        </ThemedText>
       </View>
     </View>
   );

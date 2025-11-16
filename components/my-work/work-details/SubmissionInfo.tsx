@@ -1,7 +1,7 @@
 import Badge from "@/components/libs/Badge";
+import Card from "@/components/libs/Card";
 import Rating from "@/components/libs/Rating";
 import { ThemedText } from "@/components/libs/ThemedText";
-import { ThemedView } from "@/components/libs/ThemedView";
 import { config } from "@/config/config";
 import { Answer } from "@/types/Job";
 import { MyWorkDetils, MyWorkStatus } from "@/types/myWork";
@@ -28,10 +28,22 @@ const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
       <ThemedText variant="subtitle" color="primarydark" darkColor="white">
         Task information
       </ThemedText>
-      <ThemedView
-        color="card"
-        style={{ padding: 10, borderRadius: 10, gap: 10 }}
-      >
+      <Card>
+        <View style={rowStyle}>
+          <ThemedText style={{ fontWeight: "bold" }}>
+            Submission date:
+          </ThemedText>
+          <ThemedText>
+            {new Date(data.created_at).toLocaleDateString("en-BN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
+            })}
+          </ThemedText>
+        </View>
         <View style={rowStyle}>
           <ThemedText style={{ fontWeight: "bold" }}>
             Current status:
@@ -83,7 +95,7 @@ const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
             />
           ))}
         </View>
-      </ThemedView>
+      </Card>
     </View>
   );
 };
