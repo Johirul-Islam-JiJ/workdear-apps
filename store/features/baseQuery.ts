@@ -106,6 +106,7 @@ export const api = createApi({
     "privacy-policy",
     "refund-policy",
     "terms-and-conditions",
+    "cancelation-policy",
   ],
   endpoints: () => ({}),
 });

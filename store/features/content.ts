@@ -18,6 +18,10 @@ const contentApi = api.injectEndpoints({
       query: () => `/content/pages/terms_conditions`,
       providesTags: ["terms-and-conditions"],
     }),
+    getCancelationPolicy: builder.query<any, void>({
+      query: () => `/content/pages/cancelation_policy`,
+      providesTags: ["cancelation-policy"],
+    }),
   }),
 });
 
@@ -26,4 +30,5 @@ export const {
   useGetPrivacyPolicyQuery,
   useGetRefundPolicyQuery,
   useGetTermsAndConditionsQuery,
+  useGetCancelationPolicyQuery,
 } = contentApi;
