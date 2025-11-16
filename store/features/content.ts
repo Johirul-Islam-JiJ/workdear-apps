@@ -14,6 +14,10 @@ const contentApi = api.injectEndpoints({
       query: () => `/content/pages/refund_policy`,
       providesTags: ["refund-policy"],
     }),
+    getTermsAndConditions: builder.query<any, void>({
+      query: () => `/content/pages/terms_conditions`,
+      providesTags: ["terms-and-conditions"],
+    }),
   }),
 });
 
@@ -21,4 +25,5 @@ export const {
   useGetFaqContentQuery,
   useGetPrivacyPolicyQuery,
   useGetRefundPolicyQuery,
+  useGetTermsAndConditionsQuery,
 } = contentApi;

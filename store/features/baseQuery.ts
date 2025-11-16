@@ -105,6 +105,7 @@ export const api = createApi({
     "single-tasks",
     "privacy-policy",
     "refund-policy",
+    "terms-and-conditions",
   ],
   endpoints: () => ({}),
 });
