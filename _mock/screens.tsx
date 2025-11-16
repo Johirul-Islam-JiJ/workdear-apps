@@ -46,6 +46,11 @@ export const drawerScreens = [
     name: "live-support/index",
     drawerLabel: "Live support",
   },
+  {
+    id: 9,
+    name: "my-jobs/index",
+    drawerLabel: "My jobs",
+  },
 ];
 
 export type TabScreen = {

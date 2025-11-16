@@ -1,4 +1,4 @@
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { menus } from "./paths";
 import { drawerScreens } from "./screens";
 
@@ -16,6 +16,13 @@ export const drawerMenus = [
     path: drawerScreens[2].name,
     Icon: ({ color, size }: { color: string; size: number }) => (
       <FontAwesome name="user-o" size={size} color={color} />
+    ),
+  },
+  {
+    label: drawerScreens[8].drawerLabel,
+    path: drawerScreens[8].name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <MaterialIcons name="work-outline" size={size} color={color} />
     ),
   },
   {
