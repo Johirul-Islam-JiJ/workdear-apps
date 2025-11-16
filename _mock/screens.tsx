@@ -5,53 +5,45 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Animated, StyleProp, ViewStyle } from "react-native";
 
-export const drawerScreens = [
-  {
-    id: 1,
+// ----------------- drawer screens -----------------------
+export const drawerScreens = {
+  home: {
     name: "(tabs)",
     drawerLabel: "Home",
   },
-  {
-    id: 2,
+  verify: {
     name: "verification/index",
     drawerLabel: "Verify now",
   },
-  {
-    id: 3,
+  profile: {
     name: "user-profile/index",
     drawerLabel: "My profile",
   },
-  {
-    id: 4,
-    name: "ticket/index",
-    drawerLabel: "Ticket",
-  },
-  {
-    id: 5,
-    name: "deposit/index",
-    drawerLabel: "Deposit",
-  },
-  {
-    id: 6,
-    name: "wallet/index",
-    drawerLabel: "Wallet",
-  },
-  {
-    id: 7,
-    name: "transaction-history/index",
-    drawerLabel: "Transaction history",
-  },
-  {
-    id: 8,
-    name: "live-support/index",
-    drawerLabel: "Live support",
-  },
-  {
-    id: 9,
+  myJobs: {
     name: "my-jobs/index",
     drawerLabel: "My jobs",
   },
-];
+  ticket: {
+    name: "ticket/index",
+    drawerLabel: "Ticket",
+  },
+  advertisement: {
+    name: "advertisement/index",
+    drawerLabel: "Advertisement",
+  },
+  deposit: {
+    name: "deposit/index",
+    drawerLabel: "Deposit",
+  },
+  wallet: {
+    name: "wallet/index",
+    drawerLabel: "Wallet",
+  },
+  history: {
+    name: "transaction-history/index",
+    drawerLabel: "Transaction history",
+  },
+};
 
 export type TabScreen = {
   id: number;

@@ -1,16 +1,9 @@
 import { drawerMenus } from "@/_mock/menus";
 import Button from "@/components/libs/Button";
-import { ExternalLink } from "@/components/libs/ExternalLink";
 import ThemeSwitch from "@/components/libs/ThemeSwitch";
-import { ThemedText } from "@/components/libs/ThemedText";
 import { useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import {
-  Entypo,
-  FontAwesome5,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import React from "react";
 import { StyleSheet, useColorScheme, View } from "react-native";
@@ -48,7 +41,7 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
       </View>
 
       <View style={{ gap: 8 }}>
-        <ExternalLink href="https://t.me/joinchat/AAAAAEc-5_45Y095">
+        {/* <ExternalLink href="https://t.me/joinchat/AAAAAEc-5_45Y095">
           <View style={style.telegram}>
             <View style={style.linkLabel}>
               <FontAwesome5 name="telegram-plane" size={22} color={textColor} />
@@ -58,7 +51,7 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
             </View>
             <Ionicons name="chevron-forward" size={18} color={textColor} />
           </View>
-        </ExternalLink>
+        </ExternalLink> */}
         <Button
           title="Theme mode"
           endIcon={<ThemeSwitch />}

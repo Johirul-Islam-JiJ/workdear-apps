@@ -17,7 +17,7 @@ export default function Layout() {
         }}
         drawerContent={(props) => <DrawerContent {...props} />}
       >
-        {drawerScreens.map(({ id, name, drawerLabel }) => (
+        {Object.entries(drawerScreens).map(([id, { name, drawerLabel }]) => (
           <Drawer.Screen
             key={id}
             name={name}
