@@ -36,8 +36,7 @@ export default function ContentRenderer({ html }: { html: string }) {
         color: textColor,
       },
       ul: {
-        marginLeft: 16,
-        marginBottom: 10,
+        paddingLeft: 20,
         color: textColor,
       },
       li: {

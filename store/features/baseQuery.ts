@@ -104,6 +104,7 @@ export const api = createApi({
     "getingSubmitedTaskProfs",
     "single-tasks",
     "privacy-policy",
+    "refund-policy",
   ],
   endpoints: () => ({}),
 });
