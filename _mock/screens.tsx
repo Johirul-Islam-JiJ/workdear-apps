@@ -5,8 +5,8 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Animated, StyleProp, ViewStyle } from "react-native";
 
-// ----------------- drawer screens -----------------------
 export const drawerScreens = {
+  // ----------------- drawer screens -----------------------
   home: {
     name: "(tabs)",
     drawerLabel: "Home",
@@ -35,13 +35,93 @@ export const drawerScreens = {
     name: "deposit/index",
     drawerLabel: "Deposit",
   },
+  history: {
+    name: "transaction-history/index",
+    drawerLabel: "Transaction history",
+  },
+
+  // -------------------- more screens -----------------------
+
+  // achivement and ranking screens
+  topWorkers: {
+    name: "top-workers/index",
+    drawerLabel: "Top workers",
+  },
+  topJobPoster: {
+    name: "top-job-poster/index",
+    drawerLabel: "Top job poster",
+  },
+  topReffer: {
+    name: "top-reffer/index",
+    drawerLabel: "Top reffer",
+  },
+  topUsers: {
+    name: "top-users/index",
+    drawerLabel: "Best users",
+  },
+
+  // earn and withdraw screens
+  shareAndEarn: {
+    name: "share-and-earn/index",
+    drawerLabel: "Share and Earn",
+  },
+  playandearn: {
+    name: "play-and-earn/index",
+    drawerLabel: "Play and Earn",
+  },
   wallet: {
     name: "wallet/index",
     drawerLabel: "Wallet",
   },
-  history: {
-    name: "transaction-history/index",
-    drawerLabel: "Transaction history",
+
+  // settings and preference screen
+  notification: {
+    name: "notification/index",
+    drawerLabel: "Notification",
+  },
+
+  // help and support screen
+  aboutUs: {
+    name: "about-us/index",
+    drawerLabel: "About us",
+  },
+  faq: {
+    name: "faq/index",
+    drawerLabel: "FAQ",
+  },
+  blogs: {
+    name: "blogs/index",
+    drawerLabel: "Blogs",
+  },
+  contactUs: {
+    name: "contact-us/index",
+    drawerLabel: "Contact us",
+  },
+  joinTelegram: {
+    name: "join-telegram/index",
+    drawerLabel: "Join Telegram",
+  },
+  liveSupport: {
+    name: "live-support/index",
+    drawerLabel: "Live support",
+  },
+
+  // Legal and policies screen
+  termsAndConditions: {
+    name: "terms-and-conditions/index",
+    drawerLabel: "Terms and conditions",
+  },
+  privacyPolicy: {
+    name: "privacy-policy/index",
+    drawerLabel: "Privacy policy",
+  },
+  refundPolicy: {
+    name: "refund-policy/index",
+    drawerLabel: "Refund policy",
+  },
+  cancelationPolicy: {
+    name: "cancelation-policy/index",
+    drawerLabel: "Cancelation policy",
   },
 };
 

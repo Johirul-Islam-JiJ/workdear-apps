@@ -51,13 +51,6 @@ export const drawerMenus = [
     ),
   },
   {
-    label: drawerScreens.wallet.drawerLabel,
-    path: drawerScreens.wallet.name,
-    Icon: ({ color, size }: { color: string; size: number }) => (
-      <Ionicons name="wallet-outline" size={size} color={color} />
-    ),
-  },
-  {
     label: drawerScreens.history.drawerLabel,
     path: drawerScreens.history.name,
     Icon: ({ color, size }: { color: string; size: number }) => (
@@ -75,7 +68,32 @@ export const moreMenus = [
     ),
     menus: [
       {
-        label: "",
+        label: drawerScreens.topWorkers.drawerLabel,
+        path: drawerScreens.topWorkers.name,
+        Icon: ({ color, size }: { color: string; size: number }) => (
+          <Ionicons name="star" size={size} color={color} />
+        ),
+      },
+      {
+        label: drawerScreens.topJobPoster.drawerLabel,
+        path: drawerScreens.topJobPoster.name,
+        Icon: ({ color, size }: { color: string; size: number }) => (
+          <Ionicons name="star" size={size} color={color} />
+        ),
+      },
+      {
+        label: drawerScreens.topReffer.drawerLabel,
+        path: drawerScreens.topReffer.name,
+        Icon: ({ color, size }: { color: string; size: number }) => (
+          <Ionicons name="star" size={size} color={color} />
+        ),
+      },
+      {
+        label: drawerScreens.topUsers.drawerLabel,
+        path: drawerScreens.topUsers.name,
+        Icon: ({ color, size }: { color: string; size: number }) => (
+          <Ionicons name="star" size={size} color={color} />
+        ),
       },
     ],
   },
