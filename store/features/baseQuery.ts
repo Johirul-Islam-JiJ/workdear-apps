@@ -103,6 +103,7 @@ export const api = createApi({
     "single-jobs",
     "getingSubmitedTaskProfs",
     "single-tasks",
+    "privacy-policy",
   ],
   endpoints: () => ({}),
 });

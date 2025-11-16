@@ -6,7 +6,11 @@ const contentApi = api.injectEndpoints({
       query: () => `/faqs`,
       providesTags: ["faqs"],
     }),
+    getPrivacyPolicy: builder.query<any, void>({
+      query: () => `content/pages/privacy_policy`,
+      providesTags: ["privacy-policy"],
+    }),
   }),
 });
 
-export const { useGetFaqContentQuery } = contentApi;
+export const { useGetFaqContentQuery, useGetPrivacyPolicyQuery } = contentApi;

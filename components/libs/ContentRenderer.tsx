@@ -43,6 +43,11 @@ export default function ContentRenderer({ html }: { html: string }) {
       li: {
         fontSize: 16,
         color: textColor,
+        listStyleType: "decimal",
+      },
+      ol: {
+        paddingLeft: 20,
+        color: textColor,
       },
     }),
     [textColor]
