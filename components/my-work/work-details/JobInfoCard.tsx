@@ -64,33 +64,41 @@ const JobInfoCard = ({ job }: { job: Job }) => {
   };
 
   return (
-    <ThemedView color="card" style={{ padding: 10, borderRadius: 10, gap: 10 }}>
-      <View>
-        <ThemedText variant="body2">{job.title}</ThemedText>
-        <ThemedText variant="small">Job code: {job.job_code}</ThemedText>
-        <View style={{ flexDirection: "row", marginTop: 5 }}>
-          <Badge
-            style={{ borderRadius: 5 }}
-            label={job.status}
-            color={
-              job.status === "APPROVED"
-                ? "success"
-                : job.status === "EXPIRED"
-                ? "warning"
-                : job.status === "REJECTED"
-                ? "error"
-                : "border"
-            }
-          />
+    <View style={{ rowGap: 10 }}>
+      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
+        Job information
+      </ThemedText>
+      <ThemedView
+        color="card"
+        style={{ padding: 10, borderRadius: 10, gap: 10 }}
+      >
+        <View>
+          <ThemedText variant="body2">{job.title}</ThemedText>
+          <ThemedText variant="small">Job code: {job.job_code}</ThemedText>
+          <View style={{ flexDirection: "row", marginTop: 5 }}>
+            <Badge
+              style={{ borderRadius: 5 }}
+              label={job.status}
+              color={
+                job.status === "APPROVED"
+                  ? "success"
+                  : job.status === "EXPIRED"
+                  ? "warning"
+                  : job.status === "REJECTED"
+                  ? "error"
+                  : "border"
+              }
+            />
+          </View>
+          <View style={reportWrapper}>
+            {jobReports.map((item, index) => (
+              <JobReportCard key={index} {...item} style={{ width: "49%" }} />
+            ))}
+          </View>
         </View>
-        <View style={reportWrapper}>
-          {jobReports.map((item, index) => (
-            <JobReportCard key={index} {...item} style={{ width: "49%" }} />
-          ))}
-        </View>
-      </View>
-      <SubmissionRequirement job={job} />
-    </ThemedView>
+        <SubmissionRequirement job={job} />
+      </ThemedView>
+    </View>
   );
 };
 

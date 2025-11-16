@@ -24,56 +24,67 @@ const SubmissionInfo = ({ data }: { data: MyWorkDetils }) => {
     marginBottom: 10,
   };
   return (
-    <ThemedView color="card" style={{ padding: 10, borderRadius: 10, gap: 10 }}>
-      <View style={rowStyle}>
-        <ThemedText style={{ fontWeight: "bold" }}>Current status:</ThemedText>
-        <Badge
-          label={data.status}
-          style={{ borderRadius: 5 }}
-          color={
-            data.status === MyWorkStatus.UNDER_REVIEW
-              ? "warning"
-              : data.status === MyWorkStatus.SATISFIED
-              ? "success"
-              : "error"
-          }
-        />
-      </View>
-      <View style={rowStyle}>
-        <ThemedText style={{ fontWeight: "bold" }}>
-          Rating (This task):
-        </ThemedText>
-        <Rating value={parseInt(data.rating)} />
-      </View>
-      <View>
-        <ThemedText style={{ fontWeight: "bold" }}>Answer:</ThemedText>
-        {answers ? (
-          Object.entries(answers).map(([key, value]) => (
-            <ThemedText key={key}>
-              Answer for {key}: <ThemedText variant="body2">{value}</ThemedText>
-            </ThemedText>
-          ))
-        ) : (
-          <ThemedText>Not applicable</ThemedText>
-        )}
-      </View>
-      <View>
-        <ThemedText style={{ fontWeight: "bold" }}>Proofs text:</ThemedText>
-        <ThemedText>{data.proof_data}</ThemedText>
-      </View>
-      <View style={{ rowGap: 5 }}>
-        <ThemedText style={{ fontWeight: "bold" }}>Screenshots:</ThemedText>
-        {data.job_submission_image.map((image, index) => (
-          <Image
-            key={index}
-            source={{ uri: config.fileBaseUrl + image.image_path }}
-            alt={`screenshot-${index}`}
-            style={imageStyle}
-            contentFit="contain"
+    <View style={{ rowGap: 10 }}>
+      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
+        Task information
+      </ThemedText>
+      <ThemedView
+        color="card"
+        style={{ padding: 10, borderRadius: 10, gap: 10 }}
+      >
+        <View style={rowStyle}>
+          <ThemedText style={{ fontWeight: "bold" }}>
+            Current status:
+          </ThemedText>
+          <Badge
+            label={data.status}
+            style={{ borderRadius: 5 }}
+            color={
+              data.status === MyWorkStatus.UNDER_REVIEW
+                ? "warning"
+                : data.status === MyWorkStatus.SATISFIED
+                ? "success"
+                : "error"
+            }
           />
-        ))}
-      </View>
-    </ThemedView>
+        </View>
+        <View style={rowStyle}>
+          <ThemedText style={{ fontWeight: "bold" }}>
+            Rating (This task):
+          </ThemedText>
+          <Rating value={parseInt(data.rating)} />
+        </View>
+        <View>
+          <ThemedText style={{ fontWeight: "bold" }}>Answer:</ThemedText>
+          {answers ? (
+            Object.entries(answers).map(([key, value]) => (
+              <ThemedText key={key}>
+                Answer for {key}:{" "}
+                <ThemedText variant="body2">{value}</ThemedText>
+              </ThemedText>
+            ))
+          ) : (
+            <ThemedText>Not applicable</ThemedText>
+          )}
+        </View>
+        <View>
+          <ThemedText style={{ fontWeight: "bold" }}>Proofs text:</ThemedText>
+          <ThemedText>{data.proof_data}</ThemedText>
+        </View>
+        <View style={{ rowGap: 5 }}>
+          <ThemedText style={{ fontWeight: "bold" }}>Screenshots:</ThemedText>
+          {data.job_submission_image.map((image, index) => (
+            <Image
+              key={index}
+              source={{ uri: config.fileBaseUrl + image.image_path }}
+              alt={`screenshot-${index}`}
+              style={imageStyle}
+              contentFit="contain"
+            />
+          ))}
+        </View>
+      </ThemedView>
+    </View>
   );
 };
 
