@@ -71,7 +71,7 @@ export const drawerScreens = {
   },
   wallet: {
     name: "wallet/index",
-    drawerLabel: "Wallet",
+    drawerLabel: "Withdraw",
   },
 
   // settings and preference screen
