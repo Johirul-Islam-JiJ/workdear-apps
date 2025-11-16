@@ -8,14 +8,31 @@ import { ThemedText } from "../libs/ThemedText";
 
 const NotificationCard = ({ item }: { item: Notification }) => {
   return (
-    <Card>
-      <View style={{ flexDirection: "row", alignItems: "flex-start", gap: 5 }}>
-        <AppIcon size={20} color="primarydark" darkColor="white">
+    <Card color={item.status === "UNREAD" ? "primarydark" : "card"}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "flex-start",
+          gap: 5,
+          width: "95%",
+        }}
+      >
+        <AppIcon
+          size={20}
+          color={item.status === "UNREAD" ? "white" : "primarydark"}
+          darkColor="white"
+        >
           <FontAwesome name="user-circle-o" />
         </AppIcon>
-        <ThemedText>{item.message}</ThemedText>
+        <ThemedText color={item.status === "UNREAD" ? "white" : "text"}>
+          {item.message}
+        </ThemedText>
       </View>
-      <ThemedText variant="small" style={{ textAlign: "right" }}>
+      <ThemedText
+        variant="small"
+        color={item.status === "UNREAD" ? "white" : "text"}
+        style={{ textAlign: "right" }}
+      >
         {new Date(item.created_at).toLocaleDateString("en-BN", {
           day: "numeric",
           month: "short",

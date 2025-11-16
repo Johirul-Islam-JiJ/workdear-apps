@@ -3,7 +3,7 @@ import NotificationContent from "@/components/notification/NotificationContent";
 import React from "react";
 import { ScrollView } from "react-native";
 
-const Index = () => {
+const Notification = () => {
   return (
     <ThemedView style={{ flex: 1 }} color="background">
       <ScrollView style={{ flex: 1 }}>
@@ -13,4 +13,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Notification;

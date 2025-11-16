@@ -1,7 +1,7 @@
 import { useGetNotificationQuery } from "@/store/features/notification";
 import { Notification } from "@/types/Notification";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import Pagination from "../libs/Pagination";
 import { ThemedText } from "../libs/ThemedText";
@@ -14,7 +14,13 @@ const NotificationContent = () => {
     page: page,
   });
 
-  if (isLoading) return <LoadingIndicator fullScreen />;
+  if (isLoading)
+    return (
+      <LoadingIndicator
+        fullScreen
+        style={{ height: Dimensions.get("screen").height - 100 }}
+      />
+    );
 
   const notifications: Notification[] = data?.data?.data;
 
