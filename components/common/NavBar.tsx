@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { DrawerActions } from "@react-navigation/native";
 import { Image } from "expo-image";
-import { useNavigation } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../libs/ThemedText";
@@ -38,12 +38,14 @@ const NavBar = ({ route }: { route: string }) => {
       </ThemedText>
 
       <View style={styles.wrapper}>
-        <View style={{ position: "relative" }}>
-          <Ionicons name="notifications-sharp" size={24} color="white" />
-          {notificationCount && notificationCount?.data.unread_count > 0 && (
-            <ThemedView color="primarylight" style={styles.notification} />
-          )}
-        </View>
+        <Link href="/(mainLayout)/notification">
+          <View style={{ position: "relative" }}>
+            <Ionicons name="notifications-sharp" size={24} color="white" />
+            {notificationCount && notificationCount?.data.unread_count > 0 && (
+              <ThemedView color="primarylight" style={styles.notification} />
+            )}
+          </View>
+        </Link>
         <Image style={styles.profile} contentFit="contain" source={source} />
       </View>
     </ThemedView>
