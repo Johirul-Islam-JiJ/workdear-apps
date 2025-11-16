@@ -97,10 +97,6 @@ export const drawerScreens = {
     name: "contact-us/index",
     drawerLabel: "Contact us",
   },
-  joinTelegram: {
-    name: "join-telegram/index",
-    drawerLabel: "Join Telegram",
-  },
   liveSupport: {
     name: "live-support/index",
     drawerLabel: "Live support",

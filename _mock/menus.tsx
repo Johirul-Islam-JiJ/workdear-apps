@@ -1,3 +1,4 @@
+import { ColorScheme } from "@/constants/Colors";
 import {
   Entypo,
   FontAwesome,
@@ -59,7 +60,20 @@ export const drawerMenus = [
   },
 ];
 
-export const moreMenus = [
+export type MoreMenu = {
+  label: string;
+  path: string;
+  Icon: ({ color, size }: { color: string; size: number }) => React.JSX.Element;
+};
+
+export type MoreMenusContent = {
+  title: string;
+  color: ColorScheme;
+  Icon: ({ color, size }: { color: string; size: number }) => React.JSX.Element;
+  menus: MoreMenu[];
+};
+
+export const moreMenus: MoreMenusContent[] = [
   {
     title: "Achievements & Rankings",
     color: "warning",
@@ -71,28 +85,28 @@ export const moreMenus = [
         label: drawerScreens.topWorkers.drawerLabel,
         path: drawerScreens.topWorkers.name,
         Icon: ({ color, size }: { color: string; size: number }) => (
-          <Ionicons name="star" size={size} color={color} />
+          <Ionicons name="trophy-outline" size={size} color={color} />
         ),
       },
       {
         label: drawerScreens.topJobPoster.drawerLabel,
         path: drawerScreens.topJobPoster.name,
         Icon: ({ color, size }: { color: string; size: number }) => (
-          <Ionicons name="star" size={size} color={color} />
+          <Ionicons name="trophy-outline" size={size} color={color} />
         ),
       },
       {
         label: drawerScreens.topReffer.drawerLabel,
         path: drawerScreens.topReffer.name,
         Icon: ({ color, size }: { color: string; size: number }) => (
-          <Ionicons name="star" size={size} color={color} />
+          <Ionicons name="trophy-outline" size={size} color={color} />
         ),
       },
       {
         label: drawerScreens.topUsers.drawerLabel,
         path: drawerScreens.topUsers.name,
         Icon: ({ color, size }: { color: string; size: number }) => (
-          <Ionicons name="star" size={size} color={color} />
+          <Ionicons name="trophy-outline" size={size} color={color} />
         ),
       },
     ],
