@@ -1,7 +1,8 @@
 import AppIcon from "@/components/libs/AppIcon";
 import Badge from "@/components/libs/Badge";
-import { ThemedText } from "@/components/libs/ThemedText";
+import { TextVariant, ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
+import { getRemainingDays } from "@/services/timeCalculator";
 import { Job } from "@/types/Job";
 import { FontAwesome, Octicons } from "@expo/vector-icons";
 import React from "react";
@@ -42,9 +43,10 @@ const JobInfoCard = ({ job }: { job: Job }) => {
       ),
     },
     {
-      label: "Pending",
-      value: job.submission_information.UNDER_REVIEW,
+      label: "Time Left",
+      value: getRemainingDays(job.end_date, "Job ended"),
       color: "warning",
+      variant: "body1" as TextVariant,
       Icon: (
         <AppIcon color="warning" size={20}>
           <Octicons name="stopwatch" />

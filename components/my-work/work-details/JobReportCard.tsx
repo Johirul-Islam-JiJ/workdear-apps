@@ -1,5 +1,5 @@
 import IconButton from "@/components/libs/IconButton";
-import { ThemedText } from "@/components/libs/ThemedText";
+import { TextVariant, ThemedText } from "@/components/libs/ThemedText";
 import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React from "react";
@@ -11,6 +11,7 @@ export interface JobSummaryCardProps {
   value: string | number;
   color: ColorScheme;
   style?: ViewStyle;
+  variant?: TextVariant;
 }
 
 const JobReportCard = ({
@@ -18,6 +19,7 @@ const JobReportCard = ({
   Icon,
   value,
   color,
+  variant = "body2",
   style = {},
 }: JobSummaryCardProps) => {
   const mainColor = useThemeColor(color);
@@ -39,7 +41,7 @@ const JobReportCard = ({
       <IconButton icon={Icon} color={color} variant="solid" />
       <View>
         <ThemedText color={color}>{label}</ThemedText>
-        <ThemedText variant="body2">{value}</ThemedText>
+        <ThemedText variant={variant}>{value}</ThemedText>
       </View>
     </View>
   );

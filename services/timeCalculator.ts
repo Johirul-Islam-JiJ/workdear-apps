@@ -25,13 +25,16 @@ export function timeCalculator(date: string) {
   }
 }
 
-export function getRemainingDays(endDateStr: string) {
+export function getRemainingDays(
+  endDateStr: string,
+  emtyString: string = "Expired"
+) {
   const now = new Date();
   const endDate = new Date(endDateStr);
   const diffTime = endDate.getTime() - now.getTime();
 
   if (diffTime <= 0) {
-    return "0 Days 0 Hours";
+    return emtyString;
   }
 
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
