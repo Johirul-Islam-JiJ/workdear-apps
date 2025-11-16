@@ -1,8 +1,16 @@
+import AboutusContent from "@/components/aboutus/AboutusContent";
+import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 
-const Index = () => {
-  return <View></View>;
+const Aboutus = () => {
+  return (
+    <ThemedView style={{ flex: 1 }} color="background">
+      <ScrollView style={{ flex: 1 }}>
+        <AboutusContent />
+      </ScrollView>
+    </ThemedView>
+  );
 };
 
-export default Index;
+export default Aboutus;
