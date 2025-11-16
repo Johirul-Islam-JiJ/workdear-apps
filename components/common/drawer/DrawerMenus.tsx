@@ -42,15 +42,6 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
 
       <View style={{ gap: 8 }}>
         {/* <ExternalLink href="https://t.me/joinchat/AAAAAEc-5_45Y095">
-          <View style={style.telegram}>
-            <View style={style.linkLabel}>
-              <FontAwesome5 name="telegram-plane" size={22} color={textColor} />
-              <ThemedText color="text" variant="button">
-                Join telegram
-              </ThemedText>
-            </View>
-            <Ionicons name="chevron-forward" size={18} color={textColor} />
-          </View>
         </ExternalLink> */}
         <Button
           title="Theme mode"

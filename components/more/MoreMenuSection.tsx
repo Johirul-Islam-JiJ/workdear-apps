@@ -6,6 +6,7 @@ import { View } from "react-native";
 import Button from "../libs/Button";
 import Card from "../libs/Card";
 import Divider from "../libs/Divider";
+import { ExternalLink } from "../libs/ExternalLink";
 import IconButton from "../libs/IconButton";
 import { ThemedText } from "../libs/ThemedText";
 
@@ -39,15 +40,30 @@ const MoreMenuSection = ({ menuContent }: Props) => {
 
           return (
             <View key={index}>
-              <Button
-                title={item.label}
-                endIcon="chevron-forward"
-                variant="text"
-                color="text"
-                startIcon={<item.Icon size={24} color={textColor} />}
-                style={{ justifyContent: "space-between" }}
-                onPress={() => navigation.push(path)}
-              />
+              {item.external ? (
+                <ExternalLink href={item.path}>
+                  <Button
+                    disabled
+                    title={item.label}
+                    endIcon="chevron-forward"
+                    variant="text"
+                    color="text"
+                    startIcon={<item.Icon size={24} color={textColor} />}
+                    style={{ justifyContent: "space-between" }}
+                  />
+                </ExternalLink>
+              ) : (
+                <Button
+                  title={item.label}
+                  endIcon="chevron-forward"
+                  variant="text"
+                  color="text"
+                  startIcon={<item.Icon size={24} color={textColor} />}
+                  style={{ justifyContent: "space-between" }}
+                  onPress={() => navigation.push(path)}
+                />
+              )}
+
               {index !== menuContent.menus.length - 1 && <Divider />}
             </View>
           );

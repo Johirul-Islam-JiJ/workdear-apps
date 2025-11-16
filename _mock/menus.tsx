@@ -2,6 +2,7 @@ import { ColorScheme } from "@/constants/Colors";
 import {
   Entypo,
   FontAwesome,
+  FontAwesome5,
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
@@ -63,6 +64,7 @@ export const drawerMenus = [
 export type MoreMenu = {
   label: string;
   path: string;
+  external?: boolean;
   Icon: ({ color, size }: { color: string; size: number }) => React.JSX.Element;
 };
 
@@ -194,6 +196,21 @@ export const moreMenus: MoreMenusContent[] = [
         path: drawerScreens.blogs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="newspaper-outline" size={size} color={color} />
+        ),
+      },
+      {
+        label: drawerScreens.liveSupport.drawerLabel,
+        path: drawerScreens.liveSupport.name,
+        Icon: ({ color, size }) => (
+          <Ionicons name="chatbox-ellipses-outline" size={size} color={color} />
+        ),
+      },
+      {
+        label: "Join Telegram",
+        path: "https://t.me/joinchat/AAAAAEc-5_45Y095",
+        external: true,
+        Icon: ({ color, size }) => (
+          <FontAwesome5 name="telegram-plane" size={size} color={color} />
         ),
       },
     ],
