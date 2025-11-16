@@ -1,5 +1,5 @@
 import { useGetTasksQuery } from "@/store/features/my-work";
-import { MyWork, MyWorkStatus, MyWorkSummaryType } from "@/types/myWork";
+import { MyWork, MyWorkSummaryType } from "@/types/myWork";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
@@ -7,8 +7,8 @@ import Pagination from "../libs/Pagination";
 import MyWorkList from "./MyWorkList";
 import MyWorkSummary from "./MyWorkSummary";
 
-const MyWorkContent = ({ Status = "" }: { Status?: MyWorkStatus | "" }) => {
-  const [status, setStatus] = useState(Status);
+const MyWorkContent = () => {
+  const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
   const { data: response, isLoading } = useGetTasksQuery({ status, page });
 

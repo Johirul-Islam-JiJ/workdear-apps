@@ -3,7 +3,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
-import { Animated, StyleProp, ViewStyle } from "react-native";
 
 export const drawerScreens = {
   // ----------------- drawer screens -----------------------
@@ -126,8 +125,6 @@ export type TabScreen = {
   name: string;
   title: string;
   Icon: ({ color }: { color: string }) => React.JSX.Element | null;
-  href?: null;
-  tabBarStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
 };
 
 export const tabScreens: TabScreen[] = [
@@ -174,29 +171,5 @@ export const tabScreens: TabScreen[] = [
     Icon: ({ color }: { color: string }) => (
       <MaterialIcons name="more" size={24} color={color} />
     ),
-  },
-  {
-    id: 6,
-    name: "jobs/[slug]/index",
-    title: "Job information",
-    Icon: () => null,
-    href: null,
-    tabBarStyle: { display: "none" },
-  },
-  {
-    id: 7,
-    name: "my-work/[id]/index",
-    title: "Task information",
-    Icon: () => null,
-    href: null,
-    tabBarStyle: { display: "none" },
-  },
-  {
-    id: 8,
-    name: "jobs/details/[slug]/index",
-    title: "Job details",
-    Icon: () => null,
-    href: null,
-    tabBarStyle: { display: "none" },
   },
 ];

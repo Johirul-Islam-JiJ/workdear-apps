@@ -15,7 +15,7 @@ const JobCard = ({ job }: { job: Job }) => {
   const label = `${TOTAL_SUBMISSIONS} OF ${REQUIRED_JOB_WORKER}`;
 
   return (
-    <Link href={`/(mainLayout)/(tabs)/jobs/${job.slug}`} asChild>
+    <Link href={`/(mainLayout)/jobs/${job.slug}`} asChild>
       <Pressable style={{ flex: 1 }}>
         <ThemedView color="card" style={styles.container}>
           <ThemedText

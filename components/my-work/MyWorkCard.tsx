@@ -1,5 +1,5 @@
 import { MyWork, MyWorkStatus } from "@/types/myWork";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import { View, ViewStyle } from "react-native";
 import JobReport from "../job/common/JobReport";
@@ -10,6 +10,7 @@ import { ThemedView } from "../libs/ThemedView";
 
 const MyWorkCard = ({ task }: { task: MyWork }) => {
   const status: MyWorkStatus = task.task.status;
+  const navigation = useRouter();
 
   const rowStyle: ViewStyle = {
     flexDirection: "row",
@@ -75,13 +76,10 @@ const MyWorkCard = ({ task }: { task: MyWork }) => {
             buttonSize="small"
           />
         )}
-        <Link
-          href={`/(mainLayout)/(tabs)/jobs/details/${task.job.slug}`}
-          asChild
-        >
+        <Link href={`/(mainLayout)/jobs/details/${task.job.slug}`} asChild>
           <Button style={buttonStyle} title="View Job" size="small" />
         </Link>
-        <Link href={`/(mainLayout)/(tabs)/my-work/${task.task.id}`} asChild>
+        <Link href={`/(mainLayout)/my-work/${task.task.id}`} asChild>
           <Button style={buttonStyle} title="Vew Task" size="small" />
         </Link>
       </View>

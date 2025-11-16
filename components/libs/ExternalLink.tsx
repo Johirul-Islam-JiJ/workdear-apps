@@ -8,7 +8,6 @@ type Props = {
 
 export function ExternalLink({ href, children }: Props) {
   const handlePress = async () => {
-    console.log("href", href);
     if (Platform.OS === "web") {
       window.open(href, "_blank");
     } else {

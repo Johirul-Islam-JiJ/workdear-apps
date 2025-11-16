@@ -36,6 +36,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: tabActiveColor,
+        tabBarStyle: tabBarStyle,
         header: (props) => (
           <ScreenHeader route={props.options.title as string} />
         ),
@@ -48,8 +49,6 @@ export default function TabLayout() {
           options={{
             title: screen.title,
             tabBarIcon: ({ color }) => <screen.Icon color={color} />,
-            href: screen.href,
-            tabBarStyle: screen.tabBarStyle ? screen.tabBarStyle : tabBarStyle,
           }}
         />
       ))}
