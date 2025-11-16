@@ -26,7 +26,7 @@ const MoreMenuSection = ({ menuContent }: Props) => {
           icon={<menuContent.Icon color={menuColor} size={24} />}
           color={menuContent.color}
         />
-        <ThemedText variant="body2" color="gray.800">
+        <ThemedText variant="body2" color="gray.800" darkColor="gray.200">
           {menuContent.title}
         </ThemedText>
       </View>
