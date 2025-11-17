@@ -1,6 +1,6 @@
 import { ColorScheme } from "@/constants/Colors";
 import { TopWorker } from "@/types/top-ranking";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, ViewStyle } from "react-native";
 import AppIcon from "../libs/AppIcon";
@@ -9,7 +9,17 @@ import Rating from "../libs/Rating";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const TopWorkerCard = ({ item, rank }: { item: TopWorker; rank: number }) => {
+const TopWorkerCard = ({
+  item,
+  rank,
+  work,
+  Icon,
+}: {
+  item: TopWorker;
+  rank: number;
+  work: string | number;
+  Icon: React.JSX.Element;
+}) => {
   const iconWrapper: ViewStyle = {
     borderRadius: 50,
     width: 50,
@@ -50,10 +60,10 @@ const TopWorkerCard = ({ item, rank }: { item: TopWorker; rank: number }) => {
           />
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
             <AppIcon color="primarydark" size={18}>
-              <MaterialIcons name="work" />
+              {Icon}
             </AppIcon>
             <ThemedText style={{ fontWeight: "bold" }} color="primarydark">
-              {item.user.user_rating.total_submissions}
+              {work}
             </ThemedText>
           </View>
         </View>
