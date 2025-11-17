@@ -1,4 +1,5 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { Link } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { Animated, Dimensions, Easing, View, ViewStyle } from "react-native";
 import Button from "../libs/Button";
@@ -62,7 +63,9 @@ const ChatButton = () => {
         <Animated.View style={nose} />
       </Animated.View>
 
-      <Button title="Live Chat" startIcon="chatbox-ellipses-outline" />
+      <Link href="/(mainLayout)/chat" asChild>
+        <Button title="Live Chat" startIcon="chatbox-ellipses-outline" />
+      </Link>
     </View>
   );
 };

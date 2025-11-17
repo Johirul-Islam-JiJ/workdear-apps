@@ -96,6 +96,10 @@ export const drawerScreens = {
     name: "contact-us/index",
     drawerLabel: "Contact us",
   },
+  chat: {
+    name: "chat/index",
+    drawerLabel: "Live Chat",
+  },
 
   // Legal and policies screen
   termsAndConditions: {
