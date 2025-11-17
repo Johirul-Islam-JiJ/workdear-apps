@@ -1,5 +1,6 @@
 import { Blog } from "@/types/blog";
 import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import AppIcon from "../libs/AppIcon";
@@ -34,7 +35,9 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
           year: "numeric",
         })}
       </ThemedText>
-      <Button title="Read More" />
+      <Link asChild href={`/(mainLayout)/blogs/${blog.slug}`}>
+        <Button title="Read More" />
+      </Link>
     </Card>
   );
 };

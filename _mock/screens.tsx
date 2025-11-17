@@ -92,6 +92,10 @@ export const drawerScreens = {
     name: "blogs/index",
     drawerLabel: "Blogs",
   },
+  singleBlogs: {
+    name: "blogs/[slug]/index",
+    drawerLabel: "Blogs details",
+  },
   contactUs: {
     name: "contact-us/index",
     drawerLabel: "Contact us",
