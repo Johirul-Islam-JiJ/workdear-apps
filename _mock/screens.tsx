@@ -96,10 +96,6 @@ export const drawerScreens = {
     name: "contact-us/index",
     drawerLabel: "Contact us",
   },
-  liveSupport: {
-    name: "live-support/index",
-    drawerLabel: "Live support",
-  },
 
   // Legal and policies screen
   termsAndConditions: {

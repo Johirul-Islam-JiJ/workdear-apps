@@ -27,7 +27,7 @@ const AboutusContent = () => {
         />
         <BlurView intensity={50} style={bannerWrapper}>
           <ThemedText style={{ fontWeight: "bold" }} color="white">
-            It’s All Start With “We”
+            It's All Start With “We”
           </ThemedText>
           <ThemedText variant="h1" color="white">
             About Us

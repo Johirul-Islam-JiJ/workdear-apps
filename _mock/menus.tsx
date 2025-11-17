@@ -199,8 +199,8 @@ export const moreMenus: MoreMenusContent[] = [
         ),
       },
       {
-        label: drawerScreens.liveSupport.drawerLabel,
-        path: drawerScreens.liveSupport.name,
+        label: "Live support",
+        path: drawerScreens.contactUs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="chatbox-ellipses-outline" size={size} color={color} />
         ),
