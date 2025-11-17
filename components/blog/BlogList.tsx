@@ -3,7 +3,13 @@ import React from "react";
 import { View } from "react-native";
 import BlogCard from "./BlogCard";
 
-const BlogList = ({ blogs }: { blogs: Blog[] }) => {
+const BlogList = ({
+  blogs,
+  isLoading,
+}: {
+  blogs: Blog[];
+  isLoading: boolean;
+}) => {
   return (
     <View style={{ rowGap: 5, marginTop: 10 }}>
       {blogs.map((blog) => (

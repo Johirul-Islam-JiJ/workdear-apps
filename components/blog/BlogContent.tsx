@@ -35,8 +35,9 @@ const BlogContent = () => {
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        isLoading={loadingCategory}
       />
-      <BlogList blogs={blogs} />
+      <BlogList blogs={blogs} isLoading={isLoading} />
       <Pagination
         currentPage={page}
         totalPages={blogData?.last_page || 1}
