@@ -5,8 +5,8 @@ import Button from "../libs/Button";
 
 type CategoriesProps = {
   categories: BlogCategory[];
-  setSelectedCategory: React.Dispatch<React.SetStateAction<null | number>>;
-  selectedCategory: number | null;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string | number>>;
+  selectedCategory: number | string;
 };
 
 const Categories = ({
@@ -19,7 +19,7 @@ const Categories = ({
       <View style={{ gap: 10, flexDirection: "row" }}>
         <Button
           size="small"
-          onPress={() => setSelectedCategory(null)}
+          onPress={() => setSelectedCategory("")}
           variant={!selectedCategory ? "contained" : "outlined"}
           title="All"
         />

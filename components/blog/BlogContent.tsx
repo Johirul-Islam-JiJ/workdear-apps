@@ -6,11 +6,13 @@ import {
 import { Blog, BlogCategory } from "@/types/blog";
 import React, { useState } from "react";
 import { View } from "react-native";
+import Pagination from "../libs/Pagination";
+import BlogList from "./BlogList";
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
 
 const BlogContent = () => {
-  const [selectedCategory, setSelectedCategory] = useState<null | number>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | number>("");
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const searchValue = useDebouncer(search);
@@ -33,6 +35,12 @@ const BlogContent = () => {
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+      />
+      <BlogList blogs={blogs} />
+      <Pagination
+        currentPage={page}
+        totalPages={blogData?.last_page || 1}
+        onChange={setPage}
       />
     </View>
   );
