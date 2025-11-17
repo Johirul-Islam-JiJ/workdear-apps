@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  ViewStyle,
 } from "react-native";
 
 type IconName = keyof typeof Ionicons.glyphMap;
@@ -19,6 +20,7 @@ type IconButtonProps = {
   variant?: "solid" | "outline" | "ghost";
   onPress?: () => void;
   disabled?: boolean;
+  style?: ViewStyle;
 };
 
 const IconButton: React.FC<IconButtonProps> = ({
@@ -29,6 +31,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   variant = "solid",
   onPress,
   disabled = false,
+  style = {},
 }) => {
   const theme = useColorScheme() ?? "light";
   const dark = theme === "dark";
@@ -73,6 +76,7 @@ const IconButton: React.FC<IconButtonProps> = ({
           borderColor,
           opacity,
         },
+        style,
       ]}
     >
       <View>

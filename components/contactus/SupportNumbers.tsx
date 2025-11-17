@@ -56,7 +56,14 @@ const SupportNumbers = () => {
   };
 
   return (
-    <View style={{ rowGap: 5, paddingHorizontal: 10, marginTop: -30 }}>
+    <View
+      style={{
+        rowGap: 5,
+        paddingHorizontal: 10,
+        marginTop: -30,
+        marginBottom: 10,
+      }}
+    >
       {supportNumbers.map((item, index) => (
         <Card key={index} style={wrapperStyle}>
           <View style={{ width: "48%", alignItems: "center" }}>
