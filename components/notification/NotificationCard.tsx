@@ -1,22 +1,32 @@
 import { Notification } from "@/types/Notification";
-import { FontAwesome } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 import AppIcon from "../libs/AppIcon";
+import Button from "../libs/Button";
 import Card from "../libs/Card";
 import { ThemedText } from "../libs/ThemedText";
 
-const NotificationCard = ({ item }: { item: Notification }) => {
+type NotificationCardProps = {
+  item: Notification;
+  onRead: (id: number) => Promise<void>;
+  isReading: number;
+};
+
+const NotificationCard = ({
+  item,
+  onRead,
+  isReading,
+}: NotificationCardProps) => {
+  const wrapperStyle: ViewStyle = {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 5,
+    width: "95%",
+  };
   return (
     <Card color={item.status === "UNREAD" ? "primarydark" : "card"}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "flex-start",
-          gap: 5,
-          width: "95%",
-        }}
-      >
+      <View style={wrapperStyle}>
         <AppIcon
           size={20}
           color={item.status === "UNREAD" ? "white" : "primarydark"}
@@ -28,20 +38,42 @@ const NotificationCard = ({ item }: { item: Notification }) => {
           {item.message}
         </ThemedText>
       </View>
-      <ThemedText
-        variant="small"
-        color={item.status === "UNREAD" ? "white" : "text"}
-        style={{ textAlign: "right" }}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        {new Date(item.created_at).toLocaleDateString("en-BN", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        })}
-      </ThemedText>
+        {item.status === "UNREAD" && (
+          <Button
+            title="Mark as read"
+            size="small"
+            color="primarydarker"
+            onPress={() => onRead(item.id)}
+            loading={isReading === item.id}
+            startIcon={
+              <AppIcon color="white" size={18}>
+                <Feather name="check" />
+              </AppIcon>
+            }
+          />
+        )}
+        <ThemedText
+          variant="small"
+          color={item.status === "UNREAD" ? "white" : "text"}
+          style={{ textAlign: "right", flexGrow: 1 }}
+        >
+          {new Date(item.created_at).toLocaleDateString("en-BN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })}
+        </ThemedText>
+      </View>
     </Card>
   );
 };

@@ -1,28 +1,36 @@
-import { useGetNotificationQuery } from "@/store/features/notification";
+import { useNotificationManager } from "@/hooks/useNotificationManager";
 import { Notification } from "@/types/Notification";
-import React, { useState } from "react";
+import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
 import { Dimensions, View } from "react-native";
+import AppIcon from "../libs/AppIcon";
+import Button from "../libs/Button";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import Pagination from "../libs/Pagination";
 import { ThemedText } from "../libs/ThemedText";
 import NotificationCard from "./NotificationCard";
 
 const NotificationContent = () => {
-  const [page, setPage] = useState(1);
-  const { data, isLoading } = useGetNotificationQuery({
-    status: "",
-    page: page,
-  });
+  const {
+    notifications,
+    isLoadingNotifications,
+    isLoadingMultipleUpdate,
+    isLoadingSingleUpdate,
+    handleMarkSingleNotificationAsRead,
+    handleMarkAllNotificationAsRead,
+    currentPage,
+    onchangePage,
+    totalPages,
+    notificationCount,
+  } = useNotificationManager();
 
-  if (isLoading)
+  if (isLoadingNotifications)
     return (
       <LoadingIndicator
         fullScreen
         style={{ height: Dimensions.get("screen").height - 100 }}
       />
     );
-
-  const notifications: Notification[] = data?.data?.data;
 
   return (
     <View style={{ paddingHorizontal: 10, paddingVertical: 15, rowGap: 10 }}>
@@ -37,9 +45,30 @@ const NotificationContent = () => {
 
       <View style={{ rowGap: 5 }}>
         {notifications.length > 0 ? (
-          notifications.map((notification: Notification, index) => (
-            <NotificationCard key={index} item={notification} />
-          ))
+          <>
+            {notificationCount > 0 && (
+              <Button
+                title="Mark all as read"
+                size="small"
+                style={{ alignSelf: "flex-end" }}
+                loading={isLoadingMultipleUpdate}
+                onPress={handleMarkAllNotificationAsRead}
+                startIcon={
+                  <AppIcon size={20} color="white">
+                    <FontAwesome name="check-circle" />
+                  </AppIcon>
+                }
+              />
+            )}
+            {notifications.map((notification: Notification, index) => (
+              <NotificationCard
+                key={index}
+                item={notification}
+                onRead={handleMarkSingleNotificationAsRead}
+                isReading={isLoadingSingleUpdate}
+              />
+            ))}
+          </>
         ) : (
           <View style={{ padding: 10 }}>
             <ThemedText style={{ textAlign: "center" }}>
@@ -49,9 +78,9 @@ const NotificationContent = () => {
         )}
       </View>
       <Pagination
-        currentPage={data?.data?.current_page || 1}
-        totalPages={data?.data?.last_page || 1}
-        onChange={setPage}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onChange={onchangePage}
       />
     </View>
   );
