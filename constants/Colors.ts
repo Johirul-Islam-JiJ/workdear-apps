@@ -31,6 +31,9 @@ export const Colors = {
     "gray.700": "#495057",
     "gray.800": "#343a40",
     "gray.900": "#212529",
+
+    silvar: "#C0C0C0",
+    orange: "#ffa600c2",
   },
   dark: {
     background: "#285056",
@@ -64,6 +67,9 @@ export const Colors = {
     "gray.700": "#404444",
     "gray.800": "#262829",
     "gray.900": "#0c0d0d",
+
+    silvar: "#C0C0C0",
+    orange: "#ffa600c2",
   },
 };
 

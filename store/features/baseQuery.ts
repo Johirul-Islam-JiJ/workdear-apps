@@ -108,6 +108,7 @@ export const api = createApi({
     "terms-and-conditions",
     "cancelation-policy",
     "single-blogs",
+    "top-user-catagory",
   ],
   endpoints: () => ({}),
 });

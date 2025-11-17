@@ -1,8 +1,16 @@
+import { ThemedView } from "@/components/libs/ThemedView";
+import TopWorkerContent from "@/components/top-ranking/TopWorkerContent";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 
-const Index = () => {
-  return <View></View>;
+const TopWorker = () => {
+  return (
+    <ThemedView color="background" style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <TopWorkerContent />
+      </ScrollView>
+    </ThemedView>
+  );
 };
 
-export default Index;
+export default TopWorker;
