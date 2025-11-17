@@ -35,7 +35,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
           year: "numeric",
         })}
       </ThemedText>
-      <Link asChild href={`/(mainLayout)/blogs/${blog.slug}`}>
+      <Link asChild href={`/blogs/${blog.slug}`}>
         <Button title="Read More" />
       </Link>
     </Card>

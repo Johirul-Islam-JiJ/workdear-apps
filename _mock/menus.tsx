@@ -6,7 +6,7 @@ import {
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { drawerScreens } from "./screens";
+import { blogScreens, drawerScreens } from "./screens";
 
 export const drawerMenus = [
   {
@@ -192,8 +192,8 @@ export const moreMenus: MoreMenusContent[] = [
         ),
       },
       {
-        label: drawerScreens.blogs.drawerLabel,
-        path: drawerScreens.blogs.name,
+        label: blogScreens.blogs.title,
+        path: blogScreens.blogs.path,
         Icon: ({ color, size }) => (
           <Ionicons name="newspaper-outline" size={size} color={color} />
         ),

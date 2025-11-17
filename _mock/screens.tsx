@@ -88,14 +88,6 @@ export const drawerScreens = {
     name: "faq/index",
     drawerLabel: "FAQ",
   },
-  blogs: {
-    name: "blogs/index",
-    drawerLabel: "Blogs",
-  },
-  singleBlogs: {
-    name: "blogs/[slug]/index",
-    drawerLabel: "Blogs details",
-  },
   contactUs: {
     name: "contact-us/index",
     drawerLabel: "Contact us",
@@ -121,6 +113,19 @@ export const drawerScreens = {
   cancelationPolicy: {
     name: "cancelation-policy/index",
     drawerLabel: "Cancelation policy",
+  },
+};
+
+export const blogScreens = {
+  blogs: {
+    name: "index",
+    path: "blogs/index",
+    title: "Blogs",
+  },
+  singleBlog: {
+    name: "[slug]/index",
+    path: "/blogs/[slug]/index",
+    title: "Blog details",
   },
 };
 

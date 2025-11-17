@@ -10,10 +10,15 @@ export default function Layout() {
       <Drawer
         screenOptions={{
           drawerHideStatusBarOnOpen: false,
-          header: (props) =>
-            props.route.name !== "(tabs)" && (
-              <ScreenHeader route={props.options.drawerLabel as string} />
-            ),
+          header: (props) => {
+            const lebel = props.options.drawerLabel as string;
+            const hideHeaderRoute = ["(tabs)", "blogs"];
+            return (
+              !hideHeaderRoute.includes(props.route.name) && (
+                <ScreenHeader route={lebel} />
+              )
+            );
+          },
         }}
         drawerContent={(props) => <DrawerContent {...props} />}
       >
