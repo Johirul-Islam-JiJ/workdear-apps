@@ -6,6 +6,7 @@ import Button from "../libs/Button";
 
 const ChatButton = () => {
   const backgroundColor = useThemeColor("card");
+  const textColor = useThemeColor("text");
 
   const toastOpacity = useRef(new Animated.Value(0)).current;
   const toastTranslate = useRef(new Animated.Value(20)).current;
@@ -59,7 +60,9 @@ const ChatButton = () => {
   return (
     <View style={wrapper}>
       <Animated.View style={messageWrapper}>
-        <Animated.Text>How can we help you?</Animated.Text>
+        <Animated.Text style={{ color: textColor }}>
+          How can we help you?
+        </Animated.Text>
         <Animated.View style={nose} />
       </Animated.View>
 
