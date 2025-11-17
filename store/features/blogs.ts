@@ -17,7 +17,18 @@ export const blogsApi = api.injectEndpoints({
       }),
       providesTags: ["blogs-categories"],
     }),
+    getBlogBySlug: builder.query({
+      query: (slug) => ({
+        url: `/blog/${slug}`,
+        method: "GET",
+      }),
+      providesTags: ["single-blogs"],
+    }),
   }),
 });
 
-export const { useGetBlogsQuery, useGetBlogCategoriesQuery } = blogsApi;
+export const {
+  useGetBlogsQuery,
+  useGetBlogCategoriesQuery,
+  useGetBlogBySlugQuery,
+} = blogsApi;

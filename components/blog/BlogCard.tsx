@@ -27,7 +27,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
         {blog.title}
       </ThemedText>
       <ThemedText>{blog.short_description}</ThemedText>
-      <ThemedText darkColor="gray.300" color="gray.600">
+      <ThemedText darkColor="gray.300" color="gray.600" variant="small">
         Published on:{" "}
         {new Date(blog.created_at).toLocaleDateString("en-BN", {
           day: "numeric",
