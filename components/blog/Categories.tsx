@@ -17,7 +17,7 @@ const Categories = ({
   selectedCategory,
   isLoading,
 }: CategoriesProps) => {
-  if (!isLoading)
+  if (isLoading)
     return (
       <ScrollView horizontal={true}>
         <View style={{ gap: 10, flexDirection: "row" }}>
