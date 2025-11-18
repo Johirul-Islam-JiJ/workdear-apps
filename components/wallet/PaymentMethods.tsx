@@ -41,6 +41,8 @@ const PaymentMethods = ({
     crypto
   );
 
+  if (!filteredData.length) return null;
+
   return (
     <View>
       <ThemedText variant="body2">Choose payment method {title}</ThemedText>
