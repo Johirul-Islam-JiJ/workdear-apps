@@ -1,7 +1,6 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet, View, ViewStyle } from "react-native";
-import { ThemedView } from "./ThemedView";
 
 interface LoadingIndicatorProps {
   fullScreen?: boolean;
@@ -48,7 +47,7 @@ export default function LoadingIndicator({
   ];
 
   return (
-    <ThemedView color="background" style={containerStyle}>
+    <View style={containerStyle}>
       <View style={styles.dotContainer}>
         {bounceValues.map((val, index) => (
           <Animated.View
@@ -70,7 +69,7 @@ export default function LoadingIndicator({
           />
         ))}
       </View>
-    </ThemedView>
+    </View>
   );
 }
 
