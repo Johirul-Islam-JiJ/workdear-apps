@@ -105,3 +105,10 @@ export interface User {
   verification_type: string;
   wallet_balance: WalletBalance;
 }
+
+export interface AffiliateProgram {
+  activation_bonus: number;
+  program_description: string;
+  status: boolean;
+  total: number;
+}

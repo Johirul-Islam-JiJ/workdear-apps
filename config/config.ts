@@ -7,4 +7,5 @@ export const config = {
   socketUrl: process.env.EXPO_PUBLIC_LIVE_SUPPORT_SERVER_URL,
   liveSupportServerUrl: process.env.EXPO_PUBLIC_SOCKET_URL,
   geolocationApiKey: process.env.EXPO_PUBLIC_GEOLOCATION_API_KEY,
+  siteUrl: process.env.EXPO_PUBLIC_SITE_URL,
 };
