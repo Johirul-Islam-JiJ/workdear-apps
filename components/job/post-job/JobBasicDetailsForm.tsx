@@ -323,7 +323,7 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                 <View
                   style={{
                     flexDirection: "row",
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     columnGap: 8,
                     marginTop: 7,
                   }}

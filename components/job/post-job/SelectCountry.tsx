@@ -76,6 +76,7 @@ const SelectCountry = ({ step, setStep }: Props) => {
             color="gray.800"
             darkColor="gray.300"
             style={{ textAlign: "center", width: "100%" }}
+            variant="small"
           >
             No country found
           </ThemedText>

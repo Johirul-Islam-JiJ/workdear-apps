@@ -77,35 +77,57 @@ export const JobBasicDetailsSchema = yup.object({
         const operator = condition?.operator;
         const value = condition?.value;
 
-        // ✅ Case 1: all empty → allowed
+        // Case 1: all empty
         if (!answer_type && !text && !operator && !value) return true;
 
-        // ✅ Case 2: all filled → allowed
+        // Case 2: all filled
         if (answer_type && text && operator && value) return true;
 
+        const errors = [];
+
         if (!answer_type) {
-          return this.createError({
-            path: `${this.path}.answer_type`,
-            message: "Answer type is required",
-          });
+          errors.push(
+            new yup.ValidationError(
+              "Answer type is required",
+              fields,
+              `${this.path}.answer_type`
+            )
+          );
         }
+
         if (!text) {
-          return this.createError({
-            path: `${this.path}.text`,
-            message: "Question is required",
-          });
+          errors.push(
+            new yup.ValidationError(
+              "Question is required",
+              fields,
+              `${this.path}.text`
+            )
+          );
         }
+
         if (!operator) {
-          return this.createError({
-            path: `${this.path}.condition.operator`,
-            message: "Operator is required",
-          });
+          errors.push(
+            new yup.ValidationError(
+              "Operator is required",
+              fields,
+              `${this.path}.condition.operator`
+            )
+          );
         }
+
         if (!value) {
-          return this.createError({
-            path: `${this.path}.condition.value`,
-            message: "Value is required",
-          });
+          errors.push(
+            new yup.ValidationError(
+              "Value is required",
+              fields,
+              `${this.path}.condition.value`
+            )
+          );
+        }
+
+        // Throw all errors together
+        if (errors.length > 0) {
+          throw new yup.ValidationError(errors);
         }
 
         return true;

@@ -41,22 +41,33 @@ const SelectSubCategoryModal = ({
             justifyContent: "space-between",
           }}
         >
-          {category.map((item, index) => (
-            <Button
-              key={index}
-              style={{ minWidth: "49%" }}
-              onPress={() => {
-                setSelected(
-                  selected.id !== item.id
-                    ? { id: item.id, price: item.minimum_pay }
-                    : { id: null, price: null }
-                );
-                setVisible(0);
-              }}
-              title={item.sub_category_name}
-              variant={selected.id === item.id ? "contained" : "outlined"}
-            />
-          ))}
+          {category.length ? (
+            category.map((item, index) => (
+              <Button
+                key={index}
+                style={{ minWidth: "49%" }}
+                onPress={() => {
+                  setSelected(
+                    selected.id !== item.id
+                      ? { id: item.id, price: item.minimum_pay }
+                      : { id: null, price: null }
+                  );
+                  setVisible(0);
+                }}
+                title={item.sub_category_name}
+                variant={selected.id === item.id ? "contained" : "outlined"}
+              />
+            ))
+          ) : (
+            <ThemedText
+              color="gray.800"
+              darkColor="gray.300"
+              style={{ textAlign: "center", width: "100%" }}
+              variant="small"
+            >
+              No Sub Category Found
+            </ThemedText>
+          )}
         </View>
       </ScrollView>
 
