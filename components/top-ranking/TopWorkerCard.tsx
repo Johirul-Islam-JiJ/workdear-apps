@@ -59,12 +59,12 @@ const TopWorkerCard = ({
             ratingInfo={`(${item.user.user_rating.star_provider_count})`}
           />
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-            <AppIcon color="primarydark" size={18}>
-              {Icon}
-            </AppIcon>
             <ThemedText style={{ fontWeight: "bold" }} color="primarydark">
               {work}
             </ThemedText>
+            <AppIcon color="primarydark" size={18}>
+              {Icon}
+            </AppIcon>
           </View>
         </View>
       </View>
