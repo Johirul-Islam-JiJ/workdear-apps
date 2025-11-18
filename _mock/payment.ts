@@ -25,3 +25,11 @@ export const paymentMethods = [
     withdraw: true,
   },
 ];
+
+export const countryCurrency = {
+  IN: "INR",
+  PK: "PKR",
+  NP: "NPR",
+  BD: "BDT",
+};
+export const countryCurrencyPattern = /INR|PKR|NPR|BDT/;

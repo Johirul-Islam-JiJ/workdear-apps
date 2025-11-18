@@ -1,12 +1,15 @@
-import { ThemedText } from "@/components/libs/ThemedText";
+import { ThemedView } from "@/components/libs/ThemedView";
+import WalletContent from "@/components/wallet/WalletContent";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 
 const Wallet = () => {
   return (
-    <View>
-      <ThemedText>wallet</ThemedText>
-    </View>
+    <ThemedView color="background" style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <WalletContent />
+      </ScrollView>
+    </ThemedView>
   );
 };
 

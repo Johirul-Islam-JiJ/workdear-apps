@@ -109,6 +109,12 @@ export const api = createApi({
     "cancelation-policy",
     "single-blogs",
     "top-user-catagory",
+    "payment-systems",
+    "single-deposit-payment-systems",
+    "single-passimpay-payment-systems",
+    "single-withdraw-payment-systems",
+    "currency-conversation-data",
+    "passimpay-single-transaction",
   ],
   endpoints: () => ({}),
 });
