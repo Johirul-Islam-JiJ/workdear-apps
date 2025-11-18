@@ -16,3 +16,9 @@ export interface TopRefferer {
   referredUser: User;
   referral_count: string;
 }
+
+export interface TopUser {
+  id: number;
+  user: User;
+  total_earnings: string;
+}
