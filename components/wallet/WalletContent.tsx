@@ -26,7 +26,6 @@ const WalletContent = () => {
             title="to withdraw"
             type={PaymentSystemsType.withdrawal}
             crypto={crypto}
-            setCrypto={setCrypto}
           />
         )}
       </Card>

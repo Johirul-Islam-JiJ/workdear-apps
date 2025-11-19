@@ -43,7 +43,7 @@ export type PaymentMethod = {
   id: number;
   name: string;
   slug: string;
-  type: string;
+  type: PaymentMethodsType;
   image_url: string;
   deposit: boolean;
   withdrawal: boolean;
@@ -58,4 +58,5 @@ export type PaymentMethod = {
   created_at: string;
   updated_at: string;
   currency: keyof typeof countryCurrency;
+  network?: string;
 };
