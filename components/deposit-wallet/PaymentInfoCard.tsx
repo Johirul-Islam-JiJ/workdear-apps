@@ -31,10 +31,17 @@ const PaymentInfoCard = ({
   return (
     <ThemedView
       color="gray.200"
+      darkColor="primarydark"
+      opacity={{ dark: 20 }}
       style={{ padding: 10, borderRadius: 8, rowGap: 10 }}
     >
       <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
-        <ThemedView color="gray.300" style={{ borderRadius: 10, padding: 5 }}>
+        <ThemedView
+          color="gray.300"
+          darkColor="primarydark"
+          opacity={{ dark: 20 }}
+          style={{ borderRadius: 10, padding: 5 }}
+        >
           <Image
             source={{ uri: config.fileBaseUrl + paymentMethod.image_url }}
             style={{ height: 60, width: 60 }}
@@ -51,10 +58,20 @@ const PaymentInfoCard = ({
         </View>
       </View>
 
-      <ThemedView color="gray.300" style={{ padding: 10, borderRadius: 8 }}>
+      <ThemedView
+        color="gray.300"
+        darkColor="primarydark"
+        opacity={{ dark: 20 }}
+        style={{ padding: 10, borderRadius: 8 }}
+      >
         <ThemedText
-          style={{ textTransform: "capitalize", fontWeight: "bold" }}
+          style={{
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            marginBottom: 5,
+          }}
           color="gray.600"
+          darkColor="gray.200"
           variant="small"
         >
           {formType} range

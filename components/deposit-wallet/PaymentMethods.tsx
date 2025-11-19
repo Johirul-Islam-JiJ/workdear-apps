@@ -49,9 +49,16 @@ const PaymentMethods = ({ setPaymentMethod, title, type, crypto }: Props) => {
         {filteredData.length ? (
           filteredData.map((method) => (
             <Pressable key={method.id} onPress={() => setPaymentMethod(method)}>
-              <ThemedView color="gray.200" style={itemWrapperStyle}>
+              <ThemedView
+                color="gray.200"
+                darkColor="primarydark"
+                opacity={{ dark: 20 }}
+                style={itemWrapperStyle}
+              >
                 <ThemedView
                   color="gray.300"
+                  darkColor="white"
+                  opacity={{ dark: 20 }}
                   style={{ borderRadius: 10, padding: 5 }}
                 >
                   <Image
