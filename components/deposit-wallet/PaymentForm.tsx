@@ -1,4 +1,3 @@
-import { useToast } from "@/hooks/useToast";
 import {
   useApayWithdrawMutation,
   useWithdrawWithPassimpayMutation,
@@ -10,7 +9,7 @@ import {
 } from "@/types/payment";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
@@ -35,7 +34,6 @@ const PaymentForm = ({
   const [passimpayWithdraw, { isLoading: passimpayWithdrawLoading }] =
     useWithdrawWithPassimpayMutation();
   const { handleSubmit, watch, control } = useForm();
-  const toast = useToast();
 
   const minAmount =
     formType === "deposit"
@@ -79,11 +77,12 @@ const PaymentForm = ({
       } else if (paymentMethod.type === "passimpay") {
         await handlePassimpayWithdraw(payload);
       }
-      toast.success(
+      Alert.alert(
+        "Success",
         "Withdraw request submitted successfully. You will be notified once it is processed."
       );
     } catch (error: any) {
-      toast.error(error.data?.message || "Internal Server Error");
+      Alert.alert("Error", error.data?.message || "Internal Server Error");
     }
   };
 
@@ -133,6 +132,25 @@ const PaymentForm = ({
         )}
       </View>
 
+      {paymentMethod.type === PaymentMethodsType.passimpay && (
+        <View>
+          <ThemedText>Your Wallet ID</ThemedText>
+          <Controller
+            control={control}
+            name="addressTo"
+            rules={{ required: "Wallet ID is required" }}
+            render={({ field, fieldState: { error } }) => (
+              <Input
+                placeholder="Enter your Wallet ID"
+                value={field.value}
+                onChangeText={field.onChange}
+                error={error?.message}
+              />
+            )}
+          />
+        </View>
+      )}
+
       {formFields.form_fields?.length > 0 &&
         formFields.form_fields.map((item) => {
           if (!item.key) return null;
@@ -141,7 +159,7 @@ const PaymentForm = ({
               <ThemedText>{item.label}</ThemedText>
               <Controller
                 control={control}
-                name={item.key}
+                name={`data.${item.key}`}
                 rules={item.validation as any}
                 render={({ field, fieldState: { error } }) => {
                   if (item.type === "select") {
@@ -160,6 +178,9 @@ const PaymentForm = ({
                       error={error?.message}
                       value={field.value}
                       onChangeText={field.onChange}
+                      keyboardType={
+                        item.type === "number" ? "numeric" : "default"
+                      }
                     />
                   );
                 }}
