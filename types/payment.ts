@@ -10,6 +10,23 @@ export enum PaymentSystemsType {
   withdrawal = "withdrawal",
 }
 
+export type PaymentMethodForm = {
+  name: string;
+  form_fields: {
+    key: string;
+    label: string;
+    type: string;
+    placeholder: string;
+    options: { value: string; label: string }[];
+    validation: {
+      required: string;
+      minLength: { value: string; message: string };
+      maxLength: { value: string; message: string };
+      pattern: { value: string; message: string };
+    };
+  }[];
+};
+
 export type PaymentMethod = {
   id: number;
   name: string;
@@ -21,8 +38,6 @@ export type PaymentMethod = {
   image_url: string;
   deposit: boolean;
   withdrawal: boolean;
-  deposit_backend_data: string;
-  withdrawal_backend_data: string;
   deposit_frontend_data: string;
   withdrawal_frontend_data: string;
   min_deposit: string;
@@ -34,6 +49,7 @@ export type PaymentMethod = {
   currency: keyof typeof countryCurrency;
   network?: string;
   rate_usd?: string;
+  gateway_id: number;
 };
 
 export type ExchangeRate = {

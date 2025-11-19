@@ -1,7 +1,7 @@
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import AppIcon from "./AppIcon";
 import Button from "./Button";
 import Modal from "./Modal";
@@ -84,19 +84,21 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
       <Modal
         visible={visible}
         setVisible={setVisible}
-        style={{ width: "auto" }}
+        style={{ width: "auto", maxHeight: 500, marginHorizontal: 10 }}
       >
-        {items.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{ paddingVertical: 5, paddingHorizontal: 10 }}
-            onPress={() => handleSelect(item)}
-          >
-            <ThemedText style={{ textAlign: "center" }}>
-              {item.label}
-            </ThemedText>
-          </TouchableOpacity>
-        ))}
+        <ScrollView>
+          {items.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{ paddingVertical: 5, paddingHorizontal: 10 }}
+              onPress={() => handleSelect(item)}
+            >
+              <ThemedText style={{ textAlign: "center" }}>
+                {item.label}
+              </ThemedText>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </Modal>
     </View>
   );

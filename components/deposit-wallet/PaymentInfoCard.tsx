@@ -72,7 +72,7 @@ const PaymentInfoCard = ({
           <ThemedText variant="small">
             Network Fee:{" "}
             <ThemedText color="warning" variant="small">
-              {paymentMethod.fee_network}%
+              {paymentMethod.fee_network || 0}%
             </ThemedText>
           </ThemedText>
         )}

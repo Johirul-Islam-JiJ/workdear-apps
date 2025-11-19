@@ -4,9 +4,9 @@ import { PaymentMethod, PaymentSystemsType } from "@/types/payment";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Card from "../libs/Card";
+import PaymentDetails from "./PaymentDetails";
 import PaymentMethods from "./PaymentMethods";
 import PaymentMethodToggleButton from "./PaymentMethodToggleButton";
-import WithdrawForm from "./WithdrawForm";
 
 const WalletContent = () => {
   const [paymentMethod, setPaymentMethod] = useState<null | PaymentMethod>(
@@ -22,7 +22,7 @@ const WalletContent = () => {
       <PaymentMethodToggleButton onChange={setCrypto} value={crypto} />
       <Card>
         {paymentMethod ? (
-          <WithdrawForm
+          <PaymentDetails
             setPaymentMethod={setPaymentMethod}
             paymentMethod={paymentMethod}
             formType="withdrawal"

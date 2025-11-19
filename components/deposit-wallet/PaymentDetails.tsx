@@ -2,13 +2,11 @@ import { countryCurrency, countryCurrencyPattern } from "@/_mock/payment";
 import useGetSingleGateWay from "@/hooks/useGetSingleGateWay";
 import { useGetCurrencyConversationDataQuery } from "@/store/features/payment";
 import { PaymentMethod } from "@/types/payment";
-import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
-import AppIcon from "../libs/AppIcon";
-import Button from "../libs/Button";
 import LoadingIndicator from "../libs/LoadingIndicator";
-import { ThemedText } from "../libs/ThemedText";
+import Header from "./Header";
+import PaymentForm from "./PaymentForm";
 import PaymentInfoCard from "./PaymentInfoCard";
 
 type Props = {
@@ -18,7 +16,7 @@ type Props = {
   fee: number;
 };
 
-const WithdrawForm = ({
+const PaymentDetails = ({
   setPaymentMethod,
   paymentMethod,
   formType,
@@ -41,39 +39,22 @@ const WithdrawForm = ({
 
   return (
     <View style={{ rowGap: 10 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <ThemedText
-          style={{ textTransform: "capitalize", fontWeight: "bold" }}
-          color="primarydark"
-        >
-          {paymentMethod.name.split("_")[0]} withdraw
-        </ThemedText>
-        <Button
-          title="Go back"
-          onPress={() => setPaymentMethod(null)}
-          variant="outlined"
-          size="small"
-          startIcon={
-            <AppIcon color="primarydark" size={20}>
-              <Feather name="chevron-left" />
-            </AppIcon>
-          }
-        />
-      </View>
+      <Header clearPaymentMethod={setPaymentMethod} name={paymentMethod.name} />
       <PaymentInfoCard
         paymentMethod={data}
         formType={formType}
         fee={fee}
         conversionRate={conversionRate ?? "0"}
       />
+      <PaymentForm
+        paymentMethod={data}
+        formType={formType}
+        currency={currency}
+        conversionRate={conversionRate ?? "0"}
+        fee={fee}
+      />
     </View>
   );
 };
 
-export default WithdrawForm;
+export default PaymentDetails;
