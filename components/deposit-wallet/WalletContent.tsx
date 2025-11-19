@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import Card from "../libs/Card";
 import PaymentMethods from "./PaymentMethods";
+import PaymentMethodToggleButton from "./PaymentMethodToggleButton";
 import WithdrawForm from "./WithdrawForm";
 
 const WalletContent = () => {
@@ -12,6 +13,7 @@ const WalletContent = () => {
 
   return (
     <View style={{ padding: 10 }}>
+      <PaymentMethodToggleButton onChange={setCrypto} value={crypto} />
       <Card>
         {paymentMethod ? (
           <WithdrawForm
