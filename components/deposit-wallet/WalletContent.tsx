@@ -1,4 +1,6 @@
-import { PaymentMethodsType, PaymentSystemsType } from "@/types/payment";
+import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
+import { CostName } from "@/types/CostCenter";
+import { PaymentMethod, PaymentSystemsType } from "@/types/payment";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Card from "../libs/Card";
@@ -7,9 +9,13 @@ import PaymentMethodToggleButton from "./PaymentMethodToggleButton";
 import WithdrawForm from "./WithdrawForm";
 
 const WalletContent = () => {
-  const [paymentMethod, setPaymentMethod] = useState<null | number>(null);
-  const [type, setType] = useState<PaymentMethodsType | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<null | PaymentMethod>(
+    null
+  );
   const [crypto, setCrypto] = useState(false);
+  const fee = useGetCostFromCostCenter(
+    CostName.withdrawal_fee_gateway_percentage
+  );
 
   return (
     <View style={{ padding: 10 }}>
@@ -18,13 +24,13 @@ const WalletContent = () => {
         {paymentMethod ? (
           <WithdrawForm
             setPaymentMethod={setPaymentMethod}
-            paymentMethodId={paymentMethod}
-            type={type}
+            paymentMethod={paymentMethod}
+            formType="withdrawal"
+            fee={fee}
           />
         ) : (
           <PaymentMethods
             setPaymentMethod={setPaymentMethod}
-            setGatewayType={setType}
             title="to withdraw"
             type={PaymentSystemsType.withdrawal}
             crypto={crypto}

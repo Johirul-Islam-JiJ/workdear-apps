@@ -3,7 +3,7 @@ import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { filterByCountry } from "@/services/filterByCountry";
 import { useGetPaymentSystemsQuery } from "@/store/features/payment";
-import { PaymentMethodsType, PaymentSystemsType } from "@/types/payment";
+import { PaymentMethod, PaymentSystemsType } from "@/types/payment";
 import { Image } from "expo-image";
 import React from "react";
 import { Pressable, View, ViewStyle } from "react-native";
@@ -12,22 +12,13 @@ import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 type Props = {
-  setPaymentMethod: React.Dispatch<React.SetStateAction<number | null>>;
+  setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod | null>>;
   title: string;
   type: PaymentSystemsType;
-  setGatewayType: React.Dispatch<
-    React.SetStateAction<PaymentMethodsType | null>
-  >;
   crypto: boolean;
 };
 
-const PaymentMethods = ({
-  setPaymentMethod,
-  title,
-  type,
-  setGatewayType,
-  crypto,
-}: Props) => {
+const PaymentMethods = ({ setPaymentMethod, title, type, crypto }: Props) => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetPaymentSystemsQuery(undefined);
 
@@ -41,11 +32,6 @@ const PaymentMethods = ({
     type,
     crypto
   );
-
-  function handlePaymentMethod(id: number, type: PaymentMethodsType) {
-    setPaymentMethod(id);
-    setGatewayType(type);
-  }
 
   const itemWrapperStyle: ViewStyle = {
     flexDirection: "row",
@@ -62,16 +48,18 @@ const PaymentMethods = ({
       <View style={{ rowGap: 5 }}>
         {filteredData.length ? (
           filteredData.map((method) => (
-            <Pressable
-              key={method.id}
-              onPress={() => handlePaymentMethod(method.id, method.type)}
-            >
+            <Pressable key={method.id} onPress={() => setPaymentMethod(method)}>
               <ThemedView color="gray.200" style={itemWrapperStyle}>
-                <Image
-                  source={{ uri: config.fileBaseUrl + method.image_url }}
-                  style={{ height: 60, width: 60 }}
-                  contentFit="contain"
-                />
+                <ThemedView
+                  color="gray.300"
+                  style={{ borderRadius: 10, padding: 5 }}
+                >
+                  <Image
+                    source={{ uri: config.fileBaseUrl + method.image_url }}
+                    style={{ height: 60, width: 60 }}
+                    contentFit="contain"
+                  />
+                </ThemedView>
                 <View>
                   <ThemedText style={{ textTransform: "capitalize" }}>
                     {method.name.split("_")[0]} ({method.currency})

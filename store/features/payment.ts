@@ -1,5 +1,5 @@
 import { config } from "@/config/config";
-import { PaymentMethod } from "@/types/payment";
+import { ExchangeRate, PaymentMethod } from "@/types/payment";
 import { api } from "./baseQuery";
 
 const paymentApi = api.injectEndpoints({
@@ -66,7 +66,7 @@ const paymentApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
-    getCurrencyConversationData: builder.query({
+    getCurrencyConversationData: builder.query<ExchangeRate[], void>({
       query: () => ({
         url: "/currency-conversion-rate/index",
         method: "GET",

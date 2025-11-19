@@ -31,5 +31,6 @@ export const countryCurrency = {
   PK: "PKR",
   NP: "NPR",
   BD: "BDT",
+  US: "USD",
 };
 export const countryCurrencyPattern = /INR|PKR|NPR|BDT/;
