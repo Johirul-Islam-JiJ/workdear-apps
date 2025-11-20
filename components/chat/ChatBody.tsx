@@ -30,7 +30,9 @@ const ChatBody = ({ messages }: Props) => {
       ref={listRef}
       data={messages}
       keyExtractor={(item, index) => item._id || index.toString()}
-      renderItem={({ item }) => <MessageCard message={item} />}
+      renderItem={({ item, index }) => (
+        <MessageCard message={item} isLast={index === messages.length - 1} />
+      )}
       contentContainerStyle={{ rowGap: 5, padding: 10 }}
       inverted={false}
       windowSize={21}

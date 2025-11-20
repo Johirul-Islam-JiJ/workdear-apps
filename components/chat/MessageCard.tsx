@@ -12,9 +12,10 @@ import VoicePlayer from "../libs/VoicePlayer";
 
 type Props = {
   message: Message;
+  isLast: boolean;
 };
 
-const MessageCard = ({ message }: Props) => {
+const MessageCard = ({ message, isLast }: Props) => {
   return (
     <View
       style={[style.container, message.sender_type === "user" && style.reverse]}
@@ -65,6 +66,11 @@ const MessageCard = ({ message }: Props) => {
         ) : message.voice_url ? (
           <VoicePlayer uri={message.voice_url} />
         ) : null}
+        {isLast && (
+          <ThemedText variant="small" style={{ textAlign: "right" }}>
+            {message.status}
+          </ThemedText>
+        )}
       </View>
     </View>
   );
