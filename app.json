@@ -8,6 +8,7 @@
     "scheme": "mobileapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "platforms": ["android", "ios"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
