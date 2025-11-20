@@ -5,13 +5,22 @@ import { Animated, StyleSheet, View, ViewStyle } from "react-native";
 interface LoadingIndicatorProps {
   fullScreen?: boolean;
   style?: ViewStyle;
+  size?: "small" | "medium" | "large";
 }
 
 export default function LoadingIndicator({
   fullScreen = false,
   style,
+  size = "medium",
 }: LoadingIndicatorProps) {
   const primaryColor = useThemeColor("primarydark");
+
+  const sizeStyles = {
+    small: { width: 8, height: 8 },
+    medium: { width: 12, height: 12 },
+    large: { width: 16, height: 16 },
+  }[size];
+
   const bounceValues = [
     useRef(new Animated.Value(0)).current,
     useRef(new Animated.Value(0)).current,
@@ -54,6 +63,7 @@ export default function LoadingIndicator({
             key={index}
             style={[
               styles.dot,
+              sizeStyles,
               {
                 backgroundColor: primaryColor,
                 transform: [
@@ -89,9 +99,6 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dot: {
-    width: 12,
-    height: 12,
     borderRadius: 6,
-    marginHorizontal: 4,
   },
 });

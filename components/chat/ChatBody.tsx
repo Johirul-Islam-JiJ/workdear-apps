@@ -1,12 +1,20 @@
+import { Message } from "@/types/chat";
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "../libs/ThemedText";
+import { FlatList } from "react-native";
+import MessageCard from "./MessageCard";
 
-const ChatBody = () => {
+type Props = {
+  messages: Message[];
+};
+
+const ChatBody = ({ messages }: Props) => {
   return (
-    <View>
-      <ThemedText>chat body</ThemedText>
-    </View>
+    <FlatList
+      data={messages}
+      keyExtractor={(item) => item._id}
+      renderItem={({ item }) => <MessageCard message={item} />}
+      contentContainerStyle={{ rowGap: 5, padding: 10 }}
+    />
   );
 };
 

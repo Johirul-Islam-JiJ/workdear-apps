@@ -12,7 +12,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "We need your location to determine your country."
+        "NSLocationWhenInUseUsageDescription": "We need your location to determine your country.",
+        "UIBackgroundModes": ["audio"]
       }
     },
     "android": {
@@ -43,6 +44,12 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
       ]
     ],
