@@ -1,8 +1,11 @@
 import { config } from "@/config/config";
 import { Message } from "@/types/chat";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import AppIcon from "../libs/AppIcon";
+import IconButton from "../libs/IconButton";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 import VoicePlayer from "../libs/VoicePlayer";
@@ -32,11 +35,31 @@ const MessageCard = ({ message }: Props) => {
           )}
         </View>
       )}
+
+      {message.sender_type === "system" && (
+        <IconButton
+          color="primarydark"
+          icon={
+            <AppIcon color="primarydark">
+              <FontAwesome5 name="robot" />
+            </AppIcon>
+          }
+        />
+      )}
+
       <View>
         {message.image_url ? (
           <Image source={{ uri: message.image_url }} style={style.image} />
         ) : message.message ? (
-          <ThemedView color="card" style={style.message}>
+          <ThemedView
+            color="card"
+            style={[
+              style.message,
+              message.sender_type === "user"
+                ? { borderBottomRightRadius: 0 }
+                : { borderBottomLeftRadius: 0 },
+            ]}
+          >
             <ThemedText>{message.message}</ThemedText>
           </ThemedView>
         ) : message.voice_url ? (
@@ -60,7 +83,6 @@ const style = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 8,
     borderRadius: 10,
-    borderBottomLeftRadius: 0,
   },
   profile: {
     height: 50,

@@ -7,7 +7,7 @@ export type Message = {
   message_id: number;
   message_type: "text" | "image" | "voice";
   sender_id: number;
-  sender_type: "user" | "admin";
+  sender_type: "user" | "admin" | "system";
   status: "seen" | "unseen";
   user_id: number | null;
   user_online: boolean;

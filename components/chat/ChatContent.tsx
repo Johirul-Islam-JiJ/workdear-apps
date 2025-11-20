@@ -13,6 +13,24 @@ type SocketInfo = {
   isAdmin: boolean;
 };
 
+const systemMessage: Message = {
+  _id: "system",
+  admin_id: null,
+  createdAt: "",
+  image_url: null,
+  message: "Hello, how can I help you today?",
+  message_id: 0,
+  message_type: "text",
+  sender_id: 0,
+  sender_type: "system",
+  status: "seen",
+  user_id: null,
+  user_online: true,
+  voice_url: null,
+  admin_profile: null,
+  admin_name: null,
+};
+
 const ChatContent = () => {
   const { user } = useAppSelector((state) => state.user);
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
@@ -31,7 +49,7 @@ const ChatContent = () => {
 
   useEffect(() => {
     if (chatContent && chatContent.messages.length) {
-      setChatHistory(chatContent.messages);
+      setChatHistory([systemMessage, ...chatContent.messages]);
       setSocketInfo((prev) => {
         return {
           ...prev,

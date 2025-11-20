@@ -1,5 +1,5 @@
 import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react"; // Add useState
 import { View, ViewStyle } from "react-native";
 import Card from "./Card";
 import IconButton from "./IconButton";
@@ -10,6 +10,7 @@ import { ThemedView } from "./ThemedView";
 const VoicePlayer = ({ uri }: { uri: string }) => {
   const player = useAudioPlayer({ uri });
   const status = useAudioPlayerStatus(player);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   const togglePlayback = () => {
     if (status.playing) {
@@ -19,14 +20,41 @@ const VoicePlayer = ({ uri }: { uri: string }) => {
     }
   };
 
+  const skipBack = async () => {
+    try {
+      const targetTime = Math.max(0, status.currentTime - 10);
+      await player.seekTo(targetTime);
+    } catch (error) {}
+  };
+
+  const skipForward = async () => {
+    try {
+      const targetTime = Math.min(
+        status.duration || 0,
+        status.currentTime + 10
+      );
+      await player.seekTo(targetTime);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (status.isLoaded) {
+      setHasLoadedOnce(true);
+    }
+  }, [status.isLoaded]);
+
   useEffect(() => {
     if (status.didJustFinish) {
-      player.seekTo(0);
-      player.pause();
+      player
+        .seekTo(0)
+        .then(() => {
+          player.pause();
+        })
+        .catch((error) => {});
     }
   }, [status.didJustFinish, player]);
 
-  if (!status.isLoaded) {
+  if (!status.isLoaded && !hasLoadedOnce) {
     return <LoadingIndicator size="small" />;
   }
 
@@ -40,7 +68,12 @@ const VoicePlayer = ({ uri }: { uri: string }) => {
   return (
     <Card style={{ rowGap: 5, width: 200 }}>
       <View style={buttonWrapper}>
-        <IconButton icon="play-back" color="black" size="sm" />
+        <IconButton
+          onPress={skipBack}
+          icon="play-back"
+          color="black"
+          size="sm"
+        />
 
         <IconButton
           icon={status.playing ? "pause-sharp" : "play"}
@@ -48,7 +81,12 @@ const VoicePlayer = ({ uri }: { uri: string }) => {
           size="sm"
           onPress={togglePlayback}
         />
-        <IconButton icon="play-forward" color="black" size="sm" />
+        <IconButton
+          onPress={skipForward}
+          icon="play-forward"
+          color="black"
+          size="sm"
+        />
       </View>
 
       <View>
