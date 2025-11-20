@@ -49,7 +49,7 @@ const ChatContent = () => {
   const endContainerRef = useRef(null);
   const ws = useRef<WebSocket | null>(null);
   const [image, setImage] = useState<ImagePickerAsset | null>(null);
-  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [audioBlob, setAudioBlob] = useState<string | null>(null);
   const toast = useToast();
   const { data, isLoading: messageLoading } = useGetMessageQuery(user?.id, {
     skip: !user?.id,
@@ -63,16 +63,14 @@ const ChatContent = () => {
 
   const chatContent: ChatHistory = data?.data ?? null;
 
-  async function handleSaveFile(
-    file: ImagePickerAsset,
-    fileName: string | undefined = undefined
-  ) {
+  async function handleSaveFile(file: ImagePickerAsset) {
     try {
       const formData = new FormData();
+      const fileName = file.fileName || `upload_${Date.now()}.jpg`;
       const image = {
         uri: file.uri,
         type: file.mimeType || "image/jpeg",
-        name: file.fileName || `upload_${Date.now()}.jpg`,
+        name: fileName,
       } as any;
       formData.append("file", image, fileName);
       const res = await uplaodFile(formData).unwrap();
@@ -114,12 +112,14 @@ const ChatContent = () => {
         payload.image_url = await handleSaveFile(image);
       }
 
-      // if (audioBlob) {
-      //   payload.voice_url = await handleSaveFile(
-      //     audioBlob,
-      //     `recording-${Date.now()}.wav`
-      //   );
-      // }
+      if (audioBlob) {
+        const fileObject = {
+          uri: audioBlob,
+          type: "audio/wav",
+          fileName: `recording-${Date.now()}.wav`,
+        } as any;
+        payload.voice_url = await handleSaveFile(fileObject);
+      }
 
       const message = {
         type: "message",
@@ -245,6 +245,8 @@ const ChatContent = () => {
         onSendMessage={handleSendMessage}
         onChangeImage={setImage}
         imagePreview={image}
+        onChangeAudio={setAudioBlob}
+        audioPreview={audioBlob}
       />
     </View>
   );
