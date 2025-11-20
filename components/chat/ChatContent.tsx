@@ -46,7 +46,6 @@ const ChatContent = () => {
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [isLoadingWs, setLoadingWs] = useState(true);
-  const endContainerRef = useRef(null);
   const ws = useRef<WebSocket | null>(null);
   const [image, setImage] = useState<ImagePickerAsset | null>(null);
   const [audioBlob, setAudioBlob] = useState<string | null>(null);
