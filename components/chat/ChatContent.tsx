@@ -142,7 +142,7 @@ const ChatContent = () => {
   };
 
   useEffect(() => {
-    if (chatContent && chatContent.messages.length) {
+    if (chatContent && chatContent.messages?.length) {
       setChatHistory([systemMessage, ...chatContent.messages]);
       setSocketInfo((prev) => {
         return {
@@ -151,9 +151,12 @@ const ChatContent = () => {
           adminId: chatContent.admin_id,
         };
       });
+    } else {
+      setChatHistory([systemMessage]);
     }
   }, [data]);
 
+  //ws
   useEffect(() => {
     if (!user?.id || !config.socketUrl) return;
 

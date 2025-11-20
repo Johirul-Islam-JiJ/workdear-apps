@@ -66,7 +66,7 @@ const MessageCard = ({ message, isLast }: Props) => {
         ) : message.voice_url ? (
           <VoicePlayer uri={message.voice_url} />
         ) : null}
-        {isLast && (
+        {isLast && message.sender_type !== "system" && (
           <ThemedText variant="small" style={{ textAlign: "right" }}>
             {message.status}
           </ThemedText>

@@ -1,7 +1,12 @@
+import {
+  RecordingPresets,
+  useAudioRecorder,
+  useAudioRecorderState,
+} from "expo-audio";
 import { Image } from "expo-image";
 import * as ExpoImagePicker from "expo-image-picker";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import IconButton from "../libs/IconButton";
 import Input from "../libs/Input";
 import { ThemedView } from "../libs/ThemedView";
@@ -23,6 +28,9 @@ const ChatInput = ({
   onChangeImage,
   imagePreview,
 }: Props) => {
+  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  const recorderState = useAudioRecorderState(audioRecorder);
+
   const handleImagePick = async () => {
     let result = await ExpoImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images", "videos"],
@@ -58,7 +66,7 @@ const ChatInput = ({
         <IconButton
           onPress={onSendMessage}
           disabled={isLoading}
-          icon="send-sharp"
+          icon={isLoading ? <ActivityIndicator /> : "send-sharp"}
           color="primarydark"
         />
       </View>
