@@ -29,9 +29,16 @@ const ChatBody = ({ messages }: Props) => {
     <FlatList
       ref={listRef}
       data={messages}
-      keyExtractor={(item) => item._id}
+      keyExtractor={(item, index) => item._id || index.toString()}
       renderItem={({ item }) => <MessageCard message={item} />}
       contentContainerStyle={{ rowGap: 5, padding: 10 }}
+      inverted={false}
+      windowSize={21}
+      removeClippedSubviews={true}
+      maxToRenderPerBatch={10}
+      updateCellsBatchingPeriod={50}
+      initialNumToRender={10}
+      style={{ flex: 1 }}
       onContentSizeChange={() => {
         listRef.current?.scrollToEnd({ animated: false });
       }}

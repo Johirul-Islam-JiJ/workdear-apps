@@ -1,19 +1,22 @@
 export type Message = {
   _id: string;
   admin_id: number | null;
+  conversation_id: string | null;
   createdAt: string;
   image_url: string | null;
   message: string;
   message_id: number;
   message_type: "text" | "image" | "voice";
-  sender_id: number;
+  sender_id: number | null;
   sender_type: "user" | "admin" | "system";
-  status: "seen" | "unseen";
+  status: "seen" | "unseen" | "sending";
   user_id: number | null;
   user_online: boolean;
   voice_url: string | null;
   admin_profile: string | null;
   admin_name: string | null;
+  user_name: string | null;
+  user_profile: string | null;
 };
 
 export type ChatHistory = {

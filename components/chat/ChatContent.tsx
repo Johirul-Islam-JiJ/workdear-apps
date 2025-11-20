@@ -1,9 +1,14 @@
 import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
-import { useGetMessageQuery } from "@/store/features/liveSupport";
+import { useToast } from "@/hooks/useToast";
+import {
+  useGetMessageQuery,
+  useSaveSupportFileMutation,
+} from "@/store/features/liveSupport";
 import { ChatHistory, Message } from "@/types/chat";
+import { ImagePickerAsset } from "expo-image-picker";
 import React, { useEffect, useRef, useState } from "react";
-import { View, ViewStyle } from "react-native";
+import { View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import ChatBody from "./ChatBody";
 import ChatInput from "./ChatInput";
@@ -17,6 +22,7 @@ type SocketInfo = {
 const systemMessage: Message = {
   _id: "system",
   admin_id: null,
+  conversation_id: null,
   createdAt: "",
   image_url: null,
   message: "Hello, how can I help you today?",
@@ -30,17 +36,25 @@ const systemMessage: Message = {
   voice_url: null,
   admin_profile: null,
   admin_name: null,
+  user_name: null,
+  user_profile: null,
 };
 
 const ChatContent = () => {
   const { user } = useAppSelector((state) => state.user);
+  const [inputValue, setInputValue] = useState("");
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
-  const [isLoading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [isLoadingWs, setLoadingWs] = useState(true);
   const endContainerRef = useRef(null);
   const ws = useRef<WebSocket | null>(null);
+  const [image, setImage] = useState<ImagePickerAsset | null>(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const toast = useToast();
   const { data, isLoading: messageLoading } = useGetMessageQuery(user?.id, {
     skip: !user?.id,
   });
+  const [uplaodFile] = useSaveSupportFileMutation();
   const [socketInfo, setSocketInfo] = useState<SocketInfo>({
     conversationId: null,
     adminId: null,
@@ -48,6 +62,84 @@ const ChatContent = () => {
   });
 
   const chatContent: ChatHistory = data?.data ?? null;
+
+  async function handleSaveFile(
+    file: ImagePickerAsset,
+    fileName: string | undefined = undefined
+  ) {
+    try {
+      const formData = new FormData();
+      const image = {
+        uri: file.uri,
+        type: file.mimeType || "image/jpeg",
+        name: file.fileName || `upload_${Date.now()}.jpg`,
+      } as any;
+      formData.append("file", image, fileName);
+      const res = await uplaodFile(formData).unwrap();
+      return res.fileUrl;
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Internal server error");
+    }
+  }
+
+  const handleSendMessage = async () => {
+    try {
+      if (inputValue.trim() === "" && !image && !audioBlob) return;
+
+      setLoading(true);
+
+      // get the admin id with last admin message from chat history
+      const adminId = chatHistory
+        ? [...chatHistory].reverse().find((msg) => msg.sender_type === "admin")
+            ?.sender_id
+        : null;
+
+      const payload = {
+        message_id: Date.now(),
+        conversation_id: socketInfo.conversationId,
+        sender_type: "user",
+        sender_id: user?.id ?? null,
+        admin_id: adminId ?? null,
+        message_type: "text",
+        message: inputValue,
+        status: "sending",
+        user_name: user?.name ?? null,
+        user_profile: user?.profile_image || null,
+        image_url: null,
+        voice_url: null,
+      } as Message;
+
+      // save image and get link
+      if (image) {
+        payload.image_url = await handleSaveFile(image);
+      }
+
+      // if (audioBlob) {
+      //   payload.voice_url = await handleSaveFile(
+      //     audioBlob,
+      //     `recording-${Date.now()}.wav`
+      //   );
+      // }
+
+      const message = {
+        type: "message",
+        data: payload,
+      };
+
+      ws.current?.send(JSON.stringify(message));
+      setChatHistory((prev) => {
+        if (prev) return [...prev, payload];
+        else return [payload];
+      });
+      setInputValue("");
+      setImage(null);
+      setAudioBlob(null);
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Internal server error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (chatContent && chatContent.messages.length) {
@@ -71,7 +163,7 @@ const ChatContent = () => {
 
         ws.current.onopen = () => {
           console.log("WebSocket connection established");
-          setLoading(false);
+          setLoadingWs(false);
           ws.current?.send(
             JSON.stringify({
               type: "init",
@@ -139,16 +231,18 @@ const ChatContent = () => {
     };
   }, [user]);
 
-  const containerStyle: ViewStyle = {
-    justifyContent: "space-between",
-    flex: 1,
-  };
-
-  if (messageLoading) return <LoadingIndicator fullScreen />;
+  if (messageLoading || isLoadingWs) return <LoadingIndicator fullScreen />;
   return (
-    <View style={containerStyle}>
+    <View style={{ flex: 1, justifyContent: "space-between" }}>
       <ChatBody messages={chatHistory} />
-      <ChatInput />
+      <ChatInput
+        value={inputValue}
+        onChange={setInputValue}
+        isLoading={loading}
+        onSendMessage={handleSendMessage}
+        onChangeImage={setImage}
+        imagePreview={image}
+      />
     </View>
   );
 };
