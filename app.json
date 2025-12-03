@@ -4,7 +4,7 @@
     "slug": "workdear",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon/logo.png",
+    "icon": "./assets/icon/icon.png",
     "scheme": "mobileapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -18,12 +18,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon/logo-wd.png",
-        "backgroundColor": "#e5e7ec",
-        "dark": {
-          "foregroundImage": "./assets/icon/logo-wd.png",
-          "backgroundColor": "#285056"
-        }
+        "foregroundImage": "./assets/icon/icon.png",
+        "backgroundColor": "#e5e7ec"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
