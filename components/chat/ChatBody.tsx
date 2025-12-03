@@ -28,32 +28,38 @@ const ChatBody = ({ messages, isTyping }: Props) => {
   }, [messages]);
 
   return (
-    <FlatList
-      ref={listRef}
-      data={messages}
-      keyExtractor={(item, index) => item._id || index.toString()}
-      renderItem={({ item, index }) => (
-        <MessageCard message={item} isLast={index === messages.length - 1} />
+    <>
+      <FlatList
+        ref={listRef}
+        data={messages}
+        keyExtractor={(item, index) => item._id || index.toString()}
+        renderItem={({ item, index }) => (
+          <MessageCard message={item} isLast={index === messages.length - 1} />
+        )}
+        contentContainerStyle={{ rowGap: 5, padding: 10 }}
+        inverted={false}
+        windowSize={21}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        updateCellsBatchingPeriod={50}
+        initialNumToRender={10}
+        style={{ flex: 1 }}
+        onContentSizeChange={() => {
+          listRef.current?.scrollToEnd({ animated: false });
+        }}
+      />
+      {isTyping && (
+        <View
+          style={{
+            alignItems: "flex-start",
+            paddingHorizontal: 15,
+            paddingBottom: 10,
+          }}
+        >
+          <LoadingIndicator />
+        </View>
       )}
-      ListFooterComponent={
-        isTyping ? (
-          <View style={{ alignItems: "flex-start" }}>
-            <LoadingIndicator />
-          </View>
-        ) : null
-      }
-      contentContainerStyle={{ rowGap: 5, padding: 10 }}
-      inverted={false}
-      windowSize={21}
-      removeClippedSubviews={true}
-      maxToRenderPerBatch={10}
-      updateCellsBatchingPeriod={50}
-      initialNumToRender={10}
-      style={{ flex: 1 }}
-      onContentSizeChange={() => {
-        listRef.current?.scrollToEnd({ animated: false });
-      }}
-    />
+    </>
   );
 };
 
