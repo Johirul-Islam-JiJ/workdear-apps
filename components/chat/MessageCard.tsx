@@ -50,7 +50,11 @@ const MessageCard = ({ message, isLast }: Props) => {
 
       <View>
         {message.image_url ? (
-          <Image source={{ uri: message.image_url }} style={style.image} />
+          <Image
+            source={{ uri: message.image_url }}
+            style={style.image}
+            contentFit="contain"
+          />
         ) : message.message ? (
           <ThemedView
             color="card"
@@ -66,7 +70,7 @@ const MessageCard = ({ message, isLast }: Props) => {
         ) : message.voice_url ? (
           <VoicePlayer uri={message.voice_url} />
         ) : null}
-        {isLast && message.sender_type !== "system" && (
+        {isLast && message.sender_type === "user" && (
           <ThemedText variant="small" style={{ textAlign: "right" }}>
             {message.status}
           </ThemedText>
@@ -80,9 +84,10 @@ const style = StyleSheet.create({
   container: {
     gap: 5,
     flexDirection: "row",
+    maxWidth: "70%",
   },
   reverse: {
-    flexDirection: "row-reverse",
+    alignSelf: "flex-end",
   },
   image: { width: 200, height: 100, borderRadius: 8 },
   message: {
