@@ -1,6 +1,7 @@
 import { useChatSocket } from "@/hooks/chat/useChatSocket";
 import { useChatState } from "@/hooks/chat/useChatState";
 import useMarkAsRead from "@/hooks/chat/useMarkAsRead";
+import useTyping from "@/hooks/chat/useTyping";
 import { useUploadFile } from "@/hooks/chat/useUploadFile";
 import { useAppSelector } from "@/hooks/redux";
 import { useGetMessageQuery } from "@/store/features/liveSupport";
@@ -27,7 +28,10 @@ const ChatContent = () => {
 
   const { sendMessage, loadingWs, ws } = useChatSocket({
     userId: user?.id ?? null,
-    onMessage: (msg) => setChatHistory((prev) => [...prev, msg]),
+    onMessage: (msg) => {
+      setIsTyping(false);
+      setChatHistory((prev) => [...prev, msg]);
+    },
     onMessageUpdate: (msg) => {
       const conversationId = msg?.conversation_id;
       if (conversationId) {
@@ -46,6 +50,12 @@ const ChatContent = () => {
         )
       ),
     onTyping: (isTyping) => setIsTyping(isTyping),
+  });
+
+  const { handleTypingStart, resetTyping } = useTyping({
+    socketInfo,
+    userId: user?.id ?? null,
+    ws,
   });
 
   useMarkAsRead({
@@ -88,6 +98,12 @@ const ChatContent = () => {
     setImage(null);
     setAudioBlob(null);
     setLoading(false);
+    resetTyping();
+  };
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    handleTypingStart();
   };
 
   if (messageLoading || loadingWs) return <LoadingIndicator fullScreen />;
@@ -97,7 +113,7 @@ const ChatContent = () => {
       <ChatBody messages={chatHistory} isTyping={isTyping} />
       <ChatInput
         value={inputValue}
-        onChange={setInputValue}
+        onChange={handleInputChange}
         isLoading={loading}
         onSendMessage={handleSend}
         onChangeImage={setImage}
