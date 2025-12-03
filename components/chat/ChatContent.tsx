@@ -16,6 +16,7 @@ const ChatContent = () => {
   const [image, setImage] = useState<any | null>(null);
   const [audioBlob, setAudioBlob] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const { data, isLoading: messageLoading } = useGetMessageQuery(user?.id, {
     skip: !user?.id,
@@ -44,6 +45,7 @@ const ChatContent = () => {
           msgIds.includes(m.message_id) ? { ...m, status: "seen" } : m
         )
       ),
+    onTyping: (isTyping) => setIsTyping(isTyping),
   });
 
   useMarkAsRead({
@@ -92,7 +94,7 @@ const ChatContent = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: "space-between" }}>
-      <ChatBody messages={chatHistory} />
+      <ChatBody messages={chatHistory} isTyping={isTyping} />
       <ChatInput
         value={inputValue}
         onChange={setInputValue}

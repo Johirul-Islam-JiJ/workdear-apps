@@ -1,13 +1,15 @@
 import { Message } from "@/types/chat";
 import React, { useEffect, useRef } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
+import LoadingIndicator from "../libs/LoadingIndicator";
 import MessageCard from "./MessageCard";
 
 type Props = {
   messages: Message[];
+  isTyping: boolean;
 };
 
-const ChatBody = ({ messages }: Props) => {
+const ChatBody = ({ messages, isTyping }: Props) => {
   const listRef = useRef<FlatList>(null);
 
   const initial = useRef(true);
@@ -33,6 +35,13 @@ const ChatBody = ({ messages }: Props) => {
       renderItem={({ item, index }) => (
         <MessageCard message={item} isLast={index === messages.length - 1} />
       )}
+      ListFooterComponent={
+        isTyping ? (
+          <View style={{ alignItems: "flex-start" }}>
+            <LoadingIndicator />
+          </View>
+        ) : null
+      }
       contentContainerStyle={{ rowGap: 5, padding: 10 }}
       inverted={false}
       windowSize={21}

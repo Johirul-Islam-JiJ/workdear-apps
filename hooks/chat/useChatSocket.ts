@@ -7,6 +7,7 @@ type UseChatSocketProps = {
   onMessage?: (msg: Message) => void;
   onMessageUpdate?: (msg: Message) => void;
   onReadMessages?: (msgIds: number[]) => void;
+  onTyping?: (isTyping: boolean) => void;
 };
 
 export const useChatSocket = ({
@@ -14,6 +15,7 @@ export const useChatSocket = ({
   onMessage,
   onMessageUpdate,
   onReadMessages,
+  onTyping,
 }: UseChatSocketProps) => {
   const ws = useRef<WebSocket | null>(null);
   const [loadingWs, setLoadingWs] = useState(true);
@@ -43,6 +45,11 @@ export const useChatSocket = ({
           break;
         case "read_messages":
           onReadMessages?.(message.data?.unreadmessagesId || []);
+          break;
+        case "typing":
+          onTyping?.(message.data?.is_typing || false);
+          break;
+        default:
           break;
       }
     };
