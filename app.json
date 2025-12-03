@@ -4,27 +4,26 @@
     "slug": "workdear",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon/icon.png",
+    "icon": "./assets/icon/logo.png",
     "scheme": "mobileapp",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "platforms": [
-      "android",
-      "ios"
-    ],
+    "platforms": ["android", "ios"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We need your location to determine your country.",
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon/icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon/logo-wd.png",
+        "backgroundColor": "#e5e7ec",
+        "dark": {
+          "foregroundImage": "./assets/icon/logo-wd.png",
+          "backgroundColor": "#285056"
+        }
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
@@ -39,10 +38,14 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/icon/icon.png",
+          "image": "./assets/icon/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#e5e7ec",
+          "dark": {
+            "image": "./assets/icon/logo.png",
+            "backgroundColor": "#285056"
+          }
         }
       ],
       [
