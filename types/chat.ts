@@ -9,7 +9,7 @@ export type Message = {
   message_type: "text" | "image" | "voice";
   sender_id: number | null;
   sender_type: "user" | "admin" | "system";
-  status: "seen" | "unseen" | "sending";
+  status: "seen" | "send" | "sending";
   user_id: number | null;
   user_online: boolean;
   voice_url: string | null;
@@ -30,4 +30,10 @@ export type ChatHistory = {
   user_id: number;
   user_name: string;
   user_profile: string;
+};
+
+export type SocketInfo = {
+  conversationId: string | null;
+  adminId: number | null;
+  isAdmin: boolean;
 };
