@@ -1,13 +1,18 @@
 import { ThemedText } from "@/components/libs/ThemedText";
+import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
-const Index = () => {
+const MyJobs = () => {
   return (
-    <View>
-      <ThemedText>My Jobs</ThemedText>
-    </View>
+    <ThemedView color="background" style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ padding: 10, rowGap: 10 }}>
+          <ThemedText>My Jobs</ThemedText>
+        </View>
+      </ScrollView>
+    </ThemedView>
   );
 };
 
-export default Index;
+export default MyJobs;
