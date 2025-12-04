@@ -15,7 +15,7 @@ export const Colors = {
     infolight: "#c2edfe",
     info: "#0074fe",
 
-    border: "#e5e7eb",
+    border: "#e5e7eb9c",
     placeholder: "#9F9F9F",
 
     white: "#FFFFFF",
@@ -51,7 +51,7 @@ export const Colors = {
     infolight: "#c2edfe",
     info: "#0074fe",
 
-    border: "#e5e7eb6e",
+    border: "#e5e7eb3d",
     placeholder: "#9F9F9F",
 
     white: "#FFFFFF",

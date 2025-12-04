@@ -6,16 +6,11 @@ import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Image } from "expo-image";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-interface DrawerProfileProps {
-  navigation: DrawerContentComponentProps["navigation"];
-}
-
-export default function DrawerProfile({ navigation }: DrawerProfileProps) {
+export default function DrawerProfile() {
   const { user } = useAppSelector((state) => state.user);
   const borderColor = useThemeColor("border");
 
@@ -81,12 +76,13 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
         </View>
       </View>
 
-      <View
+      <ThemedView
+        color="primarydarker"
+        opacity={{ light: 30, dark: 30 }}
         style={[
           style.balanceContainer,
           {
-            borderColor: `${borderColor}40`,
-            backgroundColor: `${borderColor}30`,
+            borderColor: borderColor,
           },
         ]}
       >
@@ -97,7 +93,7 @@ export default function DrawerProfile({ navigation }: DrawerProfileProps) {
         <ThemedText color="white" variant="button">
           Deposit: ${user?.wallet_balance.deposit_balance}
         </ThemedText>
-      </View>
+      </ThemedView>
     </ThemedView>
   );
 }

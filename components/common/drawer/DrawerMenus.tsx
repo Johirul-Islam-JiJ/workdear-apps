@@ -40,24 +40,20 @@ export default function DrawerMenus({ navigation }: DrawerQuickActionsProps) {
         })}
       </View>
 
-      <View style={{ gap: 8 }}>
-        {/* <ExternalLink href="https://t.me/joinchat/AAAAAEc-5_45Y095">
-        </ExternalLink> */}
-        <Button
-          title="Theme mode"
-          endIcon={<ThemeSwitch />}
-          variant="text"
-          color="text"
-          startIcon={
-            theme === "dark" ? (
-              <Entypo name="light-down" size={26} color="white" />
-            ) : (
-              <MaterialIcons name="dark-mode" size={20} color={darkColor} />
-            )
-          }
-          style={{ justifyContent: "space-between" }}
-        />
-      </View>
+      <Button
+        title="Theme mode"
+        endIcon={<ThemeSwitch />}
+        variant="text"
+        color="text"
+        startIcon={
+          theme === "dark" ? (
+            <Entypo name="light-down" size={26} color="white" />
+          ) : (
+            <MaterialIcons name="dark-mode" size={20} color={darkColor} />
+          )
+        }
+        style={{ justifyContent: "space-between", alignItems: "center" }}
+      />
     </View>
   );
 }
