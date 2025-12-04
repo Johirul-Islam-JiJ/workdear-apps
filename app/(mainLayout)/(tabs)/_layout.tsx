@@ -16,6 +16,7 @@ export default function TabLayout() {
   const tabBarBackgroundColor = useThemeColor("card");
   const whiteColor = useThemeColor("white");
   const blackColor = useThemeColor("black");
+  const grayColor = useThemeColor("gray.700");
   const colorScheme = useColorScheme();
   const dark = colorScheme === "dark";
 
@@ -36,6 +37,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: tabActiveColor,
+        tabBarInactiveTintColor: dark ? whiteColor : grayColor,
         tabBarStyle: tabBarStyle,
         header: (props) => (
           <ScreenHeader route={props.options.title as string} />
