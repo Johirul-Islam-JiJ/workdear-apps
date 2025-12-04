@@ -10,14 +10,12 @@ export const useUploadFile = () => {
     try {
       const formData = new FormData();
 
-      console.log(file);
-
       const extension = file.uri?.split(".").pop() || "jpg";
       const fileName = file.fileName || `upload_${Date.now()}.${extension}`;
       const fileType =
-        file.mimeType || (extension === "m4a" ? "audio/m4a" : "image/jpeg");
-
-      console.log({ fileName, fileType });
+        file.mimeType ||
+        file.type ||
+        (extension === "m4a" ? "audio/m4a" : "image/jpeg");
 
       formData.append("file", {
         uri: file.uri,
@@ -28,7 +26,6 @@ export const useUploadFile = () => {
       const res = await uploadFile(formData).unwrap();
       return res.fileUrl;
     } catch (error: any) {
-      console.log(error);
       toast.error(error?.data?.message || "Internal server error");
     }
   };
