@@ -1,68 +1,61 @@
-import { CategoryState } from "@/app/(mainLayout)/(tabs)/jobs";
 import {
   useGetcountryQuery,
   useGetJobsCategoryQuery,
 } from "@/store/features/jobs";
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
-import Button from "../libs/Button";
-import SelectCategoryModal from "./common/SelectCategoryModal";
-import SelectCountryModal from "./common/SelectCountryModal";
+import { DropdownMenu } from "../libs/DropdownMenu";
 
 type Props = {
-  countryIds: number[];
-  setCountryIds: React.Dispatch<React.SetStateAction<number[]>>;
-  category: CategoryState;
-  setCategory: React.Dispatch<React.SetStateAction<CategoryState>>;
+  selectedCountry: string;
+  setSelectedCountry: React.Dispatch<React.SetStateAction<string>>;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const JobListHeader = ({
-  countryIds,
-  setCountryIds,
-  category,
-  setCategory,
+  selectedCountry,
+  setSelectedCountry,
+  selectedCategory,
+  setSelectedCategory,
 }: Props) => {
-  const [showCategoryModal, setShowCategoryModal] = useState(0);
-  const [showCountryModal, setShowCountryModal] = useState(0);
   const { data: categories } = useGetJobsCategoryQuery();
   const { data: countries } = useGetcountryQuery();
 
+  const countriesData = countries?.data || [];
+  const countriesOption = countriesData.map((item) => {
+    return {
+      value: item.id.toString(),
+      label: item.country_name,
+    };
+  });
+  countriesOption.unshift({ value: "", label: "All" });
+  const categoriesData = categories?.data || [];
+  const categoriesOption = categoriesData.map((item) => {
+    return {
+      value: item.id.toString(),
+      label: item.category_name,
+    };
+  });
+  categoriesOption.unshift({ value: "", label: "All" });
+
   return (
     <View style={{ flexDirection: "row", gap: 10, flexWrap: "wrap" }}>
-      <Button
-        onPress={() => setShowCategoryModal(1)}
-        variant={category.id ? "contained" : "outlined"}
-        title={category.name ? category.name : "Select Category"}
-      />
-      <Button
-        onPress={() => setShowCountryModal(1)}
-        variant={countryIds.length > 0 ? "contained" : "outlined"}
-        title={
-          countryIds.length > 0
-            ? `${countryIds.length} Selected`
-            : "Select Country"
-        }
+      <DropdownMenu
+        items={categoriesOption}
+        onSelect={setSelectedCategory}
+        placeholder="Select category"
+        value={selectedCategory}
+        border
       />
 
-      {!!showCountryModal && (
-        <SelectCountryModal
-          visible={showCountryModal}
-          setVisible={setShowCountryModal}
-          countries={countries?.data || []}
-          countryIds={countryIds}
-          setCountryIds={setCountryIds}
-          highlightOnSelect={true}
-        />
-      )}
-      {!!showCategoryModal && (
-        <SelectCategoryModal
-          visible={showCategoryModal}
-          setVisible={setShowCategoryModal}
-          category={categories?.data || []}
-          selected={category}
-          setSelected={setCategory}
-        />
-      )}
+      <DropdownMenu
+        items={countriesOption}
+        onSelect={setSelectedCountry}
+        placeholder="Select country"
+        value={selectedCountry}
+        border
+      />
     </View>
   );
 };

@@ -15,21 +15,18 @@ export type CategoryState = {
 };
 
 const JobsSreen = () => {
-  const [countryIds, setCountryIds] = useState<number[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [jobsData, setJobsData] = useState<Job[]>([]);
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState<CategoryState>({
-    id: null,
-    name: null,
-  });
 
   const {
     data: jobs,
     isLoading,
     isFetching,
   } = useFindJobsQuery({
-    country_ids: countryIds.length > 0 ? countryIds : null,
-    job_category_id: category.id,
+    country_ids: selectedCountry ? [parseInt(selectedCountry)] : null,
+    job_category_id: parseInt(selectedCategory),
     higest_pay: true,
     recent: true,
     page,
@@ -38,7 +35,7 @@ const JobsSreen = () => {
   useEffect(() => {
     setJobsData([]);
     setPage(1);
-  }, [countryIds, category.id]);
+  }, [selectedCountry, selectedCategory]);
 
   useEffect(() => {
     if (jobs?.data?.data) {
@@ -60,10 +57,10 @@ const JobsSreen = () => {
       style={{ paddingHorizontal: 10, paddingVertical: 15, flex: 1 }}
     >
       <JobListHeader
-        countryIds={countryIds}
-        setCountryIds={setCountryIds}
-        category={category}
-        setCategory={setCategory}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
 
       <FlatList

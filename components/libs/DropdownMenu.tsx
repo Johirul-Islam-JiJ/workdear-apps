@@ -102,8 +102,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
         <ThemedView
           color="card"
           style={{
-            paddingTop: 10,
-            paddingBottom: 40,
+            paddingVertical: 10,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             maxHeight: "60%",
