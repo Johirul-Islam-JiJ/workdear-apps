@@ -72,6 +72,30 @@ interface WalletBalance {
   total_balance: number;
 }
 
+//{"created_at": "2025-09-14T06:45:37.000000Z", "end_date": "2025-12-14", "id": 8, "package": {"created_at": "2025-09-08T05:39:11.000000Z", "description": "Basic plan", "duration": "3", "feature": [Array], "highlighted": false, "id": 1, "minute": null, "name": "Basic", "price": "15", "updated_at": "2025-10-30T19:22:41.000000Z"}, "package_id": 1, "paid_from": "deposit_balance", "start_date": "2025-09-14", "updated_at": "2025-09-14T06:45:37.000000Z", "user_id": 1}
+type UserPackage = {
+  created_at: string;
+  end_date: string;
+  id: number;
+  package: {
+    created_at: string;
+    description: string;
+    duration: string;
+    feature: string[];
+    highlighted: boolean;
+    id: number;
+    minute: null;
+    name: string;
+    price: string;
+    updated_at: string;
+  };
+  package_id: number;
+  paid_from: string;
+  start_date: string;
+  updated_at: string;
+  user_id: number;
+};
+
 export interface User {
   about_me: string | null;
   active: string;
@@ -91,7 +115,7 @@ export interface User {
   name: string;
   online_status: boolean;
   phone_number: string | null;
-  premium_subscriptions: [];
+  premium_subscriptions: UserPackage[];
   profile_image: string;
   referral_code: string;
   referral_paused: string;

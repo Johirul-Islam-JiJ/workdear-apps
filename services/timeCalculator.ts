@@ -43,14 +43,14 @@ export function getRemainingDays(
   );
 
   if (diffDays === 0) {
-    return `${diffHours} Hour${diffHours !== 1 ? "s" : ""}`;
+    return `${diffHours} hour${diffHours !== 1 ? "s" : ""}`;
   }
 
   if (diffHours === 0) {
-    return `${diffDays} Day${diffDays !== 1 ? "s" : ""}`;
+    return `${diffDays} day${diffDays !== 1 ? "s" : ""}`;
   }
 
-  return `${diffDays} Day${diffDays !== 1 ? "s" : ""} ${diffHours} Hour${
+  return `${diffDays} day${diffDays !== 1 ? "s" : ""} ${diffHours} hour${
     diffHours !== 1 ? "s" : ""
   }`;
 }
