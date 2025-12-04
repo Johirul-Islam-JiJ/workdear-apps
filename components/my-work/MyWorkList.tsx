@@ -34,6 +34,7 @@ const MyWorkList = ({ onChangeStatus, data }: MyWorkListProps) => {
           <DropdownMenu
             items={filterOptions}
             placeholder="Filter"
+            title="Filter by status"
             onSelect={(value) => onChangeStatus(value as MyWorkStatus)}
           />
         </ThemedView>

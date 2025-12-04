@@ -82,7 +82,6 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
-      enabled
     >
       <ScrollView>
         <View
