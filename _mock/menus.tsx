@@ -59,6 +59,13 @@ export const drawerMenus = [
       <Ionicons name="receipt-outline" size={size} color={color} />
     ),
   },
+  {
+    label: drawerScreens.settings.drawerLabel,
+    path: drawerScreens.settings.name,
+    Icon: ({ color, size }: { color: string; size: number }) => (
+      <Ionicons name="settings-outline" size={size} color={color} />
+    ),
+  },
 ];
 
 export type MoreMenu = {

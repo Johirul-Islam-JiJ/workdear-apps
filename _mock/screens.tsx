@@ -38,6 +38,10 @@ export const drawerScreens = {
     name: "transaction-history/index",
     drawerLabel: "Transaction history",
   },
+  settings: {
+    name: "settings/index",
+    drawerLabel: "Settings",
+  },
 
   // -------------------- more screens -----------------------
 
