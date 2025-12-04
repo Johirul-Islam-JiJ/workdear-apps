@@ -68,6 +68,7 @@ const CountrySelectField = ({ control, setValue, errors }: Props) => {
             placeholder="Select your country"
             onSelect={onChange}
             error={errors.country_id?.message}
+            border
           />
         )}
       />

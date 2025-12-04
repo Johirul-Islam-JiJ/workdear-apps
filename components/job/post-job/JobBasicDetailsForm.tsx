@@ -213,7 +213,7 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                       value={field.value as string}
                       onSelect={field.onChange}
                       error={errors.required_proofs?.[index]?.type?.message}
-                      border={true}
+                      border
                     />
                   )}
                 />
@@ -290,6 +290,7 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                       items={selectOptions.job.question_condition_type}
                       placeholder="Select Answer Type"
                       value={field.value as string}
+                      border
                       onSelect={(value) => {
                         field.onChange(value);
                         if (value === "text") {
@@ -334,6 +335,7 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                     control={control}
                     render={({ field }) => (
                       <DropdownMenu
+                        border
                         disabled={
                           watch(`question_condition.${index}.answer_type`) ===
                           "text"
