@@ -34,7 +34,7 @@ const PackageInfo = () => {
       Icon: <Entypo name="credit-card" />,
       color: "info",
       title: "Payment method",
-      value: pack.paid_from,
+      value: pack.paid_from.replace("_", " "),
     },
   ];
 
@@ -55,8 +55,10 @@ const PackageInfo = () => {
             }}
           >
             <View>
-              <ThemedText variant="subtitle">{pack.package.name}</ThemedText>
-              <ThemedText variant="small">
+              <ThemedText variant="subtitle" color="white">
+                {pack.package.name}
+              </ThemedText>
+              <ThemedText variant="small" color="white">
                 {pack.package.description}
               </ThemedText>
             </View>
@@ -70,7 +72,7 @@ const PackageInfo = () => {
                   borderRadius: 8,
                 }}
               >
-                <ThemedText style={{ fontWeight: "bold" }}>
+                <ThemedText style={{ fontWeight: "bold" }} color="white">
                   ${pack.package.price}
                 </ThemedText>
               </ThemedView>
@@ -80,7 +82,7 @@ const PackageInfo = () => {
           {/* message  */}
           <ThemedView
             color="success"
-            opacity={{ dark: 20 }}
+            opacity={{ dark: 20, light: 20 }}
             style={{
               paddingHorizontal: 10,
               paddingVertical: 8,
