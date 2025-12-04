@@ -45,6 +45,7 @@ interface UserTransactionRecord {
   withdraw: string;
   withdrawal_fee_gateway: string;
   withdrawal_fee_manual: string;
+  job_paid: number;
 }
 
 interface Verification {

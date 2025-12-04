@@ -45,11 +45,11 @@ const OverViewCard = ({ data }: Props) => {
               <ThemedText>{work.title}</ThemedText>
               <ThemedText>{work.value}</ThemedText>
             </View>
-            {data.works.length - 1 !== index && <Divider />}
+            <Divider />
           </View>
         ))}
       </View>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", marginTop: 10 }}>
         <Rating value={data.rating} />
         <ThemedText variant="small">
           {data.rating >= 4
