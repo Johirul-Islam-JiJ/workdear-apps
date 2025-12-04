@@ -150,43 +150,47 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
         );
       })}
 
-      <ThemedText>
-        Attach required {requireScreenshots}{" "}
-        {requireScreenshots > 1 ? "screenshots" : "screenshot"}
-      </ThemedText>
-      <View style={{ rowGap: 10 }}>
-        {images.map((_image, index) => {
-          const watchedImage = watch(`images.${index}`);
-          const imageError = errors.images as
-            | FieldErrors<FormValues["images"]>
-            | undefined;
+      {requireScreenshots > 0 && (
+        <>
+          <ThemedText>
+            Attach required {requireScreenshots}{" "}
+            {requireScreenshots > 1 ? "screenshots" : "screenshot"}
+          </ThemedText>
+          <View style={{ rowGap: 10 }}>
+            {images.map((_image, index) => {
+              const watchedImage = watch(`images.${index}`);
+              const imageError = errors.images as
+                | FieldErrors<FormValues["images"]>
+                | undefined;
 
-          return (
-            <View key={index} style={{ rowGap: 5 }}>
-              <Controller
-                control={control}
-                name={`images.${index}`}
-                rules={{ required: "Screenshot is required" }}
-                render={({ field }) => (
-                  <ImagePicker
-                    value={field.value}
-                    onChange={field.onChange}
-                    error={imageError?.[index]?.message ?? ""}
+              return (
+                <View key={index} style={{ rowGap: 5 }}>
+                  <Controller
+                    control={control}
+                    name={`images.${index}`}
+                    rules={{ required: "Screenshot is required" }}
+                    render={({ field }) => (
+                      <ImagePicker
+                        value={field.value}
+                        onChange={field.onChange}
+                        error={imageError?.[index]?.message ?? ""}
+                      />
+                    )}
                   />
-                )}
-              />
-              {watchedImage && watchedImage.uri && (
-                <Image
-                  source={{ uri: watchedImage.uri }}
-                  style={{ height: 150, width: "100%", borderRadius: 10 }}
-                  alt="prevew"
-                  contentFit="cover"
-                />
-              )}
-            </View>
-          );
-        })}
-      </View>
+                  {watchedImage && watchedImage.uri && (
+                    <Image
+                      source={{ uri: watchedImage.uri }}
+                      style={{ height: 150, width: "100%", borderRadius: 10 }}
+                      alt="prevew"
+                      contentFit="cover"
+                    />
+                  )}
+                </View>
+              );
+            })}
+          </View>
+        </>
+      )}
 
       <Button
         title="Submit"
