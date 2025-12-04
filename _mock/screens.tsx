@@ -88,14 +88,6 @@ export const drawerScreens = {
     name: "faq/index",
     drawerLabel: "FAQ",
   },
-  contactUs: {
-    name: "contact-us/index",
-    drawerLabel: "Contact us",
-  },
-  chat: {
-    name: "chat/index",
-    drawerLabel: "Live Chat",
-  },
 
   // Legal and policies screen
   termsAndConditions: {
@@ -116,16 +108,26 @@ export const drawerScreens = {
   },
 };
 
-export const blogScreens = {
+export const extraStackScreens = {
   blogs: {
     name: "index",
-    path: "blogs/index",
     title: "Blogs",
+    path: "blogs/index",
   },
   singleBlog: {
     name: "[slug]/index",
-    path: "/blogs/[slug]/index",
     title: "Blog details",
+    path: "/blogs/[slug]/index",
+  },
+  contactUs: {
+    name: "index",
+    title: "Contact us",
+    path: "contact-us/index",
+  },
+  chat: {
+    name: "chat/index",
+    title: "Live Chat",
+    path: "contact-us/chat/index",
   },
 };
 

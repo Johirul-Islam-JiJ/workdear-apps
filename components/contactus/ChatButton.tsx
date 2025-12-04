@@ -66,7 +66,7 @@ const ChatButton = () => {
         <Animated.View style={nose} />
       </Animated.View>
 
-      <Link href="/(mainLayout)/chat" asChild>
+      <Link href="/contact-us/chat" asChild>
         <Button title="Live Chat" startIcon="chatbox-ellipses-outline" />
       </Link>
     </View>

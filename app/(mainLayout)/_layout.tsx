@@ -12,7 +12,7 @@ export default function Layout() {
           drawerHideStatusBarOnOpen: false,
           header: (props) => {
             const lebel = props.options.drawerLabel as string;
-            const hideHeaderRoute = ["(tabs)", "blogs"];
+            const hideHeaderRoute = ["(tabs)", "blogs", "contact-us"];
             return (
               !hideHeaderRoute.includes(props.route.name) && (
                 <ScreenHeader route={lebel} />

@@ -1,7 +1,7 @@
 import BlogContent from "@/components/blog/BlogContent";
 import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native";
 
 const Blog = () => {
   return (
