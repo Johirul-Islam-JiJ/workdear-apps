@@ -213,6 +213,7 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                       value={field.value as string}
                       onSelect={field.onChange}
                       error={errors.required_proofs?.[index]?.type?.message}
+                      border={true}
                     />
                   )}
                 />

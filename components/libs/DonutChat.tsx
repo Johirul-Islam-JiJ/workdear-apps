@@ -18,11 +18,18 @@ type Segment = {
 type Props = {
   segments: Segment[];
   description: string;
+  width?: number;
+  stockWidth?: number;
 };
 
-export default function DonutChat({ segments, description }: Props) {
-  const radius = 110;
-  const strokeWidth = 20;
+export default function DonutChat({
+  segments,
+  description,
+  width = 110,
+  stockWidth = 20,
+}: Props) {
+  const radius = width;
+  const strokeWidth = stockWidth;
   const circumference = 2 * Math.PI * radius;
   const center = radius + strokeWidth / 2;
 

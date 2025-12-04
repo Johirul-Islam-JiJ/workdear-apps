@@ -2,17 +2,19 @@ import AppIcon from "@/components/libs/AppIcon";
 import DonutChat from "@/components/libs/DonutChat";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Job } from "@/types/Job";
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
 import { ViewStyle } from "react-native";
 
 const JobHeaderInfoCard = ({ job }: { job: Job }) => {
+  const primarydark = useThemeColor("primarydark");
   const { TOTAL_SUBMISSIONS, REQUIRED_JOB_WORKER } = job.submission_information;
   const iconStyle: ViewStyle = {
     borderRadius: 50,
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     justifyContent: "center",
     alignItems: "center",
   };
@@ -32,7 +34,12 @@ const JobHeaderInfoCard = ({ job }: { job: Job }) => {
 
   return (
     <ThemedView color="card" style={containerStyle}>
-      <DonutChat cutout={cutoutScore} description={cutoutDescription} />
+      <DonutChat
+        segments={[{ value: cutoutScore, color: primarydark }]}
+        description={cutoutDescription}
+        width={40}
+        stockWidth={10}
+      />
       <ThemedText variant="body2">${job.pay_per_task}</ThemedText>
       <ThemedView color="primarydark" style={iconStyle}>
         <AppIcon color="white" size={40}>

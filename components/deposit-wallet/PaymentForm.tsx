@@ -169,6 +169,8 @@ const PaymentForm = ({
                         placeholder={item.placeholder}
                         onSelect={field.onChange}
                         value={field.value}
+                        border={true}
+                        error={error?.message}
                       />
                     );
                   }

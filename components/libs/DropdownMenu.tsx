@@ -19,6 +19,7 @@ type DropdownProps = {
   error?: string;
   value?: string;
   disabled?: boolean;
+  border?: boolean;
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -28,6 +29,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   error,
   value,
   disabled,
+  border = false,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const borderColor = useThemeColor(error ? "error" : "border");
@@ -68,6 +70,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
         style={{
           justifyContent: "space-between",
           alignItems: "center",
+          borderWidth: border ? 1 : 0,
           borderColor: borderColor,
           paddingHorizontal: 10,
         }}
