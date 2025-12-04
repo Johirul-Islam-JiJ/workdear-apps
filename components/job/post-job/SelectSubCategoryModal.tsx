@@ -25,8 +25,7 @@ const SelectSubCategoryModal = ({
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
         variant="subtitle"
-        color="primarydarker"
-        darkColor="white"
+        color="primarymain"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
         Select Sub Category
@@ -46,6 +45,7 @@ const SelectSubCategoryModal = ({
               <Button
                 key={index}
                 style={{ minWidth: "49%" }}
+                size="small"
                 onPress={() => {
                   setSelected(
                     selected.id !== item.id

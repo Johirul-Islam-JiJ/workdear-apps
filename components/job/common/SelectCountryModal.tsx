@@ -77,6 +77,7 @@ const SelectCountryModal = ({
                 <Button
                   key={index}
                   style={{ minWidth: "49%" }}
+                  size="small"
                   onPress={() => handleToggleSelect(country.id)}
                   title={country.country_name}
                   variant={isSelected ? "contained" : "outlined"}

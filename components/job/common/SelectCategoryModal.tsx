@@ -43,7 +43,8 @@ const SelectCategoryModal = ({
           {category.map((item, index) => (
             <Button
               key={index}
-              style={{ minWidth: "49%" }}
+              size="small"
+              style={{ width: "49%" }}
               onPress={() => {
                 setSelected(
                   selected.id !== item.id
