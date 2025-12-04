@@ -4,15 +4,17 @@ import { ThemedText } from "../../libs/ThemedText";
 import PackageCard from "./PackageCard";
 import PackageLoadingCard from "./PackingLoadingCard";
 
-const Packages = () => {
+const Packages = ({ title = true }: { title?: boolean }) => {
   const { data: packageData, isLoading } = useGetPremiumPackagesQuery();
   const packages = packageData?.subscription_package_list ?? [];
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
-        Unlock Premium Features
-      </ThemedText>
+      {title && (
+        <ThemedText variant="subtitle" color="primarydark" darkColor="white">
+          Unlock Premium Features
+        </ThemedText>
+      )}
       {isLoading ? (
         <View style={{ rowGap: 10 }}>
           <PackageLoadingCard />
