@@ -72,12 +72,14 @@ const VoicePlayer = ({ uri }: { uri: string }) => {
           onPress={skipBack}
           icon="play-back"
           color="black"
+          darkColor="white"
           size="sm"
         />
 
         <IconButton
           icon={status.playing ? "pause-sharp" : "play"}
           color={status.playing ? "success" : "black"}
+          darkColor={status.playing ? "success" : "white"}
           size="sm"
           onPress={togglePlayback}
         />
@@ -85,6 +87,7 @@ const VoicePlayer = ({ uri }: { uri: string }) => {
           onPress={skipForward}
           icon="play-forward"
           color="black"
+          darkColor="white"
           size="sm"
         />
       </View>

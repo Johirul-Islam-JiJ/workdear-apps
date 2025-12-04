@@ -136,9 +136,8 @@ const baseQueryLiveSupport: BaseQueryFn<
       }
 
       const url = typeof args === "string" ? args : args.url;
-      if (!isFormDataUrl(supportFormDataUrl, url)) {
+      if (!supportFormDataUrl.includes(url)) {
         headers.set("Content-Type", "application/json");
-        headers.set("Accept", "application/json");
       }
       headers.set("Accept", "application/json");
 

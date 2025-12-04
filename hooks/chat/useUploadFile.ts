@@ -9,15 +9,26 @@ export const useUploadFile = () => {
   const handleUploadFile = async (file: ImagePickerAsset | any) => {
     try {
       const formData = new FormData();
-      const fileName = file.fileName || `upload_${Date.now()}`;
-      formData.append(
-        "file",
-        { uri: file.uri, type: file.type, name: fileName } as any,
-        fileName
-      );
+
+      console.log(file);
+
+      const extension = file.uri?.split(".").pop() || "jpg";
+      const fileName = file.fileName || `upload_${Date.now()}.${extension}`;
+      const fileType =
+        file.mimeType || (extension === "m4a" ? "audio/m4a" : "image/jpeg");
+
+      console.log({ fileName, fileType });
+
+      formData.append("file", {
+        uri: file.uri,
+        type: fileType,
+        name: fileName,
+      } as any);
+
       const res = await uploadFile(formData).unwrap();
       return res.fileUrl;
     } catch (error: any) {
+      console.log(error);
       toast.error(error?.data?.message || "Internal server error");
     }
   };
