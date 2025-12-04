@@ -52,8 +52,7 @@ const SelectCountryModal = ({
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
         variant="subtitle"
-        color="primarydarker"
-        darkColor="white"
+        color="primarymain"
         style={{ textAlign: "center", marginBottom: 20 }}
       >
         Select Country

@@ -25,7 +25,7 @@ const SelectCategoryModal = ({
     <Modal visible={visible} setVisible={setVisible}>
       <ThemedText
         variant="subtitle"
-        color="primarydarker"
+        color="primarymain"
         style={{ textAlign: "center", marginBottom: 15 }}
       >
         Select Category

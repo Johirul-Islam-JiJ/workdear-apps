@@ -27,7 +27,7 @@ interface ButtonProps extends PressableProps {
 const Button: React.FC<ButtonProps> = ({
   title,
   variant = "contained",
-  color = "primarydark",
+  color = "primarymain",
   loading,
   size = "medium",
   startIcon,
