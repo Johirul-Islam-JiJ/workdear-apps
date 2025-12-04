@@ -24,8 +24,6 @@ const SummaryCard = (props: SummaryCardProps) => {
     paddingVertical: 10,
     borderRadius: 8,
     gap: 10,
-    borderWidth: 1,
-    borderColor: `${mainColor}50`,
     ...style,
   };
 
