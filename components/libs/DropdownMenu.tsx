@@ -122,6 +122,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             maxHeight: "60%",
+            minHeight: "30%",
           }}
         >
           {/* Drag handle */}
