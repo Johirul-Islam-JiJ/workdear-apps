@@ -1,4 +1,5 @@
 import Button from "@/components/libs/Button";
+import { DropdownMenu } from "@/components/libs/DropdownMenu";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useGetJobsCategoryQuery } from "@/store/features/jobs";
@@ -7,38 +8,38 @@ import { JobCategory } from "@/types/Job";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import ButtonCardLoader from "./ButtonCardLoader";
-import SelectSubCategoryModal from "./SelectSubCategoryModal";
 
 type Props = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export type SubCategoryValue = {
-  id: number | null;
+type SelectedCategory = {
+  category: number | null;
+  subCategory: number | null;
   price: string | null;
 };
 
 const SelectCategory = ({ step, setStep }: Props) => {
-  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(
-    jobPostFinalForm.job_category_id
-  );
   const { data: categories, isLoading } = useGetJobsCategoryQuery();
+  const { jobPostFinalForm } = useAppSelector((state) => state.jobForm);
   const dispatch = useAppDispatch();
-  const [selectedSubCategory, setSelectedSubCategory] =
-    useState<SubCategoryValue>({
-      id: jobPostFinalForm.job_sub_category_id,
-      price: jobPostFinalForm.minimum_pay,
-    });
+
+  const initialSelection = {
+    category: jobPostFinalForm.job_category_id,
+    subCategory: jobPostFinalForm.job_sub_category_id,
+    price: jobPostFinalForm.minimum_pay,
+  };
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectedCategory>(initialSelection);
 
   const handleNext = () => {
     dispatch(
       setJobPostFinalForm({
         ...jobPostFinalForm,
-        job_category_id: selectedCategory,
-        job_sub_category_id: selectedSubCategory.id,
-        minimum_pay: selectedSubCategory.price,
+        job_category_id: selectedCategory.category,
+        job_sub_category_id: selectedCategory.subCategory,
+        minimum_pay: selectedCategory.price,
       })
     );
     setStep(step + 1);
@@ -78,8 +79,6 @@ const SelectCategory = ({ step, setStep }: Props) => {
               category={category}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
-              selectedSubCategory={selectedSubCategory}
-              setSelectedSubCategory={setSelectedSubCategory}
             />
           ))
         ) : (
@@ -105,7 +104,7 @@ const SelectCategory = ({ step, setStep }: Props) => {
           style={{ flex: 1 }}
         />
         <Button
-          disabled={!selectedCategory || !selectedSubCategory.id}
+          disabled={!selectedCategory.category || !selectedCategory.subCategory}
           title="Next"
           style={{ flex: 1 }}
           onPress={handleNext}
@@ -117,52 +116,44 @@ const SelectCategory = ({ step, setStep }: Props) => {
 
 type CategoryProp = {
   category: JobCategory;
-  selectedCategory: number | null;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<number | null>>;
-  selectedSubCategory: SubCategoryValue;
-  setSelectedSubCategory: React.Dispatch<
-    React.SetStateAction<SubCategoryValue>
-  >;
+  selectedCategory: SelectedCategory;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<SelectedCategory>>;
 };
 
 function Category({
   category,
   selectedCategory,
   setSelectedCategory,
-  selectedSubCategory,
-  setSelectedSubCategory,
 }: CategoryProp) {
-  const [visible, setVisible] = useState(0);
+  const subCategoryOptions = category.sub_categories.map((subCategory) => ({
+    label: subCategory.sub_category_name,
+    value: subCategory.id.toString(),
+    price: subCategory.minimum_pay,
+  }));
 
-  function handleSelect() {
-    setSelectedCategory(category.id);
-    setVisible(1);
-    if (category.id !== selectedCategory) {
-      setSelectedSubCategory({
-        id: null,
-        price: null,
-      });
-    }
-  }
+  const handleSelect = (value: string) => {
+    const price =
+      subCategoryOptions.find((item) => item.value === value)?.price ?? null;
+    setSelectedCategory({
+      category: category.id,
+      subCategory: parseInt(value),
+      price: price,
+    });
+  };
 
   return (
-    <>
-      <Button
-        onPress={handleSelect}
-        title={category.category_name}
-        variant={category.id === selectedCategory ? "contained" : "outlined"}
-      />
-
-      {!!visible && (
-        <SelectSubCategoryModal
-          category={category.sub_categories}
-          selected={selectedSubCategory}
-          setSelected={setSelectedSubCategory}
-          visible={visible}
-          setVisible={setVisible}
-        />
-      )}
-    </>
+    <DropdownMenu
+      items={subCategoryOptions}
+      onSelect={handleSelect}
+      value={selectedCategory.subCategory?.toString()}
+      placeholder={category.category_name}
+      title="Select sub category"
+      border
+      multiple
+      variant={
+        selectedCategory.category === category.id ? "contained" : "outlined"
+      }
+    />
   );
 }
 

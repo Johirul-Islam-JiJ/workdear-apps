@@ -120,7 +120,14 @@ const Button: React.FC<ButtonProps> = ({
         <ActivityIndicator size="small" color={iconColor} />
       ) : (
         <>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              maxWidth: "90%",
+            }}
+          >
             {startIcon && renderIcon(startIcon)}
 
             {typeof title === "string" ? (

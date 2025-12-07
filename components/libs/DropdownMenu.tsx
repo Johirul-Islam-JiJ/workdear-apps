@@ -51,6 +51,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
     if (value) {
       const item = items.find((item) => item.value === value);
       if (item) setSelected(item);
+      else setSelected({ label: "", value: "" });
     } else {
       setSelected({ label: "", value: "" });
     }
