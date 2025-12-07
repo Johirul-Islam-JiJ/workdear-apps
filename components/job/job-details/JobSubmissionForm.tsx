@@ -9,7 +9,7 @@ import { useJobSubmissionMutation } from "@/store/features/jobs";
 import { Job, QuestionCondition } from "@/types/Job";
 import { Image } from "expo-image";
 import { ImagePickerAsset } from "expo-image-picker";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import {
   Controller,
@@ -203,12 +203,29 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
           >
             You cannot submit your own task
           </ThemedText>
-        ) : (
+        ) : user?.verificationStatus === "VERIFIED" ? (
           <Button
             title="Submit"
             loading={isLoading}
             onPress={handleSubmit(onSubmit)}
           />
+        ) : (
+          <>
+            <ThemedText
+              style={{ textAlign: "center" }}
+              color="warning"
+              variant="body2"
+            >
+              You must be verified to submit a task
+            </ThemedText>
+            <Link href="/(mainLayout)/verification" asChild>
+              <Button
+                title="Verify now"
+                style={{ marginTop: 5 }}
+                endIcon="arrow-up-right-box-outline"
+              />
+            </Link>
+          </>
         )}
       </View>
     </ThemedView>
