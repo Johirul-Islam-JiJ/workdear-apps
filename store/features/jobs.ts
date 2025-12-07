@@ -77,6 +77,14 @@ export const jobsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["jobs"],
     }),
+    updateDaysAndWorker: builder.mutation({
+      query: (data) => ({
+        url: "/jobs/add-worker",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["jobs"],
+    }),
 
     getMyJobs: builder.query({
       query: ({ page, status }) => ({
@@ -176,4 +184,5 @@ export const {
   usePlayAndPauseJobMutation,
   useReportJobMutation,
   useReportSubmissionMutation,
+  useUpdateDaysAndWorkerMutation,
 } = jobsApi;
