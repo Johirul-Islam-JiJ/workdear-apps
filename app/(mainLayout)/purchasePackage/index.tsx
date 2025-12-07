@@ -1,8 +1,8 @@
 import { ThemedView } from "@/components/libs/ThemedView";
-import PurchasePackContent from "@/components/package/PurchasePackContent";
+import PurchagePackageContent from "@/components/package/PurchagePackageContent";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 
 const PurchasePackage = () => {
   const { data } = useLocalSearchParams();
@@ -11,9 +11,7 @@ const PurchasePackage = () => {
   return (
     <ThemedView style={{ flex: 1 }} color="background">
       <ScrollView style={{ flex: 1 }}>
-        <View style={{ padding: 10 }}>
-          <PurchasePackContent packageInfo={packageData} />
-        </View>
+        <PurchagePackageContent packageInfo={packageData} />
       </ScrollView>
     </ThemedView>
   );

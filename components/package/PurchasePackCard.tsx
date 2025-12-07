@@ -13,7 +13,7 @@ type Props = {
   packageInfo: PremiumPackage;
 };
 
-const PurchasePackContent = ({ packageInfo }: Props) => {
+const PurchasePackCard = ({ packageInfo }: Props) => {
   const [buyPremium, { isLoading }] = useBuyPremiumMutation();
   const toast = useToast();
   const {
@@ -97,4 +97,4 @@ const PurchasePackContent = ({ packageInfo }: Props) => {
   );
 };
 
-export default PurchasePackContent;
+export default PurchasePackCard;
