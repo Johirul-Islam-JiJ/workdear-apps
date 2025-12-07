@@ -7,7 +7,13 @@ import Button from "../../libs/Button";
 import { ThemedText } from "../../libs/ThemedText";
 import { ThemedView } from "../../libs/ThemedView";
 
-const PackageCard = ({ data }: { data: PremiumPackage }) => {
+const PackageCard = ({
+  data,
+  active,
+}: {
+  data: PremiumPackage;
+  active?: boolean;
+}) => {
   return (
     <ThemedView color="card" style={styles.container}>
       {data.highlighted && (
@@ -52,7 +58,12 @@ const PackageCard = ({ data }: { data: PremiumPackage }) => {
         </View>
       ))}
 
-      <Button title="Get started" style={{ marginTop: 15 }} />
+      <Button
+        title={active ? "Currently active" : "Subscribe"}
+        color={active ? "success" : "primarymain"}
+        disabled={active}
+        style={{ marginTop: 15 }}
+      />
     </ThemedView>
   );
 };

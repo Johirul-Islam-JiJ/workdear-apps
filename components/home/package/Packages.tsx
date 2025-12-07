@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/hooks/redux";
 import { useGetPremiumPackagesQuery } from "@/store/features/premium";
 import { View } from "react-native";
 import { ThemedText } from "../../libs/ThemedText";
@@ -6,7 +7,10 @@ import PackageLoadingCard from "./PackingLoadingCard";
 
 const Packages = ({ title = true }: { title?: boolean }) => {
   const { data: packageData, isLoading } = useGetPremiumPackagesQuery();
+  const { user } = useAppSelector((state) => state.user);
   const packages = packageData?.subscription_package_list ?? [];
+  const purchasedPackages = user?.premium_subscriptions ?? [];
+  const pakcagesId = purchasedPackages.map((p) => p.package.id);
 
   return (
     <View style={{ rowGap: 10 }}>
@@ -22,7 +26,13 @@ const Packages = ({ title = true }: { title?: boolean }) => {
           <PackageLoadingCard />
         </View>
       ) : packages.length ? (
-        packages?.map((pack, index) => <PackageCard key={index} data={pack} />)
+        packages?.map((pack, index) => (
+          <PackageCard
+            key={index}
+            data={pack}
+            active={pakcagesId.includes(pack.id)}
+          />
+        ))
       ) : (
         <View style={{ alignItems: "center", marginVertical: 20 }}>
           <ThemedText color="gray.800" darkColor="gray.300" variant="body">
