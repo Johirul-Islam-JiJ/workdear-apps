@@ -125,7 +125,7 @@ const Button: React.FC<ButtonProps> = ({
               flexDirection: "row",
               alignItems: "center",
               gap: 10,
-              maxWidth: "90%",
+              maxWidth: endIcon ? "90%" : undefined,
             }}
           >
             {startIcon && renderIcon(startIcon)}
