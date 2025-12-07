@@ -27,6 +27,8 @@ type DropdownProps = {
   disabled?: boolean;
   border?: boolean;
   title?: string;
+  variant?: "contained" | "outlined" | "text" | "soft";
+  multiple?: boolean;
 };
 
 export const DropdownMenu: React.FC<DropdownProps> = ({
@@ -38,6 +40,8 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
   disabled,
   border = false,
   title,
+  variant = "outlined",
+  multiple = false,
 }) => {
   const [selected, setSelected] = useState({ label: "", value: "" });
   const borderColor = useThemeColor(error ? "error" : "border");
@@ -62,14 +66,25 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
     <View>
       {/* Trigger Button */}
       <Button
-        title={selected.label ? selected.label : placeholder}
+        title={
+          selected.label && multiple
+            ? `${placeholder} -> ${selected.label}`
+            : selected.label && !multiple
+            ? selected.label
+            : placeholder
+        }
         endIcon={
-          <AppIcon color="placeholder" size={18}>
+          <AppIcon
+            color={variant === "contained" ? "white" : "placeholder"}
+            size={18}
+          >
             <Ionicons name="chevron-down" />
           </AppIcon>
         }
-        variant="outlined"
-        color={error ? "error" : "text"}
+        variant={variant}
+        color={
+          error ? "error" : variant === "contained" ? "primarymain" : "text"
+        }
         onPress={() => setVisible(true)}
         textStyle="body"
         disabled={disabled}
