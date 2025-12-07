@@ -1,5 +1,6 @@
 import { PremiumPackage } from "@/types/PremiumPackage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link } from "expo-router";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import AppIcon from "../../libs/AppIcon";
@@ -7,13 +8,12 @@ import Button from "../../libs/Button";
 import { ThemedText } from "../../libs/ThemedText";
 import { ThemedView } from "../../libs/ThemedView";
 
-const PackageCard = ({
-  data,
-  active,
-}: {
+type Props = {
   data: PremiumPackage;
   active?: boolean;
-}) => {
+};
+
+const PackageCard = ({ data, active }: Props) => {
   return (
     <ThemedView color="card" style={styles.container}>
       {data.highlighted && (
@@ -46,7 +46,7 @@ const PackageCard = ({
           darkColor="gray.300"
           style={{ marginBottom: 5 }}
         >
-          3 months access
+          {data.duration} months access
         </ThemedText>
       </View>
       {data.feature.map((item, index) => (
@@ -58,12 +58,20 @@ const PackageCard = ({
         </View>
       ))}
 
-      <Button
-        title={active ? "Currently active" : "Subscribe"}
-        color={active ? "success" : "primarymain"}
-        disabled={active}
-        style={{ marginTop: 15 }}
-      />
+      <Link
+        asChild
+        href={{
+          pathname: "/(mainLayout)/purchasePackage",
+          params: { data: JSON.stringify(data) },
+        }}
+      >
+        <Button
+          title={active ? "Currently active" : "Subscribe"}
+          color={active ? "success" : "primarymain"}
+          disabled={active}
+          style={{ marginTop: 15 }}
+        />
+      </Link>
     </ThemedView>
   );
 };
