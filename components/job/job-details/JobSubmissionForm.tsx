@@ -3,6 +3,7 @@ import ImagePicker from "@/components/libs/ImagePicker";
 import Input from "@/components/libs/Input";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
+import { useAppSelector } from "@/hooks/redux";
 import { useToast } from "@/hooks/useToast";
 import { useJobSubmissionMutation } from "@/store/features/jobs";
 import { Job, QuestionCondition } from "@/types/Job";
@@ -26,6 +27,7 @@ type FormValues = {
 };
 
 const JobSubmissionForm = ({ job }: { job: Job }) => {
+  const { user } = useAppSelector((state) => state.user);
   const [jobSubmission, { isLoading }] = useJobSubmissionMutation();
   const navigation = useRouter();
   const toast = useToast();
@@ -192,12 +194,23 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
         </>
       )}
 
-      <Button
-        title="Submit"
-        loading={isLoading}
-        onPress={handleSubmit(onSubmit)}
-        style={{ marginTop: 10 }}
-      />
+      <View style={{ marginTop: 10 }}>
+        {user?.id === job?.provider?.id ? (
+          <ThemedText
+            style={{ textAlign: "center" }}
+            color="warning"
+            variant="body2"
+          >
+            You cannot submit your own task
+          </ThemedText>
+        ) : (
+          <Button
+            title="Submit"
+            loading={isLoading}
+            onPress={handleSubmit(onSubmit)}
+          />
+        )}
+      </View>
     </ThemedView>
   );
 };
