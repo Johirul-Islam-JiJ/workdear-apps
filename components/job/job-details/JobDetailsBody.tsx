@@ -2,6 +2,7 @@ import AppIcon from "@/components/libs/AppIcon";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { config } from "@/config/config";
+import { useAppSelector } from "@/hooks/redux";
 import { getRemainingDays } from "@/services/timeCalculator";
 import { Job, RequiredProofs, Steps } from "@/types/Job";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -11,6 +12,7 @@ import { View, ViewStyle } from "react-native";
 import JobReport from "../common/JobReport";
 
 const JobDetailsBody = ({ job }: { job: Job }) => {
+  const { user } = useAppSelector((state) => state.user);
   const containerStyle: ViewStyle = {
     paddingHorizontal: 10,
     paddingVertical: 15,
@@ -63,14 +65,17 @@ const JobDetailsBody = ({ job }: { job: Job }) => {
         ))}
       </View>
 
-      <View style={{ width: "30%", alignSelf: "flex-end" }}>
-        <JobReport
-          title="Submit a report agains this job"
-          type="job"
-          jobId={job.id}
-          submissionId={null}
-        />
-      </View>
+      {user?.id !== job?.provider?.id &&
+        user?.verificationStatus === "VERIFIED" && (
+          <View style={{ width: "30%", alignSelf: "flex-end" }}>
+            <JobReport
+              title="Submit a report agains this job"
+              type="job"
+              jobId={job.id}
+              submissionId={null}
+            />
+          </View>
+        )}
 
       <View>
         <ThemedText style={{ fontWeight: "bold" }}>Reqiured proofs:</ThemedText>
