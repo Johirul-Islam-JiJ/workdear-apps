@@ -3,7 +3,11 @@ import React from "react";
 import { View } from "react-native";
 import MyJobCard from "./MyJobCard";
 
-const MyjobsList = ({ data }: { data: MyJob[] }) => {
+type Props = {
+  data: MyJob[];
+};
+
+const MyjobsList = ({ data }: Props) => {
   return (
     <View style={{ rowGap: 10 }}>
       {data.map((job) => (

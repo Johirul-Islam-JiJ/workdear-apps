@@ -7,18 +7,7 @@ import MyJobSummary from "./MyJobSummary";
 import MyjobsList from "./MyjobsList";
 
 const MyJobContent = () => {
-  const {
-    data,
-    isLoading,
-    isDeleteLoading,
-    isPlayAndPauseLoading,
-    status,
-    page,
-    setStatus,
-    setPage,
-    handleDelete,
-    handlePlayAndPause,
-  } = useMyJobsData();
+  const { data, isLoading, status, page, setStatus, setPage } = useMyJobsData();
 
   const jobs: MyJob[] = data?.data?.data?.jobs || [];
   const totalPages: number = data?.data?.last_page || 1;

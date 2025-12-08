@@ -1,3 +1,4 @@
+import { useMyJobsData } from "@/hooks/useMyJobsData";
 import { getRemainingDays } from "@/services/timeCalculator";
 import { JobStatus } from "@/types/Job";
 import { MyJob } from "@/types/myJobs";
@@ -10,9 +11,19 @@ import Button from "../libs/Button";
 import Card from "../libs/Card";
 import { ThemedText } from "../libs/ThemedText";
 
-const MyJobCard = ({ job }: { job: MyJob }) => {
+type Props = {
+  job: MyJob;
+};
+
+const MyJobCard = ({ job }: Props) => {
   const expand = useRef(new Animated.Value(0)).current;
   const [expanded, setExpanded] = useState(false);
+  const {
+    isDeleteLoading,
+    isPlayAndPauseLoading,
+    handleDelete,
+    handlePlayAndPause,
+  } = useMyJobsData();
 
   const toggleExpand = () => {
     Animated.timing(expand, {
@@ -179,6 +190,8 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
           <Button
             color={paused ? "warning" : "success"}
             size="small"
+            onPress={() => handlePlayAndPause(job.id)}
+            loading={isPlayAndPauseLoading}
             title={
               <AppIcon color="white">
                 <Ionicons name={paused ? "play" : "pause-sharp"} />
@@ -190,6 +203,8 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
           <Button
             size="small"
             color="error"
+            onPress={() => handleDelete(job.id)}
+            loading={isDeleteLoading}
             title={
               <AppIcon color="white">
                 <MaterialIcons name="delete" />
