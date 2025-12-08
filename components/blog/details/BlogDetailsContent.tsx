@@ -29,7 +29,7 @@ const BlogDetailsContent = ({ slug }: { slug: string }) => {
           <Ionicons name="receipt-outline" />
         </AppIcon>
         <ThemedText color="primarylight">
-          {blog.job_category.category_name}
+          {blog.job_category?.category_name}
         </ThemedText>
       </View>
       <View>

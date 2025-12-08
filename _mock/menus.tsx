@@ -6,7 +6,7 @@ import {
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { drawerScreens, extraStackScreens, stackScreens } from "./screens";
+import { drawerScreens, stackScreens } from "./screens";
 
 export const drawerMenus = [
   {
@@ -192,22 +192,22 @@ export const moreMenus: MoreMenusContent[] = [
         ),
       },
       {
-        label: extraStackScreens.contactUs.title,
-        path: extraStackScreens.contactUs.path,
+        label: stackScreens.contactUs.drawerLabel,
+        path: stackScreens.contactUs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="call-outline" size={size} color={color} />
         ),
       },
       {
-        label: extraStackScreens.blogs.title,
-        path: extraStackScreens.blogs.path,
+        label: stackScreens.blogs.drawerLabel,
+        path: stackScreens.blogs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="newspaper-outline" size={size} color={color} />
         ),
       },
       {
-        label: extraStackScreens.chat.title,
-        path: extraStackScreens.contactUs.path,
+        label: stackScreens.chat.drawerLabel,
+        path: stackScreens.contactUs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="chatbox-ellipses-outline" size={size} color={color} />
         ),

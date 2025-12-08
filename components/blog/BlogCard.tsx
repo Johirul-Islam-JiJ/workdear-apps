@@ -16,7 +16,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
           <Ionicons name="receipt-outline" />
         </AppIcon>
         <ThemedText color="primarylight">
-          {blog.job_category.category_name}
+          {blog.job_category?.category_name}
         </ThemedText>
       </View>
       <ThemedText

@@ -5,7 +5,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 
 export const drawerScreens = {
-  // ----------------- drawer screens -----------------------
   home: {
     name: "(tabs)",
     drawerLabel: "Home",
@@ -94,6 +93,22 @@ export const stackScreens = {
     name: "faq/index",
     drawerLabel: "FAQ",
   },
+  blogs: {
+    name: "blogs/index",
+    drawerLabel: "Blogs",
+  },
+  singleBlog: {
+    name: "blogs/[slug]/index",
+    drawerLabel: "Blog details",
+  },
+  contactUs: {
+    name: "contact-us/index",
+    drawerLabel: "Contact us",
+  },
+  chat: {
+    name: "contact-us/chat/index",
+    drawerLabel: "Live Chat",
+  },
 
   // Legal and policies screen
   termsAndConditions: {
@@ -111,34 +126,6 @@ export const stackScreens = {
   cancelationPolicy: {
     name: "cancelation-policy/index",
     drawerLabel: "Cancelation policy",
-  },
-};
-
-export const extraStackScreens = {
-  blogs: {
-    name: "index",
-    title: "Blogs",
-    path: "/blogs/index",
-  },
-  singleBlog: {
-    name: "[slug]/index",
-    title: "Blog details",
-    path: "/blogs/[slug]/index",
-  },
-  contactUs: {
-    name: "index",
-    title: "Contact us",
-    path: "/contact-us/index",
-  },
-  chat: {
-    name: "chat/index",
-    title: "Live Chat",
-    path: "/contact-us/chat/index",
-  },
-  myJobDetails: {
-    name: "[slug]/index",
-    title: "My job details",
-    path: "/my-jobs/[slug]/index",
   },
 };
 
