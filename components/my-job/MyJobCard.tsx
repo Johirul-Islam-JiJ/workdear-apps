@@ -3,7 +3,7 @@ import { getRemainingDays } from "@/services/timeCalculator";
 import { JobStatus } from "@/types/Job";
 import { MyJob } from "@/types/myJobs";
 import { Entypo, Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
 import { Animated, Pressable, View } from "react-native";
 import AppIcon from "../libs/AppIcon";
@@ -25,6 +25,7 @@ const MyJobCard = ({ job }: Props) => {
     handleDelete,
     handlePlayAndPause,
   } = useMyJobsData();
+  const navigation = useRouter();
 
   const toggleExpand = () => {
     Animated.timing(expand, {
@@ -147,14 +148,13 @@ const MyJobCard = ({ job }: Props) => {
         }}
       >
         {/APPROVED|EXPIRED|CLOSED|COMPLETED/.test(status) && (
-          <Link href={`/(mainLayout)/my-jobs/${job.slug}`} asChild>
-            <Button
-              size="small"
-              startIcon="eye"
-              title="View"
-              style={{ flex: 1 }}
-            />
-          </Link>
+          <Button
+            onPress={() => navigation.push(`/(mainLayout)/my-jobs/${job.id}`)}
+            size="small"
+            startIcon="eye"
+            title="View"
+            style={{ flex: 1 }}
+          />
         )}
 
         {status === JobStatus.APPROVED && (
