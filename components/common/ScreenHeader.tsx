@@ -3,7 +3,13 @@ import { View } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 import NavBar from "./NavBar";
 
-const ScreenHeader = ({ route }: { route: string }) => {
+const ScreenHeader = ({
+  route,
+  openDrawer = true,
+}: {
+  route: string;
+  openDrawer?: boolean;
+}) => {
   return (
     <View>
       <ThemedView
@@ -11,7 +17,7 @@ const ScreenHeader = ({ route }: { route: string }) => {
         darkColor="primarydarker"
         style={{ height: 30 }}
       />
-      <NavBar route={route} />
+      <NavBar route={route} openDrawer={openDrawer} />
     </View>
   );
 };

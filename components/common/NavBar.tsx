@@ -11,12 +11,18 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const NavBar = ({ route }: { route: string }) => {
+const NavBar = ({
+  route,
+  openDrawer,
+}: {
+  route: string;
+  openDrawer: boolean;
+}) => {
   const { user } = useAppSelector((state) => state.user);
   const { data: notificationCount } = useGetNotificationCountQuery();
   const navigation = useNavigation();
 
-  function openDrawer() {
+  function handleOpenDrawer() {
     navigation.dispatch(DrawerActions.openDrawer());
   }
 
@@ -29,9 +35,13 @@ const NavBar = ({ route }: { route: string }) => {
       darkColor="primarydarker"
       style={styles.navBar}
     >
-      <Pressable onPress={openDrawer}>
-        <FontAwesome6 name="bars" size={22} color="white" />
-      </Pressable>
+      {openDrawer ? (
+        <Pressable onPress={handleOpenDrawer}>
+          <FontAwesome6 name="bars" size={22} color="white" />
+        </Pressable>
+      ) : (
+        <View />
+      )}
 
       <ThemedText color="white" style={{ fontSize: 18, fontWeight: "bold" }}>
         {route}

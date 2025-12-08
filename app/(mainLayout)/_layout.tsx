@@ -9,7 +9,12 @@ const MainLayout = () => {
       screenOptions={{
         header: (props) => {
           if (props.route.name === "(drawer)") return null;
-          return <ScreenHeader route={props.options.title as string} />;
+          return (
+            <ScreenHeader
+              route={props.options.title as string}
+              openDrawer={false}
+            />
+          );
         },
       }}
     >

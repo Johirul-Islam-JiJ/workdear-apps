@@ -131,6 +131,16 @@ export const stackScreens = {
     name: "cancelation-policy/index",
     title: "Cancelation policy",
   },
+
+  // other screens
+  packages: {
+    name: "packages/index",
+    title: "Packages",
+  },
+  myJobDetails: {
+    name: "my-jobs/[slug]/index",
+    title: "Job details",
+  },
 };
 
 export type TabScreen = {
