@@ -1,3 +1,5 @@
+import { JobStatus } from "./Job";
+
 export type MyJob = {
   id: number;
   job_code: string;
@@ -9,7 +11,7 @@ export type MyJob = {
   estimated_day: string;
   start_date: string;
   end_date: string;
-  status: string;
+  status: JobStatus;
   is_boosted: boolean;
   is_pinned: boolean;
   pause: string;
