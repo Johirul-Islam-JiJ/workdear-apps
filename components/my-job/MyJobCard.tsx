@@ -3,6 +3,7 @@ import { getRemainingDays } from "@/services/timeCalculator";
 import { JobStatus } from "@/types/Job";
 import { MyJob } from "@/types/myJobs";
 import { Entypo, Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import React, { useRef, useState } from "react";
 import { Animated, Pressable, View } from "react-native";
 import AppIcon from "../libs/AppIcon";
@@ -146,12 +147,14 @@ const MyJobCard = ({ job }: Props) => {
         }}
       >
         {/APPROVED|EXPIRED|CLOSED|COMPLETED/.test(status) && (
-          <Button
-            size="small"
-            startIcon="eye"
-            title="View"
-            style={{ flex: 1 }}
-          />
+          <Link href={`/(mainLayout)/my-jobs/${job.slug}`} asChild>
+            <Button
+              size="small"
+              startIcon="eye"
+              title="View"
+              style={{ flex: 1 }}
+            />
+          </Link>
         )}
 
         {status === JobStatus.APPROVED && (

@@ -18,10 +18,6 @@ export const drawerScreens = {
     name: "user-profile/index",
     drawerLabel: "My profile",
   },
-  myJobs: {
-    name: "my-jobs/index",
-    drawerLabel: "My jobs",
-  },
   ticket: {
     name: "ticket/index",
     drawerLabel: "Ticket",
@@ -41,6 +37,10 @@ export const drawerScreens = {
   settings: {
     name: "settings/index",
     drawerLabel: "Settings",
+  },
+  myJobs: {
+    name: "my-jobs/index",
+    drawerLabel: "My jobs",
   },
 
   // -------------------- more screens -----------------------
@@ -116,7 +116,7 @@ export const extraStackScreens = {
   blogs: {
     name: "index",
     title: "Blogs",
-    path: "blogs/index",
+    path: "/blogs/index",
   },
   singleBlog: {
     name: "[slug]/index",
@@ -126,12 +126,17 @@ export const extraStackScreens = {
   contactUs: {
     name: "index",
     title: "Contact us",
-    path: "contact-us/index",
+    path: "/contact-us/index",
   },
   chat: {
     name: "chat/index",
     title: "Live Chat",
-    path: "contact-us/chat/index",
+    path: "/contact-us/chat/index",
+  },
+  myJobDetails: {
+    name: "[slug]/index",
+    title: "My job details",
+    path: "/my-jobs/[slug]/index",
   },
 };
 

@@ -2,6 +2,7 @@ import { JobStatus } from "./Job";
 
 export type MyJob = {
   id: number;
+  slug: string;
   job_code: string;
   title: string;
   description: string;
