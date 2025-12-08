@@ -6,11 +6,12 @@ import {
   usePlayAndPauseJobMutation,
   useUpdateDaysAndWorkerMutation,
 } from "@/store/features/jobs";
+import { JobStatus } from "@/types/Job";
 import { useState } from "react";
 import { useToast } from "./useToast";
 
 export const useMyJobsData = () => {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<JobStatus | "All" | "">("");
   const [page, setPage] = useState(1);
   const toast = useToast();
 
