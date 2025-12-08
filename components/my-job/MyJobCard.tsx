@@ -36,21 +36,24 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
       year: "numeric",
     });
 
+  const status = job.status;
+  const paused = parseInt(job.pause);
+
   return (
     <Card>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <ThemedText variant="bodySemiBold">{job.job_code}</ThemedText>
         <Badge
-          label={job.status}
+          label={status}
           style={{ borderRadius: 5 }}
           color={
-            job.status === JobStatus.APPROVED
+            status === JobStatus.APPROVED
               ? "success"
               : [
                   JobStatus.COMPLETED,
                   JobStatus.DRAFT,
                   JobStatus.CLOSED,
-                ].includes(job.status)
+                ].includes(status)
               ? "primarymain"
               : "warning"
           }
@@ -83,7 +86,7 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
         </Card>
       </View>
 
-      {job.status === JobStatus.DRAFT || job.status === JobStatus.PENDING ? (
+      {status === JobStatus.DRAFT || status === JobStatus.PENDING ? (
         <Card color="border">
           <ThemedText style={{ textAlign: "center" }}>
             Not started yet
@@ -122,58 +125,78 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
         </Pressable>
       )}
 
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-        <Button
-          startIcon={job.status !== JobStatus.APPROVED && "eye"}
-          title={
-            job.status === JobStatus.APPROVED ? (
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: 5,
+          marginTop: 10,
+        }}
+      >
+        {/APPROVED|EXPIRED|CLOSED|COMPLETED/.test(status) && (
+          <Button
+            size="small"
+            startIcon="eye"
+            title="View"
+            style={{ flex: 1 }}
+          />
+        )}
+
+        {status === JobStatus.APPROVED && (
+          <>
+            <Button
+              size="small"
+              title={
+                <AppIcon color="white">
+                  <Entypo name="pin" />
+                </AppIcon>
+              }
+            />
+
+            <Button
+              size="small"
+              title={
+                <AppIcon color="white">
+                  <Ionicons name="rocket" />
+                </AppIcon>
+              }
+            />
+          </>
+        )}
+
+        {status === JobStatus.APPROVED && (
+          <Button
+            size="small"
+            title={
               <AppIcon color="white">
-                <Ionicons name="eye" />
+                <Feather name="edit" />
               </AppIcon>
-            ) : (
-              "View"
-            )
-          }
-          style={{ flex: job.status !== JobStatus.APPROVED ? 1 : 0 }}
-        />
-
-        <Button
-          title={
-            <AppIcon color="white">
-              <Entypo name="pin" />
-            </AppIcon>
-          }
-        />
-
-        <Button
-          title={
-            <AppIcon color="white">
-              <Ionicons name="rocket" />
-            </AppIcon>
-          }
-        />
-        <Button
-          title={
-            <AppIcon color="white">
-              <Feather name="edit" />
-            </AppIcon>
-          }
-        />
-        <Button
-          title={
-            <AppIcon color="white">
-              <Ionicons name="pause-sharp" />
-            </AppIcon>
-          }
-        />
-        <Button
-          color="error"
-          title={
-            <AppIcon color="white">
-              <MaterialIcons name="delete" />
-            </AppIcon>
-          }
-        />
+            }
+          />
+        )}
+        {/ACTIVE|APPROVED/.test(status) && (
+          <Button
+            color={paused ? "warning" : "success"}
+            size="small"
+            title={
+              <AppIcon color="white">
+                <Ionicons name={paused ? "play" : "pause-sharp"} />
+              </AppIcon>
+            }
+          />
+        )}
+        {/REJECTED|COMPLETED|CLOSED|DRAFT/.test(status) && (
+          <Button
+            size="small"
+            color="error"
+            title={
+              <AppIcon color="white">
+                <MaterialIcons name="delete" />
+              </AppIcon>
+            }
+          />
+        )}
       </View>
     </Card>
   );
