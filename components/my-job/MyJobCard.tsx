@@ -1,9 +1,12 @@
 import { getRemainingDays } from "@/services/timeCalculator";
 import { JobStatus } from "@/types/Job";
 import { MyJob } from "@/types/myJobs";
+import { Entypo, Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React, { useRef, useState } from "react";
 import { Animated, Pressable, View } from "react-native";
+import AppIcon from "../libs/AppIcon";
 import Badge from "../libs/Badge";
+import Button from "../libs/Button";
 import Card from "../libs/Card";
 import { ThemedText } from "../libs/ThemedText";
 
@@ -118,6 +121,60 @@ const MyJobCard = ({ job }: { job: MyJob }) => {
           </Card>
         </Pressable>
       )}
+
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+        <Button
+          startIcon={job.status !== JobStatus.APPROVED && "eye"}
+          title={
+            job.status === JobStatus.APPROVED ? (
+              <AppIcon color="white">
+                <Ionicons name="eye" />
+              </AppIcon>
+            ) : (
+              "View"
+            )
+          }
+          style={{ flex: job.status !== JobStatus.APPROVED ? 1 : 0 }}
+        />
+
+        <Button
+          title={
+            <AppIcon color="white">
+              <Entypo name="pin" />
+            </AppIcon>
+          }
+        />
+
+        <Button
+          title={
+            <AppIcon color="white">
+              <Ionicons name="rocket" />
+            </AppIcon>
+          }
+        />
+        <Button
+          title={
+            <AppIcon color="white">
+              <Feather name="edit" />
+            </AppIcon>
+          }
+        />
+        <Button
+          title={
+            <AppIcon color="white">
+              <Ionicons name="pause-sharp" />
+            </AppIcon>
+          }
+        />
+        <Button
+          color="error"
+          title={
+            <AppIcon color="white">
+              <MaterialIcons name="delete" />
+            </AppIcon>
+          }
+        />
+      </View>
     </Card>
   );
 };
