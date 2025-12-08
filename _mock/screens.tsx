@@ -42,7 +42,9 @@ export const drawerScreens = {
     name: "my-jobs/index",
     drawerLabel: "My jobs",
   },
+};
 
+export const stackScreens = {
   // -------------------- more screens -----------------------
 
   // achivement and ranking screens
