@@ -12,12 +12,8 @@ export default function DrawerLayout() {
           drawerHideStatusBarOnOpen: false,
           header: (props) => {
             const lebel = props.options.drawerLabel as string;
-            const hideHeaderRoute = ["(tabs)", "blogs", "contact-us"];
-            return (
-              !hideHeaderRoute.includes(props.route.name) && (
-                <ScreenHeader route={lebel} />
-              )
-            );
+            if (props.route.name === "(tabs)") return null;
+            return <ScreenHeader route={lebel} />;
           },
         }}
         drawerContent={(props) => <DrawerContent {...props} />}

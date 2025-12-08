@@ -1,4 +1,5 @@
 import ChatContent from "@/components/chat/ChatContent";
+import { ThemedView } from "@/components/libs/ThemedView";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Keyboard, View } from "react-native";
 
@@ -25,14 +26,16 @@ const Chat = () => {
   }, []);
 
   return (
-    <View
-      style={{
-        height: Dimensions.get("screen").height - 85,
-        paddingBottom: keyboardHeight,
-      }}
-    >
-      <ChatContent />
-    </View>
+    <ThemedView style={{ flex: 1 }} color="background">
+      <View
+        style={{
+          height: Dimensions.get("screen").height - 85,
+          paddingBottom: keyboardHeight,
+        }}
+      >
+        <ChatContent />
+      </View>
+    </ThemedView>
   );
 };
 

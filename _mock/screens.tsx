@@ -44,88 +44,92 @@ export const drawerScreens = {
 };
 
 export const stackScreens = {
-  // -------------------- more screens -----------------------
+  drawer: {
+    name: "(drawer)",
+    title: "Home",
+  },
 
+  // -------------------- more screens -----------------------
   // achivement and ranking screens
   topWorkers: {
     name: "top-workers/index",
-    drawerLabel: "Top workers",
+    title: "Top workers",
   },
   topJobPoster: {
     name: "top-job-poster/index",
-    drawerLabel: "Top job poster",
+    title: "Top job poster",
   },
   topReffer: {
     name: "top-reffer/index",
-    drawerLabel: "Top reffer",
+    title: "Top reffer",
   },
   topUsers: {
     name: "top-users/index",
-    drawerLabel: "Best users",
+    title: "Best users",
   },
 
   // earn and withdraw screens
   shareAndEarn: {
     name: "share-and-earn/index",
-    drawerLabel: "Share and Earn",
+    title: "Share and Earn",
   },
   playandearn: {
     name: "play-and-earn/index",
-    drawerLabel: "Play and Earn",
+    title: "Play and Earn",
   },
   wallet: {
     name: "wallet/index",
-    drawerLabel: "Withdraw",
+    title: "Withdraw",
   },
 
   // settings and preference screen
   notification: {
     name: "notification/index",
-    drawerLabel: "Notification",
+    title: "Notification",
   },
 
   // help and support screen
   aboutUs: {
     name: "about-us/index",
-    drawerLabel: "About us",
+    title: "About us",
   },
   faq: {
     name: "faq/index",
-    drawerLabel: "FAQ",
+    title: "FAQ",
   },
   blogs: {
     name: "blogs/index",
-    drawerLabel: "Blogs",
+    title: "Blogs",
   },
   singleBlog: {
     name: "blogs/[slug]/index",
-    drawerLabel: "Blog details",
+    title: "Blog details",
   },
   contactUs: {
     name: "contact-us/index",
-    drawerLabel: "Contact us",
+    title: "Contact us",
   },
   chat: {
     name: "contact-us/chat/index",
-    drawerLabel: "Live Chat",
+    title: "Live Chat",
   },
 
   // Legal and policies screen
   termsAndConditions: {
     name: "terms-and-conditions/index",
-    drawerLabel: "Terms and conditions",
+    title: "Terms and conditions",
   },
   privacyPolicy: {
     name: "privacy-policy/index",
-    drawerLabel: "Privacy policy",
+    title: "Privacy policy",
   },
   refundPolicy: {
     name: "refund-policy/index",
-    drawerLabel: "Refund policy",
+    title: "Refund policy",
   },
   cancelationPolicy: {
     name: "cancelation-policy/index",
-    drawerLabel: "Cancelation policy",
+    title: "Cancelation policy",
   },
 };
 

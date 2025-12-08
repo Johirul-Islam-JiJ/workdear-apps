@@ -6,8 +6,8 @@ import { useUploadFile } from "@/hooks/chat/useUploadFile";
 import { useAppSelector } from "@/hooks/redux";
 import { useGetMessageQuery } from "@/store/features/liveSupport";
 import React, { useState } from "react";
+import { View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
-import { ThemedView } from "../libs/ThemedView";
 import ChatBody from "./ChatBody";
 import ChatInput from "./ChatInput";
 
@@ -109,8 +109,7 @@ const ChatContent = () => {
   if (messageLoading || loadingWs) return <LoadingIndicator fullScreen />;
 
   return (
-    <ThemedView
-      color="background"
+    <View
       style={{
         justifyContent: "space-between",
         flex: 1,
@@ -127,7 +126,7 @@ const ChatContent = () => {
         onChangeAudio={setAudioBlob}
         audioPreview={audioBlob}
       />
-    </ThemedView>
+    </View>
   );
 };
 

@@ -91,21 +91,21 @@ export const moreMenus: MoreMenusContent[] = [
     ),
     menus: [
       {
-        label: stackScreens.shareAndEarn.drawerLabel,
+        label: stackScreens.shareAndEarn.title,
         path: stackScreens.shareAndEarn.name,
         Icon: ({ color, size }) => (
           <Ionicons name="share-social-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.playandearn.drawerLabel,
+        label: stackScreens.playandearn.title,
         path: stackScreens.playandearn.name,
         Icon: ({ color, size }) => (
           <Ionicons name="game-controller-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.wallet.drawerLabel,
+        label: stackScreens.wallet.title,
         path: stackScreens.wallet.name,
         Icon: ({ color, size }) => (
           <Ionicons name="wallet-outline" size={size} color={color} />
@@ -121,28 +121,28 @@ export const moreMenus: MoreMenusContent[] = [
     ),
     menus: [
       {
-        label: stackScreens.topWorkers.drawerLabel,
+        label: stackScreens.topWorkers.title,
         path: stackScreens.topWorkers.name,
         Icon: ({ color, size }) => (
           <Ionicons name="people-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.topJobPoster.drawerLabel,
+        label: stackScreens.topJobPoster.title,
         path: stackScreens.topJobPoster.name,
         Icon: ({ color, size }) => (
           <Ionicons name="briefcase-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.topReffer.drawerLabel,
+        label: stackScreens.topReffer.title,
         path: stackScreens.topReffer.name,
         Icon: ({ color, size }) => (
           <Ionicons name="share-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.topUsers.drawerLabel,
+        label: stackScreens.topUsers.title,
         path: stackScreens.topUsers.name,
         Icon: ({ color, size }) => (
           <Ionicons name="star-outline" size={size} color={color} />
@@ -158,7 +158,7 @@ export const moreMenus: MoreMenusContent[] = [
     ),
     menus: [
       {
-        label: stackScreens.notification.drawerLabel,
+        label: stackScreens.notification.title,
         path: stackScreens.notification.name,
         Icon: ({ color, size }) => (
           <Ionicons name="notifications-outline" size={size} color={color} />
@@ -174,7 +174,7 @@ export const moreMenus: MoreMenusContent[] = [
     ),
     menus: [
       {
-        label: stackScreens.aboutUs.drawerLabel,
+        label: stackScreens.aboutUs.title,
         path: stackScreens.aboutUs.name,
         Icon: ({ color, size }) => (
           <Ionicons
@@ -185,28 +185,28 @@ export const moreMenus: MoreMenusContent[] = [
         ),
       },
       {
-        label: stackScreens.faq.drawerLabel,
+        label: stackScreens.faq.title,
         path: stackScreens.faq.name,
         Icon: ({ color, size }) => (
           <Ionicons name="help-buoy-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.contactUs.drawerLabel,
+        label: stackScreens.contactUs.title,
         path: stackScreens.contactUs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="call-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.blogs.drawerLabel,
+        label: stackScreens.blogs.title,
         path: stackScreens.blogs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="newspaper-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.chat.drawerLabel,
+        label: stackScreens.chat.title,
         path: stackScreens.contactUs.name,
         Icon: ({ color, size }) => (
           <Ionicons name="chatbox-ellipses-outline" size={size} color={color} />
@@ -230,28 +230,28 @@ export const moreMenus: MoreMenusContent[] = [
     ),
     menus: [
       {
-        label: stackScreens.termsAndConditions.drawerLabel,
+        label: stackScreens.termsAndConditions.title,
         path: stackScreens.termsAndConditions.name,
         Icon: ({ color, size }) => (
           <Ionicons name="document-text-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.privacyPolicy.drawerLabel,
+        label: stackScreens.privacyPolicy.title,
         path: stackScreens.privacyPolicy.name,
         Icon: ({ color, size }) => (
           <Ionicons name="lock-closed-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.refundPolicy.drawerLabel,
+        label: stackScreens.refundPolicy.title,
         path: stackScreens.refundPolicy.name,
         Icon: ({ color, size }) => (
           <Ionicons name="receipt-outline" size={size} color={color} />
         ),
       },
       {
-        label: stackScreens.cancelationPolicy.drawerLabel,
+        label: stackScreens.cancelationPolicy.title,
         path: stackScreens.cancelationPolicy.name,
         Icon: ({ color, size }) => (
           <Ionicons name="close-circle-outline" size={size} color={color} />
