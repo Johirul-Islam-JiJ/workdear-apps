@@ -32,10 +32,11 @@ const Modal = ({ visible, setVisible, children, style = {} }: Props) => {
             width: "90%",
             borderRadius: 10,
             padding: 15,
-            ...style,
           }}
         >
-          {children}
+          <Pressable style={style} onPress={(e) => e.stopPropagation()}>
+            {children}
+          </Pressable>
         </ThemedView>
       </Pressable>
     </RNModal>
