@@ -60,17 +60,19 @@ const BoostModal = ({ visible, setVisible }: Props) => {
               onChangeText={field.onChange}
               keyboardType="numeric"
               placeholder="Enter duration in minutes"
+              error={errors.minutes?.message}
             />
           )}
         />
-        {errors.minutes && (
-          <ThemedText color="error">{errors.minutes?.message}</ThemedText>
-        )}
       </View>
       <ThemedText>
         Your Estimed Boosting Cost: ${(boostCost * Number(minutes)).toFixed(4)}
       </ThemedText>
-      <Button title="Boost" onPress={handleSubmit(onSubmit)} />
+      <Button
+        loading={isBoostingJob}
+        title="Boost"
+        onPress={handleSubmit(onSubmit)}
+      />
     </Modal>
   );
 };

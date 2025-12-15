@@ -30,6 +30,8 @@ const Controller = ({
 }: Props) => {
   const status = job.status;
   const paused = parseInt(job.pause);
+  const boosted = job.is_boosted;
+
   return (
     <View
       style={{
@@ -67,7 +69,7 @@ const Controller = ({
             size="small"
             onPress={onBoost}
             title={
-              <AppIcon color="white">
+              <AppIcon color={boosted ? "warning" : "white"}>
                 <Ionicons name="rocket" />
               </AppIcon>
             }
