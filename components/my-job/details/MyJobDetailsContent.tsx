@@ -3,10 +3,11 @@ import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
+import NaviagionHeader from "./NaviagionHeader";
 import SingleMyJobSummary from "./SingleMyJobSummary";
 
 const MyJobDetailsContent = () => {
-  const { jobSubmissions, basicJobInfo, page, setPage, isLoading } =
+  const { jobSubmissions, basicJobInfo, page, setPage, setStatus, isLoading } =
     useJobReview();
   const [selectedTaskIds, setSelectedTaskIds] = useState<number[]>([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -52,6 +53,7 @@ const MyJobDetailsContent = () => {
   return (
     <View style={{ rowGap: 10, padding: 10 }}>
       <SingleMyJobSummary data={basicJobInfo} />
+      <NaviagionHeader setStatus={setStatus} />
     </View>
   );
 };

@@ -5,7 +5,11 @@ import {
   useUnSatisfyMultipleTaskMutation,
   useUnsatisfySingleTaskMutation,
 } from "@/store/features/jobSubmission";
-import { JobSubmissionResponse, SingleJobSummary } from "@/types/myJobs";
+import {
+  JobSubmissionResponse,
+  SingleJobSummary,
+  TaskStatus,
+} from "@/types/myJobs";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { useToast } from "./useToast";
@@ -13,7 +17,7 @@ import { useToast } from "./useToast";
 const useJobReview = () => {
   const [isSingleUnsatisfying, setIsSingleUnsatisfying] = useState(-1);
   const [isSinglesatisfying, setIsSingleSatisfying] = useState(-1);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<TaskStatus | "">("");
   const [page, setPage] = useState(1);
   const { jobId, slug } = useLocalSearchParams();
   const jobSlug = slug as string;
