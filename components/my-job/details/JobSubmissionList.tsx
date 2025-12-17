@@ -9,7 +9,7 @@ type Props = {
 
 const JobSubmissionList = ({ jobSubmissions }: Props) => {
   return (
-    <View style={{ rowGap: 8 }}>
+    <View style={{ rowGap: 8, marginTop: 10 }}>
       {jobSubmissions.map((item) => (
         <JobSubmissionCard key={item.id} data={item} />
       ))}
