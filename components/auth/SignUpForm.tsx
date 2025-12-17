@@ -50,7 +50,7 @@ const SignUpForm = () => {
     try {
       data.device_name = "mobile";
       await registation(data).unwrap();
-      navigation.navigate("/(mainLayout)/(tabs)");
+      navigation.navigate("/(mainLayout)/(drawer)/(tabs)");
     } catch (error: any) {
       toast.error(error.data.message || "Internal server error");
     }

@@ -3,6 +3,7 @@ import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
+import JobSubmissionList from "./JobSubmissionList";
 import NaviagionHeader from "./NaviagionHeader";
 import SingleMyJobSummary from "./SingleMyJobSummary";
 
@@ -54,6 +55,7 @@ const MyJobDetailsContent = () => {
     <View style={{ rowGap: 10, padding: 10 }}>
       <SingleMyJobSummary data={basicJobInfo} />
       <NaviagionHeader setStatus={setStatus} />
+      <JobSubmissionList jobSubmissions={jobSubmissions.data} />
     </View>
   );
 };
