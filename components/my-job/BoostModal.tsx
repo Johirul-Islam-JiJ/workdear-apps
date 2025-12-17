@@ -66,7 +66,7 @@ const BoostModal = ({ visible, setVisible }: Props) => {
         />
       </View>
       <ThemedText>
-        Your Estimed Boosting Cost: ${(boostCost * Number(minutes)).toFixed(4)}
+        Your estimed boosting cost: ${(boostCost * Number(minutes)).toFixed(4)}
       </ThemedText>
       <Button
         loading={isBoostingJob}
