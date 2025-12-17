@@ -91,14 +91,14 @@ export type SingleJobSummary = {
   is_paused: boolean;
   is_pinned: boolean;
   job_end_date: string;
-  job_status: string;
+  job_status: JobStatus;
   pay_per_task: string;
   provider_id: number;
   remaining_review: string;
   title: string;
   total_report_count: number;
-  total_satisfied_count: string;
-  total_submission: string;
-  total_unsatisfied_count: string;
+  total_satisfied_count: number;
+  total_submission: number;
+  total_unsatisfied_count: number;
   total_worker_required: number;
 };

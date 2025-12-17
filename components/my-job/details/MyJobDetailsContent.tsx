@@ -1,10 +1,13 @@
+import LoadingIndicator from "@/components/libs/LoadingIndicator";
 import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
+import SingleMyJobSummary from "./SingleMyJobSummary";
 
 const MyJobDetailsContent = () => {
-  const { jobSubmissions, page, setPage } = useJobReview();
+  const { jobSubmissions, basicJobInfo, page, setPage, isLoading } =
+    useJobReview();
   const [selectedTaskIds, setSelectedTaskIds] = useState<number[]>([]);
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -38,7 +41,19 @@ const MyJobDetailsContent = () => {
     }
   };
 
-  return <View></View>;
+  if (isLoading)
+    return (
+      <LoadingIndicator
+        fullScreen
+        style={{ height: Dimensions.get("screen").height - 100 }}
+      />
+    );
+
+  return (
+    <View style={{ rowGap: 10, padding: 10 }}>
+      <SingleMyJobSummary data={basicJobInfo} />
+    </View>
+  );
 };
 
 export default MyJobDetailsContent;
