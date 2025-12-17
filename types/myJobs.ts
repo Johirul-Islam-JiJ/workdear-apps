@@ -48,3 +48,57 @@ export type MyJobStatistics = {
   total_spent: number;
   total_unsatisfied_count: number;
 };
+
+export enum TaskStatus {
+  SATISFIED = "SATISFIED",
+  UNSATISFIED = "UNSATISFIED",
+  UNDER_REVIEW = "UNDER_REVIEW",
+}
+
+export type JobSubmission = {
+  date: string;
+  id: number;
+  proof_data: string;
+  status: TaskStatus;
+  submitted_user_id: number;
+};
+
+export type JobSubmissionResponse = {
+  current_page: number;
+  data: JobSubmission[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: {
+    active: boolean;
+    label: string;
+    url: string | null;
+  }[];
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+};
+
+export type SingleJobSummary = {
+  click_count: string;
+  id: number;
+  impression_count: string;
+  is_boosted: boolean;
+  is_paused: boolean;
+  is_pinned: boolean;
+  job_end_date: string;
+  job_status: string;
+  pay_per_task: string;
+  provider_id: number;
+  remaining_review: string;
+  title: string;
+  total_report_count: number;
+  total_satisfied_count: string;
+  total_submission: string;
+  total_unsatisfied_count: string;
+  total_worker_required: number;
+};

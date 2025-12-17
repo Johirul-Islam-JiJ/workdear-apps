@@ -5,6 +5,7 @@ import {
   useUnSatisfyMultipleTaskMutation,
   useUnsatisfySingleTaskMutation,
 } from "@/store/features/jobSubmission";
+import { JobSubmissionResponse, SingleJobSummary } from "@/types/myJobs";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { useToast } from "./useToast";
@@ -22,8 +23,8 @@ const useJobReview = () => {
     { id: jobId, page, status },
     { skip: !jobId }
   );
-  const jobSubmissions = data?.data?.submitted_tasks;
-  const basicJobInfo = data?.data?.job || {};
+  const jobSubmissions: JobSubmissionResponse = data?.data?.submitted_tasks;
+  const basicJobInfo: SingleJobSummary = data?.data?.job || {};
 
   const [unSatisfySingle] = useUnsatisfySingleTaskMutation();
   const [satisfySingle] = useSatisfySingleTaskMutation();

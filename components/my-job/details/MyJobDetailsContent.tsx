@@ -1,4 +1,5 @@
 import useJobReview from "@/hooks/useJobReview";
+import { TaskStatus } from "@/types/myJobs";
 import React, { useState } from "react";
 import { View } from "react-native";
 
@@ -30,7 +31,7 @@ const MyJobDetailsContent = () => {
       setIsAllSelected(false);
     } else {
       const allIds = submissions
-        .filter((item) => item.status === "UNDER_REVIEW")
+        .filter((item) => item.status === TaskStatus.UNDER_REVIEW)
         .map((item) => item.id);
       setSelectedTaskIds(allIds);
       setIsAllSelected(true);
