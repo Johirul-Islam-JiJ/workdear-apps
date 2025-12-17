@@ -1,13 +1,16 @@
 import { MyJobStatistics } from "@/types/myJobs";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import { View, ViewStyle } from "react-native";
 import AppIcon from "../libs/AppIcon";
+import Button from "../libs/Button";
+import Modal from "../libs/Modal";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 import SummaryCard, { SummaryCardProps } from "../my-work/SummaryCard";
 
 const MyJobSummary = ({ data }: { data: MyJobStatistics }) => {
+  const [showMore, setShowMore] = useState(0);
   const summaryList: SummaryCardProps[] = [
     {
       label: "Total Jobs",
@@ -85,6 +88,7 @@ const MyJobSummary = ({ data }: { data: MyJobStatistics }) => {
     : 0;
 
   const summaryWrapper: ViewStyle = {
+    marginTop: 10,
     rowGap: 8,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -98,15 +102,6 @@ const MyJobSummary = ({ data }: { data: MyJobStatistics }) => {
 
   return (
     <View style={{ rowGap: 10 }}>
-      <ThemedText variant="subtitle" color="primarydark" darkColor="white">
-        Summary of your jobs
-      </ThemedText>
-      <View style={summaryWrapper}>
-        {summaryList.map((item, index) => (
-          <SummaryCard key={index} {...item} style={{ width: "49%" }} />
-        ))}
-      </View>
-
       <ThemedView style={rateWrapper} color="card">
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
@@ -130,7 +125,33 @@ const MyJobSummary = ({ data }: { data: MyJobStatistics }) => {
             {rejectionRate}%
           </ThemedText>
         </View>
+        <Button
+          size="small"
+          title="View Report"
+          startIcon="eye"
+          onPress={() => setShowMore(1)}
+        />
       </ThemedView>
+
+      <Modal visible={showMore} setVisible={setShowMore}>
+        <ThemedText variant="subtitle" color="primarydark" darkColor="white">
+          Summary of your jobs
+        </ThemedText>
+        <View style={summaryWrapper}>
+          {summaryList.map((item, index) => (
+            <SummaryCard key={index} {...item} style={{ width: "49%" }} />
+          ))}
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            marginTop: 10,
+          }}
+        >
+          <Button title="Close" onPress={() => setShowMore(0)} />
+        </View>
+      </Modal>
     </View>
   );
 };
