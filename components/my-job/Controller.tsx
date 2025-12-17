@@ -58,6 +58,7 @@ const Controller = ({
           <Button
             size="small"
             onPress={onPin}
+            color={job.is_pinned ? "success" : undefined}
             title={
               <AppIcon color="white">
                 <Entypo name="pin" />
@@ -68,8 +69,9 @@ const Controller = ({
           <Button
             size="small"
             onPress={onBoost}
+            color={boosted ? "success" : undefined}
             title={
-              <AppIcon color={boosted ? "warning" : "white"}>
+              <AppIcon color="white">
                 <Ionicons name="rocket" />
               </AppIcon>
             }

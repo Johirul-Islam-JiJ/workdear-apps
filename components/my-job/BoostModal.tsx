@@ -70,7 +70,7 @@ const BoostModal = ({ visible, setVisible }: Props) => {
       </ThemedText>
       <Button
         loading={isBoostingJob}
-        title="Boost"
+        title="Boost Job"
         onPress={handleSubmit(onSubmit)}
       />
     </Modal>

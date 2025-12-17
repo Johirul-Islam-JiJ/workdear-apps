@@ -48,7 +48,7 @@ const JobDetailsBody = ({ job }: { job: Job }) => {
             <MaterialIcons name="category" />
           </AppIcon>
           <ThemedText>
-            {job.job_sub_category.parent_category.category_name}
+            {job.job_sub_category?.parent_category?.category_name}
           </ThemedText>
         </View>
       </View>
