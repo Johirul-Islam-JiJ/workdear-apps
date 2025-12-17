@@ -154,7 +154,11 @@ const MyJobCard = ({ job }: Props) => {
 
       <BoostModal visible={showBoostModal} setVisible={setShowBoostModal} />
       <PinnedModal visible={showPinModal} setVisible={setShowPinModal} />
-      <EditModal visible={showEditModal} setVisible={setShowEditModal} />
+      <EditModal
+        visible={showEditModal}
+        setVisible={setShowEditModal}
+        job={job}
+      />
     </>
   );
 };
