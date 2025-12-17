@@ -43,7 +43,10 @@ const Controller = ({
       }}
     >
       {/APPROVED|EXPIRED|CLOSED|COMPLETED/.test(status) && (
-        <Link asChild href={`/(mainLayout)/my-jobs/${job.slug}`}>
+        <Link
+          asChild
+          href={`/(mainLayout)/my-jobs/${job.slug}?jobId=${job.id}`}
+        >
           <Button
             size="small"
             startIcon="eye"

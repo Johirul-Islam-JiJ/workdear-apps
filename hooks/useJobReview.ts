@@ -14,7 +14,8 @@ const useJobReview = () => {
   const [isSinglesatisfying, setIsSingleSatisfying] = useState(-1);
   const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
-  const { jobId, jobSlug } = useLocalSearchParams();
+  const { jobId, slug } = useLocalSearchParams();
+  const jobSlug = slug as string;
   const toast = useToast();
 
   const { data, isLoading } = useGetTaskSubmissionByJobQuery(

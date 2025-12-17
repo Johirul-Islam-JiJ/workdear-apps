@@ -1,18 +1,41 @@
-import LoadingIndicator from "@/components/libs/LoadingIndicator";
-import { useJobbyidQuery } from "@/store/features/jobs";
-import { Job } from "@/types/Job";
-import { useLocalSearchParams } from "expo-router";
-import React from "react";
+import useJobReview from "@/hooks/useJobReview";
+import React, { useState } from "react";
 import { View } from "react-native";
 
 const MyJobDetailsContent = () => {
-  const { slug } = useLocalSearchParams();
-  const { data, isLoading } = useJobbyidQuery(slug);
-  const job: Job = data?.data ?? {};
+  const { jobSubmissions, page, setPage } = useJobReview();
+  const [selectedTaskIds, setSelectedTaskIds] = useState<number[]>([]);
+  const [isAllSelected, setIsAllSelected] = useState(false);
 
-  if (isLoading) return <LoadingIndicator fullScreen />;
+  const handleClerSelectedId = () => {
+    setSelectedTaskIds([]);
+    setIsAllSelected(false);
+  };
 
-  console.log(job);
+  const handleSingleSelect = (id: number) => {
+    if (selectedTaskIds.includes(id)) {
+      setSelectedTaskIds((prev) =>
+        prev.filter((selectedId) => selectedId !== id)
+      );
+    } else {
+      setSelectedTaskIds((prev) => [...prev, id]);
+    }
+  };
+
+  const handleToggleSelectAll = () => {
+    const submissions = jobSubmissions?.data;
+    if (!submissions?.length) return;
+    if (isAllSelected) {
+      setSelectedTaskIds([]);
+      setIsAllSelected(false);
+    } else {
+      const allIds = submissions
+        .filter((item) => item.status === "UNDER_REVIEW")
+        .map((item) => item.id);
+      setSelectedTaskIds(allIds);
+      setIsAllSelected(true);
+    }
+  };
 
   return <View></View>;
 };
