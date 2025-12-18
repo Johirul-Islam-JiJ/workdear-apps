@@ -1,3 +1,4 @@
+import AppIcon from "@/components/libs/AppIcon";
 import Badge from "@/components/libs/Badge";
 import Button from "@/components/libs/Button";
 import Card from "@/components/libs/Card";
@@ -5,13 +6,20 @@ import { ThemedText } from "@/components/libs/ThemedText";
 import useJobReview from "@/hooks/useJobReview";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { JobSubmission, TaskStatus } from "@/types/myJobs";
+import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 
-const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
-  const [selected, setSelected] = useState(false);
+type Props = {
+  data: JobSubmission;
+  onSelect: (id: number) => void;
+  selectedTaskIds: number[];
+};
+
+const JobSubmissionCard = ({ data, onSelect, selectedTaskIds }: Props) => {
+  const selected = selectedTaskIds.includes(data.id);
   const checkboxBorderColor = useThemeColor(selected ? "success" : "gray.200");
   const checkboxColor = useThemeColor(selected ? "success" : "gray.500");
   const {
@@ -20,10 +28,6 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
     isSinglesatisfying,
     isSingleUnsatisfying,
   } = useJobReview();
-
-  const onChange = () => {
-    setSelected(!selected);
-  };
 
   const status = data.status;
 
@@ -35,15 +39,27 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ flexDirection: "row", gap: 10 }}>
-            <Checkbox
-              style={{
-                borderColor: checkboxBorderColor,
-                marginTop: 5,
-              }}
-              value={selected}
-              onValueChange={onChange}
-              color={selected ? checkboxColor : undefined}
-            />
+            {status === TaskStatus.UNDER_REVIEW && (
+              <Checkbox
+                style={{
+                  borderColor: checkboxBorderColor,
+                  marginTop: 5,
+                }}
+                value={selected}
+                onValueChange={() => onSelect(data.id)}
+                color={selected ? checkboxColor : undefined}
+              />
+            )}
+            {status === TaskStatus.SATISFIED && (
+              <AppIcon color="success">
+                <Ionicons name="happy" />
+              </AppIcon>
+            )}
+            {status === TaskStatus.UNSATISFIED && (
+              <AppIcon color="error">
+                <Ionicons name="close" />
+              </AppIcon>
+            )}
             <View>
               <ThemedText variant="body2">ID: {data.id}</ThemedText>
               <ThemedText>

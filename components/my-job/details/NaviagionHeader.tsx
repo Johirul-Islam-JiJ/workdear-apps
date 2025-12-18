@@ -1,15 +1,28 @@
 import Button from "@/components/libs/Button";
 import { DropdownMenu } from "@/components/libs/DropdownMenu";
 import { ThemedText } from "@/components/libs/ThemedText";
+import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React from "react";
 import { View } from "react-native";
 
 type Props = {
   setStatus: React.Dispatch<React.SetStateAction<"" | TaskStatus>>;
+  selectedTaskIds: number[];
+  setSelectedTaskIds: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const NaviagionHeader = ({ setStatus }: Props) => {
+const NaviagionHeader = ({
+  setStatus,
+  selectedTaskIds,
+  setSelectedTaskIds,
+}: Props) => {
+  const {
+    handleMultipleSatisfy,
+    handleMultipleUnsatisfy,
+    isMultipleSatisfing,
+    isMultipleUnsatisfing,
+  } = useJobReview();
   const statusOptions = [
     { id: 1, label: "All", value: "" },
     { id: 3, label: "CORRECT", value: "correct_submissions" },
@@ -19,16 +32,19 @@ const NaviagionHeader = ({ setStatus }: Props) => {
     { id: 6, label: "UNSATISFIED", value: "UNSATISFIED" },
   ];
 
+  function onSatisfy() {
+    handleMultipleSatisfy(selectedTaskIds, () => setSelectedTaskIds([]));
+  }
+
+  function onUnsatisfy() {
+    handleMultipleUnsatisfy(selectedTaskIds, () => setSelectedTaskIds([]));
+  }
+
   return (
     <View style={{ rowGap: 8 }}>
       <ThemedText variant="subtitle" style={{ textAlign: "center" }}>
         Submission lists
       </ThemedText>
-
-      <View style={{ flexDirection: "row", gap: 8 }}>
-        <Button style={{ flex: 1 }} title="Satisfied" color="success" />
-        <Button style={{ flex: 1 }} title="Unsatisfied" color="error" />
-      </View>
 
       <View style={{ flexDirection: "row", gap: 8 }}>
         <Button style={{ flex: 1 }} title="Extend Deadline" />
@@ -44,6 +60,24 @@ const NaviagionHeader = ({ setStatus }: Props) => {
           title="Filter by status"
         />
       </View>
+      {selectedTaskIds.length > 0 && (
+        <View style={{ flexDirection: "row", gap: 8 }}>
+          <Button
+            onPress={onSatisfy}
+            loading={isMultipleSatisfing}
+            style={{ flex: 1 }}
+            title="Satisfy"
+            color="success"
+          />
+          <Button
+            onPress={onUnsatisfy}
+            loading={isMultipleUnsatisfing}
+            style={{ flex: 1 }}
+            title="Unsatisfy"
+            color="error"
+          />
+        </View>
+      )}
     </View>
   );
 };

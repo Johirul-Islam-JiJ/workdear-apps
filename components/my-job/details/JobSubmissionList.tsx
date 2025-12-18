@@ -5,13 +5,24 @@ import JobSubmissionCard from "./JobSubmissionCard";
 
 type Props = {
   jobSubmissions: JobSubmission[];
+  onSelect: (id: number) => void;
+  selectedTaskIds: number[];
 };
 
-const JobSubmissionList = ({ jobSubmissions }: Props) => {
+const JobSubmissionList = ({
+  jobSubmissions,
+  onSelect,
+  selectedTaskIds,
+}: Props) => {
   return (
     <View style={{ rowGap: 8, marginTop: 10 }}>
       {jobSubmissions.map((item) => (
-        <JobSubmissionCard key={item.id} data={item} />
+        <JobSubmissionCard
+          key={item.id}
+          data={item}
+          onSelect={onSelect}
+          selectedTaskIds={selectedTaskIds}
+        />
       ))}
     </View>
   );
