@@ -52,12 +52,9 @@ const TopWorkerCard = ({
         </ThemedText>
       </ThemedView>
       <View style={{ flex: 1 }}>
-        <ThemedText>{item.user.name}</ThemedText>
+        <ThemedText>{item.user_name}</ThemedText>
         <View style={ratingWrapper}>
-          <Rating
-            value={item.user.user_rating.star_rating}
-            ratingInfo={`(${item.user.user_rating.star_provider_count})`}
-          />
+          <Rating value={item.user_rating} />
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
             <ThemedText style={{ fontWeight: "bold" }} color="primarydark">
               {work}

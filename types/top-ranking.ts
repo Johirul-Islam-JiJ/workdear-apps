@@ -1,24 +1,24 @@
-import { User } from "./User";
-
 export interface TopWorker {
   id: number;
-  user: User;
+  user_name: string;
+  user_rating: number;
+  total_submissions: number;
 }
 
 export interface TopJobPoster {
   id: number;
-  job_posted_count: string;
-  user: User;
+  user_name: string;
+  job_posted_count: number;
 }
 
 export interface TopRefferer {
   id: number;
-  referredUser: User;
-  referral_count: string;
+  user_name: string;
+  referral_count: number;
 }
 
 export interface TopUser {
   id: number;
-  user: User;
-  total_earnings: string;
+  user_name: string;
+  total_earnings: number;
 }

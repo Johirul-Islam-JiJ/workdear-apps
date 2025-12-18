@@ -26,7 +26,7 @@ const TopWorkerContent = () => {
           key={index}
           item={item}
           rank={index + 1}
-          work={item.user.user_rating.total_submissions}
+          work={item.total_submissions}
           Icon={<MaterialIcons name="work" />}
         />
       ))}
