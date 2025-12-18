@@ -5,6 +5,9 @@ import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import JobBasicInfo from "./JobBasicInfo";
+import JobOverView from "./JobOverView";
+import JobProofs from "./JobProofs";
+import JobTimeline from "./JobTimeline";
 import TabMenus from "./TabMenus";
 
 const JobDetailsContent = () => {
@@ -24,6 +27,9 @@ const JobDetailsContent = () => {
     <View style={{ rowGap: 10, padding: 10 }}>
       <JobBasicInfo job={job} />
       <TabMenus activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === 0 && <JobOverView job={job} />}
+      {activeTab === 1 && <JobTimeline />}
+      {activeTab === 2 && <JobProofs />}
     </View>
   );
 };

@@ -1,4 +1,3 @@
-import { Faq } from "@/types/Faq";
 import React, { useRef, useState } from "react";
 import {
   Animated,
@@ -7,12 +6,16 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import ContentRenderer from "../libs/ContentRenderer";
-import IconButton from "../libs/IconButton";
-import { ThemedText } from "../libs/ThemedText";
-import { ThemedView } from "../libs/ThemedView";
+import IconButton from "./IconButton";
+import { ThemedText } from "./ThemedText";
+import { ThemedView } from "./ThemedView";
 
-const FaqList = ({ item }: { item: Faq }) => {
+type Props = {
+  title: string;
+  description: string | React.JSX.Element;
+};
+
+const Collupsable = ({ title, description }: Props) => {
   const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -67,7 +70,7 @@ const FaqList = ({ item }: { item: Faq }) => {
             color="primarydark"
             darkColor="white"
           >
-            {item.question}
+            {title}
           </ThemedText>
 
           <Animated.View style={{ transform: [{ rotate: rotation }] }}>
@@ -91,11 +94,15 @@ const FaqList = ({ item }: { item: Faq }) => {
             setContentHeight(e.nativeEvent.layout.height)
           }
         >
-          <ContentRenderer html={item.answer} />
+          {typeof description === "string" ? (
+            <ThemedText>{description}</ThemedText>
+          ) : (
+            description
+          )}
         </View>
       </Animated.View>
     </ThemedView>
   );
 };
 
-export default FaqList;
+export default Collupsable;

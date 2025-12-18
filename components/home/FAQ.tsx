@@ -2,8 +2,9 @@ import { useGetFaqContentQuery } from "@/store/features/content";
 import { Faq } from "@/types/Faq";
 import React from "react";
 import { View } from "react-native";
+import Collupsable from "../libs/Collupsable";
+import ContentRenderer from "../libs/ContentRenderer";
 import { ThemedText } from "../libs/ThemedText";
-import FaqList from "./FaqList";
 
 const FAQ = () => {
   const { data } = useGetFaqContentQuery();
@@ -17,7 +18,11 @@ const FAQ = () => {
 
       <View style={{ rowGap: 8, marginTop: 10 }}>
         {faqData.slice(0, 5).map((item, index) => (
-          <FaqList key={index} item={item} />
+          <Collupsable
+            key={index}
+            title={item.question}
+            description={<ContentRenderer html={item.answer} />}
+          />
         ))}
       </View>
     </View>

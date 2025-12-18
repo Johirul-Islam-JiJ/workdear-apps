@@ -1,4 +1,5 @@
-import FaqList from "@/components/home/FaqList";
+import Collupsable from "@/components/libs/Collupsable";
+import ContentRenderer from "@/components/libs/ContentRenderer";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { useGetFaqContentQuery } from "@/store/features/content";
 import { Faq } from "@/types/Faq";
@@ -14,7 +15,11 @@ const FaqScreen = () => {
       <ScrollView style={{ flex: 1 }}>
         <View style={{ rowGap: 8, padding: 10 }}>
           {faqData.map((item, index) => (
-            <FaqList key={index} item={item} />
+            <Collupsable
+              key={index}
+              title={item.question}
+              description={<ContentRenderer html={item.answer} />}
+            />
           ))}
         </View>
       </ScrollView>
