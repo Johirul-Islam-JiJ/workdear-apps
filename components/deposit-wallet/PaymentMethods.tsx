@@ -1,4 +1,3 @@
-import { countryCurrency } from "@/_mock/payment";
 import { config } from "@/config/config";
 import { useAppSelector } from "@/hooks/redux";
 import { filterByCountry } from "@/services/filterByCountry";
@@ -26,12 +25,12 @@ const PaymentMethods = ({ setPaymentMethod, title, type, crypto }: Props) => {
 
   if (!data) return null;
 
-  const filteredData = filterByCountry(
+  const filteredData = filterByCountry({
     data,
-    user?.country as keyof typeof countryCurrency,
     type,
-    crypto
-  );
+    crypto,
+    currency: user?.country?.currency ?? "BDT",
+  });
 
   const itemWrapperStyle: ViewStyle = {
     flexDirection: "row",

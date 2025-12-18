@@ -73,7 +73,6 @@ interface WalletBalance {
   total_balance: number;
 }
 
-//{"created_at": "2025-09-14T06:45:37.000000Z", "end_date": "2025-12-14", "id": 8, "package": {"created_at": "2025-09-08T05:39:11.000000Z", "description": "Basic plan", "duration": "3", "feature": [Array], "highlighted": false, "id": 1, "minute": null, "name": "Basic", "price": "15", "updated_at": "2025-10-30T19:22:41.000000Z"}, "package_id": 1, "paid_from": "deposit_balance", "start_date": "2025-09-14", "updated_at": "2025-09-14T06:45:37.000000Z", "user_id": 1}
 type UserPackage = {
   created_at: string;
   end_date: string;
@@ -97,11 +96,22 @@ type UserPackage = {
   user_id: number;
 };
 
+type Country = {
+  country_code: string;
+  country_name: string;
+  created_at: string;
+  deleted_at: null;
+  id: number;
+  short_name: string;
+  updated_at: string;
+  currency: string;
+};
+
 export interface User {
   about_me: string | null;
   active: string;
   age: string | null;
-  country: string | null;
+  country: Country;
   country_id: string | null;
   created_at: string;
   deactivation: string | null;

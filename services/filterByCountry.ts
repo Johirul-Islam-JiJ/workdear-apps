@@ -1,12 +1,13 @@
-import { countryCurrency } from "@/_mock/payment";
 import { PaymentMethod, PaymentSystemsType } from "@/types/payment";
 
-export function filterByCountry(
-  data: PaymentMethod[],
-  country: keyof typeof countryCurrency = "BD",
-  type: PaymentSystemsType,
-  crypto: boolean
-) {
+type Params = {
+  data: PaymentMethod[];
+  currency: string;
+  type: PaymentSystemsType;
+  crypto: boolean;
+};
+
+export function filterByCountry({ data, type, crypto, currency }: Params) {
   const dev = false;
   if (!Array.isArray(data)) return [];
 
@@ -16,9 +17,9 @@ export function filterByCountry(
     return data.filter((item) => item.type === "passimpay" && item?.[type]);
   }
 
-  return data.filter((item: PaymentMethod) => {
-    if (/INR|PKR|NPR|BDT/.test(item.currency)) {
-      return item?.currency === countryCurrency[country] && item?.[type];
+  return data.filter((item) => {
+    if (item.type === "apay") {
+      return item?.currency === currency && item?.[type];
     } else {
       return false;
     }
