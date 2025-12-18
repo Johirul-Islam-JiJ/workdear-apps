@@ -5,6 +5,8 @@ import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React from "react";
 import { View } from "react-native";
+import CompleteJob from "./CompleteJob";
+import ExtendDeadline from "./ExtendDeadline";
 
 type Props = {
   setStatus: React.Dispatch<React.SetStateAction<"" | TaskStatus>>;
@@ -47,8 +49,8 @@ const NaviagionHeader = ({
       </ThemedText>
 
       <View style={{ flexDirection: "row", gap: 8 }}>
-        <Button style={{ flex: 1 }} title="Extend Deadline" />
-        <Button style={{ flex: 1 }} title="Complete Job" color="success" />
+        <ExtendDeadline />
+        <CompleteJob />
       </View>
       <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
         <Button style={{ flex: 1 }} title="View Job" startIcon="eye" />

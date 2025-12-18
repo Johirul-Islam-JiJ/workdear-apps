@@ -162,6 +162,29 @@ export const jobsApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    expiredJobExtend: builder.mutation({
+      query: (data) => ({
+        url: "/jobs/expired_job/extend",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["alljobs", "jobs", "getingSubmitedTaskProfs"],
+    }),
+    makeJobCompleted: builder.mutation({
+      query: (data) => ({
+        url: "/jobs/status/update",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["alljobs", "jobs", "getingSubmitedTaskProfs"],
+    }),
+    jobImpressionAndClick: builder.mutation({
+      query: ({ jobId, data }) => ({
+        url: `/jobs/impression-click-count/${jobId}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -185,4 +208,7 @@ export const {
   useReportJobMutation,
   useReportSubmissionMutation,
   useUpdateDaysAndWorkerMutation,
+  useExpiredJobExtendMutation,
+  useMakeJobCompletedMutation,
+  useJobImpressionAndClickMutation,
 } = jobsApi;
