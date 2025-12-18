@@ -61,8 +61,10 @@ const JobSubmissionCard = ({ data, onSelect, selectedTaskIds }: Props) => {
               </AppIcon>
             )}
             <View>
-              <ThemedText variant="body2">ID: {data.id}</ThemedText>
-              <ThemedText>
+              <ThemedText color="white" variant="body2">
+                ID: {data.id}
+              </ThemedText>
+              <ThemedText color="white">
                 {new Date(data.date).toLocaleDateString("en-BN", {
                   day: "numeric",
                   month: "short",

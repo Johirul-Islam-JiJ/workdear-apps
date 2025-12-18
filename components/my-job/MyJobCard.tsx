@@ -83,15 +83,15 @@ const MyJobCard = ({ job }: Props) => {
           }}
         >
           <Card style={{ flex: 1, rowGap: 0 }} color="primarydarker">
-            <ThemedText>Progress</ThemedText>
-            <ThemedText variant="body2">
+            <ThemedText color="white">Progress</ThemedText>
+            <ThemedText variant="body2" color="white">
               {job.submission_information.APPROVED}/
               {job.submission_information.REQUIRED_JOB_WORKER}
             </ThemedText>
           </Card>
           <Card style={{ flex: 1, rowGap: 0 }} color="primarydarker">
-            <ThemedText>Cost</ThemedText>
-            <ThemedText variant="body2">
+            <ThemedText color="white">Cost</ThemedText>
+            <ThemedText color="white" variant="body2">
               $
               {(
                 parseFloat(job.pay_per_task) *
