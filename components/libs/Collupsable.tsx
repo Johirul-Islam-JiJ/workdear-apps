@@ -7,15 +7,16 @@ import {
   View,
 } from "react-native";
 import IconButton from "./IconButton";
-import { ThemedText } from "./ThemedText";
+import { TextVariant, ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 
 type Props = {
   title: string;
   description: string | React.JSX.Element;
+  titleVariant?: TextVariant;
 };
 
-const Collupsable = ({ title, description }: Props) => {
+const Collupsable = ({ title, description, titleVariant }: Props) => {
   const [expanded, setExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -69,6 +70,7 @@ const Collupsable = ({ title, description }: Props) => {
             style={{ marginBottom: 5, fontWeight: "bold", width: "85%" }}
             color="primarydark"
             darkColor="white"
+            variant={titleVariant}
           >
             {title}
           </ThemedText>
