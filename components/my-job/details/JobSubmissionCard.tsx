@@ -1,12 +1,11 @@
-import AppIcon from "@/components/libs/AppIcon";
 import Badge from "@/components/libs/Badge";
 import Button from "@/components/libs/Button";
 import Card from "@/components/libs/Card";
+import IconButton from "@/components/libs/IconButton";
 import { ThemedText } from "@/components/libs/ThemedText";
 import useJobReview from "@/hooks/useJobReview";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { JobSubmission, TaskStatus } from "@/types/myJobs";
-import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
 import React from "react";
@@ -34,7 +33,8 @@ const JobSubmissionCard = ({ data, onSelect, selectedTaskIds }: Props) => {
   return (
     <Card style={{ padding: 0, rowGap: 0 }}>
       <Card
-        color="primarydarker"
+        darkColor="primarydarker"
+        color="primarydark"
         style={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -51,14 +51,15 @@ const JobSubmissionCard = ({ data, onSelect, selectedTaskIds }: Props) => {
               />
             )}
             {status === TaskStatus.SATISFIED && (
-              <AppIcon color="success">
-                <Ionicons name="happy" />
-              </AppIcon>
+              <IconButton
+                icon="happy"
+                color="primarydarker"
+                darkColor="success"
+                size="sm"
+              />
             )}
             {status === TaskStatus.UNSATISFIED && (
-              <AppIcon color="error">
-                <Ionicons name="close" />
-              </AppIcon>
+              <IconButton icon="close" color="error" size="sm" />
             )}
             <View>
               <ThemedText color="white" variant="body2">

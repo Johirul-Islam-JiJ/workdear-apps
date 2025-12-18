@@ -6,9 +6,10 @@ type props = {
   children: React.ReactNode;
   style?: ViewStyle;
   color?: ColorScheme;
+  darkColor?: ColorScheme;
 };
 
-const Card = ({ children, style = {}, color = "card" }: props) => {
+const Card = ({ children, style = {}, color = "card", darkColor }: props) => {
   const wrapperStyle: ViewStyle = {
     borderRadius: 10,
     padding: 10,
@@ -16,7 +17,7 @@ const Card = ({ children, style = {}, color = "card" }: props) => {
     ...style,
   };
   return (
-    <ThemedView color={color} style={wrapperStyle}>
+    <ThemedView color={color} darkColor={darkColor} style={wrapperStyle}>
       {children}
     </ThemedView>
   );

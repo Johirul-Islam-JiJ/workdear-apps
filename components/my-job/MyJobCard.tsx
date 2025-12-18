@@ -82,14 +82,22 @@ const MyJobCard = ({ job }: Props) => {
             gap: 10,
           }}
         >
-          <Card style={{ flex: 1, rowGap: 0 }} color="primarydarker">
+          <Card
+            style={{ flex: 1, rowGap: 0 }}
+            darkColor="primarydarker"
+            color="primarydark"
+          >
             <ThemedText color="white">Progress</ThemedText>
             <ThemedText variant="body2" color="white">
               {job.submission_information.APPROVED}/
               {job.submission_information.REQUIRED_JOB_WORKER}
             </ThemedText>
           </Card>
-          <Card style={{ flex: 1, rowGap: 0 }} color="primarydarker">
+          <Card
+            style={{ flex: 1, rowGap: 0 }}
+            darkColor="primarydarker"
+            color="primarydark"
+          >
             <ThemedText color="white">Cost</ThemedText>
             <ThemedText color="white" variant="body2">
               $
