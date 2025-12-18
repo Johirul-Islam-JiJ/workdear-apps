@@ -24,7 +24,7 @@ const TopUserContent = () => {
       {topUsers.map((item, index) => (
         <TopWorkerCard
           key={index}
-          item={item}
+          item={item as any}
           rank={index + 1}
           work={item.total_earnings}
           Icon={<Feather name="dollar-sign" />}

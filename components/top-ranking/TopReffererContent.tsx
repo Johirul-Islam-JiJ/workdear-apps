@@ -24,7 +24,7 @@ const TopReffererContent = () => {
       {topRefferer.map((item, index) => (
         <TopWorkerCard
           key={index}
-          item={{ user: item.referredUser, id: item.id }}
+          item={item as any}
           rank={index + 1}
           work={item.referral_count}
           Icon={<MaterialIcons name="room-preferences" />}

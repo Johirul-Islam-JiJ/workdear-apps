@@ -19,6 +19,7 @@ const TopWorkerContent = () => {
   }
 
   const topWorkers: TopWorker[] = response?.data?.top_workers ?? [];
+
   return (
     <View style={{ padding: 10, rowGap: 5 }}>
       {topWorkers.map((item, index) => (
@@ -26,7 +27,7 @@ const TopWorkerContent = () => {
           key={index}
           item={item}
           rank={index + 1}
-          work={item.total_submissions}
+          work={item.satisfied_count}
           Icon={<MaterialIcons name="work" />}
         />
       ))}

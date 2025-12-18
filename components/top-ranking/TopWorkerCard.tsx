@@ -54,7 +54,7 @@ const TopWorkerCard = ({
       <View style={{ flex: 1 }}>
         <ThemedText>{item.user_name}</ThemedText>
         <View style={ratingWrapper}>
-          <Rating value={item.user_rating} />
+          {item.user_rating ? <Rating value={item.user_rating} /> : <View />}
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
             <ThemedText style={{ fontWeight: "bold" }} color="primarydark">
               {work}

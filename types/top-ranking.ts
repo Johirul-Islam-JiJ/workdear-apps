@@ -2,7 +2,7 @@ export interface TopWorker {
   id: number;
   user_name: string;
   user_rating: number;
-  total_submissions: number;
+  satisfied_count: number;
 }
 
 export interface TopJobPoster {
