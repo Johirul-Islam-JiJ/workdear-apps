@@ -2,6 +2,7 @@ import Badge from "@/components/libs/Badge";
 import Button from "@/components/libs/Button";
 import Card from "@/components/libs/Card";
 import { ThemedText } from "@/components/libs/ThemedText";
+import useJobReview from "@/hooks/useJobReview";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { JobSubmission, TaskStatus } from "@/types/myJobs";
 import Checkbox from "expo-checkbox";
@@ -13,6 +14,12 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
   const [selected, setSelected] = useState(false);
   const checkboxBorderColor = useThemeColor(selected ? "success" : "gray.200");
   const checkboxColor = useThemeColor(selected ? "success" : "gray.500");
+  const {
+    handleSatisfySignle,
+    handleUnSatisfySingle,
+    isSinglesatisfying,
+    isSingleUnsatisfying,
+  } = useJobReview();
 
   const onChange = () => {
     setSelected(!selected);
@@ -89,6 +96,8 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
                 title="Satisfy"
                 startIcon="checkmark"
                 color="success"
+                onPress={() => handleSatisfySignle(data.id)}
+                loading={isSinglesatisfying === data.id}
               />
               <Button
                 size="small"
@@ -96,6 +105,8 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
                 title="Unsatisfy"
                 startIcon="close-sharp"
                 color="error"
+                onPress={() => handleUnSatisfySingle(data.id)}
+                loading={isSingleUnsatisfying === data.id}
               />
             </>
           )}
