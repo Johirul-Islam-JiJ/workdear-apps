@@ -1,14 +1,15 @@
-import { ThemedText } from "@/components/libs/ThemedText";
-import { useLocalSearchParams } from "expo-router";
+import { ThemedView } from "@/components/libs/ThemedView";
+import JobDetailsContent from "@/components/my-job/job-details/JobDetailsContent";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 
 const MyjosDetails = () => {
-  const { slug } = useLocalSearchParams();
   return (
-    <View>
-      <ThemedText>MyjosDetails {slug}</ThemedText>
-    </View>
+    <ThemedView color="background" style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
+        <JobDetailsContent />
+      </ScrollView>
+    </ThemedView>
   );
 };
 

@@ -6,7 +6,7 @@ import { ThemedText } from "../libs/ThemedText";
 
 export interface SummaryCardProps {
   label: string;
-  value: number;
+  value: number | string;
   startContent?: string;
   endContent?: string;
   color: ColorScheme;
@@ -34,7 +34,9 @@ const SummaryCard = (props: SummaryCardProps) => {
       </ThemedText>
       <ThemedText color={color} variant="body2">
         {startContent}
-        {Number(value).toLocaleString("en-US")}
+        {typeof value === "number"
+          ? Number(value).toLocaleString("en-US")
+          : value}
         <ThemedText color={color} variant="body">
           {endContent}
         </ThemedText>
