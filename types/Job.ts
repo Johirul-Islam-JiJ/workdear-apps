@@ -81,6 +81,8 @@ type JobSubCategory = {
 };
 
 export interface Job {
+  click_count: string;
+  impression_count: string;
   countries: JobCountry[];
   created_at: string;
   deleted_at: null;
