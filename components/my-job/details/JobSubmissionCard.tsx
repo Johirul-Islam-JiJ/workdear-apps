@@ -5,6 +5,7 @@ import { ThemedText } from "@/components/libs/ThemedText";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { JobSubmission, TaskStatus } from "@/types/myJobs";
 import Checkbox from "expo-checkbox";
+import { Link } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 
@@ -69,27 +70,35 @@ const JobSubmissionCard = ({ data }: { data: JobSubmission }) => {
         <ThemedText variant="body2">Proof</ThemedText>
         <ThemedText>{data.proof_data}</ThemedText>
 
-        <View style={{ flexDirection: "row", gap: 8, marginTop: 10 }}>
-          <Button
-            size="small"
-            style={{ flex: 1 }}
-            title="View"
-            startIcon="eye"
-          />
-          <Button
-            size="small"
-            style={{ flex: 1 }}
-            title="Satisfy"
-            startIcon="checkmark"
-            color="success"
-          />
-          <Button
-            size="small"
-            style={{ flex: 1 }}
-            title="Unsatisfy"
-            startIcon="close-sharp"
-            color="error"
-          />
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 8,
+            marginTop: 10,
+            justifyContent: "flex-end",
+          }}
+        >
+          <Link href={`/(mainLayout)/my-jobs/job-review/${data.id}`} asChild>
+            <Button size="small" title="View" startIcon="eye" />
+          </Link>
+          {status === TaskStatus.UNDER_REVIEW && (
+            <>
+              <Button
+                size="small"
+                style={{ flex: 1 }}
+                title="Satisfy"
+                startIcon="checkmark"
+                color="success"
+              />
+              <Button
+                size="small"
+                style={{ flex: 1 }}
+                title="Unsatisfy"
+                startIcon="close-sharp"
+                color="error"
+              />
+            </>
+          )}
         </View>
       </Card>
     </Card>

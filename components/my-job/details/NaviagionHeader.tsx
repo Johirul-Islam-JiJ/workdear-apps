@@ -10,23 +10,13 @@ type Props = {
 };
 
 const NaviagionHeader = ({ setStatus }: Props) => {
-  const options = [
-    {
-      label: "All",
-      value: "",
-    },
-    {
-      label: "Satisfied",
-      value: TaskStatus.SATISFIED,
-    },
-    {
-      label: "Unsatisfied",
-      value: TaskStatus.UNSATISFIED,
-    },
-    {
-      label: "Under Review",
-      value: TaskStatus.UNDER_REVIEW,
-    },
+  const statusOptions = [
+    { id: 1, label: "All", value: "" },
+    { id: 3, label: "CORRECT", value: "correct_submissions" },
+    { id: 2, label: "INCORRECT", value: "incorrect_submissions" },
+    { id: 4, label: "PENDING", value: "UNDER_REVIEW" },
+    { id: 5, label: "SATISFIED", value: "SATISFIED" },
+    { id: 6, label: "UNSATISFIED", value: "UNSATISFIED" },
   ];
 
   return (
@@ -48,7 +38,7 @@ const NaviagionHeader = ({ setStatus }: Props) => {
         <Button style={{ flex: 1 }} title="View Job" startIcon="eye" />
         <DropdownMenu
           onSelect={(value) => setStatus(value as any)}
-          items={options}
+          items={statusOptions}
           placeholder="Filter"
           border
           title="Filter by status"
