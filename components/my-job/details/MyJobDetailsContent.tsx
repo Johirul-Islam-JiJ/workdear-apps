@@ -1,4 +1,5 @@
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
+import Pagination from "@/components/libs/Pagination";
 import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
 import React, { useState } from "react";
@@ -56,6 +57,11 @@ const MyJobDetailsContent = () => {
       <SingleMyJobSummary data={basicJobInfo} />
       <NaviagionHeader setStatus={setStatus} />
       <JobSubmissionList jobSubmissions={jobSubmissions.data} />
+      <Pagination
+        currentPage={page}
+        onChange={setPage}
+        totalPages={jobSubmissions.last_page ?? 1}
+      />
     </View>
   );
 };
