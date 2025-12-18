@@ -3,6 +3,7 @@ import { DropdownMenu } from "@/components/libs/DropdownMenu";
 import { ThemedText } from "@/components/libs/ThemedText";
 import useJobReview from "@/hooks/useJobReview";
 import { TaskStatus } from "@/types/myJobs";
+import { Link } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import CompleteJob from "./CompleteJob";
@@ -24,6 +25,7 @@ const NaviagionHeader = ({
     handleMultipleUnsatisfy,
     isMultipleSatisfing,
     isMultipleUnsatisfing,
+    jobSlug,
   } = useJobReview();
   const statusOptions = [
     { id: 1, label: "All", value: "" },
@@ -51,7 +53,9 @@ const NaviagionHeader = ({
       <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
         <ExtendDeadline />
         <CompleteJob />
-        <Button style={{ flex: 1 }} title="View Job" startIcon="eye" />
+        <Link asChild href={`/(mainLayout)/my-jobs/job/${jobSlug}`}>
+          <Button style={{ flex: 1 }} title="View Job" startIcon="eye" />
+        </Link>
         <DropdownMenu
           onSelect={(value) => setStatus(value as any)}
           items={statusOptions}
