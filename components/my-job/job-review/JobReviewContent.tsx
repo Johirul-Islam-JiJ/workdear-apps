@@ -8,6 +8,7 @@ import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Dimensions, View } from "react-native";
 import ProofImage from "./ProofImage";
+import RateWorker from "./RateWorker";
 
 const JobReviewContent = () => {
   const { id } = useLocalSearchParams();
@@ -32,6 +33,7 @@ const JobReviewContent = () => {
           <ThemedText variant="body2">{submission.proof_data}</ThemedText>
         </ThemedView>
       </Card>
+      <RateWorker taskId={submission.id} />
     </View>
   );
 };
