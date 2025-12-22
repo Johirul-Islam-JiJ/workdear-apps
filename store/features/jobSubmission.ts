@@ -16,6 +16,7 @@ export const checkTaskProfsApi = api.injectEndpoints({
         url: `/submissionDetails/${id}`,
         method: "GET",
       }),
+      providesTags: ["single-task"],
     }),
 
     giveTips: builder.mutation({
@@ -40,7 +41,7 @@ export const checkTaskProfsApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["getingSubmitedTaskProfs"],
+      invalidatesTags: ["getingSubmitedTaskProfs", "single-task"],
     }),
 
     unsatisfySingleTask: builder.mutation({
@@ -49,7 +50,7 @@ export const checkTaskProfsApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["getingSubmitedTaskProfs"],
+      invalidatesTags: ["getingSubmitedTaskProfs", "single-task"],
     }),
 
     satisfyMultipleTask: builder.mutation({
@@ -58,7 +59,7 @@ export const checkTaskProfsApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["getingSubmitedTaskProfs"],
+      invalidatesTags: ["getingSubmitedTaskProfs", "single-task"],
     }),
 
     unSatisfyMultipleTask: builder.mutation({
@@ -67,7 +68,7 @@ export const checkTaskProfsApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["getingSubmitedTaskProfs"],
+      invalidatesTags: ["getingSubmitedTaskProfs", "single-task"],
     }),
   }),
 });

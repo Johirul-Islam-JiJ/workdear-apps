@@ -37,7 +37,12 @@ const JobReviewContent = () => {
       </Card>
       <RateWorker taskId={submission.id} />
       <VarificationQuestion submission={submission} />
-      <ActionButons taskId={submission.id} />
+      <ActionButons
+        taskId={submission.id}
+        status={submission.status}
+        jobSlug={submission.job.slug}
+        jobId={submission.job.id}
+      />
     </View>
   );
 };

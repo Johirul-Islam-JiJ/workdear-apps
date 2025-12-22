@@ -1,5 +1,6 @@
 import { Job } from "./Job";
-import { JobSubmissionImage, MyWorkStatus } from "./myWork";
+import { TaskStatus } from "./myJobs";
+import { JobSubmissionImage } from "./myWork";
 
 export type JobSubmission = {
   id: number;
@@ -15,7 +16,7 @@ export type JobSubmission = {
   report: null;
   reviewed_at: null;
   star_reason: null;
-  status: MyWorkStatus;
+  status: TaskStatus;
   submitted_at: string;
   updated_at: string;
   worker_id: number;
