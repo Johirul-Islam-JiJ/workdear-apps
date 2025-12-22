@@ -8,7 +8,7 @@ type Props = {
   allTime: number | string;
 };
 
-const YourTicketBalance = ({ tisSeason, allTime }: Props) => {
+const TicketBalance = ({ tisSeason, allTime }: Props) => {
   const CardRender = ({
     title,
     value,
@@ -33,4 +33,4 @@ const YourTicketBalance = ({ tisSeason, allTime }: Props) => {
   );
 };
 
-export default YourTicketBalance;
+export default TicketBalance;

@@ -3,7 +3,8 @@ import React from "react";
 import { Dimensions, View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import BuyNewTicket from "./BuyNewTicket";
-import YourTicketBalance from "./YourTicketBalance";
+import TicketBalance from "./TicketBalance";
+import TimeCountdown from "./TimeCountdown";
 
 const TicketContend = () => {
   const { data, isLoading } = useGetTicketQuery(undefined);
@@ -19,10 +20,11 @@ const TicketContend = () => {
   return (
     <View style={{ gap: 10, padding: 10 }}>
       <BuyNewTicket />
-      <YourTicketBalance
+      <TicketBalance
         allTime={data?.user_data?.all_ticket ?? 0}
         tisSeason={data?.user_data?.seasonal_ticket ?? 0}
       />
+      <TimeCountdown drawTime={data?.draw_date ?? ""} />
     </View>
   );
 };
