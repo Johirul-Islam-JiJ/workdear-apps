@@ -50,11 +50,18 @@ const NaviagionHeader = ({
         Submission lists
       </ThemedText>
 
-      <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          columnGap: "1%",
+          rowGap: 8,
+          flexWrap: "wrap",
+        }}
+      >
         <ExtendDeadline />
         <CompleteJob />
         <Link asChild href={`/(mainLayout)/my-jobs/job/${jobSlug}`}>
-          <Button style={{ flex: 1 }} title="View Job" startIcon="eye" />
+          <Button style={{ width: "49%" }} title="View Job" startIcon="eye" />
         </Link>
         <DropdownMenu
           onSelect={(value) => setStatus(value as any)}

@@ -46,6 +46,7 @@ const ExtendDeadline = () => {
       <>
         <Button
           onPress={() => setShowExtendDeadlineModal(1)}
+          style={{ width: "49%" }}
           title="Extend Deadline"
         />
 

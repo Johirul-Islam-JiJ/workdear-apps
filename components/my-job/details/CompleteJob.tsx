@@ -36,7 +36,7 @@ const CompleteJob = () => {
     <>
       <Button
         onPress={() => setShowCompleteJobModal(1)}
-        style={{ flex: 1 }}
+        style={{ width: "49%" }}
         title="Complete Job"
         color="success"
       />
