@@ -8,7 +8,7 @@ type Props = {
 };
 
 const TabMenus = ({ activeTab, setActiveTab }: Props) => {
-  const tabs = ["Overview", "Timeline", "Proofs"];
+  const tabs = ["Overview", "Timeline", "Status"];
   return (
     <View style={{ flexDirection: "row", columnGap: 8 }}>
       {tabs.map((tab, index) => (

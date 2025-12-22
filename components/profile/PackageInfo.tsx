@@ -94,7 +94,7 @@ const PackageInfo = () => {
               <Badge variant="dot" color="success" /> Active
             </ThemedText>
             <ThemedText variant="small" color="success">
-              {getRemainingDays(pack.end_date)} days left
+              {getRemainingDays(pack.end_date)}
             </ThemedText>
           </ThemedView>
 

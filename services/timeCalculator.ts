@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 // calculing time how long ago the job was created
 export function timeCalculator(date: string) {
   const now = new Date();
@@ -27,7 +29,7 @@ export function timeCalculator(date: string) {
 
 export function getRemainingDays(
   endDateStr: string,
-  emtyString: string = "Expired"
+  emtyString: string | JSX.Element = "Expired"
 ) {
   const now = new Date();
   const endDate = new Date(endDateStr);
@@ -43,14 +45,14 @@ export function getRemainingDays(
   );
 
   if (diffDays === 0) {
-    return `${diffHours} hour${diffHours !== 1 ? "s" : ""}`;
+    return `${diffHours} hour${diffHours !== 1 ? "s" : ""} left`;
   }
 
   if (diffHours === 0) {
-    return `${diffDays} day${diffDays !== 1 ? "s" : ""}`;
+    return `${diffDays} day${diffDays !== 1 ? "s" : ""} left`;
   }
 
   return `${diffDays} day${diffDays !== 1 ? "s" : ""} ${diffHours} hour${
     diffHours !== 1 ? "s" : ""
-  }`;
+  } left`;
 }

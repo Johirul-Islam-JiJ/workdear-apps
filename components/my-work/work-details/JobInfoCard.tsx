@@ -44,7 +44,7 @@ const JobInfoCard = ({ job }: { job: Job }) => {
     },
     {
       label: "Time Left",
-      value: getRemainingDays(job.end_date, "Job ended"),
+      value: getRemainingDays(job.end_date, "Job ended") as string,
       color: "warning",
       variant: "body1" as TextVariant,
       Icon: (

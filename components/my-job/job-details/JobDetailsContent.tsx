@@ -28,7 +28,7 @@ const JobDetailsContent = () => {
       <JobBasicInfo job={job} />
       <TabMenus activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 0 && <JobOverView job={job} />}
-      {activeTab === 1 && <JobTimeline />}
+      {activeTab === 1 && <JobTimeline job={job} />}
       {activeTab === 2 && <JobProofs />}
     </View>
   );
