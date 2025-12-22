@@ -9,6 +9,7 @@ import React from "react";
 import { Dimensions, View } from "react-native";
 import ProofImage from "./ProofImage";
 import RateWorker from "./RateWorker";
+import VarificationQuestion from "./VarificationQuestion";
 
 const JobReviewContent = () => {
   const { id } = useLocalSearchParams();
@@ -34,6 +35,7 @@ const JobReviewContent = () => {
         </ThemedView>
       </Card>
       <RateWorker taskId={submission.id} />
+      <VarificationQuestion submission={submission} />
     </View>
   );
 };

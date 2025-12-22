@@ -2,7 +2,7 @@ import { ImagePickerAsset } from "expo-image-picker";
 import { User } from "./User";
 
 export type QuestionCondition = {
-  id: number;
+  id: string;
   answer_type: string;
   text: string;
   condition: {
@@ -11,7 +11,7 @@ export type QuestionCondition = {
   };
 };
 
-export type Answer = Record<string, string> | null;
+export type Answer = Record<string, string>;
 
 export type RequiredProofs = {
   type: string;
