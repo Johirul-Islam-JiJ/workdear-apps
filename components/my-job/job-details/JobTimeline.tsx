@@ -2,6 +2,7 @@ import AppIcon from "@/components/libs/AppIcon";
 import Card from "@/components/libs/Card";
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
+import { ColorScheme } from "@/constants/Colors";
 import { getRemainingDays } from "@/services/timeCalculator";
 import { Job } from "@/types/Job";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,14 +14,23 @@ const JobTimeline = ({ job }: { job: Job }) => {
     {
       title: "Submitted",
       date: job.created_at,
+      color: "success",
     },
     {
       title: "Job Start",
       date: job.start_date,
+      color:
+        getRemainingDays(job.start_date, "started") === "started"
+          ? "success"
+          : "gray.400",
     },
     {
       title: "Job End",
       date: job.end_date,
+      color:
+        getRemainingDays(job.end_date, "expired") === "expired"
+          ? "success"
+          : "gray.400",
     },
   ];
   return (
@@ -30,14 +40,14 @@ const JobTimeline = ({ job }: { job: Job }) => {
           key={index}
           style={{ flexDirection: "row", columnGap: 10, position: "relative" }}
         >
-          {index !== list.length - 1 && (
+          {index !== 0 && (
             <ThemedView
-              color="success"
+              color={item.color as ColorScheme}
               style={{
                 width: 5,
-                height: "120%",
+                height: "110%",
                 position: "absolute",
-                top: "50%",
+                bottom: "90%",
                 left: "3.5%",
                 zIndex: 1,
               }}
@@ -45,7 +55,7 @@ const JobTimeline = ({ job }: { job: Job }) => {
           )}
 
           <ThemedView
-            color="success"
+            color={item.color as ColorScheme}
             style={{
               height: 30,
               width: 30,
