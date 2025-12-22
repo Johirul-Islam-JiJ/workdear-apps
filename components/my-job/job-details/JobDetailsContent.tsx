@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import JobBasicInfo from "./JobBasicInfo";
 import JobOverView from "./JobOverView";
-import JobProofs from "./JobProofs";
+import JobStatus from "./JobStatus";
 import JobTimeline from "./JobTimeline";
 import TabMenus from "./TabMenus";
 
@@ -29,7 +29,7 @@ const JobDetailsContent = () => {
       <TabMenus activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 0 && <JobOverView job={job} />}
       {activeTab === 1 && <JobTimeline job={job} />}
-      {activeTab === 2 && <JobProofs />}
+      {activeTab === 2 && <JobStatus job={job} />}
     </View>
   );
 };

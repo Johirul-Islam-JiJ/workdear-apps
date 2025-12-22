@@ -34,6 +34,8 @@ type JobCountry = {
     job_id: string;
   };
   updated_at: string;
+  short_name: string;
+  currency: string;
 };
 
 type Report = {
