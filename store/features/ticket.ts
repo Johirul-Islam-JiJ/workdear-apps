@@ -1,8 +1,9 @@
+import { TicketType } from "@/types/ticket";
 import { api } from "./baseQuery";
 
 const ticketApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getTicket: builder.query({
+    getTicket: builder.query<TicketType, void>({
       query: () => ({
         url: "/daily-draws/V1/get-ticket-data",
         method: "GET",
