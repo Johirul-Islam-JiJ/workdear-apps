@@ -7,14 +7,13 @@ import { useToast } from "@/hooks/useToast";
 import { useGiveRatingToWorkerMutation } from "@/store/features/jobSubmission";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { View } from "react-native";
 
 const RateWorker = ({ taskId }: { taskId: number }) => {
   const [rateWorker, { isLoading }] = useGiveRatingToWorkerMutation();
   const {
     control,
     handleSubmit,
-    setValue,
-    watch,
     reset,
     formState: { errors },
   } = useForm({
@@ -45,7 +44,16 @@ const RateWorker = ({ taskId }: { taskId: number }) => {
         name="rating"
         rules={{ required: "Rating is required" }}
         render={({ field: { onChange, value } }) => (
-          <Rating value={parseInt(value ?? "0")} onChange={onChange} editable />
+          <View>
+            <Rating
+              value={parseInt(value ?? "0")}
+              onChange={onChange}
+              editable
+            />
+            {errors.rating && (
+              <ThemedText color="error">{errors.rating.message}</ThemedText>
+            )}
+          </View>
         )}
       />
 
