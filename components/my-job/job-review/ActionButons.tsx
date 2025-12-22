@@ -7,6 +7,7 @@ import { TaskStatus } from "@/types/myJobs";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
+import GiveTips from "./GiveTips";
 
 type Props = {
   taskId: number;
@@ -66,7 +67,7 @@ const ActionButons = ({ taskId, status, jobSlug, jobId }: Props) => {
   }
 
   return (
-    <View style={{ rowGap: 10 }}>
+    <View style={{ rowGap: 10, marginBottom: 10 }}>
       <View style={{ flexDirection: "row", gap: 8 }}>
         <Button
           onPress={() => handleTaskReview(Satisfaction.Satisfied)}
@@ -93,12 +94,7 @@ const ActionButons = ({ taskId, status, jobSlug, jobId }: Props) => {
           type="job_submission"
           style={{ flex: 1 }}
         />
-        <Button
-          color="success"
-          title="Give tips"
-          style={{ flex: 1 }}
-          startIcon="happy"
-        />
+        <GiveTips taskId={taskId} />
       </View>
     </View>
   );
