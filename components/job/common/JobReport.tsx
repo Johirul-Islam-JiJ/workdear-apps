@@ -93,6 +93,7 @@ const JobReport = ({
                   onChangeText={field.onChange}
                   multiline
                   numberOfLines={5}
+                  style={{ height: "auto" }}
                   error={errors.reason?.message}
                 />
               )}

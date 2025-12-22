@@ -13,12 +13,7 @@ const ProofImage = ({ images }: { images: JobSubmissionImage[] }) => {
       <ThemedText variant="bodySemiBold">Proof Images</ThemedText>
       <View style={{ rowGap: 8 }}>
         {images.map((image, index) => (
-          <ThemedView
-            key={index}
-            color="white"
-            darkColor="gray.500"
-            style={{ borderRadius: 10 }}
-          >
+          <ThemedView key={index} color="border" style={{ borderRadius: 10 }}>
             <Image
               source={{ uri: config.fileBaseUrl + image.image_path }}
               style={{

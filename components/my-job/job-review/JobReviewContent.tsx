@@ -7,6 +7,7 @@ import { JobSubmission } from "@/types/submission";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Dimensions, View } from "react-native";
+import ActionButons from "./ActionButons";
 import ProofImage from "./ProofImage";
 import RateWorker from "./RateWorker";
 import VarificationQuestion from "./VarificationQuestion";
@@ -30,12 +31,13 @@ const JobReviewContent = () => {
       <ProofImage images={submission.job_submission_image} />
       <Card>
         <ThemedText variant="bodySemiBold">Proof Text</ThemedText>
-        <ThemedView color="gray.500" style={{ padding: 10, borderRadius: 10 }}>
+        <ThemedView color="border" style={{ padding: 10, borderRadius: 10 }}>
           <ThemedText variant="body2">{submission.proof_data}</ThemedText>
         </ThemedView>
       </Card>
       <RateWorker taskId={submission.id} />
       <VarificationQuestion submission={submission} />
+      <ActionButons taskId={submission.id} />
     </View>
   );
 };
