@@ -6,6 +6,7 @@ import BuyTicket from "./BuyTicket";
 import RecentPurchase from "./RecentPurchase";
 import TicketBalance from "./TicketBalance";
 import TimeCountdown from "./TimeCountdown";
+import TopTicketBuyer from "./TopTicketBuyer";
 
 const TicketContend = () => {
   const { data, isLoading } = useGetTicketQuery(undefined);
@@ -28,6 +29,7 @@ const TicketContend = () => {
       />
       <TimeCountdown drawTime={data?.draw_date ?? ""} />
       <RecentPurchase data={data?.recent_buyers ?? []} />
+      <TopTicketBuyer data={data?.top_ticket_buyers ?? []} />
     </View>
   );
 };
