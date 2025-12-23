@@ -10,7 +10,13 @@ import Button from "../libs/Button";
 import Card from "../libs/Card";
 import { TextVariant, ThemedText } from "../libs/ThemedText";
 
-const AdvertisementCard = ({ ads }: { ads: Advertisement }) => {
+type Props = {
+  ads: Advertisement;
+  onStatusUpdate: (id: number, status: AdvertisementStatus) => void;
+  isUpdating: number;
+};
+
+const AdvertisementCard = ({ ads, onStatusUpdate, isUpdating }: Props) => {
   const dateFormatter = (date: string) =>
     new Date(date).toLocaleDateString("en-BN", {
       day: "numeric",
@@ -21,6 +27,7 @@ const AdvertisementCard = ({ ads }: { ads: Advertisement }) => {
       hour12: true,
     });
 
+  //   console.log(ads);
   const list = [
     {
       title: "Clicks",
@@ -75,7 +82,7 @@ const AdvertisementCard = ({ ads }: { ads: Advertisement }) => {
               label={ads.status}
               style={{ borderRadius: 8, alignSelf: "flex-start" }}
               color={
-                ads.status === AdvertisementStatus.ACTIVE
+                ads.status === AdvertisementStatus.APPROVED
                   ? "success"
                   : ads.status === AdvertisementStatus.EXPIRED
                   ? "warning"
@@ -105,9 +112,22 @@ const AdvertisementCard = ({ ads }: { ads: Advertisement }) => {
           />
           <Button
             style={{ flex: 1 }}
-            title={ads.status === AdvertisementStatus.ACTIVE ? "Pause" : "Play"}
+            onPress={() =>
+              onStatusUpdate(
+                ads.id,
+                ads.status === AdvertisementStatus.APPROVED
+                  ? AdvertisementStatus.INACTIVE
+                  : AdvertisementStatus.ACTIVE
+              )
+            }
+            loading={isUpdating === ads.id}
+            title={
+              ads.status === AdvertisementStatus.APPROVED ? "Pause" : "Play"
+            }
             color={
-              ads.status === AdvertisementStatus.ACTIVE ? "success" : "warning"
+              ads.status === AdvertisementStatus.APPROVED
+                ? "success"
+                : "warning"
             }
             startIcon={
               <AppIcon color="white" size={18}>

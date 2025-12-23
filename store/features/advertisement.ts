@@ -39,6 +39,20 @@ const advertisementApi = api.injectEndpoints({
       }),
       invalidatesTags: ["ads"],
     }),
+    updateAdsStatus: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/advertisement/V1/${id}/status`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["ads"],
+    }),
+    updateAdsClickCount: builder.mutation({
+      query: (id) => ({
+        url: `/clickCount/${id}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -48,4 +62,6 @@ export const {
   useGetAdCostsQuery,
   useUpdateAdvertisementMutation,
   useDeleteAdvertisementMutation,
+  useUpdateAdsStatusMutation,
+  useUpdateAdsClickCountMutation,
 } = advertisementApi;
