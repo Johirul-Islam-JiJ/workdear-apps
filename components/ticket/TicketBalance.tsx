@@ -27,8 +27,8 @@ const TicketBalance = ({ tisSeason, allTime }: Props) => {
   return (
     <Card>
       <ThemedText variant="subtitle">Your ticket balance</ThemedText>
-      <CardRender title="This Season" value={tisSeason} />
-      <CardRender title="All Time" value={allTime} />
+      <CardRender title="This season" value={tisSeason} />
+      <CardRender title="All time" value={allTime} />
     </Card>
   );
 };
