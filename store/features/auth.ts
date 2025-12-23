@@ -19,7 +19,17 @@ const authApi = api.injectEndpoints({
           console.log("Login mutation error:", error);
         }
       },
-      invalidatesTags: ["profile"],
+      invalidatesTags: [
+        "profile",
+        "notification-count",
+        "notifications",
+        "withdraw-history",
+        "accepted-tasks",
+        "tasks",
+        "deposit-history",
+        "playAndEarn",
+        "jobs",
+      ],
     }),
     register: builder.mutation({
       query: (data) => ({
@@ -36,7 +46,17 @@ const authApi = api.injectEndpoints({
           console.log("Register mutation error:", error);
         }
       },
-      invalidatesTags: ["profile"],
+      invalidatesTags: [
+        "profile",
+        "notification-count",
+        "notifications",
+        "withdraw-history",
+        "accepted-tasks",
+        "tasks",
+        "deposit-history",
+        "playAndEarn",
+        "jobs",
+      ],
     }),
     logout: builder.mutation({
       query: () => ({
@@ -52,7 +72,6 @@ const authApi = api.injectEndpoints({
           console.log("Logout mutation error:", error);
         }
       },
-      invalidatesTags: ["profile"],
     }),
     forgotPassword: builder.mutation({
       query: (data) => ({

@@ -90,7 +90,6 @@ export const api = createApi({
     "ads-cost",
     "accepted-tasks",
     "tasks",
-    "deleteJob",
     "ticket",
     "generalData",
     "playAndEarn",
