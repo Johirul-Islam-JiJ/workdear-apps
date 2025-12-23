@@ -8,7 +8,7 @@ import { useJobbyidQuery } from "@/store/features/jobs";
 import { Job } from "@/types/Job";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { ScrollView, ViewStyle } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 
 const JobDetails = () => {
   const { slug } = useLocalSearchParams();
@@ -17,21 +17,22 @@ const JobDetails = () => {
 
   if (isLoading) return <LoadingIndicator fullScreen />;
 
-  const containerStyle: ViewStyle = {
-    rowGap: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    flex: 1,
-  };
   return (
-    <ScrollView>
-      <ThemedView color="background" style={containerStyle}>
-        <HeaderPart job={job} />
-        <PlatFormGuide />
-        <JobDetailsBody job={job} />
-        <JobSubmissionForm job={job} />
-      </ThemedView>
-    </ScrollView>
+    <ThemedView color="background" style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <ScrollView style={{ flex: 1 }}>
+          <View style={{ gap: 10, padding: 10 }}>
+            <HeaderPart job={job} />
+            <PlatFormGuide />
+            <JobDetailsBody job={job} />
+            <JobSubmissionForm job={job} />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </ThemedView>
   );
 };
 
