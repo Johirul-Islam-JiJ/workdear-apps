@@ -1,17 +1,17 @@
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
 import Button from "../libs/Button";
 
 const Navigation = () => {
+  const router = useRouter();
   return (
-    <Link href="/(mainLayout)/add-advertisement" asChild>
-      <Button
-        title="Add Advertisement"
-        size="small"
-        style={{ alignSelf: "flex-end" }}
-        endIcon="arrow-up-right-box-outline"
-      />
-    </Link>
+    <Button
+      onPress={() => router.push("/(mainLayout)/advertisement/add")}
+      title="Add Advertisement"
+      size="small"
+      style={{ alignSelf: "flex-end" }}
+      endIcon="arrow-up-right-box-outline"
+    />
   );
 };
 

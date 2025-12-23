@@ -2,6 +2,7 @@ import { config } from "@/config/config";
 import { Advertisement, AdvertisementStatus } from "@/types/Advertisement";
 import { FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import AppIcon from "../libs/AppIcon";
@@ -25,6 +26,7 @@ const AdvertisementCard = ({
   onDelete,
   isDeleting,
 }: Props) => {
+  const router = useRouter();
   const dateFormatter = (date: string) =>
     new Date(date).toLocaleDateString("en-BN", {
       day: "numeric",
@@ -35,7 +37,12 @@ const AdvertisementCard = ({
       hour12: true,
     });
 
-  //   console.log(ads);
+  const handleGoEdit = () => {
+    router.push({
+      pathname: "/(mainLayout)/advertisement/update",
+      params: { ads: JSON.stringify(ads) },
+    });
+  };
   const list = [
     {
       title: "Clicks",
@@ -111,6 +118,7 @@ const AdvertisementCard = ({
         <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
           <Button
             style={{ flex: 1 }}
+            onPress={handleGoEdit}
             title="Edit"
             startIcon={
               <AppIcon color="white" size={18}>

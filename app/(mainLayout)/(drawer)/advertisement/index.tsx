@@ -20,9 +20,6 @@ const Advertisement = () => {
   const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
   const { data, isLoading } = useGetAdsQuery({ status, page });
-  const [showUpdatModal, setShowUpdateModal] = useState(false);
-  const [updateModalData, setUpdateModalData] = useState(null);
-  const [showDeleteModal, setShowDeleteModal] = useState(0);
 
   const ads: AdvertisementType[] = data?.data?.ads || [];
   const totalPages: number = data?.meta?.last_page || 1;
