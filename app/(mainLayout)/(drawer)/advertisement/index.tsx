@@ -1,7 +1,9 @@
+import AdvertisementFilter from "@/components/advertisement/AdvertisementFilter";
 import AdvertisementSummary from "@/components/advertisement/AdvertisementSummary";
 import Navigation from "@/components/advertisement/Navigation";
 import Container from "@/components/common/Container";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
+import Pagination from "@/components/libs/Pagination";
 import { useGetAdsQuery } from "@/store/features/advertisement";
 import React, { useState } from "react";
 
@@ -23,6 +25,13 @@ const Advertisement = () => {
     <Container>
       <Navigation />
       <AdvertisementSummary data={report} />
+      <AdvertisementFilter onStatusChange={setStatus} />
+
+      <Pagination
+        currentPage={page}
+        onChange={setPage}
+        totalPages={totalPages}
+      />
     </Container>
   );
 };
