@@ -2,7 +2,7 @@ import { useGetUserByCatagoryQuery } from "@/store/features/top-user-catagory";
 import { TopJobPoster } from "@/types/top-ranking";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import TopWorkerCard from "./TopWorkerCard";
 
@@ -21,7 +21,7 @@ const TopJobPosterContent = () => {
   const topJobPoster: TopJobPoster[] = response?.data?.top_job_providers ?? [];
 
   return (
-    <View style={{ padding: 10, rowGap: 5 }}>
+    <>
       {topJobPoster.map((item, index) => (
         <TopWorkerCard
           key={index}
@@ -31,7 +31,7 @@ const TopJobPosterContent = () => {
           Icon={<MaterialIcons name="work-history" />}
         />
       ))}
-    </View>
+    </>
   );
 };
 

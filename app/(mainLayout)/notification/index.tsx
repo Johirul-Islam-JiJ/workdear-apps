@@ -1,15 +1,12 @@
-import { ThemedView } from "@/components/libs/ThemedView";
+import Container from "@/components/common/Container";
 import NotificationContent from "@/components/notification/NotificationContent";
 import React from "react";
-import { ScrollView } from "react-native";
 
 const Notification = () => {
   return (
-    <ThemedView style={{ flex: 1 }} color="background">
-      <ScrollView style={{ flex: 1 }}>
-        <NotificationContent />
-      </ScrollView>
-    </ThemedView>
+    <Container>
+      <NotificationContent />
+    </Container>
   );
 };
 

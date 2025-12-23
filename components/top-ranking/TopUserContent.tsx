@@ -2,7 +2,7 @@ import { useGetUserByCatagoryQuery } from "@/store/features/top-user-catagory";
 import { TopUser } from "@/types/top-ranking";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import TopWorkerCard from "./TopWorkerCard";
 
@@ -20,7 +20,7 @@ const TopUserContent = () => {
 
   const topUsers: TopUser[] = response?.data?.top_users ?? [];
   return (
-    <View style={{ padding: 10, rowGap: 5 }}>
+    <>
       {topUsers.map((item, index) => (
         <TopWorkerCard
           key={index}
@@ -30,7 +30,7 @@ const TopUserContent = () => {
           Icon={<Feather name="dollar-sign" />}
         />
       ))}
-    </View>
+    </>
   );
 };
 

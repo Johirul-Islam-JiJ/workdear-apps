@@ -1,15 +1,12 @@
-import { ThemedView } from "@/components/libs/ThemedView";
+import Container from "@/components/common/Container";
 import TopReffererContent from "@/components/top-ranking/TopReffererContent";
 import React from "react";
-import { ScrollView } from "react-native";
 
 const TopRefferer = () => {
   return (
-    <ThemedView color="background" style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1 }}>
-        <TopReffererContent />
-      </ScrollView>
-    </ThemedView>
+    <Container rowGap={5}>
+      <TopReffererContent />
+    </Container>
   );
 };
 

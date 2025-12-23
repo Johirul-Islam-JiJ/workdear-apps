@@ -33,7 +33,7 @@ const NotificationContent = () => {
     );
 
   return (
-    <View style={{ paddingHorizontal: 10, paddingVertical: 15, rowGap: 10 }}>
+    <>
       <View>
         <ThemedText variant="body2" style={{ textAlign: "center" }}>
           Latest Notification
@@ -82,7 +82,7 @@ const NotificationContent = () => {
         totalPages={totalPages}
         onChange={onchangePage}
       />
-    </View>
+    </>
   );
 };
 

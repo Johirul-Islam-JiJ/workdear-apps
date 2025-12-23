@@ -2,7 +2,7 @@ import { useGetUserByCatagoryQuery } from "@/store/features/top-user-catagory";
 import { TopRefferer } from "@/types/top-ranking";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import TopWorkerCard from "./TopWorkerCard";
 
@@ -20,7 +20,7 @@ const TopReffererContent = () => {
 
   const topRefferer: TopRefferer[] = response?.data?.top_referrers;
   return (
-    <View style={{ padding: 10, rowGap: 5 }}>
+    <>
       {topRefferer.map((item, index) => (
         <TopWorkerCard
           key={index}
@@ -30,7 +30,7 @@ const TopReffererContent = () => {
           Icon={<MaterialIcons name="room-preferences" />}
         />
       ))}
-    </View>
+    </>
   );
 };
 

@@ -1,12 +1,12 @@
-import { ThemedView } from "@/components/libs/ThemedView";
+import Container from "@/components/common/Container";
 import PlayAndEarnContent from "@/components/play-and-earn/PlayAndEarnContent";
 import React from "react";
 
 const PlayAndEarn = () => {
   return (
-    <ThemedView color="background" style={{ flex: 1 }}>
+    <Container>
       <PlayAndEarnContent />
-    </ThemedView>
+    </Container>
   );
 };
 

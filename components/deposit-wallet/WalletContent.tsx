@@ -18,7 +18,7 @@ const WalletContent = () => {
   );
 
   return (
-    <View style={{ padding: 10 }}>
+    <View>
       <PaymentMethodToggleButton onChange={setCrypto} value={crypto} />
       <Card>
         {paymentMethod ? (

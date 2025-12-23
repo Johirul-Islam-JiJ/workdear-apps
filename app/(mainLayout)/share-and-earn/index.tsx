@@ -1,12 +1,14 @@
-import { ThemedView } from "@/components/libs/ThemedView";
-import ShareAndEarnContent from "@/components/share-and-earn/ShareAndEarnContent";
+import Container from "@/components/common/Container";
+import AffiliateLinkCard from "@/components/share-and-earn/AffiliateLinkCard";
+import AffiliateProgramControl from "@/components/share-and-earn/AffiliateProgramControl";
 import React from "react";
 
 const ShareAndEarn = () => {
   return (
-    <ThemedView color="background" style={{ flex: 1 }}>
-      <ShareAndEarnContent />
-    </ThemedView>
+    <Container rowGap={20}>
+      <AffiliateLinkCard />
+      <AffiliateProgramControl />
+    </Container>
   );
 };
 
