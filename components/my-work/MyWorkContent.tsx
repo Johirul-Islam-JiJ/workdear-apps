@@ -54,7 +54,7 @@ const MyWorkContent = () => {
   }
 
   return (
-    <View style={{ rowGap: 20, padding: 10 }}>
+    <>
       <MyWorkSummary data={workSummary} />
       <MyWorkList onChangeStatus={setStatus} data={tasks} />
       <Pagination
@@ -62,7 +62,7 @@ const MyWorkContent = () => {
         currentPage={page}
         onChange={setPage}
       />
-    </View>
+    </>
   );
 };
 

@@ -88,7 +88,6 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
           style={{
             flex: 1,
             rowGap: 10,
-            paddingBottom: 15,
           }}
         >
           <ThemedText

@@ -48,7 +48,6 @@ const SelectCountry = ({ step, setStep }: Props) => {
       style={{
         flex: 1,
         justifyContent: "space-between",
-        paddingBottom: 15,
       }}
     >
       <ScrollView contentContainerStyle={{ gap: 7 }} style={{ flex: 1 }}>

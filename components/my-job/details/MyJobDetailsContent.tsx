@@ -2,7 +2,7 @@ import LoadingIndicator from "@/components/libs/LoadingIndicator";
 import Pagination from "@/components/libs/Pagination";
 import useJobReview from "@/hooks/useJobReview";
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import JobSubmissionList from "./JobSubmissionList";
 import NaviagionHeader from "./NaviagionHeader";
 import SingleMyJobSummary from "./SingleMyJobSummary";
@@ -31,7 +31,7 @@ const MyJobDetailsContent = () => {
     );
 
   return (
-    <View style={{ rowGap: 10, padding: 10 }}>
+    <>
       <SingleMyJobSummary data={basicJobInfo} />
       <NaviagionHeader
         setStatus={setStatus}
@@ -48,7 +48,7 @@ const MyJobDetailsContent = () => {
         onChange={setPage}
         totalPages={jobSubmissions.last_page ?? 1}
       />
-    </View>
+    </>
   );
 };
 

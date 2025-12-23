@@ -49,7 +49,6 @@ const SelectCategory = ({ step, setStep }: Props) => {
     <View
       style={{
         justifyContent: "space-between",
-        paddingBottom: 15,
         gap: 15,
         flex: 1,
       }}

@@ -14,7 +14,7 @@ const PostJobScreen = () => {
       color="card"
       style={{
         flex: 1,
-        paddingHorizontal: 10,
+        padding: 10,
         rowGap: 15,
       }}
     >

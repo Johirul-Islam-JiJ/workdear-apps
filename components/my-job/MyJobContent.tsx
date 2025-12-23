@@ -51,7 +51,7 @@ const MyJobContent = () => {
   }
 
   return (
-    <View style={{ padding: 10, rowGap: 10 }}>
+    <>
       <MyJobSummary data={reports} />
       <FilterAndHeader onChangeStatus={setStatus} />
       <MyjobsList data={jobs} />
@@ -60,7 +60,7 @@ const MyJobContent = () => {
         totalPages={totalPages}
         onChange={setPage}
       />
-    </View>
+    </>
   );
 };
 

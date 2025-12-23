@@ -6,7 +6,7 @@ import { useGetSingleTaskByIdQuery } from "@/store/features/jobSubmission";
 import { JobSubmission } from "@/types/submission";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import ActionButons from "./ActionButons";
 import ProofImage from "./ProofImage";
 import RateWorker from "./RateWorker";
@@ -26,7 +26,7 @@ const JobReviewContent = () => {
     );
 
   return (
-    <View style={{ padding: 10, rowGap: 10 }}>
+    <>
       <ThemedText variant="subtitle">Review the submission</ThemedText>
       <ProofImage images={submission.job_submission_image} />
       <Card>
@@ -43,7 +43,7 @@ const JobReviewContent = () => {
         jobSlug={submission.job.slug}
         jobId={submission.job.id}
       />
-    </View>
+    </>
   );
 };
 

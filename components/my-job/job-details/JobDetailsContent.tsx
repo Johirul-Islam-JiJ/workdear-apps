@@ -3,7 +3,7 @@ import { useJobbyidQuery } from "@/store/features/jobs";
 import { Job } from "@/types/Job";
 import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import JobBasicInfo from "./JobBasicInfo";
 import JobOverView from "./JobOverView";
 import JobStatus from "./JobStatus";
@@ -24,13 +24,13 @@ const JobDetailsContent = () => {
       />
     );
   return (
-    <View style={{ rowGap: 10, padding: 10 }}>
+    <>
       <JobBasicInfo job={job} />
       <TabMenus activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 0 && <JobOverView job={job} />}
       {activeTab === 1 && <JobTimeline job={job} />}
       {activeTab === 2 && <JobStatus job={job} />}
-    </View>
+    </>
   );
 };
 

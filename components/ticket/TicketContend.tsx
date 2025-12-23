@@ -1,6 +1,6 @@
 import { useGetTicketQuery } from "@/store/features/ticket";
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import BuyTicket from "./BuyTicket";
 import RecentPurchase from "./RecentPurchase";
@@ -22,7 +22,7 @@ const TicketContend = () => {
   }
 
   return (
-    <View style={{ gap: 10, padding: 10 }}>
+    <>
       <BuyTicket unitPrice={data?.per_ticket_price ?? "0"} />
       <TicketBalance
         allTime={data?.user_data?.all_ticket ?? 0}
@@ -32,7 +32,7 @@ const TicketContend = () => {
       <RecentPurchase data={data?.recent_buyers ?? []} />
       <TopTicketBuyer data={data?.top_ticket_buyers ?? []} />
       <PreviousDayWinner data={data?.previous_days_winners ?? []} />
-    </View>
+    </>
   );
 };
 

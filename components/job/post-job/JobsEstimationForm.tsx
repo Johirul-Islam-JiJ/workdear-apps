@@ -157,7 +157,7 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
           type: "success",
         })
       );
-      navigation.navigate("/(mainLayout)/(tabs)");
+      navigation.navigate("/(mainLayout)/(drawer)/my-jobs");
       dispatch(setClearJobPostForm());
     } catch (error: any) {
       dispatch(

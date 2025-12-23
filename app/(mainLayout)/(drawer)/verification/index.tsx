@@ -1,12 +1,12 @@
+import Container from "@/components/common/Container";
 import { ThemedText } from "@/components/libs/ThemedText";
 import React from "react";
-import { View } from "react-native";
 
 const Verification = () => {
   return (
-    <View>
+    <Container>
       <ThemedText>Verification</ThemedText>
-    </View>
+    </Container>
   );
 };
 
