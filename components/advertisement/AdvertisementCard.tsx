@@ -1,0 +1,136 @@
+import { config } from "@/config/config";
+import { Advertisement, AdvertisementStatus } from "@/types/Advertisement";
+import { FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import React from "react";
+import { View } from "react-native";
+import AppIcon from "../libs/AppIcon";
+import Badge from "../libs/Badge";
+import Button from "../libs/Button";
+import Card from "../libs/Card";
+import { TextVariant, ThemedText } from "../libs/ThemedText";
+
+const AdvertisementCard = ({ ads }: { ads: Advertisement }) => {
+  const dateFormatter = (date: string) =>
+    new Date(date).toLocaleDateString("en-BN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+  const list = [
+    {
+      title: "Clicks",
+      value: ads.click_count,
+      variant: "body2",
+    },
+    {
+      title: "Cost",
+      value: `$ ${ads.cost}`,
+      variant: "body2",
+    },
+    {
+      title: "Duration",
+      value: `${ads.duration_days} days`,
+      variant: "body2",
+    },
+    {
+      title: "Start Date",
+      value: dateFormatter(ads.start_date),
+      variant: "body",
+    },
+    {
+      title: "End Date",
+      value: dateFormatter(ads.end_date),
+      variant: "body",
+    },
+  ];
+  return (
+    <Card style={{ padding: 0, rowGap: 0 }}>
+      <Image
+        source={{ uri: config.fileBaseUrl + ads.banner_image }}
+        style={{
+          width: "100%",
+          height: 150,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+        }}
+      />
+      <Card>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            flexWrap: "wrap",
+            columnGap: "2%",
+            rowGap: 5,
+          }}
+        >
+          <View style={{ width: "49%" }}>
+            <ThemedText color="gray.400">Status</ThemedText>
+            <Badge
+              label={ads.status}
+              style={{ borderRadius: 8, alignSelf: "flex-start" }}
+              color={
+                ads.status === AdvertisementStatus.ACTIVE
+                  ? "success"
+                  : ads.status === AdvertisementStatus.EXPIRED
+                  ? "warning"
+                  : undefined
+              }
+            />
+          </View>
+          {list.map((item, index) => (
+            <View key={index} style={{ width: "49%" }}>
+              <ThemedText color="gray.400">{item.title}</ThemedText>
+              <ThemedText variant={item.variant as TextVariant}>
+                {item.value}
+              </ThemedText>
+            </View>
+          ))}
+        </View>
+
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+          <Button
+            style={{ flex: 1 }}
+            title="Edit"
+            startIcon={
+              <AppIcon color="white" size={18}>
+                <FontAwesome6 name="edit" />
+              </AppIcon>
+            }
+          />
+          <Button
+            style={{ flex: 1 }}
+            title={ads.status === AdvertisementStatus.ACTIVE ? "Pause" : "Play"}
+            color={
+              ads.status === AdvertisementStatus.ACTIVE ? "success" : "warning"
+            }
+            startIcon={
+              <AppIcon color="white" size={18}>
+                <FontAwesome6
+                  name={
+                    ads.status === AdvertisementStatus.ACTIVE ? "pause" : "play"
+                  }
+                />
+              </AppIcon>
+            }
+          />
+          <Button
+            color="error"
+            title={
+              <AppIcon color="white" size={24}>
+                <MaterialIcons name="delete" />
+              </AppIcon>
+            }
+          />
+        </View>
+      </Card>
+    </Card>
+  );
+};
+
+export default AdvertisementCard;
