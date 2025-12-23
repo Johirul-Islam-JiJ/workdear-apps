@@ -52,10 +52,7 @@ const JobsSreen = () => {
   }, [jobs]);
 
   return (
-    <ThemedView
-      color="background"
-      style={{ paddingHorizontal: 10, paddingVertical: 15, flex: 1 }}
-    >
+    <ThemedView color="background" style={{ padding: 10, flex: 1 }}>
       <JobListHeader
         selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
@@ -86,9 +83,7 @@ const JobsSreen = () => {
                 justifyContent: "center",
               }}
             >
-              <ThemedText color="gray.800" darkColor="gray.300" variant="body">
-                No job found
-              </ThemedText>
+              <ThemedText>No job found</ThemedText>
             </View>
           )
         }
