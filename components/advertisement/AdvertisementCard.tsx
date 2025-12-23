@@ -14,9 +14,17 @@ type Props = {
   ads: Advertisement;
   onStatusUpdate: (id: number, status: AdvertisementStatus) => void;
   isUpdating: number;
+  onDelete: (id: number) => void;
+  isDeleting: number;
 };
 
-const AdvertisementCard = ({ ads, onStatusUpdate, isUpdating }: Props) => {
+const AdvertisementCard = ({
+  ads,
+  onStatusUpdate,
+  isUpdating,
+  onDelete,
+  isDeleting,
+}: Props) => {
   const dateFormatter = (date: string) =>
     new Date(date).toLocaleDateString("en-BN", {
       day: "numeric",
@@ -140,6 +148,8 @@ const AdvertisementCard = ({ ads, onStatusUpdate, isUpdating }: Props) => {
             }
           />
           <Button
+            onPress={() => onDelete(ads.id)}
+            loading={isDeleting === ads.id}
             color="error"
             title={
               <AppIcon color="white" size={24}>
