@@ -1,5 +1,7 @@
 import { useToast } from "@/hooks/useToast";
+import { BuyTicketSchema } from "@/schema/BuyTicket";
 import { useBuyticketMutation } from "@/store/features/ticket";
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -19,6 +21,7 @@ const BuyTicket = ({ unitPrice }: { unitPrice: string }) => {
     control,
     formState: { errors },
   } = useForm({
+    resolver: yupResolver(BuyTicketSchema),
     defaultValues: {
       ticket_amount: "",
       balance_type: "",
@@ -62,7 +65,6 @@ const BuyTicket = ({ unitPrice }: { unitPrice: string }) => {
           <Controller
             name="balance_type"
             control={control}
-            rules={{ required: "Balance type is required" }}
             render={({ field }) => (
               <View>
                 <ThemedText>Balance type</ThemedText>
@@ -80,7 +82,6 @@ const BuyTicket = ({ unitPrice }: { unitPrice: string }) => {
           <Controller
             name="ticket_amount"
             control={control}
-            rules={{ required: "Ticket amount is required" }}
             render={({ field }) => (
               <View>
                 <ThemedText>How many ticket you want</ThemedText>

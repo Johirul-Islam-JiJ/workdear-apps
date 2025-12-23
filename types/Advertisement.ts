@@ -35,3 +35,11 @@ export interface AdvertisementSummary {
   total_click: string;
   total_cost: string;
 }
+
+export type CostList = {
+  cost: string;
+  duration_days: string;
+  id: string;
+  is_active: boolean;
+  updated_at: string;
+};
