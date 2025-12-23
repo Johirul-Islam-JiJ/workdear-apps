@@ -12,7 +12,7 @@ import MyJobSummary from "./MyJobSummary";
 import MyjobsList from "./MyjobsList";
 
 const MyJobContent = () => {
-  const { data, isLoading, page, setStatus, setPage } = useMyJobsData();
+  const { data, isLoading, page, setStatus, setPage, status } = useMyJobsData();
 
   const jobs: MyJob[] = data?.data?.data?.jobs || [];
   const totalPages: number = data?.data?.last_page || 1;
@@ -28,7 +28,7 @@ const MyJobContent = () => {
       />
     );
 
-  if (jobs.length === 0) {
+  if (jobs.length === 0 && status === "") {
     return (
       <View
         style={{
