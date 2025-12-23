@@ -118,45 +118,51 @@ const AdvertisementCard = ({
               </AppIcon>
             }
           />
-          <Button
-            style={{ flex: 1 }}
-            onPress={() =>
-              onStatusUpdate(
-                ads.id,
+          {/APPROVED|INACTIVE|ACTIVE/.test(ads.status) && (
+            <Button
+              style={{ flex: 1 }}
+              onPress={() =>
+                onStatusUpdate(
+                  ads.id,
+                  ads.status === AdvertisementStatus.APPROVED
+                    ? AdvertisementStatus.INACTIVE
+                    : AdvertisementStatus.ACTIVE
+                )
+              }
+              loading={isUpdating === ads.id}
+              title={
+                ads.status === AdvertisementStatus.APPROVED ? "Pause" : "Play"
+              }
+              color={
                 ads.status === AdvertisementStatus.APPROVED
-                  ? AdvertisementStatus.INACTIVE
-                  : AdvertisementStatus.ACTIVE
-              )
-            }
-            loading={isUpdating === ads.id}
-            title={
-              ads.status === AdvertisementStatus.APPROVED ? "Pause" : "Play"
-            }
-            color={
-              ads.status === AdvertisementStatus.APPROVED
-                ? "success"
-                : "warning"
-            }
-            startIcon={
-              <AppIcon color="white" size={18}>
-                <FontAwesome6
-                  name={
-                    ads.status === AdvertisementStatus.ACTIVE ? "pause" : "play"
-                  }
-                />
-              </AppIcon>
-            }
-          />
-          <Button
-            onPress={() => onDelete(ads.id)}
-            loading={isDeleting === ads.id}
-            color="error"
-            title={
-              <AppIcon color="white" size={24}>
-                <MaterialIcons name="delete" />
-              </AppIcon>
-            }
-          />
+                  ? "success"
+                  : "warning"
+              }
+              startIcon={
+                <AppIcon color="white" size={18}>
+                  <FontAwesome6
+                    name={
+                      ads.status === AdvertisementStatus.ACTIVE
+                        ? "pause"
+                        : "play"
+                    }
+                  />
+                </AppIcon>
+              }
+            />
+          )}
+          {/EXPIRED|PENDING|REJECTED/.test(ads.status) && (
+            <Button
+              onPress={() => onDelete(ads.id)}
+              loading={isDeleting === ads.id}
+              color="error"
+              title={
+                <AppIcon color="white" size={24}>
+                  <MaterialIcons name="delete" />
+                </AppIcon>
+              }
+            />
+          )}
         </View>
       </Card>
     </Card>
