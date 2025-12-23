@@ -1,13 +1,13 @@
+import Container from "@/components/common/Container";
 import { ThemedText } from "@/components/libs/ThemedText";
 import React from "react";
-import { View } from "react-native";
 
-const Index = () => {
+const Advertisement = () => {
   return (
-    <View>
+    <Container>
       <ThemedText>Advertisement</ThemedText>
-    </View>
+    </Container>
   );
 };
 
-export default Index;
+export default Advertisement;
