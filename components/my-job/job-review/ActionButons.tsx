@@ -51,7 +51,7 @@ const ActionButons = ({ taskId, status, jobSlug, jobId }: Props) => {
         color="success"
         style={{ textAlign: "center", marginBottom: 10 }}
       >
-        Task already Satisfied
+        This task is Satisfied
       </ThemedText>
     );
   } else if (status === TaskStatus.UNSATISFIED) {
@@ -61,7 +61,7 @@ const ActionButons = ({ taskId, status, jobSlug, jobId }: Props) => {
         color="error"
         style={{ textAlign: "center", marginBottom: 10 }}
       >
-        Task already UnSatisfied
+        This task is Unsatisfied
       </ThemedText>
     );
   }
