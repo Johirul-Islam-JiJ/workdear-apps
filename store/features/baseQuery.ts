@@ -40,8 +40,7 @@ const apiFormDataUrl = [
 
 const isFormDataUrl = (formDataUrl: string[], url: string) => {
   return formDataUrl.some((path) => {
-    const pattern = new RegExp(`^${path}(/|$)`);
-    return pattern.test(url);
+    return url.startsWith(path);
   });
 };
 
@@ -63,6 +62,8 @@ const baseQueryWithAuth: BaseQueryFn<
       if (!isFormDataUrl(apiFormDataUrl, url)) {
         headers.set("Content-Type", "application/json");
         headers.set("Accept", "application/json");
+      } else {
+        headers.set("Content-Type", "multipart/form-data");
       }
       headers.set("Accept", "application/json");
       headers.set("X-API-Key", config.apiKey as string);

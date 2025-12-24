@@ -1,3 +1,4 @@
+import { config } from "@/config/config";
 import { Advertisementschema } from "@/schema/Advertisement";
 import { useGetAdCostsQuery } from "@/store/features/advertisement";
 import { CostList } from "@/types/Advertisement";
@@ -9,6 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Dimensions, Pressable, View } from "react-native";
 import Button from "../libs/Button";
 import Card from "../libs/Card";
+import { DropdownMenu } from "../libs/DropdownMenu";
 import ImagePicker from "../libs/ImagePicker";
 import Input from "../libs/Input";
 import LoadingIndicator from "../libs/LoadingIndicator";
@@ -25,7 +27,7 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
   const {
     handleSubmit,
     control,
-    reset,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({
@@ -41,14 +43,12 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
 
   useEffect(() => {
     if (!data) return;
-    reset({
-      title: data.title,
-      target_url: data.target_url,
-      status: data.status,
-      cost_id: data.cost_id,
-      banner_image: data.banner_image,
-    });
-  }, [data]);
+    setValue("cost_id", data.abs_cost_id);
+    setValue("title", data.title);
+    setValue("target_url", data.target_url);
+    setValue("status", data.status);
+    setValue("banner_image", data.banner_image);
+  }, []);
 
   if (costLoading) {
     return (
@@ -61,6 +61,16 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
 
   const costList: CostList[] = costs?.ad_cost_lists ?? [];
   const bannerImage = watch("banner_image") as ImagePickerAsset;
+  const statusOptions = [
+    {
+      label: "Active",
+      value: "ACTIVE",
+    },
+    {
+      label: "Inactive",
+      value: "INACTIVE",
+    },
+  ];
 
   return (
     <Card>
@@ -108,7 +118,11 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
                     onPress={() => field.onChange(cost.id)}
                   >
                     <Card
-                      color={cost.id === field.value ? "primarydark" : "border"}
+                      color={
+                        cost.id === parseInt(field.value ?? "0")
+                          ? "primarydark"
+                          : "border"
+                      }
                       style={{
                         flexDirection: "row",
                         alignItems: "center",
@@ -130,6 +144,26 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
         )}
       />
 
+      {data && /ACTIVE|INACTIVE|APPROVED/.test(data.status) && (
+        <Controller
+          name="status"
+          control={control}
+          render={({ field }) => (
+            <View>
+              <ThemedText>Status</ThemedText>
+              <DropdownMenu
+                items={statusOptions}
+                onSelect={field.onChange}
+                value={field.value}
+                border
+                placeholder="Select status"
+                error={errors.status?.message}
+              />
+            </View>
+          )}
+        />
+      )}
+
       <Controller
         name="banner_image"
         control={control}
@@ -141,9 +175,14 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
               error={errors.banner_image?.message}
               value={bannerImage}
             />
-            {bannerImage?.uri && (
+            {bannerImage && (
               <Image
-                source={{ uri: bannerImage?.uri }}
+                source={{
+                  uri:
+                    typeof bannerImage === "string"
+                      ? config.fileBaseUrl + bannerImage
+                      : bannerImage?.uri,
+                }}
                 style={{
                   width: "100%",
                   height: 100,

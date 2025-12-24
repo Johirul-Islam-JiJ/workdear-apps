@@ -25,11 +25,13 @@ const advertisementApi = api.injectEndpoints({
       providesTags: ["ads-cost"],
     }),
     updateAdvertisement: builder.mutation({
-      query: ({ data, id }) => ({
-        url: `/advertisement/V1/update/${id}`,
-        method: "POST",
-        body: data,
-      }),
+      query: ({ data, id }) => {
+        return {
+          url: `/advertisement/V1/update/${id}`,
+          method: "POST",
+          body: data,
+        };
+      },
       invalidatesTags: ["ads"],
     }),
     deleteAdvertisement: builder.mutation({

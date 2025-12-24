@@ -39,7 +39,7 @@ export interface AdvertisementSummary {
 export type CostList = {
   cost: string;
   duration_days: string;
-  id: string;
+  id: number;
   is_active: boolean;
   updated_at: string;
 };
