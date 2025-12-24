@@ -27,6 +27,7 @@ const AdvertisementCard = ({
   isDeleting,
 }: Props) => {
   const router = useRouter();
+
   const dateFormatter = (date: string) =>
     new Date(date).toLocaleDateString("en-BN", {
       day: "numeric",
@@ -48,28 +49,34 @@ const AdvertisementCard = ({
       title: "Clicks",
       value: ads.click_count,
       variant: "body2",
+      render: true,
     },
     {
       title: "Cost",
       value: `$ ${ads.cost}`,
       variant: "body2",
+      render: true,
     },
     {
       title: "Duration",
       value: `${ads.duration_days} days`,
       variant: "body2",
+      render: true,
     },
     {
       title: "Start Date",
       value: dateFormatter(ads.start_date),
       variant: "body",
+      render: ads.start_date,
     },
     {
       title: "End Date",
       value: dateFormatter(ads.end_date),
       variant: "body",
+      render: ads.end_date,
     },
   ];
+
   return (
     <Card style={{ padding: 0, rowGap: 0 }}>
       <Image
@@ -105,14 +112,17 @@ const AdvertisementCard = ({
               }
             />
           </View>
-          {list.map((item, index) => (
-            <View key={index} style={{ width: "49%" }}>
-              <ThemedText color="gray.400">{item.title}</ThemedText>
-              <ThemedText variant={item.variant as TextVariant}>
-                {item.value}
-              </ThemedText>
-            </View>
-          ))}
+          {list.map((item, index) => {
+            if (!item.render) return null;
+            return (
+              <View key={index} style={{ width: "49%" }}>
+                <ThemedText color="gray.400">{item.title}</ThemedText>
+                <ThemedText variant={item.variant as TextVariant}>
+                  {item.value}
+                </ThemedText>
+              </View>
+            );
+          })}
         </View>
 
         <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
