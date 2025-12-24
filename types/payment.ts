@@ -60,3 +60,23 @@ export type ExchangeRate = {
   created_at: string;
   updated_at: string;
 };
+
+export type PaymentInfo = {
+  amount: string;
+  created_at: string;
+  currency: keyof typeof countryCurrency;
+  deposit_fee: number;
+  deposit_in_wallet: number;
+  order_id: string;
+  payment_system: string;
+  redirect_url: string;
+  status: string;
+  transaction_id: string;
+  user: {
+    deposit_balance: string;
+    earning_balance: string;
+    email: string;
+    id: number;
+    name: string;
+  };
+};

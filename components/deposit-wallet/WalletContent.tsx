@@ -140,7 +140,6 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
               <BinanceInfo data={binanceData} />
             ) : (
               <PaymentDetails
-                setPaymentMethod={setPaymentMethod}
                 paymentMethod={paymentMethod}
                 formType={formType}
                 fee={fee}

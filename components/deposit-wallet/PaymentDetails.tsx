@@ -9,7 +9,6 @@ import PaymentForm from "./PaymentForm";
 import PaymentInfoCard from "./PaymentInfoCard";
 
 type Props = {
-  setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod | null>>;
   paymentMethod: PaymentMethod;
   formType: "deposit" | "withdrawal";
   fee: number;
@@ -18,7 +17,6 @@ type Props = {
 };
 
 const PaymentDetails = ({
-  setPaymentMethod,
   paymentMethod,
   formType,
   fee,
