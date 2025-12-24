@@ -93,7 +93,7 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
       }
       await jobSubmission(formData).unwrap();
       toast.success("Task submitted successfully");
-      navigation.navigate("/(mainLayout)/(tabs)/my-work");
+      navigation.navigate("/(mainLayout)/(drawer)/(tabs)/my-work");
     } catch (err: any) {
       toast.error(err?.data?.message ?? "Internal Server Error");
     }
@@ -218,7 +218,7 @@ const JobSubmissionForm = ({ job }: { job: Job }) => {
             >
               You must be verified to submit a task
             </ThemedText>
-            <Link href="/(mainLayout)/verification" asChild>
+            <Link href="/(mainLayout)/(drawer)/verification" asChild>
               <Button
                 title="Verify now"
                 style={{ marginTop: 5 }}

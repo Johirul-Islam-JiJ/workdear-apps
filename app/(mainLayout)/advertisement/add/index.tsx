@@ -17,7 +17,12 @@ const AddAdvertisement = () => {
       formData.append("title", data.title);
       formData.append("target_url", data.target_url);
       formData.append("cost_id", data.cost_id);
-      formData.append("banner_image", data.banner_image);
+      const file = data.banner_image;
+      formData.append("banner_image", {
+        uri: file.uri,
+        type: file.mimeType || "image/jpeg",
+        name: file.fileName || `upload_${Date.now()}.jpg`,
+      } as any);
       await createAds(formData).unwrap();
       toast.success("Advertisement created successfully");
       router.back();

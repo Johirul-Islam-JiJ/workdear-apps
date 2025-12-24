@@ -2,10 +2,14 @@ import { Advertisementschema } from "@/schema/Advertisement";
 import { useGetAdCostsQuery } from "@/store/features/advertisement";
 import { CostList } from "@/types/Advertisement";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Image } from "expo-image";
+import { ImagePickerAsset } from "expo-image-picker";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Dimensions, View } from "react-native";
+import { Dimensions, Pressable, View } from "react-native";
+import Button from "../libs/Button";
 import Card from "../libs/Card";
+import ImagePicker from "../libs/ImagePicker";
 import Input from "../libs/Input";
 import LoadingIndicator from "../libs/LoadingIndicator";
 import { ThemedText } from "../libs/ThemedText";
@@ -22,6 +26,7 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(Advertisementschema),
@@ -55,6 +60,7 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
   }
 
   const costList: CostList[] = costs?.ad_cost_lists ?? [];
+  const bannerImage = watch("banner_image") as ImagePickerAsset;
 
   return (
     <Card>
@@ -94,8 +100,66 @@ const AdvertisementForm = ({ data, onSubmit, isLoading }: Props) => {
         render={({ field }) => (
           <View>
             <ThemedText>Duration</ThemedText>
+            <View style={{ rowGap: 5 }}>
+              {costList.length > 0 ? (
+                costList.map((cost) => (
+                  <Pressable
+                    key={cost.id}
+                    onPress={() => field.onChange(cost.id)}
+                  >
+                    <Card
+                      color={cost.id === field.value ? "primarydark" : "border"}
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <ThemedText color="white">
+                        {cost.duration_days}
+                      </ThemedText>
+                      <ThemedText color="white">${cost.cost}</ThemedText>
+                    </Card>
+                  </Pressable>
+                ))
+              ) : (
+                <ThemedText>Cost not found</ThemedText>
+              )}
+            </View>
           </View>
         )}
+      />
+
+      <Controller
+        name="banner_image"
+        control={control}
+        render={({ field }) => (
+          <View>
+            <ThemedText>Banner Image</ThemedText>
+            <ImagePicker
+              onChange={field.onChange}
+              error={errors.banner_image?.message}
+              value={bannerImage}
+            />
+            {bannerImage?.uri && (
+              <Image
+                source={{ uri: bannerImage?.uri }}
+                style={{
+                  width: "100%",
+                  height: 100,
+                  borderRadius: 10,
+                  marginTop: 5,
+                }}
+              />
+            )}
+          </View>
+        )}
+      />
+      <Button
+        title="Submit"
+        style={{ marginTop: 10 }}
+        onPress={handleSubmit(onSubmit)}
+        loading={isLoading}
       />
     </Card>
   );

@@ -2,7 +2,18 @@ import * as yup from "yup";
 
 export const Advertisementschema = yup.object({
   title: yup.string().required("Title is required"),
-  target_url: yup.string().required("Link is required"),
+  target_url: yup
+    .string()
+    .required("Link is required")
+    .test("url", "Invalid URL", (value) => {
+      if (!value) return false;
+      try {
+        new URL(value);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }),
   status: yup.string().required("Status is required"),
   cost_id: yup.string().required("Time duration is required"),
   banner_image: yup
@@ -27,7 +38,7 @@ export const Advertisementschema = yup.object({
       (value: any) => {
         if (!value) return false;
         if (typeof value === "string") return true;
-        return value.fileSize <= 1 * 1024 * 1024;
+        return value.fileSize <= 2 * 1024 * 1024;
       }
     ),
 });
