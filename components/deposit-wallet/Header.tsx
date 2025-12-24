@@ -9,9 +9,10 @@ import { ThemedText } from "../libs/ThemedText";
 type props = {
   name: string;
   clearPaymentMethod: (value: PaymentMethod | null) => void;
+  formType: "deposit" | "withdrawal";
 };
 
-const Header = ({ name, clearPaymentMethod }: props) => {
+const Header = ({ name, clearPaymentMethod, formType }: props) => {
   return (
     <View
       style={{
@@ -24,7 +25,7 @@ const Header = ({ name, clearPaymentMethod }: props) => {
         style={{ textTransform: "capitalize", fontWeight: "bold" }}
         color="primarydark"
       >
-        {name.split("_")[0]} withdraw
+        {name.split("_")[0]} {formType}
       </ThemedText>
       <Button
         title="Go back"

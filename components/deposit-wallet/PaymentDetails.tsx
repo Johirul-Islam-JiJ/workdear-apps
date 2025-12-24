@@ -14,6 +14,8 @@ type Props = {
   paymentMethod: PaymentMethod;
   formType: "deposit" | "withdrawal";
   fee: number;
+  onSubmit: (data: any) => void;
+  isPaymentLoading: boolean;
 };
 
 const PaymentDetails = ({
@@ -21,6 +23,8 @@ const PaymentDetails = ({
   paymentMethod,
   formType,
   fee,
+  onSubmit,
+  isPaymentLoading,
 }: Props) => {
   const { data: currencyData } = useGetCurrencyConversationDataQuery(undefined);
   const { data, isLoading } = useGetSingleGateWay({
@@ -39,7 +43,11 @@ const PaymentDetails = ({
 
   return (
     <View style={{ rowGap: 10 }}>
-      <Header clearPaymentMethod={setPaymentMethod} name={paymentMethod.name} />
+      <Header
+        clearPaymentMethod={setPaymentMethod}
+        name={paymentMethod.name}
+        formType={formType}
+      />
       <PaymentInfoCard
         paymentMethod={data}
         formType={formType}
@@ -52,6 +60,8 @@ const PaymentDetails = ({
         currency={currency}
         conversionRate={conversionRate ?? "0"}
         fee={fee}
+        onSubmit={onSubmit}
+        isLoading={isPaymentLoading}
       />
     </View>
   );

@@ -8,4 +8,5 @@ export const config = {
   liveSupportServerUrl: process.env.EXPO_PUBLIC_SUPPORT_SERVER_URL,
   geolocationApiKey: process.env.EXPO_PUBLIC_GEOLOCATION_API_KEY,
   siteUrl: process.env.EXPO_PUBLIC_SITE_URL,
+  paymentPageUrl: process.env.NEXT_PUBLIC_SITE_URL + "/payment",
 };

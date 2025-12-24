@@ -1,12 +1,22 @@
-import { ThemedText } from "@/components/libs/ThemedText";
+import Container from "@/components/common/Container";
+import WalletContent from "@/components/deposit-wallet/WalletContent";
+import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
+import { CostName } from "@/types/CostCenter";
+import { PaymentSystemsType } from "@/types/payment";
 import React from "react";
-import { View } from "react-native";
 
 const Deposit = () => {
+  const fee = useGetCostFromCostCenter(CostName.deposit_fee_gateway_percentage);
+
   return (
-    <View>
-      <ThemedText>deposit</ThemedText>
-    </View>
+    <Container>
+      <WalletContent
+        fee={fee}
+        formType="deposit"
+        type={PaymentSystemsType.deposit}
+        title="to deposit"
+      />
+    </Container>
   );
 };
 

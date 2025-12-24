@@ -1,15 +1,11 @@
 import {
-  useApayWithdrawMutation,
-  useWithdrawWithPassimpayMutation,
-} from "@/store/features/payment";
-import {
   PaymentMethod,
   PaymentMethodForm,
   PaymentMethodsType,
 } from "@/types/payment";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 import Button from "../libs/Button";
 import { DropdownMenu } from "../libs/DropdownMenu";
 import Input from "../libs/Input";
@@ -20,6 +16,8 @@ type props = {
   currency: string;
   conversionRate: string;
   fee: number;
+  onSubmit: (data: any) => void;
+  isLoading: boolean;
 };
 
 const PaymentForm = ({
@@ -28,11 +26,9 @@ const PaymentForm = ({
   currency,
   conversionRate,
   fee,
+  onSubmit,
+  isLoading,
 }: props) => {
-  const [apayWithdraw, { isLoading: apayWithdrawLoading }] =
-    useApayWithdrawMutation();
-  const [passimpayWithdraw, { isLoading: passimpayWithdrawLoading }] =
-    useWithdrawWithPassimpayMutation();
   const { handleSubmit, watch, control } = useForm();
 
   const minAmount =
@@ -58,33 +54,6 @@ const PaymentForm = ({
       ? (parseFloat(amount) / parseFloat(conversionRate)).toFixed(4)
       : 0;
   const networkFee: number = parseFloat(paymentMethod.fee_network ?? "0");
-
-  async function handleApayWithdraw(payload: any) {
-    payload.payment_system = paymentMethod.name;
-    payload.data = payload.data || {};
-    await apayWithdraw(payload).unwrap();
-  }
-
-  async function handlePassimpayWithdraw(payload: any) {
-    payload.paymentId = paymentMethod.gateway_id;
-    await passimpayWithdraw(payload).unwrap();
-  }
-
-  const onSubmit = async (payload: any) => {
-    try {
-      if (paymentMethod.type === "apay") {
-        await handleApayWithdraw(payload);
-      } else if (paymentMethod.type === "passimpay") {
-        await handlePassimpayWithdraw(payload);
-      }
-      Alert.alert(
-        "Success",
-        "Withdraw request submitted successfully. You will be notified once it is processed."
-      );
-    } catch (error: any) {
-      Alert.alert("Error", error.data?.message || "Internal Server Error");
-    }
-  };
 
   return (
     <View style={{ rowGap: 5, marginTop: 10 }}>
@@ -191,18 +160,23 @@ const PaymentForm = ({
           );
         })}
 
-      <ThemedText variant="small" style={{ marginTop: 10 }}>
-        Withdrawal amount:{" "}
+      <ThemedText
+        variant="small"
+        style={{ marginTop: 10, textTransform: "capitalize" }}
+      >
+        {formType} amount:{" "}
         <ThemedText color="warning" variant="small">
-          {equivalentUSD -
+          {(
+            equivalentUSD -
             (equivalentUSD * networkFee) / 100 -
-            (equivalentUSD * fee) / 100}
+            (equivalentUSD * fee) / 100
+          ).toFixed(4)}
           $
         </ThemedText>
       </ThemedText>
       <Button
         onPress={handleSubmit(onSubmit)}
-        loading={apayWithdrawLoading || passimpayWithdrawLoading}
+        loading={isLoading}
         title={formType === "deposit" ? "Deposit" : "Withdraw"}
       />
     </View>
