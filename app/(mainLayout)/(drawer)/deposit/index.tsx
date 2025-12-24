@@ -1,5 +1,5 @@
 import Container from "@/components/common/Container";
-import WalletContent from "@/components/deposit-wallet/WalletContent";
+import PaymentContent from "@/components/deposit-wallet/PaymentContent";
 import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
 import { CostName } from "@/types/CostCenter";
 import { PaymentSystemsType } from "@/types/payment";
@@ -10,7 +10,7 @@ const Deposit = () => {
 
   return (
     <Container>
-      <WalletContent
+      <PaymentContent
         fee={fee}
         formType="deposit"
         type={PaymentSystemsType.deposit}

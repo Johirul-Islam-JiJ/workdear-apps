@@ -33,7 +33,7 @@ export type BinanceData = {
   appName: string;
 } | null;
 
-const WalletContent = ({ fee, formType, type, title }: Props) => {
+const PaymentContent = ({ fee, formType, type, title }: Props) => {
   const [passimpayWithdraw] = useWithdrawWithPassimpayMutation();
   const [passimpayDeposit] = useDepositWithPassimpayMutation();
   const [apayWithdraw] = useApayWithdrawMutation();
@@ -164,4 +164,4 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
   );
 };
 
-export default WalletContent;
+export default PaymentContent;

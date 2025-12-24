@@ -7,7 +7,7 @@ import Button from "../libs/Button";
 import IconButton from "../libs/IconButton";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
-import { BinanceData } from "./WalletContent";
+import { BinanceData } from "./PaymentContent";
 
 const BinanceInfo = ({ data }: { data: BinanceData }) => {
   const [copy, setCopy] = useState(false);
