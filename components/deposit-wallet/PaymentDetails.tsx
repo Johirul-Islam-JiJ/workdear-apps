@@ -38,7 +38,7 @@ const PaymentDetails = ({
     (c) => c.to_currency === currency && c.from_currency === countryCurrency.US
   )?.rate;
 
-  if (isLoading) return <LoadingIndicator />;
+  if (isLoading) return <LoadingIndicator color="card" />;
 
   return (
     <View style={{ rowGap: 10 }}>

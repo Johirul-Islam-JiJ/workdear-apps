@@ -21,7 +21,7 @@ const PaymentMethods = ({ setPaymentMethod, title, type, crypto }: Props) => {
   const { user } = useAppSelector((state) => state.user);
   const { data, isLoading } = useGetPaymentSystemsQuery(undefined);
 
-  if (isLoading) return <LoadingIndicator />;
+  if (isLoading) return <LoadingIndicator color="card" />;
 
   if (!data) return null;
 

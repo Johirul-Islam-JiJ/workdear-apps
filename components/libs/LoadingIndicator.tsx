@@ -1,3 +1,4 @@
+import { ColorScheme } from "@/constants/Colors";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet, View, ViewStyle } from "react-native";
@@ -7,12 +8,14 @@ interface LoadingIndicatorProps {
   fullScreen?: boolean;
   style?: ViewStyle;
   size?: "small" | "medium" | "large";
+  color?: ColorScheme;
 }
 
 export default function LoadingIndicator({
   fullScreen = false,
   style,
   size = "medium",
+  color = "background",
 }: LoadingIndicatorProps) {
   const primaryColor = useThemeColor("primarydark");
 
@@ -57,7 +60,7 @@ export default function LoadingIndicator({
   ];
 
   return (
-    <ThemedView color="background" style={containerStyle}>
+    <ThemedView color={color} style={containerStyle}>
       <View style={styles.dotContainer}>
         {bounceValues.map((val, index) => (
           <Animated.View
