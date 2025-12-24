@@ -5,7 +5,6 @@ import { PaymentMethod } from "@/types/payment";
 import React from "react";
 import { View } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
-import Header from "./Header";
 import PaymentForm from "./PaymentForm";
 import PaymentInfoCard from "./PaymentInfoCard";
 
@@ -43,11 +42,6 @@ const PaymentDetails = ({
 
   return (
     <View style={{ rowGap: 10 }}>
-      <Header
-        clearPaymentMethod={setPaymentMethod}
-        name={paymentMethod.name}
-        formType={formType}
-      />
       <PaymentInfoCard
         paymentMethod={data}
         formType={formType}

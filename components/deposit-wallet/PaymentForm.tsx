@@ -101,24 +101,25 @@ const PaymentForm = ({
         )}
       </View>
 
-      {paymentMethod.type === PaymentMethodsType.passimpay && (
-        <View>
-          <ThemedText>Your Wallet ID</ThemedText>
-          <Controller
-            control={control}
-            name="addressTo"
-            rules={{ required: "Wallet ID is required" }}
-            render={({ field, fieldState: { error } }) => (
-              <Input
-                placeholder="Enter your Wallet ID"
-                value={field.value}
-                onChangeText={field.onChange}
-                error={error?.message}
-              />
-            )}
-          />
-        </View>
-      )}
+      {paymentMethod.type === PaymentMethodsType.passimpay &&
+        formType === "withdrawal" && (
+          <View>
+            <ThemedText>Your Wallet ID</ThemedText>
+            <Controller
+              control={control}
+              name="addressTo"
+              rules={{ required: "Wallet ID is required" }}
+              render={({ field, fieldState: { error } }) => (
+                <Input
+                  placeholder="Enter your Wallet ID"
+                  value={field.value}
+                  onChangeText={field.onChange}
+                  error={error?.message}
+                />
+              )}
+            />
+          </View>
+        )}
 
       {formFields.form_fields?.length > 0 &&
         formFields.form_fields.map((item) => {

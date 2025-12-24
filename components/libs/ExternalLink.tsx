@@ -1,5 +1,5 @@
 import { openBrowserAsync } from "expo-web-browser";
-import { Platform, Pressable } from "react-native";
+import { Pressable } from "react-native";
 
 type Props = {
   href: string;
@@ -8,11 +8,7 @@ type Props = {
 
 export function ExternalLink({ href, children }: Props) {
   const handlePress = async () => {
-    if (Platform.OS === "web") {
-      window.open(href, "_blank");
-    } else {
-      await openBrowserAsync(href);
-    }
+    await openBrowserAsync(href);
   };
 
   return <Pressable onPress={handlePress}>{children}</Pressable>;

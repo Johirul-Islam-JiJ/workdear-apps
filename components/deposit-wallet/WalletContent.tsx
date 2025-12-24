@@ -8,9 +8,12 @@ import {
 } from "@/store/features/payment";
 import { PaymentMethod, PaymentSystemsType } from "@/types/payment";
 import { useRouter } from "expo-router";
+import { openBrowserAsync } from "expo-web-browser";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Linking, View } from "react-native";
 import Card from "../libs/Card";
+import BinanceInfo from "./BinanceInfo";
+import Header from "./Header";
 import PaymentDetails from "./PaymentDetails";
 import PaymentMethods from "./PaymentMethods";
 import PaymentMethodToggleButton from "./PaymentMethodToggleButton";
@@ -22,12 +25,21 @@ type Props = {
   title: string;
 };
 
+export type BinanceData = {
+  invoiceUrl: string;
+  walletAddress: string;
+  amount: string;
+  orderId: string;
+  appName: string;
+} | null;
+
 const WalletContent = ({ fee, formType, type, title }: Props) => {
   const [passimpayWithdraw] = useWithdrawWithPassimpayMutation();
   const [passimpayDeposit] = useDepositWithPassimpayMutation();
   const [apayWithdraw] = useApayWithdrawMutation();
   const [apayDeposit] = useApayDepositMutation();
   const [isLoading, setIsLoading] = useState(false);
+  const [binanceData, setBinanceData] = useState<BinanceData>(null);
   const [crypto, setCrypto] = useState(false);
   const toast = useToast();
   const router = useRouter();
@@ -41,11 +53,14 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
     payload.data = payload.data || {};
     payload.data.return_url = config.paymentPageUrl;
     const res = await apayDeposit(payload).unwrap();
-    if (res?.data?.gateway_url) {
-      if (/^https?:\/\//.test(res.data?.gateway_url || "")) {
-        // window.location.href = res.data.gateway_url;
+    const url = res?.data?.gateway_url;
+    if (url) {
+      if (/^https?:\/\//.test(url)) {
+        await openBrowserAsync(url);
       } else {
-        // open payment app;
+        const canOpen = await Linking.canOpenURL(url);
+        if (!canOpen) throw { message: "No Payment App Found" };
+        await Linking.openURL(url);
       }
     } else {
       throw { message: "Payment gateway URL not found" };
@@ -56,7 +71,13 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
     if (!paymentMethod) throw { message: "Please select a payment method" };
     payload.currency_id = paymentMethod.gateway_id;
     const res = await passimpayDeposit(payload).unwrap();
-    // open payment app;
+    setBinanceData({
+      invoiceUrl: res?.invoiceUrl,
+      walletAddress: res.makePaymentAddress,
+      amount: res.makePaymentAmount,
+      orderId: res.order_id,
+      appName: "Binance",
+    });
   }
 
   async function handleApayWithdraw(payload: any) {
@@ -108,14 +129,26 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
       <PaymentMethodToggleButton onChange={setCrypto} value={crypto} />
       <Card>
         {paymentMethod ? (
-          <PaymentDetails
-            setPaymentMethod={setPaymentMethod}
-            paymentMethod={paymentMethod}
-            formType={formType}
-            fee={fee}
-            onSubmit={onSubmit}
-            isPaymentLoading={isLoading}
-          />
+          <View style={{ rowGap: 10 }}>
+            <Header
+              clearPaymentMethod={setPaymentMethod}
+              name={paymentMethod.name}
+              formType={formType}
+            />
+
+            {binanceData ? (
+              <BinanceInfo data={binanceData} />
+            ) : (
+              <PaymentDetails
+                setPaymentMethod={setPaymentMethod}
+                paymentMethod={paymentMethod}
+                formType={formType}
+                fee={fee}
+                onSubmit={onSubmit}
+                isPaymentLoading={isLoading}
+              />
+            )}
+          </View>
         ) : (
           <PaymentMethods
             setPaymentMethod={setPaymentMethod}
