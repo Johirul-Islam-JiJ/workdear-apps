@@ -117,7 +117,10 @@ const WalletContent = ({ fee, formType, type, title }: Props) => {
       }
     } catch (error: any) {
       const message =
-        error?.data?.message || error?.message || "Internal server error";
+        error?.data?.message ||
+        error?.message ||
+        error?.data?.error ||
+        "Internal server error";
       toast.error(message);
     } finally {
       setIsLoading(false);
