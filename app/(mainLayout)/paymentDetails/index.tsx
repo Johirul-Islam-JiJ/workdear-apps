@@ -1,5 +1,6 @@
 import Container from "@/components/common/Container";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
+import AccountDetails from "@/components/paymentDetails/AccountDetails";
 import PaymentDetailsInfo from "@/components/paymentDetails/PaymentDetailsInfo";
 import PaymentStatus from "@/components/paymentDetails/PaymentStatus";
 import useGetPaymentInfo from "@/hooks/useGetPaymentInfo";
@@ -23,6 +24,7 @@ const PaymentDetails = () => {
     <Container>
       <PaymentStatus data={data} />
       <PaymentDetailsInfo data={data} />
+      <AccountDetails data={data} />
     </Container>
   );
 };

@@ -77,6 +77,7 @@ export type PaymentInfo = {
   user: {
     deposit_balance: string;
     earning_balance: string;
+    deposit_in_wallet: string;
     email: string;
     id: number;
     name: string;
