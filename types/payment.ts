@@ -62,16 +62,18 @@ export type ExchangeRate = {
 };
 
 export type PaymentInfo = {
-  amount: string;
-  created_at: string;
-  currency: keyof typeof countryCurrency;
-  deposit_fee: number;
-  deposit_in_wallet: number;
-  order_id: string;
-  payment_system: string;
-  redirect_url: string;
-  status: string;
-  transaction_id: string;
+  transaction_report: {
+    amount: string;
+    created_at: string;
+    currency: string;
+    deposit_fee: number;
+    deposit_in_wallet: number;
+    order_id: string;
+    payment_system: string;
+    redirect_url: null;
+    status: string;
+    transaction_id: string;
+  };
   user: {
     deposit_balance: string;
     earning_balance: string;
