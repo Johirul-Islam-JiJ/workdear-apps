@@ -38,7 +38,7 @@ const Advertisement = () => {
         }}
       >
         <ThemedText>No advertisement found</ThemedText>
-        <Link href="/(mainLayout)/add-advertisement" asChild>
+        <Link href="/(mainLayout)/advertisement/add" asChild>
           <Button
             title="Add your first ads"
             size="small"

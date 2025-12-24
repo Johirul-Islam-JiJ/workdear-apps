@@ -37,7 +37,9 @@ const HomeJobLists = () => {
       {data?.length > 0 && (
         <View style={{ alignItems: "center" }}>
           <Button
-            onPress={() => navigation.navigate("/(mainLayout)/(tabs)/jobs")}
+            onPress={() =>
+              navigation.navigate("/(mainLayout)/(drawer)/(tabs)/jobs")
+            }
             title="View More"
           />
         </View>
