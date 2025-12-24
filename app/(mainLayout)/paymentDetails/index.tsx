@@ -1,5 +1,6 @@
 import Container from "@/components/common/Container";
 import LoadingIndicator from "@/components/libs/LoadingIndicator";
+import PaymentDetailsInfo from "@/components/paymentDetails/PaymentDetailsInfo";
 import PaymentStatus from "@/components/paymentDetails/PaymentStatus";
 import useGetPaymentInfo from "@/hooks/useGetPaymentInfo";
 import { useGetCurrencyConversationDataQuery } from "@/store/features/payment";
@@ -21,6 +22,7 @@ const PaymentDetails = () => {
   return (
     <Container>
       <PaymentStatus data={data} />
+      <PaymentDetailsInfo data={data} />
     </Container>
   );
 };
