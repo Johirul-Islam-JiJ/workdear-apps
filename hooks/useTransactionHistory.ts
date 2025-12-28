@@ -16,6 +16,7 @@ type data = {
   setPage: (page: number) => void;
   status: PaymentStatusType | "";
   setStatus: (status: PaymentStatusType | "") => void;
+  totalPages: number;
 };
 
 export const useTransactionHistory = ({ type }: Params): data => {
@@ -32,6 +33,11 @@ export const useTransactionHistory = ({ type }: Params): data => {
       status,
     });
 
+  const totalPages =
+    type === "deposit"
+      ? deposits?.meta?.last_page
+      : withdrawals?.meta?.last_page || 1;
+
   return {
     transactions: type === "deposit" ? deposits?.data : withdrawals?.data || [],
     isLoading: type === "deposit" ? depositLoading : withdrawalLoading,
@@ -39,5 +45,6 @@ export const useTransactionHistory = ({ type }: Params): data => {
     setPage,
     status,
     setStatus,
+    totalPages,
   };
 };

@@ -2,7 +2,11 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { ThemedView } from "../libs/ThemedView";
 
-type Props = { children: React.ReactNode; rowGap?: number; padding?: number };
+type Props = {
+  children: React.ReactNode;
+  rowGap?: number;
+  padding?: number;
+};
 
 const Container = ({ children, rowGap = 10, padding = 10 }: Props) => {
   return (
