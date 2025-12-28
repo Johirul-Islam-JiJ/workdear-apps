@@ -1,12 +1,14 @@
-import { ThemedText } from "@/components/libs/ThemedText";
-import React from "react";
-import { View } from "react-native";
+import Container from "@/components/common/Container";
+import TabNavigation from "@/components/transactions/TabNavigation";
+import React, { useState } from "react";
 
 const TransactionHistory = () => {
+  const [showDeposit, setShowDeposit] = useState(true);
+
   return (
-    <View>
-      <ThemedText>Transaction History</ThemedText>
-    </View>
+    <Container>
+      <TabNavigation onChange={setShowDeposit} value={showDeposit} />
+    </Container>
   );
 };
 

@@ -7,7 +7,7 @@ type Props = {
   value: boolean;
 };
 
-const PaymentMethodToggleButton = ({ onChange, value }: Props) => {
+const TabNavigation = ({ onChange, value }: Props) => {
   return (
     <View
       style={{
@@ -18,9 +18,9 @@ const PaymentMethodToggleButton = ({ onChange, value }: Props) => {
       }}
     >
       <Button
-        title="E-wallet"
-        variant={!value ? "contained" : "outlined"}
-        onPress={() => onChange(false)}
+        title="Deposit"
+        variant={value ? "contained" : "outlined"}
+        onPress={() => onChange(true)}
         style={{
           borderRadius: 0,
           borderTopLeftRadius: 8,
@@ -28,9 +28,9 @@ const PaymentMethodToggleButton = ({ onChange, value }: Props) => {
         }}
       />
       <Button
-        title="Crypto"
-        variant={value ? "contained" : "outlined"}
-        onPress={() => onChange(true)}
+        title="Withdrawal"
+        variant={!value ? "contained" : "outlined"}
+        onPress={() => onChange(false)}
         style={{
           borderRadius: 0,
           borderTopRightRadius: 8,
@@ -41,4 +41,4 @@ const PaymentMethodToggleButton = ({ onChange, value }: Props) => {
   );
 };
 
-export default PaymentMethodToggleButton;
+export default TabNavigation;
