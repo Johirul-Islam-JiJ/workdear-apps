@@ -29,6 +29,7 @@ const authApi = api.injectEndpoints({
         "deposit-history",
         "playAndEarn",
         "jobs",
+        "ads",
       ],
     }),
     register: builder.mutation({

@@ -14,7 +14,7 @@ import {
 } from "@/types/Advertisement";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 
 const Advertisement = () => {
   const [status, setStatus] = useState("");
@@ -29,23 +29,25 @@ const Advertisement = () => {
 
   if (ads.length === 0 && status === "") {
     return (
-      <View
-        style={{
-          height: Dimensions.get("screen").height - 140,
-          justifyContent: "center",
-          alignItems: "center",
-          rowGap: 5,
-        }}
-      >
-        <ThemedText>No advertisement found</ThemedText>
-        <Link href="/(mainLayout)/advertisement/add" asChild>
-          <Button
-            title="Add your first ads"
-            size="small"
-            endIcon="arrow-up-right-box-outline"
-          />
-        </Link>
-      </View>
+      <Container>
+        <View
+          style={{
+            gap: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "50%",
+          }}
+        >
+          <ThemedText>No advertisement found</ThemedText>
+          <Link href="/(mainLayout)/advertisement/add" asChild>
+            <Button
+              title="Add your first ads"
+              size="small"
+              endIcon="arrow-up-right-box-outline"
+            />
+          </Link>
+        </View>
+      </Container>
     );
   }
 
