@@ -27,7 +27,7 @@ export const SignUpSchema = yup.object().shape({
 
 export const EditProfileSchema = yup.object().shape({
   name: yup.string(),
-  age: yup.number().typeError("Age must be a number"),
+  age: yup.string().matches(/^\d*$/, "Age must be a number"),
   email: yup.string().email("Invalid email"),
   phone: yup.string(),
   country: yup.string(),

@@ -8,6 +8,7 @@ interface InputProps extends TextInputProps {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   height?: DimensionValue | undefined;
+  EndAdorment?: React.ReactNode;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   endIcon = null,
   height = 45,
   style,
+  EndAdorment,
   ...props
 }) => {
   const borderColor = useThemeColor(error ? "error" : "border");
@@ -52,6 +54,7 @@ const Input: React.FC<InputProps> = ({
             {endIcon}
           </View>
         )}
+        {EndAdorment && EndAdorment}
       </View>
       {error && (
         <ThemedText style={{ marginTop: 2 }} variant="small" color="error">

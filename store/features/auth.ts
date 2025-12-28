@@ -156,6 +156,13 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["profile"],
     }),
+    sendVarificationMail: builder.mutation({
+      query: () => ({
+        url: "/sendVerificationEmail",
+        method: "POST",
+      }),
+      invalidatesTags: ["profile"],
+    }),
   }),
 });
 
@@ -174,4 +181,5 @@ export const {
   useReferredDataQuery,
   useAccountDeleteMutation,
   useUpdateAccountDeleteMutation,
+  useSendVarificationMailMutation,
 } = authApi;
