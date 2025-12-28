@@ -61,6 +61,12 @@ export type ExchangeRate = {
   updated_at: string;
 };
 
+export enum PaymentStatusType {
+  pending = "Pending",
+  completed = "Success",
+  failed = "Failed",
+}
+
 export type PaymentInfo = {
   transaction_report: {
     amount: string;
@@ -71,7 +77,7 @@ export type PaymentInfo = {
     order_id: string;
     payment_system: string;
     redirect_url: null;
-    status: string;
+    status: PaymentStatusType;
     transaction_id: string;
   };
   user: {
@@ -82,4 +88,16 @@ export type PaymentInfo = {
     id: number;
     name: string;
   };
+};
+
+export type TransactionHistory = {
+  amount: string;
+  created_at: string;
+  currency: string;
+  id: number;
+  payment_system: string;
+  processed_by: string;
+  status: PaymentStatusType;
+  transaction_id: string;
+  type: PaymentMethodsType;
 };

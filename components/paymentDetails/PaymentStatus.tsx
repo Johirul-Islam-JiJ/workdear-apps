@@ -9,7 +9,7 @@ import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
 const PaymentStatus = ({ data }: { data: PaymentInfo }) => {
-  const paymentStatus = data.transaction_report.status;
+  const paymentStatus = data.transaction_report?.status?.toLocaleLowerCase();
 
   switch (paymentStatus) {
     case "pending":
@@ -51,6 +51,7 @@ const PaymentStatus = ({ data }: { data: PaymentInfo }) => {
         </Card>
       );
     case "success":
+    case "accepted":
       return (
         <Card style={{ rowGap: 0 }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>

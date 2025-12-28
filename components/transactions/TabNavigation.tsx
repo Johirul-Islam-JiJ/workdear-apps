@@ -1,10 +1,11 @@
+import { TransactionType } from "@/app/(mainLayout)/(drawer)/transaction-history";
 import React from "react";
 import { View } from "react-native";
 import Button from "../libs/Button";
 
 type Props = {
-  onChange: (value: boolean) => void;
-  value: boolean;
+  onChange: (value: TransactionType) => void;
+  value: TransactionType;
 };
 
 const TabNavigation = ({ onChange, value }: Props) => {
@@ -19,8 +20,8 @@ const TabNavigation = ({ onChange, value }: Props) => {
     >
       <Button
         title="Deposit"
-        variant={value ? "contained" : "outlined"}
-        onPress={() => onChange(true)}
+        variant={value === "deposit" ? "contained" : "outlined"}
+        onPress={() => onChange("deposit")}
         style={{
           borderRadius: 0,
           borderTopLeftRadius: 8,
@@ -29,8 +30,8 @@ const TabNavigation = ({ onChange, value }: Props) => {
       />
       <Button
         title="Withdrawal"
-        variant={!value ? "contained" : "outlined"}
-        onPress={() => onChange(false)}
+        variant={value === "withdrawal" ? "contained" : "outlined"}
+        onPress={() => onChange("withdrawal")}
         style={{
           borderRadius: 0,
           borderTopRightRadius: 8,
