@@ -6,6 +6,7 @@ import {
 } from "@/store/features/auth";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { View } from "react-native";
 import AppIcon from "../libs/AppIcon";
 import Button from "../libs/Button";
 import Card from "../libs/Card";
@@ -63,6 +64,49 @@ const AccountDeactivation = () => {
             </AppIcon>
           }
         />
+      )}
+
+      {user?.deactivation && user?.deactivation?.status !== "CANCEL" && (
+        <View style={{ gap: 5 }}>
+          <ThemedText>
+            Your account is{" "}
+            <ThemedText color="warning" variant="body2">
+              {user.deactivation.status}
+            </ThemedText>{" "}
+            for deactivation
+          </ThemedText>
+
+          <Card color="border">
+            <ThemedText>{user.deactivation.reason_for_deactivation}</ThemedText>
+          </Card>
+
+          <ThemedText variant="small">
+            Requested at:{" "}
+            {new Date(user.deactivation.created_at).toLocaleDateString(
+              "en-GB",
+              { day: "numeric", month: "long", year: "numeric" }
+            )}
+          </ThemedText>
+          {user.deactivation.status === "REJECT" && (
+            <Card color="border">
+              <ThemedText>
+                Rejected reason: {user.deactivation.admin_comment}
+              </ThemedText>
+            </Card>
+          )}
+          <View style={{ flexDirection: "row", gap: 5, flexWrap: "wrap" }}>
+            <Button
+              onPress={handleCancelDeleteAccount}
+              loading={isCanceling}
+              color="error"
+              title="Cancel Deactivation"
+            />
+            <Button
+              onPress={() => setShowDeleteModal(1)}
+              title="Edit Deactivation"
+            />
+          </View>
+        </View>
       )}
 
       <DeleteAccountModal
