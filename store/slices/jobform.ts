@@ -36,8 +36,6 @@ const initialState: JobPostForm = {
 type JobFormState = {
   jobPostFirstForm: JobPostForm["jobPostFirstForm"];
   jobPostFinalForm: JobPostForm["jobPostFinalForm"];
-  isUpdate: boolean;
-  jobId: number | null;
 };
 
 export const jobForm = createSlice({
@@ -45,8 +43,6 @@ export const jobForm = createSlice({
   initialState: {
     jobPostFirstForm: initialState.jobPostFirstForm,
     jobPostFinalForm: initialState.jobPostFinalForm,
-    isUpdate: false,
-    jobId: null,
   } as JobFormState,
   reducers: {
     setJobPostFirstForm: (state, action) => {
@@ -59,21 +55,10 @@ export const jobForm = createSlice({
       state.jobPostFinalForm = initialState.jobPostFinalForm;
       state.jobPostFirstForm = initialState.jobPostFirstForm;
     },
-    setIsUpdate: (state, action) => {
-      state.isUpdate = action.payload;
-    },
-    setJobId: (state, action) => {
-      state.jobId = action.payload;
-    },
   },
 });
 
-export const {
-  setJobPostFirstForm,
-  setJobPostFinalForm,
-  setClearJobPostForm,
-  setIsUpdate,
-  setJobId,
-} = jobForm.actions;
+export const { setJobPostFirstForm, setJobPostFinalForm, setClearJobPostForm } =
+  jobForm.actions;
 
 export default jobForm.reducer;

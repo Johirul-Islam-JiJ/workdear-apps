@@ -106,6 +106,26 @@ const Controller = ({
           }
         />
       )}
+
+      {status === JobStatus.DRAFT && (
+        <Link
+          asChild
+          href={{
+            pathname: "/(mainLayout)/jobs/edit",
+            params: { slug: job.slug },
+          }}
+        >
+          <Button
+            title={
+              <AppIcon color="white">
+                <Feather name="edit" />
+              </AppIcon>
+            }
+            size="small"
+          />
+        </Link>
+      )}
+
       {/REJECTED|COMPLETED|CLOSED|DRAFT/.test(status) && (
         <Button
           size="small"

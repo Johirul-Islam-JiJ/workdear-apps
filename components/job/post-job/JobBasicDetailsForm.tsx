@@ -4,6 +4,7 @@ import Button from "@/components/libs/Button";
 import { DropdownMenu } from "@/components/libs/DropdownMenu";
 import Input from "@/components/libs/Input";
 import { ThemedText } from "@/components/libs/ThemedText";
+import { config } from "@/config/config";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { JobBasicDetailsSchema } from "@/schema/jobs";
 import { setJobPostFirstForm } from "@/store/slices/jobform";
@@ -440,9 +441,17 @@ const JobBasicDetailsForm = ({ step, setStep }: Props) => {
                 source={{ uri: image }}
                 style={{ height: 100, borderRadius: 10, marginTop: 5 }}
               />
-            ) : jobPostFirstForm.thumbnail?.uri ? (
+            ) : typeof jobPostFirstForm.thumbnail !== "string" &&
+              jobPostFirstForm.thumbnail?.uri ? (
               <Image
                 source={{ uri: jobPostFirstForm.thumbnail.uri }}
+                style={{ height: 100, borderRadius: 10, marginTop: 5 }}
+              />
+            ) : typeof jobPostFirstForm.thumbnail == "string" ? (
+              <Image
+                source={{
+                  uri: config.fileBaseUrl + jobPostFirstForm.thumbnail,
+                }}
                 style={{ height: 100, borderRadius: 10, marginTop: 5 }}
               />
             ) : null}

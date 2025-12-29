@@ -191,7 +191,7 @@ export interface JobPostFirstForm {
   steps: string;
   required_proofs: string;
   question_condition: string;
-  thumbnail: ImagePickerAsset | undefined;
+  thumbnail: ImagePickerAsset | string | undefined;
 }
 
 export interface JobPostFinalForm {

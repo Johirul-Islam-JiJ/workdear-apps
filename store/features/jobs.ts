@@ -75,7 +75,7 @@ export const jobsApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["jobs"],
+      invalidatesTags: ["jobs", "single-jobs"],
     }),
     updateDaysAndWorker: builder.mutation({
       query: (data) => ({

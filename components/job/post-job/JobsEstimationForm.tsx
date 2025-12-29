@@ -5,12 +5,15 @@ import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import useGetCostFromCostCenter from "@/hooks/useGetCostFromCostCenter";
-import { useCreateJobMutation } from "@/store/features/jobs";
+import { useToast } from "@/hooks/useToast";
+import {
+  useCreateJobMutation,
+  useUpdateJobMutation,
+} from "@/store/features/jobs";
 import {
   setClearJobPostForm,
   setJobPostFinalForm,
 } from "@/store/slices/jobform";
-import { showNotification } from "@/store/slices/notification";
 import { CostName } from "@/types/CostCenter";
 import { JobPayload } from "@/types/Job";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,14 +35,17 @@ import * as yup from "yup";
 type Props = {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  jobId?: number;
 };
 
-const JobsEstimationForm = ({ step, setStep }: Props) => {
+const JobsEstimationForm = ({ step, setStep, jobId }: Props) => {
   const jobPostFee = useGetCostFromCostCenter(CostName.job_post_fee_percentage);
   const jobSSfee = useGetCostFromCostCenter(CostName.job_post_screenshot_fee);
-  const [createJob, { isLoading }] = useCreateJobMutation();
+  const [createJob, { isLoading: isCreating }] = useCreateJobMutation();
+  const [updateJosb, { isLoading: isUpdating }] = useUpdateJobMutation();
   const { generalData } = useAppSelector((state) => state.settings);
   const navigation = useRouter();
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const { jobPostFinalForm, jobPostFirstForm } = useAppSelector(
     (state) => state.jobForm
@@ -138,34 +144,32 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
             formData.append("country_ids[]", String(countryId));
           });
         } else if (key === "thumbnail" && value) {
-          const file = value as ImagePickerAsset;
-          formData.append("thumbnail", {
-            uri: file.uri,
-            type: file.mimeType || "image/jpeg",
-            name: file.fileName || `upload_${Date.now()}.jpg`,
-          } as any);
+          if (typeof value !== "string") {
+            const file = value as ImagePickerAsset;
+            formData.append("thumbnail", {
+              uri: file.uri,
+              type: file.mimeType || "image/jpeg",
+              name: file.fileName || `upload_${Date.now()}.jpg`,
+            } as any);
+          }
         } else if (value !== undefined && value !== null) {
           formData.append(key, String(value));
         }
       });
 
-      await createJob(formData).unwrap();
-
-      dispatch(
-        showNotification({
-          message: "Job created successfully",
-          type: "success",
-        })
-      );
+      if (jobId) {
+        formData.append("job_id", jobId.toString());
+        await updateJosb(formData).unwrap();
+        toast.success("Job updated successfully");
+      } else {
+        await createJob(formData).unwrap();
+        toast.success("Job created successfully");
+      }
       navigation.navigate("/(mainLayout)/(drawer)/my-jobs");
       dispatch(setClearJobPostForm());
     } catch (error: any) {
-      dispatch(
-        showNotification({
-          message: error.data.message || "Internal server error",
-          type: "error",
-        })
-      );
+      console.log(error);
+      toast.error(error?.data?.message || "Internal server error");
     }
   }
 
@@ -392,7 +396,7 @@ const JobsEstimationForm = ({ step, setStep }: Props) => {
             style={{ flex: 1 }}
           />
           <Button
-            loading={isLoading}
+            loading={isCreating || isUpdating}
             onPress={handleSubmit(onSubmit)}
             title="Submit"
             style={{ flex: 1 }}
