@@ -139,7 +139,39 @@ export const stackScreens = {
   },
   myJobDetails: {
     name: "my-jobs/[slug]/index",
+    title: "Job submissions",
+  },
+  jobDetails: {
+    name: "jobs/[slug]/index",
     title: "Job details",
+  },
+  jobView: {
+    name: "jobs/details/[slug]/index",
+    title: "Job details",
+  },
+  myJobView: {
+    name: "my-jobs/job/[slug]/index",
+    title: "Job details",
+  },
+  viewMyTask: {
+    name: "my-work/[id]/index",
+    title: "Work details",
+  },
+  editJob: {
+    name: "jobs/edit/index",
+    title: "Edit job",
+  },
+  taskReview: {
+    name: "my-jobs/job-review/[id]/index",
+    title: "Task review",
+  },
+  addAds: {
+    name: "advertisement/add/index",
+    title: "Add ads",
+  },
+  editAds: {
+    name: "advertisement/update/index",
+    title: "Edit ads",
   },
 };
 

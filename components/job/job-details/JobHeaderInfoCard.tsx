@@ -37,7 +37,7 @@ const JobHeaderInfoCard = ({ job }: { job: Job }) => {
       <DonutChat
         segments={[{ value: cutoutScore, color: primarydark }]}
         description={cutoutDescription}
-        width={40}
+        width={50}
         stockWidth={10}
       />
       <ThemedText variant="body2">${job.pay_per_task}</ThemedText>

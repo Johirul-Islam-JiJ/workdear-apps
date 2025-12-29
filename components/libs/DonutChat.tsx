@@ -95,7 +95,7 @@ export default function DonutChat({
       </Svg>
 
       <View style={styles.label}>
-        <ThemedText>{description}</ThemedText>
+        <ThemedText variant="small">{description}</ThemedText>
       </View>
     </View>
   );
