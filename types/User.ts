@@ -107,6 +107,21 @@ type Country = {
   currency: string;
 };
 
+export type UserDeactivation = {
+  admin_comment: string | null;
+  created_at: string;
+  id: number;
+  reason_for_deactivation: string;
+  status: string;
+  updated_at: string;
+  userData: {
+    id: number;
+    name: string;
+    profile_image: string | null;
+  };
+  user_id: string;
+};
+
 export interface User {
   about_me: string | null;
   active: string;
@@ -114,7 +129,7 @@ export interface User {
   country: Country;
   country_id: string | null;
   created_at: string;
-  deactivation: string | null;
+  deactivation: null | UserDeactivation;
   deleted_at: string | null;
   email: string;
   email_verified_at: string | null;
