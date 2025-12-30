@@ -1,6 +1,4 @@
 import React from "react";
-import { View } from "react-native";
-import { ThemedView } from "../libs/ThemedView";
 import NavBar from "./NavBar";
 
 const ScreenHeader = ({
@@ -10,16 +8,7 @@ const ScreenHeader = ({
   route: string;
   openDrawer?: boolean;
 }) => {
-  return (
-    <View>
-      <ThemedView
-        color="primarydark"
-        darkColor="primarydarker"
-        style={{ height: 30 }}
-      />
-      <NavBar route={route} openDrawer={openDrawer} />
-    </View>
-  );
+  return <NavBar route={route} openDrawer={openDrawer} />;
 };
 
 export default ScreenHeader;
