@@ -3,13 +3,7 @@ import ScreenHeader from "@/components/common/ScreenHeader";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Tabs } from "expo-router";
 import React from "react";
-import {
-  Animated,
-  Platform,
-  StyleProp,
-  useColorScheme,
-  ViewStyle,
-} from "react-native";
+import { useColorScheme } from "react-native";
 
 export default function TabLayout() {
   const tabActiveColor = useThemeColor("primarydark");
@@ -20,25 +14,18 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const dark = colorScheme === "dark";
 
-  const tabBarStyle: Animated.WithAnimatedValue<StyleProp<ViewStyle>> =
-    Platform.select({
-      ios: {
-        position: "absolute",
-        backgroundColor: tabBarBackgroundColor,
-        shadowColor: dark ? whiteColor : blackColor,
-      },
-      default: {
-        backgroundColor: tabBarBackgroundColor,
-        shadowColor: dark ? whiteColor : blackColor,
-      },
-    });
-
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: tabActiveColor,
         tabBarInactiveTintColor: dark ? whiteColor : grayColor,
-        tabBarStyle: tabBarStyle,
+        tabBarStyle: {
+          height: 55,
+          paddingBottom: 0,
+          marginBottom: 0,
+          backgroundColor: tabBarBackgroundColor,
+          shadowColor: dark ? whiteColor : blackColor,
+        },
         header: (props) => (
           <ScreenHeader route={props.options.title as string} />
         ),
