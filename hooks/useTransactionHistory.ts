@@ -35,7 +35,7 @@ export const useTransactionHistory = ({ type }: Params): data => {
 
   const totalPages =
     type === "deposit"
-      ? deposits?.meta?.last_page
+      ? deposits?.meta?.last_page || 1
       : withdrawals?.meta?.last_page || 1;
 
   return {

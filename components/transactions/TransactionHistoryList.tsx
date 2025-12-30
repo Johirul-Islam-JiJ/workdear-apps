@@ -5,7 +5,7 @@ import { ThemedText } from "../libs/ThemedText";
 import TransactionHistoryCard from "./TransactionHistoryCard";
 
 const TransactionHistoryList = ({ data }: { data: TransactionHistory[] }) => {
-  if (data.length === 0)
+  if (!data?.length)
     return (
       <View style={{ alignItems: "center", marginVertical: 20 }}>
         <ThemedText color="gray.800" darkColor="gray.300" variant="body">

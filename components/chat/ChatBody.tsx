@@ -28,26 +28,15 @@ const ChatBody = ({ messages, isTyping }: Props) => {
   }, [messages]);
 
   return (
-    <>
-      <FlatList
-        ref={listRef}
-        data={messages}
-        keyExtractor={(item, index) => item._id || index.toString()}
-        renderItem={({ item, index }) => (
-          <MessageCard message={item} isLast={index === messages.length - 1} />
-        )}
-        contentContainerStyle={{ rowGap: 5, padding: 10 }}
-        inverted={false}
-        windowSize={21}
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={10}
-        updateCellsBatchingPeriod={50}
-        initialNumToRender={10}
-        style={{ flex: 1 }}
-        onContentSizeChange={() => {
-          listRef.current?.scrollToEnd({ animated: false });
-        }}
-      />
+    <View style={{ rowGap: 5, padding: 10 }}>
+      {messages.map((message, index) => (
+        <MessageCard
+          key={index}
+          message={message}
+          isLast={index === messages.length - 1}
+        />
+      ))}
+
       {isTyping && (
         <View
           style={{
@@ -59,7 +48,7 @@ const ChatBody = ({ messages, isTyping }: Props) => {
           <LoadingIndicator />
         </View>
       )}
-    </>
+    </View>
   );
 };
 

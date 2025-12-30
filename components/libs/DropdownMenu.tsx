@@ -95,6 +95,7 @@ export const DropdownMenu: React.FC<DropdownProps> = ({
           borderWidth: border ? 1 : 0,
           borderColor,
           paddingHorizontal: 10,
+          height: 47,
         }}
       />
 

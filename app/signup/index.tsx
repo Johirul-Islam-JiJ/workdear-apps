@@ -17,28 +17,33 @@ const SignUp = () => {
   return (
     <ThemedView color="card" style={{ flex: 1 }}>
       <KeyboardAvoidingView
-        style={{ flexGrow: 1 }}
+        style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView
             contentContainerStyle={{
-              flex: 1,
+              flexGrow: 1,
             }}
           >
+            {/* Header */}
             <Header
-              subTitle="Sign up with your real information"
               title="Let's get started"
+              subTitle="Sign up with your real information"
             />
+
+            {/* Form */}
             <SignUpForm />
+
+            {/* Footer */}
             <View
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
                 marginTop: "auto",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
                 gap: 4,
-                padding: 10,
+                paddingVertical: 16,
               }}
             >
               <ThemedText>Already have an account?</ThemedText>

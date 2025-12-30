@@ -26,7 +26,11 @@ const TransactionHistory = () => {
   return (
     <Container>
       <TabNavigation onChange={setType} value={type} />
-      <TransactionFilter status={status} setStatus={setStatus} />
+      <TransactionFilter
+        status={status}
+        setStatus={setStatus}
+        dataLength={transactions?.length || 0}
+      />
       <TransactionHistoryList data={transactions} />
       <Pagination
         currentPage={page}

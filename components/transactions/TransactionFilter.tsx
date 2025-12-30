@@ -6,9 +6,10 @@ import { DropdownMenu } from "../libs/DropdownMenu";
 type Props = {
   status: PaymentStatusType | "";
   setStatus: (status: PaymentStatusType | "") => void;
+  dataLength: number;
 };
 
-const TransactionFilter = ({ status, setStatus }: Props) => {
+const TransactionFilter = ({ status, setStatus, dataLength }: Props) => {
   const statusOptions = [
     { label: "All", value: "" },
     { label: "Pending", value: "pending" },
@@ -20,6 +21,8 @@ const TransactionFilter = ({ status, setStatus }: Props) => {
     { label: "Hold", value: "hold" },
     { label: "Refund", value: "refund" },
   ];
+
+  if (dataLength === 0) return null;
 
   return (
     <View>

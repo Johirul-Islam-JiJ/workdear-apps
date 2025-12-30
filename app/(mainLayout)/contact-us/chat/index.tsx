@@ -1,7 +1,7 @@
 import ChatContent from "@/components/chat/ChatContent";
 import { ThemedView } from "@/components/libs/ThemedView";
 import React, { useEffect, useState } from "react";
-import { Dimensions, Keyboard, View } from "react-native";
+import { Keyboard } from "react-native";
 
 const Chat = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -26,15 +26,11 @@ const Chat = () => {
   }, []);
 
   return (
-    <ThemedView style={{ flex: 1 }} color="background">
-      <View
-        style={{
-          height: Dimensions.get("screen").height - 85,
-          paddingBottom: keyboardHeight,
-        }}
-      >
-        <ChatContent />
-      </View>
+    <ThemedView
+      color="background"
+      style={{ flex: 1, marginBottom: keyboardHeight }}
+    >
+      <ChatContent />
     </ThemedView>
   );
 };

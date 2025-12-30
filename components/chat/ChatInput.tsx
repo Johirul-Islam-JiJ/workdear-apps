@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
     rowGap: 5,
+    marginTop: "auto",
   },
   wrapper: {
     flexDirection: "row",
