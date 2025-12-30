@@ -109,17 +109,45 @@ export const AccountVerificationSchema = yup.object().shape({
     .mixed()
     .required("Front image is required")
     .test(
+      "fileType",
+      "Front image must be in jpg,jpeg or png format",
+      (value: any) => {
+        if (!value) return false;
+        if (value) {
+          return (
+            value.mimeType === "image/jpeg" ||
+            value.mimeType === "image/png" ||
+            value.mimeType === "image/jpg"
+          );
+        }
+      }
+    )
+    .test(
       "fileSize",
       "Front image must be less than 2048KB",
-      (value: any) => value && value.size <= 2048 * 1024
+      (value: any) => value && value.fileSize <= 2048 * 1024
     ),
   selfieImage: yup
     .mixed()
     .required("Selfie image is required")
     .test(
+      "fileType",
+      "Selfie image must be in jpg,jpeg or png format",
+      (value: any) => {
+        if (!value) return false;
+        if (value) {
+          return (
+            value.mimeType === "image/jpeg" ||
+            value.mimeType === "image/png" ||
+            value.mimeType === "image/jpg"
+          );
+        }
+      }
+    )
+    .test(
       "fileSize",
       "Selfie image must be less than 2048KB",
-      (value: any) => value && value.size <= 2048 * 1024
+      (value: any) => value && value.fileSize <= 2048 * 1024
     ),
 });
 

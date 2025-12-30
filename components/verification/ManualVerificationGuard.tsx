@@ -8,8 +8,7 @@ import VerificationRejected from "./VerificationRejected";
 const ManualVerificationGuard = () => {
   const { user } = useAppSelector((state) => state.user);
 
-  //   const verification_status = user?.verificationStatus;
-  const verification_status = "REJECTED";
+  const verification_status = user?.verificationStatus;
   return (
     <>
       {verification_status === "PENDING" ? (
