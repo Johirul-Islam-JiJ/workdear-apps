@@ -7,7 +7,7 @@ import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Checkbox from "expo-checkbox";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, View } from "react-native";
@@ -57,186 +57,165 @@ const SignUpForm = () => {
   }
 
   return (
-    <View style={{ padding: 10 }}>
-      <View style={{ gap: 7 }}>
-        <View>
-          <ThemedText>Full Name</ThemedText>
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Enter your full name"
-                value={value}
-                onChangeText={onChange}
-                error={errors.name?.message}
-              />
-            )}
-          />
-        </View>
-        <View>
-          <ThemedText>Email</ThemedText>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Enter your email"
-                value={value}
-                onChangeText={onChange}
-                error={errors.email?.message}
-                startIcon={
-                  <Fontisto name="email" size={20} color={emailIconColor} />
-                }
-              />
-            )}
-          />
-        </View>
-        <View>
-          <ThemedText>Password</ThemedText>
-          <Controller
-            name="password"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Enter the password"
-                secureTextEntry={!showPasswoard}
-                error={errors.password?.message}
-                value={value}
-                onChangeText={onChange}
-                startIcon={
-                  <Feather name="lock" size={20} color={passwordIconColor} />
-                }
-                endIcon={
-                  <Feather
-                    onPress={() => setShowPassword(!showPasswoard)}
-                    name={showPasswoard ? "eye-off" : "eye"}
-                    size={20}
-                    color={passwordIconColor}
-                  />
-                }
-              />
-            )}
-          />
-        </View>
-
-        <View>
-          <ThemedText>Confirm Password</ThemedText>
-          <Controller
-            name="password_confirmation"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Re-enter the password"
-                secureTextEntry={!showConfirmPasswoard}
-                error={errors.password_confirmation?.message}
-                value={value}
-                onChangeText={onChange}
-                startIcon={
-                  <Feather name="lock" size={20} color={passwordIconColor} />
-                }
-                endIcon={
-                  <Feather
-                    onPress={() =>
-                      setShowConfirmPassword(!showConfirmPasswoard)
-                    }
-                    name={showConfirmPasswoard ? "eye-off" : "eye"}
-                    size={20}
-                    color={passwordIconColor}
-                  />
-                }
-              />
-            )}
-          />
-        </View>
-
-        <CountrySelectField
+    <View style={{ gap: 7, padding: 10 }}>
+      <View>
+        <ThemedText>Full Name</ThemedText>
+        <Controller
           control={control}
-          setValue={setValue}
-          errors={errors}
+          name="name"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Enter your full name"
+              value={value}
+              onChangeText={onChange}
+              error={errors.name?.message}
+            />
+          )}
         />
-
-        <View>
-          <ThemedText>Manager ID</ThemedText>
-          <Controller
-            name="manager_id"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                placeholder="Enter the manager ID"
-                error={errors.manager_id?.message}
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-        </View>
-
-        <View>
-          <Controller
-            name="acceptedTerms"
-            control={control}
-            render={({ field: { onChange, value } }) => (
-              <Pressable
-                onPress={() => onChange(!value)}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  gap: 10,
-                  width: "95%",
-                }}
-              >
-                <Checkbox
-                  style={{ borderColor: checkboxBorderColor, marginTop: 5 }}
-                  value={value}
-                  onValueChange={onChange}
-                  color={value ? checkboxColor : undefined}
+      </View>
+      <View>
+        <ThemedText>Email</ThemedText>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Enter your email"
+              value={value}
+              onChangeText={onChange}
+              error={errors.email?.message}
+              startIcon={
+                <Fontisto name="email" size={20} color={emailIconColor} />
+              }
+            />
+          )}
+        />
+      </View>
+      <View>
+        <ThemedText>Password</ThemedText>
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Enter the password"
+              secureTextEntry={!showPasswoard}
+              error={errors.password?.message}
+              value={value}
+              onChangeText={onChange}
+              startIcon={
+                <Feather name="lock" size={20} color={passwordIconColor} />
+              }
+              endIcon={
+                <Feather
+                  onPress={() => setShowPassword(!showPasswoard)}
+                  name={showPasswoard ? "eye-off" : "eye"}
+                  size={20}
+                  color={passwordIconColor}
                 />
-                <ThemedText>
-                  I agree to Workdear's{" "}
-                  <ThemedText underline>Terms of Service</ThemedText> and{" "}
-                  <ThemedText underline>Privacy Policy</ThemedText>
-                </ThemedText>
-              </Pressable>
-            )}
-          />
-        </View>
-
-        {error && isFetchBaseQueryError(error) && (
-          <ThemedText
-            variant="small"
-            color="error"
-            style={{ textAlign: "center" }}
-          >
-            {error.data.message}
-          </ThemedText>
-        )}
-
-        <Button
-          style={{ marginTop: 15 }}
-          onPress={handleSubmit(onSubmit)}
-          loading={isLoading}
-          title="Sign up"
-          variant="contained"
+              }
+            />
+          )}
         />
       </View>
 
-      <View
-        style={{
-          alignItems: "center",
-          flexDirection: "row",
-          gap: 4,
-          justifyContent: "center",
-          marginTop: 10,
-        }}
-      >
-        <ThemedText>Already have an account?</ThemedText>
-        <Link href="/signin">
-          <ThemedText variant="link" underline>
-            Login
-          </ThemedText>
-        </Link>
+      <View>
+        <ThemedText>Confirm Password</ThemedText>
+        <Controller
+          name="password_confirmation"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Re-enter the password"
+              secureTextEntry={!showConfirmPasswoard}
+              error={errors.password_confirmation?.message}
+              value={value}
+              onChangeText={onChange}
+              startIcon={
+                <Feather name="lock" size={20} color={passwordIconColor} />
+              }
+              endIcon={
+                <Feather
+                  onPress={() => setShowConfirmPassword(!showConfirmPasswoard)}
+                  name={showConfirmPasswoard ? "eye-off" : "eye"}
+                  size={20}
+                  color={passwordIconColor}
+                />
+              }
+            />
+          )}
+        />
       </View>
+
+      <CountrySelectField
+        control={control}
+        setValue={setValue}
+        errors={errors}
+      />
+
+      <View>
+        <ThemedText>Manager ID</ThemedText>
+        <Controller
+          name="manager_id"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Enter the manager ID"
+              error={errors.manager_id?.message}
+              value={value}
+              onChangeText={onChange}
+            />
+          )}
+        />
+      </View>
+
+      <View>
+        <Controller
+          name="acceptedTerms"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Pressable
+              onPress={() => onChange(!value)}
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                gap: 10,
+                width: "95%",
+              }}
+            >
+              <Checkbox
+                style={{ borderColor: checkboxBorderColor, marginTop: 5 }}
+                value={value}
+                onValueChange={onChange}
+                color={value ? checkboxColor : undefined}
+              />
+              <ThemedText>
+                I agree to Workdear's{" "}
+                <ThemedText underline>Terms of Service</ThemedText> and{" "}
+                <ThemedText underline>Privacy Policy</ThemedText>
+              </ThemedText>
+            </Pressable>
+          )}
+        />
+      </View>
+
+      {error && isFetchBaseQueryError(error) && (
+        <ThemedText
+          variant="small"
+          color="error"
+          style={{ textAlign: "center" }}
+        >
+          {error.data.message}
+        </ThemedText>
+      )}
+
+      <Button
+        style={{ marginTop: 15 }}
+        onPress={handleSubmit(onSubmit)}
+        loading={isLoading}
+        title="Sign up"
+        variant="contained"
+      />
     </View>
   );
 };
