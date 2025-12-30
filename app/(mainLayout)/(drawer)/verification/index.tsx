@@ -1,11 +1,11 @@
 import Container from "@/components/common/Container";
-import { ThemedText } from "@/components/libs/ThemedText";
+import InstantVerification from "@/components/verification/InstantVerification";
 import React from "react";
 
 const Verification = () => {
   return (
     <Container>
-      <ThemedText>Verification</ThemedText>
+      <InstantVerification />
     </Container>
   );
 };
