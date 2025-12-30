@@ -2,20 +2,30 @@ import Header from "@/components/auth/Header";
 import SignUpForm from "@/components/auth/SignUpForm";
 import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 const SignUp = () => {
   return (
     <ThemedView color="card" style={{ flex: 1 }}>
-      <Header
-        subTitle="Sign up with your real information"
-        title="Let's get started"
-      />
       <KeyboardAvoidingView
+        style={{ flexGrow: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
       >
-        <SignUpForm />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView>
+            <Header
+              subTitle="Sign up with your real information"
+              title="Let's get started"
+            />
+            <SignUpForm />
+          </ScrollView>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ThemedView>
   );

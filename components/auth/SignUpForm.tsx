@@ -10,7 +10,7 @@ import Checkbox from "expo-checkbox";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Pressable, ScrollView, View } from "react-native";
+import { Pressable, View } from "react-native";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
@@ -57,15 +57,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        flexGrow: 1,
-        justifyContent: "space-between",
-        paddingHorizontal: 15,
-        paddingVertical: 20,
-      }}
-    >
+    <View style={{ padding: 10 }}>
       <View style={{ gap: 7 }}>
         <View>
           <ThemedText>Full Name</ThemedText>
@@ -224,7 +216,7 @@ const SignUpForm = () => {
           style={{ marginTop: 15 }}
           onPress={handleSubmit(onSubmit)}
           loading={isLoading}
-          title="Sign Up"
+          title="Sign up"
           variant="contained"
         />
       </View>
@@ -245,7 +237,7 @@ const SignUpForm = () => {
           </ThemedText>
         </Link>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
