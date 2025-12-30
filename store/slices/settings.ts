@@ -8,6 +8,7 @@ export interface SettingsState {
   advertisement: Advertisement[] | [];
   generalData: AppConfig;
   costCenter: CostCenter[] | [];
+  handleKeyboard: boolean;
 }
 
 const settings = createSlice({
@@ -18,6 +19,7 @@ const settings = createSlice({
     advertisement: [],
     generalData: {},
     costCenter: [],
+    handleKeyboard: false,
   } as SettingsState,
   reducers: {
     toggleSideBar: (state, action) => {
@@ -40,6 +42,9 @@ const settings = createSlice({
     setCostCenter: (state, action) => {
       state.costCenter = action.payload;
     },
+    setHandleKeyboard: (state, action) => {
+      state.handleKeyboard = action.payload;
+    },
   },
 });
 
@@ -49,5 +54,6 @@ export const {
   setAdvertisement,
   setGeneralData,
   setCostCenter,
+  setHandleKeyboard,
 } = settings.actions;
 export default settings.reducer;

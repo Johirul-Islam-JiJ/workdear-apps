@@ -12,43 +12,38 @@ type Props = {
 const ChatBody = ({ messages, isTyping }: Props) => {
   const listRef = useRef<FlatList>(null);
 
-  const initial = useRef(true);
-
   useEffect(() => {
-    if (messages.length === 0) return;
-
-    if (initial.current) {
-      setTimeout(() => {
-        listRef.current?.scrollToEnd({ animated: false });
-      }, 50);
-      initial.current = false;
-    } else {
+    if (messages.length > 0) {
       listRef.current?.scrollToEnd({ animated: true });
     }
-  }, [messages]);
+  }, [messages, isTyping]);
 
   return (
-    <View style={{ rowGap: 5, padding: 10 }}>
-      {messages.map((message, index) => (
-        <MessageCard
-          key={index}
-          message={message}
-          isLast={index === messages.length - 1}
-        />
-      ))}
-
-      {isTyping && (
-        <View
-          style={{
-            alignItems: "flex-start",
-            paddingHorizontal: 15,
-            paddingBottom: 10,
-          }}
-        >
-          <LoadingIndicator />
-        </View>
+    <FlatList
+      ref={listRef}
+      data={messages}
+      keyExtractor={(_, index) => index.toString()}
+      contentContainerStyle={{ padding: 10, rowGap: 5 }}
+      renderItem={({ item, index }) => (
+        <MessageCard message={item} isLast={index === messages.length - 1} />
       )}
-    </View>
+      ListFooterComponent={
+        isTyping ? (
+          <View
+            style={{
+              alignItems: "flex-start",
+              paddingHorizontal: 15,
+              paddingBottom: 10,
+            }}
+          >
+            <LoadingIndicator />
+          </View>
+        ) : null
+      }
+      onContentSizeChange={() =>
+        listRef.current?.scrollToEnd({ animated: true })
+      }
+    />
   );
 };
 
