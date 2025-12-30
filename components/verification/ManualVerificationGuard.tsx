@@ -9,7 +9,7 @@ const ManualVerificationGuard = () => {
   const { user } = useAppSelector((state) => state.user);
 
   //   const verification_status = user?.verificationStatus;
-  const verification_status = "PENDING";
+  const verification_status = "REJECTED";
   return (
     <>
       {verification_status === "PENDING" ? (
