@@ -1,6 +1,4 @@
-import { useAppDispatch } from "@/hooks/redux";
 import { useToast } from "@/hooks/useToast";
-import { setHandleKeyboard } from "@/store/slices/settings";
 import {
   AudioModule,
   RecordingPresets,
@@ -40,7 +38,6 @@ const ChatInput = ({
 }: Props) => {
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const recorderState = useAudioRecorderState(audioRecorder);
-  const dispatch = useAppDispatch();
   const toast = useToast();
 
   const handleImagePick = async () => {
@@ -53,7 +50,6 @@ const ChatInput = ({
 
     if (!result.canceled) {
       onChangeImage(result.assets[0]);
-      dispatch(setHandleKeyboard(true));
     }
   };
 
@@ -65,7 +61,6 @@ const ChatInput = ({
         const uri = audioRecorder.uri;
         if (uri) {
           onChangeAudio(uri);
-          dispatch(setHandleKeyboard(true));
         }
       } else {
         // Start recording: Request permissions and set mode first (if not done)

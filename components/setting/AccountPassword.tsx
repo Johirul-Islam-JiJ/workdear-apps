@@ -71,7 +71,7 @@ const AccountPassword = () => {
               secureTextEntry={!showPassCurrent}
               error={errorsPassword.old_password?.message}
               endIcon={
-                <AppIcon color="text" size={20}>
+                <AppIcon color="gray.400" size={20}>
                   <Ionicons
                     onPress={() => setShowPassCurrent((prev) => !prev)}
                     name={showPassCurrent ? "eye-off" : "eye"}
@@ -95,7 +95,7 @@ const AccountPassword = () => {
               secureTextEntry={!showPassNew}
               error={errorsPassword.password?.message}
               endIcon={
-                <AppIcon color="text" size={20}>
+                <AppIcon color="gray.400" size={20}>
                   <Ionicons
                     onPress={() => setShowPassNew((prev) => !prev)}
                     name={showPassNew ? "eye-off" : "eye"}
@@ -119,7 +119,7 @@ const AccountPassword = () => {
               secureTextEntry={!showPassConfirm}
               error={errorsPassword.password_confirmation?.message}
               endIcon={
-                <AppIcon color="text" size={20}>
+                <AppIcon color="gray.400" size={20}>
                   <Ionicons
                     onPress={() => setShowPassConfirm((prev) => !prev)}
                     name={showPassConfirm ? "eye-off" : "eye"}

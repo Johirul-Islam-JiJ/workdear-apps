@@ -22,14 +22,7 @@ import { ImagePickerAsset } from "expo-image-picker";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Pressable, ScrollView, View, ViewStyle } from "react-native";
 import * as yup from "yup";
 
 type Props = {
@@ -204,206 +197,196 @@ const JobsEstimationForm = ({ step, setStep, jobId }: Props) => {
   const pointStyle: ViewStyle = { height: 8, width: 8, borderRadius: 10 };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-      enabled
+    <ScrollView
+      contentContainerStyle={{
+        flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: 15,
+      }}
     >
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: "space-between",
-          paddingBottom: 15,
+      <View
+        style={{
+          flexGrow: 1,
+          gap: 20,
         }}
       >
-        <View
-          style={{
-            flexGrow: 1,
-            gap: 20,
-          }}
-        >
-          <View style={{ gap: 10 }}>
-            <ThemedText
-              variant="bodySemiBold"
-              color="primarydarker"
-              darkColor="white"
-            >
-              Worker configuration
-            </ThemedText>
-            <View>
-              <ThemedText>Worker need</ThemedText>
-              <Controller
-                name="total_workers_required"
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    keyboardType="numeric"
-                    value={value?.toString()}
-                    onChangeText={onChange}
-                    placeholder="Enter worker need"
-                    error={errors.total_workers_required?.message}
-                  />
-                )}
-              />
-            </View>
-
-            <View>
-              <ThemedText>Each worker earn </ThemedText>
-              <Controller
-                name="pay_per_task"
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    keyboardType="numeric"
-                    value={value?.toString()}
-                    onChangeText={onChange}
-                    placeholder="Enter worker earn"
-                    error={errors.pay_per_task?.message}
-                  />
-                )}
-              />
-            </View>
-
-            <View>
-              <ThemedText>Required Screenshot</ThemedText>
-              <Controller
-                name="require_screenshots"
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    keyboardType="numeric"
-                    value={value?.toString()}
-                    onChangeText={onChange}
-                    placeholder="Enter screenshot amount"
-                    error={errors.require_screenshots?.message}
-                  />
-                )}
-              />
-            </View>
-
-            <View>
-              <ThemedText>Estimated day</ThemedText>
-              <Controller
-                name="estimated_day"
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                  <Input
-                    keyboardType="numeric"
-                    value={value?.toString()}
-                    onChangeText={onChange}
-                    placeholder="Enter estimated day"
-                    error={errors.estimated_day?.message}
-                  />
-                )}
-              />
-            </View>
-
+        <View style={{ gap: 10 }}>
+          <ThemedText
+            variant="bodySemiBold"
+            color="primarydarker"
+            darkColor="white"
+          >
+            Worker configuration
+          </ThemedText>
+          <View>
+            <ThemedText>Worker need</ThemedText>
             <Controller
-              name="status"
+              name="total_workers_required"
               control={control}
-              render={({ field }) => (
-                <Pressable
-                  onPress={() =>
-                    field.onChange(
-                      field.value === "DRAFT" ? "PENDING" : "DRAFT"
-                    )
-                  }
-                  style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
-                >
-                  <Checkbox
-                    value={field.value === "DRAFT"}
-                    onChange={() =>
-                      field.onChange(
-                        field.value === "DRAFT" ? "PENDING" : "DRAFT"
-                      )
-                    }
-                  />
-                  <ThemedText>Save as Draft</ThemedText>
-                </Pressable>
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  keyboardType="numeric"
+                  value={value?.toString()}
+                  onChangeText={onChange}
+                  placeholder="Enter worker need"
+                  error={errors.total_workers_required?.message}
+                />
               )}
             />
           </View>
 
-          <View style={{ gap: 10 }}>
-            <ThemedText
-              variant="bodySemiBold"
-              color="primarydarker"
-              darkColor="white"
-            >
-              Cost summary
-            </ThemedText>
+          <View>
+            <ThemedText>Each worker earn </ThemedText>
+            <Controller
+              name="pay_per_task"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  keyboardType="numeric"
+                  value={value?.toString()}
+                  onChangeText={onChange}
+                  placeholder="Enter worker earn"
+                  error={errors.pay_per_task?.message}
+                />
+              )}
+            />
+          </View>
 
-            <View>
-              <View style={listStyle}>
-                <ThemedText>Base Cost</ThemedText>
-                <ThemedText style={{ fontWeight: "bold" }}>
-                  ${totalCost.toFixed(4)}
-                </ThemedText>
-              </View>
+          <View>
+            <ThemedText>Required Screenshot</ThemedText>
+            <Controller
+              name="require_screenshots"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  keyboardType="numeric"
+                  value={value?.toString()}
+                  onChangeText={onChange}
+                  placeholder="Enter screenshot amount"
+                  error={errors.require_screenshots?.message}
+                />
+              )}
+            />
+          </View>
 
-              <View style={listStyle}>
-                <ThemedText>Platform Fee ({platformFee}%)</ThemedText>
-                <ThemedText style={{ fontWeight: "bold" }} color="warning">
-                  ${jobPostFeeCost.toFixed(4)}
-                </ThemedText>
-              </View>
+          <View>
+            <ThemedText>Estimated day</ThemedText>
+            <Controller
+              name="estimated_day"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  keyboardType="numeric"
+                  value={value?.toString()}
+                  onChangeText={onChange}
+                  placeholder="Enter estimated day"
+                  error={errors.estimated_day?.message}
+                />
+              )}
+            />
+          </View>
+
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <Pressable
+                onPress={() =>
+                  field.onChange(field.value === "DRAFT" ? "PENDING" : "DRAFT")
+                }
+                style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+              >
+                <Checkbox
+                  value={field.value === "DRAFT"}
+                  onChange={() =>
+                    field.onChange(
+                      field.value === "DRAFT" ? "PENDING" : "DRAFT"
+                    )
+                  }
+                />
+                <ThemedText>Save as Draft</ThemedText>
+              </Pressable>
+            )}
+          />
+        </View>
+
+        <View style={{ gap: 10 }}>
+          <ThemedText
+            variant="bodySemiBold"
+            color="primarydarker"
+            darkColor="white"
+          >
+            Cost summary
+          </ThemedText>
+
+          <View>
+            <View style={listStyle}>
+              <ThemedText>Base Cost</ThemedText>
+              <ThemedText style={{ fontWeight: "bold" }}>
+                ${totalCost.toFixed(4)}
+              </ThemedText>
             </View>
 
-            <Divider />
+            <View style={listStyle}>
+              <ThemedText>Platform Fee ({platformFee}%)</ThemedText>
+              <ThemedText style={{ fontWeight: "bold" }} color="warning">
+                ${jobPostFeeCost.toFixed(4)}
+              </ThemedText>
+            </View>
+          </View>
 
-            <View>
-              <View style={listStyle}>
-                <ThemedText style={{ fontWeight: "bold" }}>
-                  Total Cost
-                </ThemedText>
-                <ThemedText style={{ fontWeight: "bold" }} color="success">
-                  ${(totalCost + jobPostFeeCost).toFixed(4)}
-                </ThemedText>
-              </View>
+          <Divider />
+
+          <View>
+            <View style={listStyle}>
+              <ThemedText style={{ fontWeight: "bold" }}>Total Cost</ThemedText>
+              <ThemedText style={{ fontWeight: "bold" }} color="success">
+                ${(totalCost + jobPostFeeCost).toFixed(4)}
+              </ThemedText>
+            </View>
+            <ThemedView
+              color="warning"
+              style={{ height: 7, borderRadius: 10, overflow: "hidden" }}
+            >
               <ThemedView
-                color="warning"
-                style={{ height: 7, borderRadius: 10, overflow: "hidden" }}
+                color="success"
+                style={{ height: "100%", width: `${score}%` }}
+              />
+            </ThemedView>
+            <View style={listStyle}>
+              <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
               >
-                <ThemedView
-                  color="success"
-                  style={{ height: "100%", width: `${score}%` }}
-                />
-              </ThemedView>
-              <View style={listStyle}>
-                <View
-                  style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
-                >
-                  <ThemedView color="success" style={pointStyle} />
-                  <ThemedText variant="small">Worder payment</ThemedText>
-                </View>
-                <View
-                  style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
-                >
-                  <ThemedView color="warning" style={pointStyle} />
-                  <ThemedText variant="small">Fee</ThemedText>
-                </View>
+                <ThemedView color="success" style={pointStyle} />
+                <ThemedText variant="small">Worder payment</ThemedText>
+              </View>
+              <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
+              >
+                <ThemedView color="warning" style={pointStyle} />
+                <ThemedText variant="small">Fee</ThemedText>
               </View>
             </View>
           </View>
         </View>
+      </View>
 
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-          <Button
-            disabled={step === 0}
-            onPress={handlePrevStep}
-            title="Previews"
-            variant="outlined"
-            style={{ flex: 1 }}
-          />
-          <Button
-            loading={isCreating || isUpdating}
-            onPress={handleSubmit(onSubmit)}
-            title="Submit"
-            style={{ flex: 1 }}
-          />
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+        <Button
+          disabled={step === 0}
+          onPress={handlePrevStep}
+          title="Previews"
+          variant="outlined"
+          style={{ flex: 1 }}
+        />
+        <Button
+          loading={isCreating || isUpdating}
+          onPress={handleSubmit(onSubmit)}
+          title="Submit"
+          style={{ flex: 1 }}
+        />
+      </View>
+    </ScrollView>
   );
 };
 

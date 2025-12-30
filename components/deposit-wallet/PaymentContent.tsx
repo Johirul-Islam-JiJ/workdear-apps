@@ -1,4 +1,5 @@
 import { config } from "@/config/config";
+import useKeyboardHeight from "@/hooks/useKeyboardHeight";
 import { useToast } from "@/hooks/useToast";
 import {
   useApayDepositMutation,
@@ -43,6 +44,7 @@ const PaymentContent = ({ fee, formType, type, title }: Props) => {
   const [crypto, setCrypto] = useState(false);
   const toast = useToast();
   const router = useRouter();
+  const keyboardHeight = useKeyboardHeight();
   const [paymentMethod, setPaymentMethod] = useState<null | PaymentMethod>(
     null
   );
@@ -128,7 +130,7 @@ const PaymentContent = ({ fee, formType, type, title }: Props) => {
   };
 
   return (
-    <View>
+    <View style={{ marginBottom: keyboardHeight }}>
       <PaymentMethodToggleButton onChange={setCrypto} value={crypto} />
       <Card>
         {paymentMethod ? (
