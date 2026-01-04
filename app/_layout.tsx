@@ -1,4 +1,5 @@
 import ToastNotification from "@/components/libs/ToastNotification";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import ScreenProvider from "@/providers/ScreenProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import {
@@ -16,11 +17,17 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const theme = useColorScheme() ?? "light";
+  const primaryDarker = useThemeColor("primarydarker");
+  const primaryDark = useThemeColor("primarydark");
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar style={theme === "dark" ? "light" : "dark"} />
+        <StatusBar
+          style={theme === "dark" ? "light" : "dark"}
+          backgroundColor={theme === "dark" ? primaryDarker : primaryDark}
+          translucent={false}
+        />
         <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
           <StoreProvider>
             <ScreenProvider />
