@@ -27,8 +27,8 @@ const SignIn = () => {
             }}
           >
             <Header
-              subTitle="You have been missed, Good to see you again!"
               title="Welcome back"
+              subTitle="You have been missed, Good to see you again!"
             />
 
             <SignInForm />

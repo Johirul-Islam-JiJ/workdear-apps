@@ -26,7 +26,9 @@ const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
       >
         {title}
       </ThemedText>
-      <ThemedText color="white">{subTitle}</ThemedText>
+      <ThemedText color="white" style={{ textAlign: "center" }}>
+        {subTitle}
+      </ThemedText>
     </ThemedView>
   );
 };
