@@ -23,7 +23,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <StatusBar
         backgroundColor={theme === "dark" ? primaryDarker : primaryDark}
-        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+        barStyle="light-content"
         translucent={false}
       />
       <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
