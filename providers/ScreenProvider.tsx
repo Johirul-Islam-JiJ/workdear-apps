@@ -79,6 +79,7 @@ function ScreenProvider() {
       <Stack.Protected guard={!user}>
         <Stack.Screen name="signup/index" />
         <Stack.Screen name="signin/index" />
+        <Stack.Screen name="forgot-password/index" />
       </Stack.Protected>
       <Stack.Protected guard={!!user}>
         <Stack.Screen name="(mainLayout)" />

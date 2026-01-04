@@ -6,7 +6,7 @@ import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { Fontisto } from "@expo/vector-icons";
 import Feather from "@expo/vector-icons/Feather";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -48,7 +48,7 @@ const SignInForm = () => {
     try {
       data.device_name = "mobile";
       await login(data).unwrap();
-      navigation.navigate("/(mainLayout)/(drawer)/(tabs)");
+      navigation.push("/(mainLayout)/(drawer)/(tabs)");
     } catch (error: any) {
       toast.error(error.data.message || "Internal server error");
     }
@@ -101,9 +101,12 @@ const SignInForm = () => {
           )}
         />
       </View>
-      <ThemedText style={{ textAlign: "right" }} variant="link">
-        Forgot password?
-      </ThemedText>
+
+      <Link href="/forgotpassword">
+        <ThemedText style={{ textAlign: "right" }} variant="link">
+          Forgot password?
+        </ThemedText>
+      </Link>
 
       {error && isFetchBaseQueryError(error) && (
         <ThemedText
