@@ -2,16 +2,20 @@ import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
 import { Image } from "expo-image";
 import React from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
+  const frame = useSafeAreaInsets();
+
   return (
     <ThemedView
       color="primarydark"
       darkColor="primarydarker"
       style={{
-        height: 200,
         justifyContent: "center",
         alignItems: "center",
+        paddingTop: frame.top,
+        paddingBottom: 15,
       }}
     >
       <Image

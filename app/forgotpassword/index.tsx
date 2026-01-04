@@ -9,10 +9,13 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ForgotPassword = () => {
+  const frame = useSafeAreaInsets();
+
   return (
-    <ThemedView color="card" style={{ flex: 1 }}>
+    <ThemedView color="card" style={{ flex: 1, paddingBottom: frame.bottom }}>
       <KeyboardAvoidingView
         style={{ flexGrow: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
