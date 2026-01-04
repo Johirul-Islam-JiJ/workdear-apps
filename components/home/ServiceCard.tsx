@@ -1,4 +1,5 @@
-import { Service } from "@/_mock/services";
+import { serviceIcons } from "@/_mock/services";
+import { Feature } from "@/types/GeneralData";
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
 import { View, ViewStyle } from "react-native";
@@ -6,7 +7,7 @@ import { default as AppIcon } from "../libs/AppIcon";
 import { ThemedText } from "../libs/ThemedText";
 import { ThemedView } from "../libs/ThemedView";
 
-const ServiceCard = ({ item }: { item: Service }) => {
+const ServiceCard = ({ item, index }: { item: Feature; index: number }) => {
   const iconStyle: ViewStyle = {
     borderRadius: 50,
     width: 60,
@@ -18,7 +19,7 @@ const ServiceCard = ({ item }: { item: Service }) => {
     <ThemedView color="card" style={{ borderRadius: 10, padding: 15 }}>
       <View style={{ alignItems: "center", marginBottom: 10 }}>
         <ThemedView color="primarydark" style={iconStyle}>
-          <item.Icon color="white" size={40} />
+          {serviceIcons[index].Icon({ color: "white", size: 30 })}
         </ThemedView>
       </View>
       <ThemedText variant="subtitle" style={{ textAlign: "center" }}>

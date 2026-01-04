@@ -1,4 +1,4 @@
-import { services } from "@/_mock/services";
+import { useAppSelector } from "@/hooks/redux";
 import React from "react";
 import { DimensionValue, View } from "react-native";
 import { ThemedText } from "../libs/ThemedText";
@@ -6,6 +6,10 @@ import { ThemedView } from "../libs/ThemedView";
 import ServiceCard from "./ServiceCard";
 
 const Services = () => {
+  const { generalData } = useAppSelector((state) => state.settings);
+
+  const services = generalData.experience_the_best_services ?? [];
+
   return (
     <View>
       <ThemedText
@@ -29,7 +33,7 @@ const Services = () => {
       <Line width="60%" />
       <View style={{ rowGap: 10, marginTop: 15 }}>
         {services.map((item, index) => (
-          <ServiceCard key={index} item={item} />
+          <ServiceCard key={index} item={item} index={index} />
         ))}
       </View>
     </View>

@@ -57,6 +57,16 @@ export interface SocialLinks {
 }
 
 /**
+ * Represents the features of the application.
+ */
+export interface Feature {
+  description: string;
+  features: string[];
+  id: string;
+  title: string;
+}
+
+/**
  * Represents the overall application configuration data.
  */
 export interface AppConfig {
@@ -98,4 +108,5 @@ export interface AppConfig {
   user_count: number;
   withdraw_max_amount: string;
   withdraw_min_amount: string;
+  experience_the_best_services: Feature[];
 }
