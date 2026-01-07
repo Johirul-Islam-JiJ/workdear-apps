@@ -1,7 +1,7 @@
-import { useToast } from "@/hooks/useToast";
 import { useForgotPasswordMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
@@ -20,8 +20,7 @@ const schema = yup.object().shape({
 const ForgotForm = () => {
   const [resetPasswordMutation, { isLoading, error, isSuccess }] =
     useForgotPasswordMutation();
-
-  const toast = useToast();
+  const router = useRouter();
 
   const {
     control,
@@ -32,11 +31,14 @@ const ForgotForm = () => {
   });
 
   const onSubmit = async (data: any) => {
-    resetPasswordMutation(data);
+    try {
+      await resetPasswordMutation(data).unwrap();
+      router.push("/otp");
+    } catch (error) {}
   };
 
   return (
-    <View style={{ gap: 15, padding: 10 }}>
+    <View style={{ gap: 20, padding: 10, paddingTop: 20 }}>
       <Controller
         control={control}
         name="email"
@@ -57,11 +59,6 @@ const ForgotForm = () => {
         <ThemedText color="error" variant="body">
           {(error.data as { message?: string })?.message ||
             "Internal server error"}
-        </ThemedText>
-      )}
-      {isSuccess && (
-        <ThemedText color="success" variant="body">
-          Password reset email sent successfully
         </ThemedText>
       )}
 
