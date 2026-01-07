@@ -163,6 +163,13 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["profile"],
     }),
+    verifyOpt: builder.mutation({
+      query: (data) => ({
+        url: "/verify-user-by-security-code",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -182,4 +189,5 @@ export const {
   useAccountDeleteMutation,
   useUpdateAccountDeleteMutation,
   useSendVarificationMailMutation,
+  useVerifyOptMutation,
 } = authApi;

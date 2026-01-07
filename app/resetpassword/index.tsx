@@ -1,5 +1,5 @@
 import Header from "@/components/auth/Header";
-import OtpForm from "@/components/auth/OtpForm";
+import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
 import { ThemedView } from "@/components/libs/ThemedView";
 import React from "react";
 import {
@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const Otp = () => {
+const ResetPassword = () => {
   const frame = useSafeAreaInsets();
 
   return (
@@ -30,7 +30,7 @@ const Otp = () => {
               title="OTP Verification"
               subTitle="Verify your email address to continue"
             />
-            <OtpForm />
+            <ResetPasswordForm />
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -38,4 +38,4 @@ const Otp = () => {
   );
 };
 
-export default Otp;
+export default ResetPassword;

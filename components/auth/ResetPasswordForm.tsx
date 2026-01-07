@@ -1,57 +1,45 @@
-import { useForgotPasswordMutation } from "@/store/features/auth";
+import { useToast } from "@/hooks/useToast";
+import { useVerifyOptMutation } from "@/store/features/auth";
 import { isFetchBaseQueryError } from "@/store/features/baseQuery";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
-import * as yup from "yup";
 import Button from "../libs/Button";
-import Input from "../libs/Input";
+import OtpInput from "../libs/OtpInput";
 import { ThemedText } from "../libs/ThemedText";
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required("Email is required")
-    .email("Invalid email format"),
-});
-
-const ForgotForm = () => {
-  const [resetPasswordMutation, { isLoading, error, isSuccess }] =
-    useForgotPasswordMutation();
+const ResetPasswordForm = () => {
+  const [verifyOptMutation, { isLoading, error }] = useVerifyOptMutation();
   const router = useRouter();
+  const toast = useToast();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    defaultValues: {
+      code: "",
+    },
   });
 
   const onSubmit = async (data: any) => {
     try {
-      await resetPasswordMutation(data).unwrap();
+      await verifyOptMutation(data).unwrap();
       router.push("/resetpassword");
-    } catch (error) {}
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Internal server error");
+    }
   };
 
   return (
     <View style={{ gap: 20, padding: 10, paddingTop: 20 }}>
       <Controller
+        name="code"
         control={control}
-        name="email"
         render={({ field }) => (
-          <View>
-            <ThemedText>Email address</ThemedText>
-            <Input
-              value={field.value}
-              onChangeText={field.onChange}
-              placeholder="Enter email address"
-              error={errors.email?.message}
-            />
-          </View>
+          <OtpInput onChange={field.onChange} error={!!errors.code} />
         )}
       />
 
@@ -63,12 +51,12 @@ const ForgotForm = () => {
       )}
 
       <Button
-        title="Reset password"
-        onPress={handleSubmit(onSubmit)}
         loading={isLoading}
+        title="Verify"
+        onPress={handleSubmit(onSubmit)}
       />
     </View>
   );
 };
 
-export default ForgotForm;
+export default ResetPasswordForm;
