@@ -43,10 +43,19 @@ export const ResetPasswordSchema = yup.object().shape({
 });
 
 export const ForgetPasswordSchema = yup.object().shape({
+  token: yup.string().required("OTP is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Invalid email format"),
   password: yup
     .string()
     .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
+    .min(6, "Password must be at least 6 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+      "Password must contain at least one uppercase, one lowercase, one number, and one special character"
+    ),
   password_confirmation: yup
     .string()
     .required("Confirm password is required")

@@ -33,7 +33,10 @@ const ForgotForm = () => {
   const onSubmit = async (data: any) => {
     try {
       await resetPasswordMutation(data).unwrap();
-      router.push("/resetpassword");
+      router.push({
+        pathname: "/resetpassword",
+        params: { email: data.email },
+      });
     } catch (error) {}
   };
 
