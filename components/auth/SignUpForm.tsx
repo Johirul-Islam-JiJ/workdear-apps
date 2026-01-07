@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, View } from "react-native";
+import AppIcon from "../libs/AppIcon";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
@@ -85,7 +86,9 @@ const SignUpForm = () => {
               onChangeText={onChange}
               error={errors.email?.message}
               startIcon={
-                <Fontisto name="email" size={20} color={emailIconColor} />
+                <AppIcon color="placeholder" size={20}>
+                  <Fontisto name="email" />
+                </AppIcon>
               }
             />
           )}
@@ -104,15 +107,17 @@ const SignUpForm = () => {
               value={value}
               onChangeText={onChange}
               startIcon={
-                <Feather name="lock" size={20} color={passwordIconColor} />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather name="lock" />
+                </AppIcon>
               }
               endIcon={
-                <Feather
-                  onPress={() => setShowPassword(!showPasswoard)}
-                  name={showPasswoard ? "eye-off" : "eye"}
-                  size={20}
-                  color={passwordIconColor}
-                />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather
+                    onPress={() => setShowPassword(!showPasswoard)}
+                    name={showPasswoard ? "eye-off" : "eye"}
+                  />
+                </AppIcon>
               }
             />
           )}
@@ -132,15 +137,19 @@ const SignUpForm = () => {
               value={value}
               onChangeText={onChange}
               startIcon={
-                <Feather name="lock" size={20} color={passwordIconColor} />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather name="lock" />
+                </AppIcon>
               }
               endIcon={
-                <Feather
-                  onPress={() => setShowConfirmPassword(!showConfirmPasswoard)}
-                  name={showConfirmPasswoard ? "eye-off" : "eye"}
-                  size={20}
-                  color={passwordIconColor}
-                />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather
+                    onPress={() =>
+                      setShowConfirmPassword(!showConfirmPasswoard)
+                    }
+                    name={showConfirmPasswoard ? "eye-off" : "eye"}
+                  />
+                </AppIcon>
               }
             />
           )}

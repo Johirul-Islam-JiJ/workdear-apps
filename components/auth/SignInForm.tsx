@@ -1,4 +1,3 @@
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { useToast } from "@/hooks/useToast";
 import { loginDefaultValues } from "@/schema/auth";
 import { useLoginMutation } from "@/store/features/auth";
@@ -11,6 +10,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
 import * as yup from "yup";
+import AppIcon from "../libs/AppIcon";
 import Button from "../libs/Button";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
@@ -39,10 +39,6 @@ const SignInForm = () => {
     resolver: yupResolver(schema),
     defaultValues: loginDefaultValues,
   });
-  const emailIconColor = useThemeColor(errors.email ? "error" : "placeholder");
-  const passwordIconColor = useThemeColor(
-    errors.password ? "error" : "placeholder"
-  );
 
   async function onSubmit(data: Payload) {
     try {
@@ -68,7 +64,9 @@ const SignInForm = () => {
               onChangeText={onChange}
               error={errors.email?.message}
               startIcon={
-                <Fontisto name="email" size={20} color={emailIconColor} />
+                <AppIcon color="placeholder" size={20}>
+                  <Fontisto name="email" />
+                </AppIcon>
               }
             />
           )}
@@ -87,15 +85,17 @@ const SignInForm = () => {
               value={value}
               onChangeText={onChange}
               startIcon={
-                <Feather name="lock" size={20} color={passwordIconColor} />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather name="lock" />
+                </AppIcon>
               }
               endIcon={
-                <Feather
-                  onPress={() => setShowPassword(!showPasswoard)}
-                  name={showPasswoard ? "eye-off" : "eye"}
-                  size={20}
-                  color={passwordIconColor}
-                />
+                <AppIcon color="placeholder" size={20}>
+                  <Feather
+                    onPress={() => setShowPassword(!showPasswoard)}
+                    name={showPasswoard ? "eye-off" : "eye"}
+                  />
+                </AppIcon>
               }
             />
           )}
