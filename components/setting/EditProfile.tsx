@@ -6,16 +6,18 @@ import {
   useUpdateProfileMutation,
 } from "@/store/features/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
 import Button from "../libs/Button";
 import Card from "../libs/Card";
 import Input from "../libs/Input";
 import { ThemedText } from "../libs/ThemedText";
+import EmailVerifyModal from "./EmailVerifyModal";
 
 const EditProfile = () => {
   const { user } = useAppSelector((state) => state.user);
+  const [showEmailVerifyModal, setShowEmailVerifyModal] = useState(0);
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const [sendVarificationEmail, { isLoading: isLoadingVarification }] =
     useSendVarificationMailMutation();
@@ -48,7 +50,7 @@ const EditProfile = () => {
   const handleSendVarificationMessage = async () => {
     try {
       await sendVarificationEmail(undefined).unwrap();
-      toast.success("Verification email sent successfully");
+      setShowEmailVerifyModal(1);
     } catch (error: any) {
       toast.error(error.data?.message || "Internal server error");
     }
@@ -155,6 +157,11 @@ const EditProfile = () => {
         onPress={handleSubmit(onSubmit)}
         style={{ marginTop: 10 }}
         loading={isLoading}
+      />
+
+      <EmailVerifyModal
+        open={showEmailVerifyModal}
+        onClose={setShowEmailVerifyModal}
       />
     </Card>
   );

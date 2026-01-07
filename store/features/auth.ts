@@ -158,7 +158,7 @@ const authApi = api.injectEndpoints({
     }),
     sendVarificationMail: builder.mutation({
       query: () => ({
-        url: "/sendVerificationEmail",
+        url: "/email/resend",
         method: "POST",
       }),
       invalidatesTags: ["profile"],
@@ -169,6 +169,7 @@ const authApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["profile"],
     }),
   }),
 });
