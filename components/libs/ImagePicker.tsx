@@ -14,7 +14,7 @@ interface ImagePickerProps {
 const ImagePicker = ({ value, onChange, error }: ImagePickerProps) => {
   const borderColor = useThemeColor(error ? "error" : "border");
 
-  const pickImage = async () => {
+  const handleImagePicker = async () => {
     let result = await ExpoImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images", "videos"],
       allowsEditing: true,
@@ -41,7 +41,7 @@ const ImagePicker = ({ value, onChange, error }: ImagePickerProps) => {
     <View>
       <View style={containerStyle}>
         <Button
-          onPress={pickImage}
+          onPress={handleImagePicker}
           title="Choose Image"
           size="small"
           color={error ? "error" : undefined}

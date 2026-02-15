@@ -3,6 +3,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
+  ActivityIndicator,
   StyleSheet,
   TouchableOpacity,
   useColorScheme,
@@ -21,6 +22,7 @@ type IconButtonProps = {
   onPress?: () => void;
   disabled?: boolean;
   style?: ViewStyle;
+  isLoading?: boolean;
 };
 
 const IconButton: React.FC<IconButtonProps> = ({
@@ -31,6 +33,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   variant = "solid",
   onPress,
   disabled = false,
+  isLoading = false,
   style = {},
 }) => {
   const theme = useColorScheme() ?? "light";
@@ -56,8 +59,8 @@ const IconButton: React.FC<IconButtonProps> = ({
     variant === "solid"
       ? `${colorValue}20`
       : variant === "outline"
-      ? "transparent"
-      : "transparent";
+        ? "transparent"
+        : "transparent";
 
   const borderColor = variant === "outline" ? colorValue : "transparent";
   const opacity = disabled ? 0.5 : 1;
@@ -66,7 +69,7 @@ const IconButton: React.FC<IconButtonProps> = ({
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       style={[
         styles.container,
         {
@@ -80,7 +83,9 @@ const IconButton: React.FC<IconButtonProps> = ({
       ]}
     >
       <View>
-        {typeof icon === "string" ? (
+        {isLoading ? (
+          <ActivityIndicator size="small" color={colorValue} />
+        ) : typeof icon === "string" ? (
           <Ionicons
             name={icon as IconName}
             size={iconSize}
