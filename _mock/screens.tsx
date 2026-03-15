@@ -173,6 +173,10 @@ export const stackScreens = {
     name: "advertisement/update/index",
     title: "Edit ads",
   },
+  ranking: {
+    name: "ranking/index",
+    title: "Ranking",
+  },
 };
 
 export type TabScreen = {

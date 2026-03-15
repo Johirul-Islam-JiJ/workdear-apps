@@ -171,6 +171,12 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["profile"],
     }),
+    getProfileRanking: builder.query({
+      query: () => ({
+        url: "/get-my-category-rank",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -191,4 +197,5 @@ export const {
   useUpdateAccountDeleteMutation,
   useSendVarificationMailMutation,
   useVerifyOptMutation,
+  useGetProfileRankingQuery,
 } = authApi;
