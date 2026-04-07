@@ -1,4 +1,4 @@
-import { PaymentInfo } from "@/types/payment";
+import { PaymentInfo, PaymentStatusType } from "@/types/payment";
 import React from "react";
 import { View } from "react-native";
 import Card from "../libs/Card";
@@ -34,7 +34,7 @@ const AccountDetails = ({ data }: { data: PaymentInfo }) => {
         </ThemedText>
         <ThemedText variant="subtitle">${data.user.deposit_balance}</ThemedText>
       </View>
-      {data.transaction_report.status === "success" && (
+      {data.transaction_report.status === PaymentStatusType.completed && (
         <View>
           <ThemedText darkColor="gray.400" color="gray.500">
             Amount Added

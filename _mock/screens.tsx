@@ -173,8 +173,8 @@ export const stackScreens = {
     name: "advertisement/update/index",
     title: "Edit ads",
   },
-  rank: {
-    name: "rank/index",
+  ranking: {
+    name: "ranking/index",
     title: "Your Ranking",
   },
 };
