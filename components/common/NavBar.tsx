@@ -56,7 +56,15 @@ const NavBar = ({
             )}
           </View>
         </Link>
-        <Image style={styles.profile} contentFit="contain" source={source} />
+        <Link href="/(mainLayout)/rank" asChild>
+          <Pressable>
+            <Image
+              style={styles.profile}
+              contentFit="contain"
+              source={source}
+            />
+          </Pressable>
+        </Link>
       </View>
     </ThemedView>
   );
