@@ -3,7 +3,7 @@
     "name": "Workdear",
     "slug": "workdear",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon/icon.png",
     "scheme": "mobileapp",
     "userInterfaceStyle": "automatic",

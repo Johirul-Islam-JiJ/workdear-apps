@@ -14,7 +14,7 @@ export type ErrorData = {
 };
 
 export function isFetchBaseQueryError(
-  error: FetchBaseQueryError | SerializedError
+  error: FetchBaseQueryError | SerializedError,
 ): error is FetchBaseQueryError & { data: ErrorData } {
   return (
     typeof error === "object" &&
@@ -75,48 +75,50 @@ const baseQueryWithAuth: BaseQueryFn<
   return rawBaseQuery(args, api, extraOptions);
 };
 
+export const tagsType = [
+  "countries",
+  "profile",
+  "ads",
+  "deposit-history",
+  "withdraw-history",
+  "notification-count",
+  "notifications",
+  "jobs",
+  "alljobs",
+  "ads-cost",
+  "accepted-tasks",
+  "tasks",
+  "ticket",
+  "generalData",
+  "playAndEarn",
+  "categories",
+  "costCenter",
+  "blogs",
+  "blogs-categories",
+  "jobs-home",
+  "faqs",
+  "single-jobs",
+  "getingSubmitedTaskProfs",
+  "single-tasks",
+  "privacy-policy",
+  "refund-policy",
+  "terms-and-conditions",
+  "cancelation-policy",
+  "single-blogs",
+  "top-user-catagory",
+  "payment-systems",
+  "single-deposit-payment-systems",
+  "single-passimpay-payment-systems",
+  "single-withdraw-payment-systems",
+  "currency-conversation-data",
+  "passimpay-single-transaction",
+  "single-task",
+];
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithAuth,
-  tagTypes: [
-    "countries",
-    "profile",
-    "ads",
-    "deposit-history",
-    "withdraw-history",
-    "notification-count",
-    "notifications",
-    "jobs",
-    "alljobs",
-    "ads-cost",
-    "accepted-tasks",
-    "tasks",
-    "ticket",
-    "generalData",
-    "playAndEarn",
-    "categories",
-    "costCenter",
-    "blogs",
-    "blogs-categories",
-    "jobs-home",
-    "faqs",
-    "single-jobs",
-    "getingSubmitedTaskProfs",
-    "single-tasks",
-    "privacy-policy",
-    "refund-policy",
-    "terms-and-conditions",
-    "cancelation-policy",
-    "single-blogs",
-    "top-user-catagory",
-    "payment-systems",
-    "single-deposit-payment-systems",
-    "single-passimpay-payment-systems",
-    "single-withdraw-payment-systems",
-    "currency-conversation-data",
-    "passimpay-single-transaction",
-    "single-task",
-  ],
+  tagTypes: tagsType,
   endpoints: () => ({}),
 });
 

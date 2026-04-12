@@ -107,8 +107,8 @@ const AdvertisementCard = ({
                 ads.status === AdvertisementStatus.APPROVED
                   ? "success"
                   : ads.status === AdvertisementStatus.EXPIRED
-                  ? "warning"
-                  : undefined
+                    ? "warning"
+                    : undefined
               }
             />
           </View>
@@ -126,16 +126,18 @@ const AdvertisementCard = ({
         </View>
 
         <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-          <Button
-            style={{ flex: 1 }}
-            onPress={handleGoEdit}
-            title="Edit"
-            startIcon={
-              <AppIcon color="white" size={18}>
-                <FontAwesome6 name="edit" />
-              </AppIcon>
-            }
-          />
+          {!/APPROVED|INACTIVE/.test(ads.status) && (
+            <Button
+              style={{ flex: 1 }}
+              onPress={handleGoEdit}
+              title="Edit"
+              startIcon={
+                <AppIcon color="white" size={18}>
+                  <FontAwesome6 name="edit" />
+                </AppIcon>
+              }
+            />
+          )}
           {/APPROVED|INACTIVE|ACTIVE/.test(ads.status) && (
             <Button
               style={{ flex: 1 }}
@@ -144,7 +146,7 @@ const AdvertisementCard = ({
                   ads.id,
                   ads.status === AdvertisementStatus.APPROVED
                     ? AdvertisementStatus.INACTIVE
-                    : AdvertisementStatus.ACTIVE
+                    : AdvertisementStatus.ACTIVE,
                 )
               }
               loading={isUpdating === ads.id}
