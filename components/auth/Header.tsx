@@ -1,10 +1,13 @@
 import { ThemedText } from "@/components/libs/ThemedText";
 import { ThemedView } from "@/components/libs/ThemedView";
+import { config } from "@/config/config";
+import { useAppSelector } from "@/hooks/redux";
 import { Image } from "expo-image";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
+  const { generalData } = useAppSelector((state) => state.settings);
   const frame = useSafeAreaInsets();
 
   return (
@@ -18,11 +21,13 @@ const Header = ({ title, subTitle }: { title: string; subTitle: string }) => {
         paddingBottom: 15,
       }}
     >
-      <Image
-        source={require("@/assets/images/logo-white.png")}
-        style={{ height: 50, width: 160 }}
-        contentFit="contain"
-      />
+      {generalData.site_logo_light && (
+        <Image
+          source={{ uri: config.fileBaseUrl + generalData.site_logo_dark }}
+          style={{ height: 50, width: 160 }}
+          contentFit="contain"
+        />
+      )}
       <ThemedText
         variant="subtitle"
         color="white"
