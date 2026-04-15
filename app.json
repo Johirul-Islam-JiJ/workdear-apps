@@ -4,7 +4,7 @@
     "slug": "workdear",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon/icon.png",
+    "icon": "./assets/icon/logo.png",
     "scheme": "mobileapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon/icon.png",
+        "foregroundImage": "./assets/icon/logo.png",
         "backgroundColor": "#e5e7ec"
       },
       "edgeToEdgeEnabled": true,
