@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
+  SharedValue,
   useAnimatedProps,
   useSharedValue,
   withTiming,
@@ -9,6 +10,55 @@ import Svg, { Circle } from "react-native-svg";
 import { ThemedText } from "./ThemedText";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+type SegmentData = {
+  value: number;
+  color: string;
+  arcLength: number;
+  startOffset: number;
+};
+
+type SegmentArcProps = {
+  seg: SegmentData;
+  circumference: number;
+  center: number;
+  radius: number;
+  strokeWidth: number;
+  progress: SharedValue<number>;
+};
+
+function SegmentArc({
+  seg,
+  circumference,
+  center,
+  radius,
+  strokeWidth,
+  progress,
+}: SegmentArcProps) {
+  const animatedProps = useAnimatedProps(() => {
+    const p = progress.value;
+    const animArcLength = p * seg.arcLength;
+    const animStartOffset = p * seg.startOffset;
+    return {
+      strokeDasharray: `${animArcLength} ${circumference - animArcLength}`,
+      strokeDashoffset: -animStartOffset,
+    };
+  });
+
+  return (
+    <AnimatedCircle
+      stroke={seg.color}
+      fill="none"
+      cx={center}
+      cy={center}
+      r={radius}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      transform={`rotate(-90, ${center}, ${center})`}
+      animatedProps={animatedProps}
+    />
+  );
+}
 
 type Segment = {
   value: number;
@@ -39,9 +89,8 @@ export default function DonutChat({
     progress.value = withTiming(1, { duration: 1400 });
   }, []);
 
-  // Precompute static arc lengths and start offsets (cumulative)
   let cumulative = 0;
-  const segmentsData = segments.map((seg) => {
+  const segmentsData: SegmentData[] = segments.map((seg) => {
     const arcLength = (seg.value / 100) * circumference;
     const data = { ...seg, arcLength, startOffset: cumulative };
     cumulative += arcLength;
@@ -54,7 +103,6 @@ export default function DonutChat({
         height={radius * 2 + strokeWidth * 2}
         width={radius * 2 + strokeWidth * 2}
       >
-        {/* Background circle */}
         <Circle
           stroke="#CFD8DC"
           fill="none"
@@ -64,34 +112,17 @@ export default function DonutChat({
           strokeWidth={strokeWidth}
         />
 
-        {segmentsData.map((seg, index) => {
-          const animatedProps = useAnimatedProps(() => {
-            const p = progress.value;
-            const animArcLength = p * seg.arcLength;
-            const animStartOffset = p * seg.startOffset;
-            return {
-              strokeDasharray: `${animArcLength} ${
-                circumference - animArcLength
-              }`,
-              strokeDashoffset: -animStartOffset,
-            };
-          });
-
-          return (
-            <AnimatedCircle
-              key={index}
-              stroke={seg.color}
-              fill="none"
-              cx={center}
-              cy={center}
-              r={radius}
-              strokeWidth={strokeWidth}
-              strokeLinecap="round"
-              transform={[{ rotate: `-90 ${center} ${center}` }]}
-              animatedProps={animatedProps}
-            />
-          );
-        })}
+        {segmentsData.map((seg, index) => (
+          <SegmentArc
+            key={index}
+            seg={seg}
+            circumference={circumference}
+            center={center}
+            radius={radius}
+            strokeWidth={strokeWidth}
+            progress={progress}
+          />
+        ))}
       </Svg>
 
       <View style={styles.label}>
