@@ -66,12 +66,6 @@
       "eas": {
         "projectId": "2827a3cb-0c56-4151-a75d-d379d412307c"
       }
-    },
-    "overrides": {
-      "react": "19.2.0",
-      "react-dom": "19.2.0",
-      "postcss": "^8.5.10",
-      "uuid": "^9.0.0"
     }
   }
 }
