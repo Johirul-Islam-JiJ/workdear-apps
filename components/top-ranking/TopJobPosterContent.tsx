@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
+import NoDataFound from "./NoDataFound";
 import TopWorkerCard from "./TopWorkerCard";
 
 const TopJobPosterContent = () => {
@@ -19,6 +20,10 @@ const TopJobPosterContent = () => {
   }
 
   const topJobPoster: TopJobPoster[] = response?.data?.top_job_providers ?? [];
+
+  if (topJobPoster.length === 0) {
+    return <NoDataFound message="There is no job poster history found" />;
+  }
 
   return (
     <>

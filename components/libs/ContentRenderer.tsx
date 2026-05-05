@@ -31,6 +31,24 @@ export default function ContentRenderer({ html }: { html: string }) {
         marginBottom: 10,
         color: textColor,
       },
+      h3: {
+        fontSize: 18,
+        fontWeight: "600",
+        marginBottom: 10,
+        color: textColor,
+      },
+      h4: {
+        fontSize: 16,
+        fontWeight: "600",
+        marginBottom: 10,
+        color: textColor,
+      },
+      h5: {
+        fontSize: 14,
+        fontWeight: "600",
+        marginBottom: 10,
+        color: textColor,
+      },
       a: {
         textDecorationLine: "underline",
         color: textColor,
@@ -49,7 +67,7 @@ export default function ContentRenderer({ html }: { html: string }) {
         color: textColor,
       },
     }),
-    [textColor]
+    [textColor],
   );
 
   const source = useMemo(() => ({ html }), [html]);

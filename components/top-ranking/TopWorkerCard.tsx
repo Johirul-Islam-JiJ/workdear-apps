@@ -39,10 +39,10 @@ const TopWorkerCard = ({
     rank === 1
       ? "warning"
       : rank === 2
-      ? "silvar"
-      : rank === 3
-      ? "orange"
-      : "primarydark";
+        ? "silvar"
+        : rank === 3
+          ? "orange"
+          : "primarydark";
 
   return (
     <Card style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>

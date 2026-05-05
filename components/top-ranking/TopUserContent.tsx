@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
+import NoDataFound from "./NoDataFound";
 import TopWorkerCard from "./TopWorkerCard";
 
 const TopUserContent = () => {
@@ -19,6 +20,11 @@ const TopUserContent = () => {
   }
 
   const topUsers: TopUser[] = response?.data?.top_users ?? [];
+
+  if (topUsers.length === 0) {
+    return <NoDataFound message="There is no users history found" />;
+  }
+
   return (
     <>
       {topUsers.map((item, index) => (

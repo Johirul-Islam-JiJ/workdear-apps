@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { Dimensions } from "react-native";
 import LoadingIndicator from "../libs/LoadingIndicator";
+import NoDataFound from "./NoDataFound";
 import TopWorkerCard from "./TopWorkerCard";
 
 const TopReffererContent = () => {
@@ -18,7 +19,12 @@ const TopReffererContent = () => {
     );
   }
 
-  const topRefferer: TopRefferer[] = response?.data?.top_referrers;
+  const topRefferer: TopRefferer[] = response?.data?.top_referrers ?? [];
+
+  if (topRefferer.length === 0) {
+    return <NoDataFound message="There is no refferer history found" />;
+  }
+
   return (
     <>
       {topRefferer.map((item, index) => (
