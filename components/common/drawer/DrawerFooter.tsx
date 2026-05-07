@@ -1,7 +1,6 @@
 import Button from "@/components/libs/Button";
 import Divider from "@/components/libs/Divider";
 import IconButton from "@/components/libs/IconButton";
-import { ThemedText } from "@/components/libs/ThemedText";
 import { useAppDispatch } from "@/hooks/redux";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { logout } from "@/store/slices/user";
@@ -49,14 +48,14 @@ export default function DrawerFooter() {
       />
 
       {/* App Version */}
-      <ThemedText
+      {/* <ThemedText
         variant="small"
         color="gray.600"
         darkColor="gray.400"
         style={{ textAlign: "center", marginBottom: 5 }}
       >
         VERSION: 1.0.0
-      </ThemedText>
+      </ThemedText> */}
     </View>
   );
 }
